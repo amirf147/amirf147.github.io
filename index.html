@@ -1,7 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trello API Token Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .token-display {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-family: monospace;
+        }
+        .success {
+            color: #28a745;
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div class="container">
+        <h1>Trello API Token Extractor</h1>
+        
+        <div id="status">
+            <p>This page will help you extract your Trello API token from the callback URL.</p>
+        </div>
+
+        <div id="token-section" style="display: none;">
+            <h2>Your Trello Token:</h2>
+            <div id="token-display" class="token-display"></div>
+            <button onclick="copyToken()">Copy Token</button>
+            <button onclick="clearToken()">Clear</button>
+        </div>
+
+        <div id="instructions">
+            <h2>Instructions:</h2>
+            <ol>
+                <li>Get your API Key from: <a href="https://trello.com/app-key" target="_blank">https://trello.com/app-key</a></li>
+                <li>Create the authorization URL using your API key</li>
+                <li>When you authorize, you'll be redirected back here with your token</li>
+                <li>The token will be automatically extracted and displayed above</li>
+            </ol>
+        </div>
+
+        <div id="manual-section">
+            <h2>Manual Token Extraction:</h2>
+            <p>If you have a callback URL with a token, paste it here:</p>
+            <input type="text" id="manual-url" placeholder="Paste your callback URL here..." style="width: 100%; padding: 8px; margin: 10px 0;">
+            <button onclick="extractFromManualUrl()">Extract Token</button>
+        </div>
+    </div>
+
+    <script>
+        function getTokenFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+            
+            // Check URL parameters first
+            let token = urlParams.get('token');
+            
+            // If not in params, check hash
+            if (!token && hash) {
+                const hashParams = new URLSearchParams(hash.substring(1));
+                token = hashParams.get('token');
+            }
+            
+            return token;
+        }
+
+        function displayToken(token) {
+            if (token) {
+                document.getElementById('token-display').textContent = token;
+                document.getElementById('token-section').style.display = 'block';
+                document.getElementById('token-display').className = 'token-display success';
+                document.getElementById('status').innerHTML = '<p style="color: #28a745;">✓ Token successfully extracted!</p>';
+            }
+        }
+
+        function copyToken() {
+            const tokenText = document.getElementById('token-display').textContent;
+            navigator.clipboard.writeText(tokenText).then(() => {
+                alert('Token copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = tokenText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Token copied to clipboard!');
+            });
+        }
+
+        function clearToken() {
+            document.getElementById('token-section').style.display = 'none';
+            document.getElementById('status').innerHTML = '<p>Token cleared. Ready for next extraction.</p>';
+            // Clear URL parameters
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        function extractFromManualUrl() {
+            const manualUrl = document.getElementById('manual-url').value;
+            if (!manualUrl) {
+                alert('Please paste a URL first');
+                return;
+            }
+
+            try {
+                const url = new URL(manualUrl);
+                const urlParams = new URLSearchParams(url.search);
+                const hashParams = new URLSearchParams(url.hash.substring(1));
+                
+                let token = urlParams.get('token') || hashParams.get('token');
+                
+                if (token) {
+                    displayToken(token);
+                } else {
+                    document.getElementById('status').innerHTML = '<p style="color: #dc3545;">No token found in the provided URL.</p>';
+                }
+            } catch (e) {
+                document.getElementById('status').innerHTML = '<p style="color: #dc3545;">Invalid URL format.</p>';
+            }
+        }
+
+        // Auto-extract token when page loads
+        window.onload = function() {
+            const token = getTokenFromUrl();
+            if (token) {
+                displayToken(token);
+            }
+        };
+    </script>
 </body>
 </html>
