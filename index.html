@@ -92,6 +92,32 @@
             margin-left: 10px;
             font-weight: normal;
         }
+
+        .status-tag.status-live {
+            background-color: #238636;
+            color: #ffffff;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            background-color: #161b22;
+            margin-bottom: 15px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -137,16 +163,15 @@
     <h2>Advanced AI Architectures</h2>
     <ul>
         <li>
-            <span class="project-title">Tactical Agentic Activity Tracker</span><span class="status-tag">Coming
-                Soon</span>
+            <span class="project-title">Tactical Agentic Activity Tracker</span><span class="status-tag status-live">Live Demo</span>
             <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure cloud
                 infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
             <div class="evidence-box">
-                <!-- Replace 'agent-architecture.png' with your image file name when ready -->
-                <img class="screenshot" src="agent-architecture.png" alt="Architecture Diagram / Demo Video Placeholder"
-                    width="600" height="300">
-                <span style="color: #8b949e; font-size: 0.9rem; font-style: italic;">Private repository infrastructure
-                    overview and demonstration video coming soon.</span>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ufrwROqSNLs" title="Tactical Agentic Activity Tracker - 3 Agent Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <img class="screenshot" src="agent-architecture.png" alt="Tactical Agentic Activity Tracker 3-Agent Demo Screenshot" width="600">
+                <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs" target="_blank">→ Watch "3 Agent Demo" on YouTube</a>
             </div>
         </li>
     </ul>
