@@ -153,12 +153,39 @@
     <h2>Open Source Contributions</h2>
     <ul>
         <li>
-            <span class="project-title">Caster Voice Accessibility Ecosystem</span><span class="status-tag status-live">Merged PRs</span>
+            <span class="project-title">Caster Framework (Merged Pull Requests)</span><span class="status-tag status-live">Merged</span>
             <p class="description">Merged pull requests into Caster—a widely used open-source voice dictation and accessibility framework. Contributions include HUD startup race condition retry logic (#965), title-case contraction and possessive parser fixes (#962), and Windows 11 virtual desktop integration via updated pyvda API (#960).</p>
             <div class="evidence-box">
-                <img class="screenshot" src="prs-screenshot.png" alt="Merged Pull Requests on Caster Repository" width="600">
+                <img class="screenshot" src="prs-screenshot.png" alt="Merged Pull Requests on Caster Repository" width="800">
                 <a class="evidence-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
                     target="_blank">→ View Merged Commits on GitHub</a>
+            </div>
+        </li>
+        <li>
+            <span class="project-title">Caster Framework — Fix 4-Digit Length Restriction Bug</span><span class="status-tag status-live">Open PR #975</span>
+            <p class="description">Fixes digit sequence length limitations in Caster by migrating the numeric rule extra from legacy ShortIntegerRef to NumberRef with zero-preservation, eliminating the 4-digit cap for seamless long numeric dictation.</p>
+            <div class="evidence-box">
+                <img class="screenshot" src="caster-pr-screenshot.png" alt="Caster Pull Request #975 Screenshot" width="800">
+                <a class="evidence-link" href="https://github.com/dictation-toolbox/Caster/pull/975"
+                    target="_blank">→ View Pull Request #975 on GitHub</a>
+            </div>
+        </li>
+        <li>
+            <span class="project-title">Dragonfly Framework — Fix Number Series Sequence Matching & Limits</span><span class="status-tag status-live">Open PR #409</span>
+            <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence matching conflicts, digit length constraints, and zero formatting loss across speech recognition backends.</p>
+            <div class="evidence-box">
+                <img class="screenshot" src="dragonfly-pr-screenshot.png" alt="Dragonfly Pull Request #409 Screenshot" width="800">
+                <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
+                    target="_blank">→ View Pull Request #409 on GitHub</a>
+            </div>
+        </li>
+        <li>
+            <span class="project-title">pyvda — Handle Stale COM Objects & RPC Server Unavailability</span><span class="status-tag status-live">Open PR #57</span>
+            <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle destroyed COM interface pointers and RPC server unavailability errors caused by Windows Explorer restarts or system sleep cycles.</p>
+            <div class="evidence-box">
+                <img class="screenshot" src="pyvda-pr-screenshot.png" alt="pyvda Pull Request #57 Screenshot" width="800">
+                <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57"
+                    target="_blank">→ View Pull Request #57 on GitHub</a>
             </div>
         </li>
     </ul>
