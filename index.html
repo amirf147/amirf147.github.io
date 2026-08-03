@@ -18,101 +18,270 @@
         })();
     </script>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --heading-color: #f0f6fc;
-            --subtitle-color: #8b949e;
-            --border-color: #21262d;
-            --link-color: #58a6ff;
-            --card-border: #30363d;
-            --card-bg: #161b22;
-            --status-bg: #21262d;
-            --status-text: #8b949e;
-            --status-live-bg: #238636;
-            --status-live-text: #ffffff;
-            --toggle-bg: #21262d;
-            --toggle-border: #30363d;
-            --toggle-text: #c9d1d9;
-            --toggle-hover-bg: #30363d;
+            /* Pure Black & White Monochrome Dark Mode */
+            --bg-color: #000000;
+            --text-color: #d4d4d4;
+            --heading-color: #ffffff;
+            --subtitle-color: #a3a3a3;
+            --accent-color: #ffffff;
+            --border-color: #262626;
+            --divider-color: #262626;
+            --status-bg: #171717;
+            --status-text: #a3a3a3;
+            --status-live-bg: #ffffff;
+            --status-live-text: #000000;
+            --btn-bg: #121212;
+            --btn-border: #333333;
+            --btn-text: #e5e5e5;
+            --btn-hover-bg: #262626;
+            --btn-hover-border: #ffffff;
+            --tag-num: #888888;
+            --menu-bg: #121212;
+            --menu-border: #333333;
+            --focus-ring: #ffffff;
         }
 
         [data-theme="light"] {
+            /* Pure White & Black Monochrome Light Mode */
             --bg-color: #ffffff;
-            --text-color: #1f2328;
-            --heading-color: #1f2328;
-            --subtitle-color: #656d76;
-            --border-color: #d0d7de;
-            --link-color: #0969da;
-            --card-border: #d0d7de;
-            --card-bg: #f6f8fa;
-            --status-bg: #eff1f3;
-            --status-text: #57606a;
-            --status-live-bg: #1a7f37;
+            --text-color: #171717;
+            --heading-color: #000000;
+            --subtitle-color: #525252;
+            --accent-color: #000000;
+            --border-color: #e5e5e5;
+            --divider-color: #e5e5e5;
+            --status-bg: #f5f5f5;
+            --status-text: #525252;
+            --status-live-bg: #000000;
             --status-live-text: #ffffff;
-            --toggle-bg: #f6f8fa;
-            --toggle-border: #d0d7de;
-            --toggle-text: #1f2328;
-            --toggle-hover-bg: #eaeef2;
+            --btn-bg: #ffffff;
+            --btn-border: #d4d4d4;
+            --btn-text: #171717;
+            --btn-hover-bg: #f5f5f5;
+            --btn-hover-border: #000000;
+            --tag-num: #666666;
+            --menu-bg: #ffffff;
+            --menu-border: #d4d4d4;
+            --focus-ring: #000000;
+        }
+
+        [data-theme="high-contrast"] {
+            /* High Contrast Yellow on Black for Visual Impairment */
+            --bg-color: #000000;
+            --text-color: #ffff00;
+            --heading-color: #ffff00;
+            --subtitle-color: #e6e600;
+            --accent-color: #ffff00;
+            --border-color: #ffff00;
+            --divider-color: #ffff00;
+            --status-bg: #000000;
+            --status-text: #ffff00;
+            --status-live-bg: #ffff00;
+            --status-live-text: #000000;
+            --btn-bg: #000000;
+            --btn-border: #ffff00;
+            --btn-text: #ffff00;
+            --btn-hover-bg: #222200;
+            --btn-hover-border: #ffff00;
+            --tag-num: #ffff00;
+            --menu-bg: #000000;
+            --menu-border: #ffff00;
+            --focus-ring: #ffff00;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 0;
+            padding: 40px 20px 80px 20px;
             line-height: 1.6;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .header-container {
+        /* Accessibility & Focus */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--focus-ring);
+            color: var(--bg-color);
+            padding: 10px 20px;
+            border-radius: 0 0 6px 6px;
+            z-index: 10000;
+            transition: top 0.2s ease;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+
+        *:focus-visible {
+            outline: 3px dashed var(--focus-ring);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation Toolbar */
+        .top-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 28px;
+            scroll-margin-top: 40px;
+        }
+
+        .top-utility-bar {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
+            align-items: center;
+            width: 100%;
         }
 
-        h1 {
-            color: var(--heading-color);
-            font-size: 2rem;
-            margin-bottom: 5px;
-            margin-top: 0;
+        .section-nav-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px 0;
+            border-top: 1px solid var(--divider-color);
+            border-bottom: 1px solid var(--divider-color);
         }
 
-        .subtitle {
+        .section-nav-label {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: var(--subtitle-color);
-            font-size: 1.1rem;
-            margin-top: 0;
-            margin-bottom: 40px;
+            opacity: 0.85;
         }
 
-        .theme-toggle {
+        .section-nav-cluster {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        /* Nav Dropdowns */
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background-color: var(--toggle-bg);
-            color: var(--toggle-text);
-            border: 1px solid var(--toggle-border);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            gap: 8px;
+            background-color: var(--btn-bg);
+            color: var(--heading-color);
+            border: 2px solid var(--btn-border);
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            transition: all 0.15s ease;
             user-select: none;
-            margin-top: 4px;
-            flex-shrink: 0;
         }
 
-        .theme-toggle:hover {
-            background-color: var(--toggle-hover-bg);
+        .nav-btn:hover {
+            background-color: var(--btn-hover-bg);
+            border-color: var(--btn-hover-border);
+            color: var(--heading-color);
+        }
+
+        .nav-btn .tag-prefix {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.8rem;
+            color: var(--tag-num);
+            font-weight: 800;
+        }
+
+        .nav-btn .arrow {
+            font-size: 0.75rem;
+            margin-left: 2px;
+            opacity: 0.8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+            background-color: var(--menu-bg);
+            border: 1px solid var(--menu-border);
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            min-width: 260px;
+            z-index: 100;
+            padding: 6px 0;
+        }
+
+        /* Invisible mouse bridge over the dropdown gap */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+        }
+
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 14px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.83rem;
+            font-weight: 500;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--btn-hover-bg);
+            color: var(--heading-color);
         }
 
         .theme-toggle svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             fill: none;
             stroke: currentColor;
             stroke-width: 2;
@@ -120,73 +289,130 @@
             stroke-linejoin: round;
         }
 
-        h2 {
-            color: var(--heading-color);
-            font-size: 1.3rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-top: 40px;
+        /* Hero Header */
+        .hero {
+            margin-bottom: 24px;
         }
 
-        ul {
+        h1.main-title {
+            color: var(--heading-color);
+            font-size: 2.2rem;
+            margin: 0 0 6px 0;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--subtitle-color);
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        /* Section Styling */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--heading-color);
+            margin-top: 80px;
+            margin-bottom: 36px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--divider-color);
+            scroll-margin-top: 50px;
+        }
+
+        main > section:first-of-type .section-header {
+            margin-top: 24px;
+        }
+
+        .section-header .section-num {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: var(--tag-num);
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        /* Project Items */
+        ul.project-list {
             list-style-type: none;
             padding: 0;
+            margin: 0;
         }
 
-        li {
-            margin-bottom: 30px;
+        li.project-item {
+            margin-bottom: 80px;
+            scroll-margin-top: 50px;
+        }
+
+        .project-title-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .project-title {
-            font-weight: bold;
-            color: var(--link-color);
-            font-size: 1.1rem;
-        }
-
-        .description {
-            color: var(--subtitle-color);
-            margin: 5px 0 15px 0;
-        }
-
-        .evidence-box {
-            margin-top: 15px;
-        }
-
-        .screenshot {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            border: 1px solid var(--card-border);
-            border-radius: 6px;
-            background-color: var(--card-bg);
-            margin-bottom: 8px;
-        }
-
-        .evidence-link {
-            display: inline-block;
-            color: var(--link-color);
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-
-        .evidence-link:hover {
+            font-weight: 800;
+            color: var(--heading-color);
+            font-size: 1.15rem;
             text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            margin: 0;
         }
 
         .status-tag {
             display: inline-block;
             background-color: var(--status-bg);
             color: var(--status-text);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             padding: 2px 8px;
-            border-radius: 12px;
-            margin-left: 10px;
-            font-weight: normal;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         .status-tag.status-live {
             background-color: var(--status-live-bg);
             color: var(--status-live-text);
+            border-color: transparent;
+        }
+
+        .description {
+            color: var(--subtitle-color);
+            margin: 10px 0 16px 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .evidence-box {
+            margin-top: 14px;
+        }
+
+        .screenshot {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .evidence-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--heading-color);
+            text-decoration: underline;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .evidence-link:hover {
+            opacity: 0.8;
         }
 
         .video-container {
@@ -196,9 +422,8 @@
             overflow: hidden;
             max-width: 100%;
             border-radius: 6px;
-            border: 1px solid var(--card-border);
-            background-color: var(--card-bg);
-            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
         }
 
         .video-container iframe {
@@ -210,144 +435,472 @@
             border: 0;
         }
 
-        .footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            margin-bottom: 40px;
-            border-top: 1px solid var(--border-color);
+        /* Per-Item Navigation Footer */
+        .item-nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px dashed var(--border-color);
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--divider-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
             gap: 10px;
             color: var(--subtitle-color);
             font-size: 0.85rem;
         }
+
+        /* Back to Top Floating Button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--btn-border);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.15s ease, border-color 0.15s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .back-to-top-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top-btn:hover {
+            background-color: var(--btn-hover-bg);
+            border-color: var(--btn-hover-border);
+            color: var(--heading-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 14px;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .dropdown-menu {
+                min-width: 220px;
+            }
+        }
+
+        /* Accessibility Dialog Modal */
+        dialog {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 2px solid var(--focus-ring);
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(3px);
+        }
+        
+        dialog h2 {
+            margin-top: 0;
+            color: var(--heading-color);
+            border-bottom: 1px solid var(--divider-color);
+            padding-bottom: 12px;
+        }
+        
+        .kbd {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 0.85em;
+            font-family: monospace;
+            font-weight: bold;
+            background-color: var(--btn-bg);
+            border: 2px solid var(--btn-border);
+            border-radius: 4px;
+            color: var(--heading-color);
+            margin: 0 4px;
+        }
+        
+        .dialog-close {
+            margin-top: 24px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Theme Previews in Dialog */
+        .theme-previews {
+            display: flex;
+            gap: 10px;
+            margin: 14px 0 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .theme-preview-card {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            user-select: none;
+        }
+
+        .theme-preview-card svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .preview-dark {
+            background-color: #121212;
+            color: #ffffff;
+            border: 2px solid #333333;
+        }
+
+        .preview-dark svg {
+            stroke: #ffffff;
+        }
+
+        .preview-light {
+            background-color: #ffffff;
+            color: #171717;
+            border: 2px solid #d4d4d4;
+        }
+
+        .preview-light svg {
+            stroke: #171717;
+        }
+
+        .preview-contrast {
+            background-color: #000000;
+            color: #ffff00;
+            border: 2px solid #ffff00;
+        }
+
+        .preview-contrast svg {
+            fill: #ffff00;
+            stroke: none;
+        }
     </style>
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="sr-only">
+        Amir Farhadi's Portfolio. This page contains 3 main sections: Solved Problems, Open Source, and Public Tools. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
+    </div>
 
-    <header class="header-container">
-        <div>
-            <h1>Amir Farhadi</h1>
+    <div class="container">
+        <nav id="top" class="top-bar" aria-label="Main Navigation">
+            <!-- Row 1: Top Utility Bar (Accessibility top-left, Theme top-right) -->
+            <div class="top-utility-bar">
+                <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide">
+                    <span class="tag-prefix">//</span> Accessibility Help <span class="kbd">?</span>
+                </button>
+                <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme">
+                    <span id="theme-icon" style="display: flex; align-items: center;"></span>
+                    <span id="theme-label">Theme</span>
+                </button>
+            </div>
+
+            <!-- Row 2: Page Sections Row (Centered with Section Label) -->
+            <div class="section-nav-wrapper">
+                <span class="section-nav-label">PAGE SECTIONS</span>
+                <div class="section-nav-cluster">
+                    <div class="nav-dropdown">
+                        <a href="#solved-problems" class="nav-btn">
+                            <span class="tag-prefix">// 01</span> Solved Problems <span class="arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-tracker">1. Tactical Agentic Activity Tracker</a>
+                            <a href="#item-caster-switcher">2. Caster Voice App Switcher</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#open-source" class="nav-btn">
+                            <span class="tag-prefix">// 02</span> Open Source <span class="arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-caster-merged">Caster Merged Pull Requests</a>
+                            <a href="#item-caster-975">Caster PR #975 (4-Digit Fix)</a>
+                            <a href="#item-dragonfly-409">Dragonfly PR #409 (Number Series)</a>
+                            <a href="#item-pyvda-57">pyvda PR #57 (COM Object Fix)</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#tools" class="nav-btn">
+                            <span class="tag-prefix">// 03</span> Public Tools <span class="arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-winstasis">WinStasis (Window Restorer)</a>
+                            <a href="#item-vdtree">vdtree (Virtual Desktop Tree)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <h1 class="main-title">Amir Farhadi</h1>
             <p class="subtitle">Software Engineer | Automation & Agentic Architect Proof of Work</p>
+        </header>
+
+        <main id="main-content">
+        
+        <section aria-labelledby="solved-problems">
+            <h2 id="solved-problems" class="section-header">
+                <span class="section-num">// 01</span> Real-World Solved Problems
+            </h2>
+            <ul class="project-list">
+                <li id="item-tracker" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">1. Tactical Agentic Activity Tracker</h3>
+                        <span class="status-tag status-live">Live Demo</span>
+                    </div>
+                    <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure cloud infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
+                    <div class="evidence-box">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/ufrwROqSNLs?si=Si-a7m6eVQ9GWaFR" title="Demonstration video: Tactical Agentic Activity Tracker multi-agent orchestration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs" target="_blank" aria-label="Watch 3 Agent Demo video on YouTube (opens in new tab)">→ Watch "3 Agent Demo" on YouTube</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <span></span>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-caster-switcher" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+                <li id="item-caster-switcher" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">2. Caster Voice App Switcher (Replacing Alt+Tab)</h3>
+                        <span class="status-tag status-live">Live Demo</span>
+                    </div>
+                    <p class="description">Low-level Windows desktop focus management and voice window switching engine for the Caster/Dragonfly speech recognition framework. Implements a 3-tier failsafe focus architecture (Win32 API + Thread Attach OS bypass, Taskbar UIA automation, synthetic keyboard macros), virtual desktop filtering, and tab cycling.</p>
+                    <div class="evidence-box">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/zeyoatLmYgQ?si=x_mrpffWQZEdt9ky" title="Demonstration video: Caster Voice App Switcher replacing ALT+TAB with voice commands" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <a class="evidence-link" href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank" aria-label="Watch Replacing ALT+TAB with Voice commands video on YouTube (opens in new tab)">→ Watch "Replacing ALT + TAB with Voice commands" on YouTube</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-tracker" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-caster-merged" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="open-source">
+            <h2 id="open-source" class="section-header">
+                <span class="section-num">// 02</span> Open Source Contributions
+            </h2>
+            <ul class="project-list">
+                <li id="item-caster-merged" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">Caster Framework (Merged Pull Requests)</h3>
+                        <span class="status-tag status-live">Merged</span>
+                    </div>
+                    <p class="description">Merged pull requests into Caster—a widely used open-source voice dictation and accessibility framework. Contributions include HUD startup race condition retry logic (#965), title-case contraction and possessive parser fixes (#962), and Windows 11 virtual desktop integration via updated pyvda API (#960).</p>
+                    <div class="evidence-box">
+                        <img class="screenshot" src="prs-screenshot.png" alt="Screenshot of Caster repository on GitHub showing 3 merged pull requests by Amir Farhadi: PR #965, PR #962, and PR #960." width="800">
+                        <a class="evidence-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank" aria-label="View Merged Commits on Caster GitHub repository (opens in new tab)">→ View Merged Commits on GitHub</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-caster-switcher" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-caster-975" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+                <li id="item-caster-975" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">Caster Framework — Fix 4-Digit Length Restriction Bug</h3>
+                        <span class="status-tag status-live">Open PR #975</span>
+                    </div>
+                    <p class="description">Fixes digit sequence length limitations in Caster by migrating the numeric rule extra from legacy ShortIntegerRef to NumberRef with zero-preservation, eliminating the 4-digit cap for seamless long numeric dictation.</p>
+                    <div class="evidence-box">
+                        <img class="screenshot" src="caster-pr-screenshot.png" alt="Screenshot of Caster Pull Request #975 on GitHub showing code changes replacing ShortIntegerRef with NumberRef." width="800">
+                        <a class="evidence-link" href="https://github.com/dictation-toolbox/Caster/pull/975" target="_blank" aria-label="View Pull Request #975 on Caster GitHub repository (opens in new tab)">→ View Pull Request #975 on GitHub</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-caster-merged" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-dragonfly-409" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+                <li id="item-dragonfly-409" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">Dragonfly Framework — Fix Number Series Sequence Matching & Limits</h3>
+                        <span class="status-tag status-live">Open PR #409</span>
+                    </div>
+                    <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence matching conflicts, digit length constraints, and zero formatting loss across speech recognition backends.</p>
+                    <div class="evidence-box">
+                        <img class="screenshot" src="dragonfly-pr-screenshot.png" alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching." width="800">
+                        <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank" aria-label="View Pull Request #409 on Dragonfly GitHub repository (opens in new tab)">→ View Pull Request #409 on GitHub</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-caster-975" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-pyvda-57" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+                <li id="item-pyvda-57" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">pyvda — Handle Stale COM Objects & RPC Server Unavailability</h3>
+                        <span class="status-tag status-live">Open PR #57</span>
+                    </div>
+                    <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle destroyed COM interface pointers and RPC server unavailability errors caused by Windows Explorer restarts or system sleep cycles.</p>
+                    <div class="evidence-box">
+                        <img class="screenshot" src="pyvda-pr-screenshot.png" alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers." width="800">
+                        <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank" aria-label="View Pull Request #57 on pyvda GitHub repository (opens in new tab)">→ View Pull Request #57 on GitHub</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-dragonfly-409" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-winstasis" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="tools">
+            <h2 id="tools" class="section-header">
+                <span class="section-num">// 03</span> Publicly Released Tools
+            </h2>
+            <ul class="project-list">
+                <li id="item-winstasis" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">WinStasis (Window Position Restorer CLI)</h3>
+                        <span class="status-tag status-live">Tiny Tool Town</span>
+                    </div>
+                    <p class="description">Lightweight CLI utility to instantly snapshot and restore window positions and virtual desktop assignments on Windows, permanently resolving application drift. Publicly featured on Tiny Tool Town.</p>
+                    <div class="evidence-box">
+                        <img class="screenshot" src="winstasis-screenshot.png" alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary." width="600">
+                        <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank" style="margin-right: 20px;" aria-label="View WinStasis repository on GitHub (opens in new tab)">→ View GitHub Repository</a>
+                        <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/" target="_blank" aria-label="View WinStasis on Tiny Tool Town (opens in new tab)">→ View on Tiny Tool Town</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-pyvda-57" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <a href="#item-vdtree" class="nav-btn">Next Entry → <span class="kbd">n</span></a>
+                    </div>
+                </li>
+                <li id="item-vdtree" class="project-item">
+                    <div class="project-title-row">
+                        <h3 class="project-title">vdtree (Windows Virtual Desktop Tree CLI)</h3>
+                        <span class="status-tag status-live">Tiny Tool Town</span>
+                    </div>
+                    <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops. Maps out all active virtual desktops and open application windows in a clean CLI table, displaying window titles, desktop assignments, coordinates (X, Y), and dimensions (W x H).</p>
+                    <div class="evidence-box">
+                        <img class="screenshot" src="vdtree-screenshot.png" alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions." width="600">
+                        <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank" style="margin-right: 20px;" aria-label="View vdtree repository on GitHub (opens in new tab)">→ View GitHub Repository</a>
+                        <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/" target="_blank" aria-label="View vdtree on Tiny Tool Town (opens in new tab)">→ View on Tiny Tool Town</a>
+                    </div>
+                    <div class="item-nav-bar">
+                        <a href="#item-winstasis" class="nav-btn">← Prev Entry <span class="kbd">p</span></a>
+                        <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                        <span></span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <span>© Amir Farhadi — Software Portfolio</span>
+            <span>Proof of Work Evidence</span>
+        </footer>
+        </main>
+    </div>
+
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">↑ Top</button>
+
+    <!-- Accessibility Dialog -->
+    <dialog id="a11y-dialog" aria-labelledby="a11y-dialog-title">
+        <h2 id="a11y-dialog-title">Accessibility & Keyboard Shortcuts Guide</h2>
+        <p>This portfolio is optimized for screen readers, high-contrast visibility, and keyboard navigation.</p>
+        
+        <p><strong>Theme Toggle Button States:</strong> Click the <code>Theme</code> button in the top toolbar to cycle through 3 visual modes:</p>
+        <div class="theme-previews" aria-label="Visual theme button states">
+            <div class="theme-preview-card preview-dark" title="Dark mode state button">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <span>Light</span>
+            </div>
+            <div class="theme-preview-card preview-light" title="Light mode state button">
+                <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <span>Dark</span>
+            </div>
+            <div class="theme-preview-card preview-contrast" title="High Contrast mode state button">
+                <svg viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></svg>
+                <span>Contrast</span>
+            </div>
         </div>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-            <span id="theme-icon" style="display: flex; align-items: center;"></span>
-            <span id="theme-label">Theme</span>
-        </button>
-    </header>
 
-    <h2>Real-World Solved Problems</h2>
-    <ul>
-        <li>
-            <span class="project-title">1. Tactical Agentic Activity Tracker</span><span class="status-tag status-live">Live Demo</span>
-            <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure cloud infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
-            <div class="evidence-box">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/ufrwROqSNLs" title="Tactical Agentic Activity Tracker - 3 Agent Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs" target="_blank">→ Watch "3 Agent Demo" on YouTube</a>
-            </div>
-        </li>
-        <li>
-            <span class="project-title">2. Caster Voice App Switcher (Replacing Alt+Tab)</span><span class="status-tag status-live">Live Demo</span>
-            <p class="description">Low-level Windows desktop focus management and voice window switching engine for the Caster/Dragonfly speech recognition framework. Implements a 3-tier failsafe focus architecture (Win32 API + Thread Attach OS bypass, Taskbar UIA automation, synthetic keyboard macros), virtual desktop filtering, and tab cycling.</p>
-            <div class="evidence-box">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/zeyoatLmYgQ" title="Replacing ALT + TAB with Voice commands" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                <a class="evidence-link" href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank">→ Watch "Replacing ALT + TAB with Voice commands" on YouTube</a>
-            </div>
-        </li>
-    </ul>
-
-    <h2>Open Source Contributions</h2>
-    <ul>
-        <li>
-            <span class="project-title">Caster Framework (Merged Pull Requests)</span><span class="status-tag status-live">Merged</span>
-            <p class="description">Merged pull requests into Caster—a widely used open-source voice dictation and accessibility framework. Contributions include HUD startup race condition retry logic (#965), title-case contraction and possessive parser fixes (#962), and Windows 11 virtual desktop integration via updated pyvda API (#960).</p>
-            <div class="evidence-box">
-                <img class="screenshot" src="prs-screenshot.png" alt="Merged Pull Requests on Caster Repository" width="800">
-                <a class="evidence-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-                    target="_blank">→ View Merged Commits on GitHub</a>
-            </div>
-        </li>
-        <li>
-            <span class="project-title">Caster Framework — Fix 4-Digit Length Restriction Bug</span><span class="status-tag status-live">Open PR #975</span>
-            <p class="description">Fixes digit sequence length limitations in Caster by migrating the numeric rule extra from legacy ShortIntegerRef to NumberRef with zero-preservation, eliminating the 4-digit cap for seamless long numeric dictation.</p>
-            <div class="evidence-box">
-                <img class="screenshot" src="caster-pr-screenshot.png" alt="Caster Pull Request #975 Screenshot" width="800">
-                <a class="evidence-link" href="https://github.com/dictation-toolbox/Caster/pull/975"
-                    target="_blank">→ View Pull Request #975 on GitHub</a>
-            </div>
-        </li>
-        <li>
-            <span class="project-title">Dragonfly Framework — Fix Number Series Sequence Matching & Limits</span><span class="status-tag status-live">Open PR #409</span>
-            <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence matching conflicts, digit length constraints, and zero formatting loss across speech recognition backends.</p>
-            <div class="evidence-box">
-                <img class="screenshot" src="dragonfly-pr-screenshot.png" alt="Dragonfly Pull Request #409 Screenshot" width="800">
-                <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-                    target="_blank">→ View Pull Request #409 on GitHub</a>
-            </div>
-        </li>
-        <li>
-            <span class="project-title">pyvda — Handle Stale COM Objects & RPC Server Unavailability</span><span class="status-tag status-live">Open PR #57</span>
-            <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle destroyed COM interface pointers and RPC server unavailability errors caused by Windows Explorer restarts or system sleep cycles.</p>
-            <div class="evidence-box">
-                <img class="screenshot" src="pyvda-pr-screenshot.png" alt="pyvda Pull Request #57 Screenshot" width="800">
-                <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57"
-                    target="_blank">→ View Pull Request #57 on GitHub</a>
-            </div>
-        </li>
-    </ul>
-
-    <h2>Publicly Released Tools</h2>
-    <ul>
-        <li>
-            <span class="project-title">WinStasis (Window Position Restorer CLI)</span><span class="status-tag status-live">Tiny Tool Town</span>
-            <p class="description">Lightweight CLI utility to instantly snapshot and restore window positions and virtual desktop assignments on Windows, permanently resolving application drift. Publicly featured on Tiny Tool Town.</p>
-            <div class="evidence-box">
-                <img class="screenshot" src="winstasis-screenshot.png" alt="WinStasis Window Position Restorer Graphic" width="600">
-                <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
-                    style="margin-right: 20px;">→ View GitHub Repository</a>
-                <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/" target="_blank">→ View on Tiny Tool Town</a>
-            </div>
-        </li>
-        <li>
-            <span class="project-title">vdtree (Windows Virtual Desktop Tree CLI)</span><span class="status-tag status-live">Tiny Tool Town</span>
-            <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops. Maps out all active virtual desktops and open application windows in a clean CLI table, displaying window titles, desktop assignments, coordinates (X, Y), and dimensions (W x H).</p>
-            <div class="evidence-box">
-                <img class="screenshot" src="vdtree-screenshot.png" alt="vdtree CLI Console Table Screenshot" width="600">
-                <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank"
-                    style="margin-right: 20px;">→ View GitHub Repository</a>
-                <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/" target="_blank">→ View on Tiny Tool Town</a>
-            </div>
-        </li>
-    </ul>
-
-    <footer class="footer">
-        <span>© Amir Farhadi</span>
-    </footer>
+        <p><strong>Keyboard Shortcuts:</strong></p>
+        <ul>
+            <li><span class="kbd">?</span> Toggle this Accessibility Guide</li>
+            <li><span class="kbd">1</span> Jump to Solved Problems</li>
+            <li><span class="kbd">2</span> Jump to Open Source Contributions</li>
+            <li><span class="kbd">3</span> Jump to Public Tools</li>
+            <li><span class="kbd">t</span> Back to Top</li>
+            <li><span class="kbd">n</span> Jump to Next Project Entry</li>
+            <li><span class="kbd">p</span> Jump to Previous Project Entry</li>
+        </ul>
+        <div class="dialog-close">
+            <button id="close-a11y-btn" class="nav-btn">Close Guide</button>
+        </div>
+    </dialog>
 
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const themeLabel = document.getElementById('theme-label');
+        const backToTopBtn = document.getElementById('back-to-top');
 
         const sunSvg = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
         const moonSvg = `<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        const contrastSvg = `<svg viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></svg>`;
 
         function updateToggleUI(theme) {
-            if (theme === 'dark') {
+            if (theme === 'light') {
                 themeIcon.innerHTML = sunSvg;
                 themeLabel.textContent = 'Light';
-                themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
+                themeToggleBtn.setAttribute('aria-label', 'Switch to high contrast theme');
+            } else if (theme === 'high-contrast') {
+                themeIcon.innerHTML = contrastSvg;
+                themeLabel.textContent = 'Contrast';
+                themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
             } else {
                 themeIcon.innerHTML = moonSvg;
                 themeLabel.textContent = 'Dark';
-                themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
+                themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
             }
         }
 
@@ -359,7 +912,11 @@
 
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = getCurrentTheme();
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            let newTheme;
+            if (currentTheme === 'dark') newTheme = 'light';
+            else if (currentTheme === 'light') newTheme = 'high-contrast';
+            else newTheme = 'dark';
+            
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateToggleUI(newTheme);
@@ -374,6 +931,82 @@
                 }
             });
         }
+
+        // Back to Top Button Logic
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 150) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Accessibility Shortcuts & Dialog Logic
+        const a11yBtn = document.getElementById('a11y-btn');
+        const a11yDialog = document.getElementById('a11y-dialog');
+        const closeA11yBtn = document.getElementById('close-a11y-btn');
+
+        a11yBtn.addEventListener('click', () => {
+            a11yDialog.showModal();
+        });
+
+        closeA11yBtn.addEventListener('click', () => {
+            a11yDialog.close();
+        });
+        
+        a11yDialog.addEventListener('click', (e) => {
+            if (e.target === a11yDialog) {
+                a11yDialog.close();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            // Do not trigger shortcuts if user is typing in an input (though we have none here, good practice)
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+            
+            const projects = Array.from(document.querySelectorAll('.project-item'));
+            
+            if (e.key === '?') {
+                if (a11yDialog.open) {
+                    a11yDialog.close();
+                } else {
+                    a11yDialog.showModal();
+                }
+            } else if (e.key === '1') {
+                document.getElementById('solved-problems').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === '2') {
+                document.getElementById('open-source').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === '3') {
+                document.getElementById('tools').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 't') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (e.key === 'n') {
+                // Find next project below current scroll position
+                const currentY = window.scrollY;
+                for (const project of projects) {
+                    // Check if project top is below current view + offset
+                    if (project.getBoundingClientRect().top > 60) {
+                        project.scrollIntoView({ behavior: 'smooth' });
+                        break;
+                    }
+                }
+            } else if (e.key === 'p') {
+                // Find previous project above current scroll position
+                const currentY = window.scrollY;
+                for (let i = projects.length - 1; i >= 0; i--) {
+                    const project = projects[i];
+                    // Check if project top is above current view
+                    if (project.getBoundingClientRect().top < -60) {
+                        project.scrollIntoView({ behavior: 'smooth' });
+                        break;
+                    }
+                }
+            }
+        });
     </script>
 </body>
 
