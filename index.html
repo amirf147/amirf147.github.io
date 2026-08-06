@@ -1002,27 +1002,43 @@
                 const topNav = document.getElementById('top');
                 if (topNav) topNav.focus();
             } else if (e.key === 'n') {
-                // Find next project below current scroll position
-                const currentY = window.scrollY;
-                for (const project of projects) {
-                    // Check if project top is below current view + offset
-                    if (project.getBoundingClientRect().top > 60) {
-                        project.scrollIntoView({ behavior: 'smooth' });
-                        project.focus();
-                        break;
+                const activeProject = document.activeElement ? document.activeElement.closest('.project-item') : null;
+                let target = null;
+                const activeIdx = projects.indexOf(activeProject);
+                if (activeIdx !== -1 && activeIdx < projects.length - 1) {
+                    target = projects[activeIdx + 1];
+                } else {
+                    // Fallback to bounding rect check
+                    for (const project of projects) {
+                        if (project.getBoundingClientRect().top > 60) {
+                            target = project;
+                            break;
+                        }
                     }
                 }
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.focus({ preventScroll: true });
+                }
             } else if (e.key === 'p') {
-                // Find previous project above current scroll position
-                const currentY = window.scrollY;
-                for (let i = projects.length - 1; i >= 0; i--) {
-                    const project = projects[i];
-                    // Check if project top is above current view
-                    if (project.getBoundingClientRect().top < -60) {
-                        project.scrollIntoView({ behavior: 'smooth' });
-                        project.focus();
-                        break;
+                const activeProject = document.activeElement ? document.activeElement.closest('.project-item') : null;
+                let target = null;
+                const activeIdx = projects.indexOf(activeProject);
+                if (activeIdx !== -1 && activeIdx > 0) {
+                    target = projects[activeIdx - 1];
+                } else {
+                    // Fallback to bounding rect check (bottom-up)
+                    for (let i = projects.length - 1; i >= 0; i--) {
+                        const project = projects[i];
+                        if (project.getBoundingClientRect().top < -60) {
+                            target = project;
+                            break;
+                        }
                     }
+                }
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.focus({ preventScroll: true });
                 }
             }
         });
