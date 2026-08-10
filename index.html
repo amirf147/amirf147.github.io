@@ -23,75 +23,93 @@
         }
 
         :root {
-            /* Pure Black & White Monochrome Dark Mode */
-            --bg-color: #000000;
-            --text-color: #d4d4d4;
-            --heading-color: #ffffff;
-            --subtitle-color: #a3a3a3;
-            --accent-color: #ffffff;
-            --border-color: #262626;
-            --divider-color: #262626;
-            --status-bg: #171717;
-            --status-text: #a3a3a3;
-            --status-live-bg: #ffffff;
-            --status-live-text: #000000;
-            --btn-bg: #121212;
-            --btn-border: #333333;
-            --btn-text: #e5e5e5;
-            --btn-hover-bg: #262626;
-            --btn-hover-border: #ffffff;
-            --tag-num: #a3a3a3;
-            --menu-bg: #121212;
-            --menu-border: #333333;
-            --focus-ring: #ffffff;
+            /* VS Code Dark+ / Antigravity Dark Syntax Theme */
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --heading-color: #f0f6fc;
+            --subtitle-color: #8b949e;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+            --divider-color: #21262d;
+            --status-bg: #161b22;
+            --status-text: #8b949e;
+            --status-live-bg: rgba(46, 160, 67, 0.18);
+            --status-live-text: #56d364;
+            --btn-bg: #161b22;
+            --btn-border: #30363d;
+            --btn-text: #c9d1d9;
+            --btn-hover-bg: #21262d;
+            --btn-hover-border: #58a6ff;
+            --tag-num: #79c0ff;
+            --menu-bg: #161b22;
+            --menu-border: #30363d;
+            --focus-ring: #58a6ff;
+            /* Syntax Tokens */
+            --syntax-repo: #d2a8ff;
+            --syntax-sha-bg: #1f242c;
+            --syntax-sha-border: #30363d;
+            --syntax-sha-text: #7ee787;
+            --live-dot-color: #3fb950;
         }
 
         [data-theme="light"] {
-            /* Pure White & Black Monochrome Light Mode */
+            /* VS Code Light+ / GitHub Light Syntax Theme */
             --bg-color: #ffffff;
-            --text-color: #171717;
-            --heading-color: #000000;
-            --subtitle-color: #525252;
-            --accent-color: #000000;
-            --border-color: #e5e5e5;
-            --divider-color: #e5e5e5;
-            --status-bg: #f5f5f5;
-            --status-text: #525252;
-            --status-live-bg: #000000;
-            --status-live-text: #ffffff;
+            --text-color: #24292f;
+            --heading-color: #0f1419;
+            --subtitle-color: #57606a;
+            --accent-color: #0969da;
+            --border-color: #d0d7de;
+            --divider-color: #eaeef2;
+            --status-bg: #f6f8fa;
+            --status-text: #57606a;
+            --status-live-bg: rgba(26, 127, 55, 0.12);
+            --status-live-text: #1a7f37;
             --btn-bg: #ffffff;
-            --btn-border: #d4d4d4;
-            --btn-text: #171717;
-            --btn-hover-bg: #f5f5f5;
-            --btn-hover-border: #000000;
-            --tag-num: #525252;
+            --btn-border: #d0d7de;
+            --btn-text: #24292f;
+            --btn-hover-bg: #f3f4f6;
+            --btn-hover-border: #0969da;
+            --tag-num: #0550ae;
             --menu-bg: #ffffff;
-            --menu-border: #d4d4d4;
-            --focus-ring: #000000;
+            --menu-border: #d0d7de;
+            --focus-ring: #0969da;
+            /* Syntax Tokens */
+            --syntax-repo: #8250df;
+            --syntax-sha-bg: #f3f4f6;
+            --syntax-sha-border: #d0d7de;
+            --syntax-sha-text: #1a7f37;
+            --live-dot-color: #1a7f37;
         }
 
         [data-theme="high-contrast"] {
-            /* High Contrast Yellow on Black for Visual Impairment */
+            /* Modern Multi-Color High Contrast (WCAG AAA Compliant) */
             --bg-color: #000000;
-            --text-color: #ffff00;
-            --heading-color: #ffff00;
-            --subtitle-color: #e6e600;
+            --text-color: #ffffff;
+            --heading-color: #ffffff;
+            --subtitle-color: #d4d4d4;
             --accent-color: #ffff00;
             --border-color: #ffff00;
-            --divider-color: #ffff00;
+            --divider-color: #555555;
             --status-bg: #000000;
-            --status-text: #ffff00;
-            --status-live-bg: #ffff00;
-            --status-live-text: #000000;
+            --status-text: #ffffff;
+            --status-live-bg: #000000;
+            --status-live-text: #00ff00;
             --btn-bg: #000000;
             --btn-border: #ffff00;
             --btn-text: #ffff00;
-            --btn-hover-bg: #222200;
+            --btn-hover-bg: #1a1a00;
             --btn-hover-border: #ffff00;
             --tag-num: #ffff00;
             --menu-bg: #000000;
             --menu-border: #ffff00;
             --focus-ring: #ffff00;
+            /* Syntax Tokens for High Scannability */
+            --syntax-repo: #00ffff; /* Electric Cyan (16.6:1 contrast ratio) */
+            --syntax-sha-bg: #000000;
+            --syntax-sha-border: #00ff00;
+            --syntax-sha-text: #00ff00; /* Electric Lime Green (15.3:1 contrast ratio) */
+            --live-dot-color: #00ff00;
         }
 
         body {
@@ -676,8 +694,9 @@
         .commits-live-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--accent-color);
+            background-color: var(--live-dot-color);
             border-radius: 50%;
+            box-shadow: 0 0 6px var(--live-dot-color);
             animation: pulse-dot 1.8s infinite ease-in-out;
         }
 
@@ -734,7 +753,7 @@
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 0.78rem;
             font-weight: 700;
-            color: var(--accent-color);
+            color: var(--syntax-repo);
             text-decoration: underline;
             text-underline-offset: 2px;
             text-decoration-thickness: 1px;
@@ -772,17 +791,19 @@
         .commit-sha-badge {
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 0.75rem;
-            padding: 2px 6px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
+            font-weight: 600;
+            padding: 3px 8px;
+            background-color: var(--syntax-sha-bg);
+            border: 1px solid var(--syntax-sha-border);
             border-radius: 4px;
-            color: var(--text-color);
+            color: var(--syntax-sha-text);
             text-decoration: none;
-            transition: border-color 0.15s ease;
+            transition: all 0.15s ease;
         }
 
         .commit-sha-badge:hover {
             border-color: var(--accent-color);
+            transform: translateY(-1px);
         }
 
         .commit-time-elapsed {
