@@ -1595,17 +1595,6 @@
                 return;
             }
 
-        function renderCommits(items) {
-            if (!commitsContainer) return;
-            if (!items || items.length === 0) {
-                commitsContainer.innerHTML = `
-                    <div class="commits-error-container">
-                        <p class="commits-error-text">No recent public commits found.</p>
-                    </div>
-                `;
-                return;
-            }
-
             let html = '<div id="commits-wrapper" class="commits-feed-wrapper"><ul class="commits-list">';
             const limit = Math.min(items.length, 15);
             for (let i = 0; i < limit; i++) {
