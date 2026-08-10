@@ -854,6 +854,62 @@
             font-weight: 600;
         }
 
+        /* CSS Tooltip */
+        [data-tooltip] {
+            position: relative;
+        }
+        
+        [data-tooltip]::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 135%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            max-width: 220px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: var(--menu-bg);
+            color: var(--text-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid var(--menu-border);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        [data-tooltip]::after {
+            content: '';
+            position: absolute;
+            top: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: var(--menu-border);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        [data-tooltip]:hover::before,
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        [data-tooltip][disabled]:hover::before,
+        [data-tooltip][disabled]:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Custom smaller button */
         .nav-btn.btn-sm {
             padding: 4px 10px;
@@ -902,7 +958,7 @@
                         GitHub Profile<span class="sr-only"> (opens in a new tab)</span>
                     </a>
                 </div>
-                <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme">
+                <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme" data-tooltip="Cycle Themes (Dark, Light, High Contrast)">
                     <span id="theme-icon" style="display: flex; align-items: center;"></span>
                     <span id="theme-label">Theme</span>
                 </button>
@@ -972,9 +1028,9 @@
                         <span class="commits-live-dot" aria-hidden="true"></span>
                         <span class="commits-live-text">Live Commits Feed</span>
                     </div>
-                    <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list">
+                    <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list" data-tooltip="Fetch latest live commits">
                         <svg class="refresh-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l.73-.73"/></svg>
-                        Refresh
+                        <span class="refresh-text">Refresh</span>
                     </button>
                 </div>
                 <div id="commits-feed-container" aria-live="polite">
@@ -1548,8 +1604,39 @@
                 }
             } finally {
                 if (refreshIcon) refreshIcon.classList.remove('spinning');
-                if (refreshBtn) refreshBtn.disabled = false;
+                if (refreshBtn && !isCooldown) refreshBtn.disabled = false;
             }
+        }
+
+        let isCooldown = false;
+        
+        function startRefreshCooldown() {
+            isCooldown = true;
+            let secondsLeft = 60;
+            if (refreshBtn) {
+                refreshBtn.disabled = true;
+                refreshBtn.style.cursor = 'not-allowed';
+                refreshBtn.setAttribute('data-tooltip', 'GitHub API rate limit cooldown to prevent throttling.');
+            }
+            
+            const textSpan = refreshBtn ? refreshBtn.querySelector('.refresh-text') : null;
+            if (textSpan) textSpan.textContent = `Wait ${secondsLeft}s`;
+            
+            const interval = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft <= 0) {
+                    clearInterval(interval);
+                    isCooldown = false;
+                    if (refreshBtn) {
+                        refreshBtn.disabled = false;
+                        refreshBtn.style.cursor = '';
+                        refreshBtn.setAttribute('data-tooltip', 'Fetch latest live commits');
+                    }
+                    if (textSpan) textSpan.textContent = 'Refresh';
+                } else {
+                    if (textSpan) textSpan.textContent = `Wait ${secondsLeft}s`;
+                }
+            }, 1000);
         }
 
         // Initialize commits loading
@@ -1557,7 +1644,9 @@
 
         if (refreshBtn) {
             refreshBtn.addEventListener('click', () => {
+                if (isCooldown) return;
                 loadCommits(true);
+                startRefreshCooldown();
             });
         }
     </script>
