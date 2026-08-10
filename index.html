@@ -644,6 +644,245 @@
             fill: #ffff00;
             stroke: none;
         }
+
+        /* Recent Commits Section */
+        #recent-commits-section {
+            scroll-margin-top: 50px;
+        }
+
+        .commits-container {
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            padding: 24px;
+            background-color: var(--btn-bg);
+            transition: border-color 0.2s ease;
+        }
+
+        .commits-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--divider-color);
+            padding-bottom: 12px;
+        }
+
+        .commits-live-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .commits-live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            animation: pulse-dot 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.3; transform: scale(0.9); }
+        }
+
+        .commits-live-text {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .commits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .commit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--divider-color);
+            gap: 20px;
+        }
+
+        .commit-item:last-child {
+            border-bottom: none;
+        }
+
+        .commit-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .commit-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .commit-repo {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-thickness: 1px;
+        }
+
+        .commit-repo:hover {
+            opacity: 0.8;
+        }
+
+        .commit-message-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .commit-message-link:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+        }
+
+        .commit-right-side {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .commit-sha-badge {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .commit-sha-badge:hover {
+            border-color: var(--accent-color);
+        }
+
+        .commit-time-elapsed {
+            font-size: 0.82rem;
+            color: var(--subtitle-color);
+            white-space: nowrap;
+        }
+
+        .commits-footer-row {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--divider-color);
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* Skeleton Loading */
+        .skeleton-loader {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skeleton-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--divider-color);
+            height: 38px;
+        }
+
+        .skeleton-row:last-child {
+            border-bottom: none;
+        }
+
+        .skeleton-bar {
+            height: 14px;
+            background: linear-gradient(90deg, var(--divider-color) 25%, var(--border-color) 50%, var(--divider-color) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Error state styling */
+        .commits-error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .commits-error-text {
+            color: var(--subtitle-color);
+            font-size: 0.95rem;
+        }
+
+        .commits-error-link {
+            color: var(--heading-color);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Custom smaller button */
+        .nav-btn.btn-sm {
+            padding: 4px 10px;
+            font-size: 0.8rem;
+        }
+        
+        .refresh-icon.spinning {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(-360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .commit-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 16px 0;
+            }
+            .commit-right-side {
+                align-self: flex-end;
+            }
+            .commit-message-link {
+                white-space: normal;
+                word-break: break-word;
+            }
+        }
     </style>
 </head>
 
@@ -673,6 +912,10 @@
             <div class="section-nav-wrapper">
                 <span class="section-nav-label">PAGE SECTIONS</span>
                 <div class="section-nav-cluster">
+                    <a href="#recent-commits-section" class="nav-btn">
+                        <span class="tag-prefix" aria-hidden="true">// 00</span> Recent Activity
+                    </a>
+
                     <div class="nav-dropdown">
                         <a href="#solved-problems" class="nav-btn" aria-haspopup="true">
                             <span class="tag-prefix" aria-hidden="true">// 01</span> Solved Problems <span class="arrow" aria-hidden="true">▾</span>
@@ -719,6 +962,32 @@
 
         <main id="main-content" tabindex="-1">
         
+        <section id="recent-commits-section" aria-labelledby="recent-commits-title">
+            <h2 id="recent-commits-title" class="section-header" tabindex="-1">
+                <span class="section-num" aria-hidden="true">// 00</span> Recent Activity
+            </h2>
+            <div class="commits-container">
+                <div class="commits-header-row">
+                    <div class="commits-live-status">
+                        <span class="commits-live-dot" aria-hidden="true"></span>
+                        <span class="commits-live-text">Live Commits Feed</span>
+                    </div>
+                    <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list">
+                        <svg class="refresh-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l.73-.73"/></svg>
+                        Refresh
+                    </button>
+                </div>
+                <div id="commits-feed-container" aria-live="polite">
+                    <!-- Commits skeleton/list will render here dynamically -->
+                </div>
+                <div class="commits-footer-row">
+                    <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc" target="_blank" class="nav-btn" style="width: 100%; justify-content: center;" aria-label="View search query on GitHub (opens in a new tab)">
+                        View Commits Search Query on GitHub<span class="sr-only"> (opens in a new tab)</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section aria-labelledby="solved-problems">
             <h2 id="solved-problems" class="section-header" tabindex="-1">
                 <span class="section-num" aria-hidden="true">// 01</span> Real-World Solved Problems
@@ -941,6 +1210,7 @@
         <p><strong>Keyboard Shortcuts:</strong></p>
         <ul>
             <li><span class="kbd">?</span> Toggle this Accessibility Guide</li>
+            <li><span class="kbd">0</span> Jump to Recent Activity</li>
             <li><span class="kbd">1</span> Jump to Solved Problems</li>
             <li><span class="kbd">2</span> Jump to Open Source Contributions</li>
             <li><span class="kbd">3</span> Jump to Public Tools</li>
@@ -1056,6 +1326,12 @@
                 } else {
                     a11yDialog.showModal();
                 }
+            } else if (e.key === '0') {
+                const target = document.getElementById('recent-commits-title');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.focus();
+                }
             } else if (e.key === '1') {
                 const target = document.getElementById('solved-problems');
                 target.scrollIntoView({ behavior: 'smooth' });
@@ -1113,6 +1389,177 @@
                 }
             }
         });
+
+        // Recent Commits Feed Logic
+        const commitsContainer = document.getElementById('commits-feed-container');
+        const refreshBtn = document.getElementById('refresh-commits-btn');
+        const refreshIcon = refreshBtn ? refreshBtn.querySelector('.refresh-icon') : null;
+        
+        const COMMITS_CACHE_KEY = 'amir_recent_commits_feed';
+        const COMMITS_CACHE_TIME_KEY = 'amir_recent_commits_feed_time';
+        const COMMITS_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+        function getRelativeTimeString(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffSec = Math.floor(diffMs / 1000);
+            const diffMin = Math.floor(diffSec / 60);
+            const diffHr = Math.floor(diffMin / 60);
+            const diffDays = Math.floor(diffHr / 24);
+            
+            if (isNaN(date.getTime())) return '';
+            if (diffDays > 30) {
+                return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            } else if (diffDays > 0) {
+                return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+            } else if (diffHr > 0) {
+                return `${diffHr} hour${diffHr > 1 ? 's' : ''} ago`;
+            } else if (diffMin > 0) {
+                return `${diffMin} minute${diffMin > 1 ? 's' : ''} ago`;
+            } else {
+                return 'just now';
+            }
+        }
+
+        function renderSkeletons() {
+            if (!commitsContainer) return;
+            let skeletonHtml = '<div class="skeleton-loader">';
+            for (let i = 0; i < 5; i++) {
+                skeletonHtml += `
+                    <div class="skeleton-row">
+                        <div style="display: flex; flex-direction: column; gap: 8px; width: 60%;">
+                            <div class="skeleton-bar" style="width: 40%; height: 10px;"></div>
+                            <div class="skeleton-bar" style="width: 90%; height: 14px;"></div>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <div class="skeleton-bar" style="width: 60px; height: 20px;"></div>
+                            <div class="skeleton-bar" style="width: 80px; height: 12px;"></div>
+                        </div>
+                    </div>
+                `;
+            }
+            skeletonHtml += '</div>';
+            commitsContainer.innerHTML = skeletonHtml;
+        }
+
+        function renderCommits(items) {
+            if (!commitsContainer) return;
+            if (!items || items.length === 0) {
+                commitsContainer.innerHTML = `
+                    <div class="commits-error-container">
+                        <p class="commits-error-text">No recent public commits found.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<ul class="commits-list">';
+            const limit = Math.min(items.length, 5);
+            for (let i = 0; i < limit; i++) {
+                const item = items[i];
+                const sha = item.sha ? item.sha.substring(0, 7) : '';
+                const commitUrl = item.html_url || '';
+                const repoName = item.repository ? item.repository.name : '';
+                const repoFullName = item.repository ? item.repository.full_name : '';
+                const repoUrl = item.repository ? item.repository.html_url : '';
+                const commitMsg = item.commit && item.commit.message ? item.commit.message.split('\n')[0] : 'No commit message';
+                const commitDate = item.commit && item.commit.committer ? item.commit.committer.date : '';
+                const relativeTime = getRelativeTimeString(commitDate);
+
+                html += `
+                    <li class="commit-item">
+                        <div class="commit-info">
+                            <div class="commit-meta">
+                                <a href="${repoUrl}" target="_blank" class="commit-repo" aria-label="Repository ${repoFullName} (opens in a new tab)">
+                                    ${repoFullName}
+                                </a>
+                            </div>
+                            <a href="${commitUrl}" target="_blank" class="commit-message-link" title="${commitMsg.replace(/"/g, '&quot;')}" aria-label="Commit: ${commitMsg.replace(/"/g, '&quot;')} (opens in a new tab)">
+                                ${commitMsg}
+                            </a>
+                        </div>
+                        <div class="commit-right-side">
+                            <a href="${commitUrl}" target="_blank" class="commit-sha-badge" aria-label="Commit SHA ${sha} (opens in a new tab)">
+                                ${sha}
+                            </a>
+                            <time class="commit-time-elapsed" datetime="${commitDate}">${relativeTime}</time>
+                        </div>
+                    </li>
+                `;
+            }
+            html += '</ul>';
+            commitsContainer.innerHTML = html;
+        }
+
+        function renderError(err) {
+            if (!commitsContainer) return;
+            console.error('Error loading commits:', err);
+            commitsContainer.innerHTML = `
+                <div class="commits-error-container">
+                    <p class="commits-error-text">Failed to load live commits feed due to rate limiting or network issues.</p>
+                    <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc" target="_blank" class="commits-error-link" aria-label="View commits on GitHub (opens in a new tab)">
+                        View commits on GitHub directly →
+                    </a>
+                </div>
+            `;
+        }
+
+        async function loadCommits(forceRefresh = false) {
+            if (refreshIcon) refreshIcon.classList.add('spinning');
+            if (refreshBtn) refreshBtn.disabled = true;
+            
+            const cachedData = localStorage.getItem(COMMITS_CACHE_KEY);
+            const cachedTime = localStorage.getItem(COMMITS_CACHE_TIME_KEY);
+            const now = Date.now();
+            
+            if (!cachedData || forceRefresh) {
+                renderSkeletons();
+            }
+
+            try {
+                if (!forceRefresh && cachedData && cachedTime && (now - parseInt(cachedTime) < COMMITS_CACHE_TTL)) {
+                    renderCommits(JSON.parse(cachedData));
+                    if (refreshIcon) refreshIcon.classList.remove('spinning');
+                    if (refreshBtn) refreshBtn.disabled = false;
+                    return;
+                }
+
+                const response = await fetch('https://api.github.com/search/commits?q=author:amirf147&sort=committer-date&order=desc', {
+                    headers: {
+                        'Accept': 'application/vnd.github+json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`GitHub API error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                localStorage.setItem(COMMITS_CACHE_KEY, JSON.stringify(data.items));
+                localStorage.setItem(COMMITS_CACHE_TIME_KEY, now.toString());
+                renderCommits(data.items);
+            } catch (err) {
+                if (cachedData) {
+                    console.warn('API error, falling back to cached commits data:', err);
+                    renderCommits(JSON.parse(cachedData));
+                } else {
+                    renderError(err);
+                }
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('spinning');
+                if (refreshBtn) refreshBtn.disabled = false;
+            }
+        }
+
+        // Initialize commits loading
+        loadCommits();
+
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                loadCommits(true);
+            });
+        }
     </script>
 </body>
 
