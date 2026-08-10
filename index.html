@@ -1633,7 +1633,7 @@
             if (limit > 5) {
                 html += `
                     <div class="commits-expand-row">
-                        <button id="toggle-commits-expand-btn" class="nav-btn btn-sm" aria-expanded="false" aria-controls="commits-wrapper" aria-label="Show more recent commits">
+                        <button id="toggle-commits-expand-btn" class="nav-btn btn-sm" aria-expanded="false" aria-controls="commits-wrapper" aria-label="Show more recent commits" data-tooltip="Expand to view all ${limit} recent commits">
                             Show More Commits
                         </button>
                     </div>
@@ -1651,6 +1651,7 @@
                         toggleBtn.textContent = isExpanded ? 'Show Less' : 'Show More Commits';
                         toggleBtn.setAttribute('aria-expanded', isExpanded.toString());
                         toggleBtn.setAttribute('aria-label', isExpanded ? 'Show fewer recent commits' : 'Show more recent commits');
+                        toggleBtn.setAttribute('data-tooltip', isExpanded ? 'Collapse commit feed view' : `Expand to view all ${limit} recent commits`);
                     });
                 }
             }
