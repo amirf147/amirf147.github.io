@@ -359,10 +359,25 @@
             font-weight: 800;
             color: var(--heading-color);
             font-size: 1.15rem;
+            margin: 0;
+        }
+
+        .project-title a {
+            color: var(--heading-color);
             text-decoration: underline;
             text-decoration-thickness: 2px;
             text-underline-offset: 4px;
-            margin: 0;
+            transition: opacity 0.15s ease, color 0.15s ease;
+        }
+
+        .project-title a:hover {
+            opacity: 0.8;
+        }
+
+        .project-title a:focus-visible {
+            outline: 3px dashed var(--focus-ring);
+            outline-offset: 4px;
+            border-radius: 2px;
         }
 
         .status-tag {
@@ -400,6 +415,27 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             margin-bottom: 8px;
+        }
+
+        .screenshot-link {
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+        }
+
+        .screenshot-link:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+        }
+
+        .screenshot-link:hover .screenshot {
+            border-color: var(--btn-hover-border);
+        }
+
+        .screenshot-link:focus-visible {
+            outline: 3px dashed var(--focus-ring);
+            outline-offset: 4px;
         }
 
         .evidence-link {
@@ -618,9 +654,15 @@
         <nav id="top" class="top-bar" aria-label="Main Navigation" tabindex="-1">
             <!-- Row 1: Top Utility Bar (Accessibility top-left, Theme top-right) -->
             <div class="top-utility-bar">
-                <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide">
-                    <span class="tag-prefix" aria-hidden="true">//</span> Accessibility Help <span class="kbd">?</span>
-                </button>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide">
+                        <span class="tag-prefix" aria-hidden="true">//</span> Accessibility Help <span class="kbd">?</span>
+                    </button>
+                    <a href="https://github.com/Amirf147" target="_blank" class="nav-btn" aria-label="Amir Farhadi's GitHub Profile">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: text-bottom;"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+                        GitHub Profile<span class="sr-only"> (opens in a new tab)</span>
+                    </a>
+                </div>
                 <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme">
                     <span id="theme-icon" style="display: flex; align-items: center;"></span>
                     <span id="theme-label">Theme</span>
@@ -684,7 +726,7 @@
             <ul class="project-list">
                 <li id="item-tracker" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">1. Tactical Agentic Activity Tracker</h3>
+                        <h3 class="project-title"><a href="https://www.youtube.com/watch?v=ufrwROqSNLs" target="_blank">1. Tactical Agentic Activity Tracker<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Live Demo</span>
                     </div>
                     <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure cloud infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
@@ -702,7 +744,7 @@
                 </li>
                 <li id="item-caster-switcher" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">2. Caster Voice App Switcher (Replacing Alt+Tab)</h3>
+                        <h3 class="project-title"><a href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank">2. Caster Voice App Switcher (Replacing Alt+Tab)<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Live Demo</span>
                     </div>
                     <p class="description">Low-level Windows desktop focus management and voice window switching engine for the Caster/Dragonfly speech recognition framework. Implements a 3-tier failsafe focus architecture (Win32 API + Thread Attach OS bypass, Taskbar UIA automation, synthetic keyboard macros), virtual desktop filtering, and tab cycling.</p>
@@ -728,12 +770,14 @@
             <ul class="project-list">
                 <li id="item-caster-merged" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">Caster Framework (Merged Pull Requests)</h3>
+                        <h3 class="project-title"><a href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank">Caster Framework (Merged Pull Requests)<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Merged</span>
                     </div>
                     <p class="description">Merged pull requests into Caster—a widely used open-source voice dictation and accessibility framework. Contributions include HUD startup race condition retry logic (#965), title-case contraction and possessive parser fixes (#962), and Windows 11 virtual desktop integration via updated pyvda API (#960).</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="prs-screenshot.png" alt="Screenshot of Caster repository on GitHub showing 3 merged pull requests by Amir Farhadi: PR #965, PR #962, and PR #960." width="800">
+                        <a class="screenshot-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank" aria-label="View Merged Commits on GitHub by Amir Farhadi (opens in a new tab)">
+                            <img class="screenshot" src="prs-screenshot.png" alt="Screenshot of Caster repository on GitHub showing 3 merged pull requests by Amir Farhadi: PR #965, PR #962, and PR #960." width="800">
+                        </a>
                         <a class="evidence-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank"><span aria-hidden="true">→ </span>View Merged Commits on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
                     </div>
                     <div class="item-nav-bar">
@@ -744,12 +788,14 @@
                 </li>
                 <li id="item-caster-975" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">Caster Framework — Fix 4-Digit Length Restriction Bug</h3>
+                        <h3 class="project-title"><a href="https://github.com/dictation-toolbox/Caster/pull/975" target="_blank">Caster Framework — Fix 4-Digit Length Restriction Bug<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Open PR #975</span>
                     </div>
                     <p class="description">Fixes digit sequence length limitations in Caster by migrating the numeric rule extra from legacy ShortIntegerRef to NumberRef with zero-preservation, eliminating the 4-digit cap for seamless long numeric dictation.</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="caster-pr-screenshot.png" alt="Screenshot of Caster Pull Request #975 on GitHub showing code changes replacing ShortIntegerRef with NumberRef." width="800">
+                        <a class="screenshot-link" href="https://github.com/dictation-toolbox/Caster/pull/975" target="_blank" aria-label="View Pull Request #975 on GitHub (opens in a new tab)">
+                            <img class="screenshot" src="caster-pr-screenshot.png" alt="Screenshot of Caster Pull Request #975 on GitHub showing code changes replacing ShortIntegerRef with NumberRef." width="800">
+                        </a>
                         <a class="evidence-link" href="https://github.com/dictation-toolbox/Caster/pull/975" target="_blank"><span aria-hidden="true">→ </span>View Pull Request #975 on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
                     </div>
                     <div class="item-nav-bar">
@@ -760,12 +806,14 @@
                 </li>
                 <li id="item-dragonfly-409" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">Dragonfly Framework — Fix Number Series Sequence Matching & Limits</h3>
+                        <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank">Dragonfly Framework — Fix Number Series Sequence Matching & Limits<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Open PR #409</span>
                     </div>
                     <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence matching conflicts, digit length constraints, and zero formatting loss across speech recognition backends.</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="dragonfly-pr-screenshot.png" alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching." width="800">
+                        <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank" aria-label="View Pull Request #409 on GitHub (opens in a new tab)">
+                            <img class="screenshot" src="dragonfly-pr-screenshot.png" alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching." width="800">
+                        </a>
                         <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank"><span aria-hidden="true">→ </span>View Pull Request #409 on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
                     </div>
                     <div class="item-nav-bar">
@@ -776,12 +824,14 @@
                 </li>
                 <li id="item-dragonfly-408" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">Dragonfly Framework — Fix Kaldi Deferred Mid-Phrase Reload Bug</h3>
+                        <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/408" target="_blank">Dragonfly Framework — Fix Kaldi Deferred Mid-Phrase Reload Bug<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Open PR #408</span>
                     </div>
                     <p class="description">Fixes KaldiError engine crashes during deferred mid-phrase reloads by capturing rules to destroy at deferral time rather than retrieving newly compiled rules from the global dictionary post-phrase.</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="dragonfly-pr408-screenshot.png" alt="Screenshot of Dragonfly Pull Request #408 on GitHub detailing fix for Kaldi deferred unload mid-phrase reload race condition." width="800">
+                        <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408" target="_blank" aria-label="View Pull Request #408 on GitHub (opens in a new tab)">
+                            <img class="screenshot" src="dragonfly-pr408-screenshot.png" alt="Screenshot of Dragonfly Pull Request #408 on GitHub detailing fix for Kaldi deferred unload mid-phrase reload race condition." width="800">
+                        </a>
                         <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408" target="_blank"><span aria-hidden="true">→ </span>View Pull Request #408 on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
                     </div>
                     <div class="item-nav-bar">
@@ -792,12 +842,14 @@
                 </li>
                 <li id="item-pyvda-57" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">pyvda — Handle Stale COM Objects & RPC Server Unavailability</h3>
+                        <h3 class="project-title"><a href="https://github.com/mirober/pyvda/pull/57" target="_blank">pyvda — Handle Stale COM Objects & RPC Server Unavailability<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Open PR #57</span>
                     </div>
                     <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle destroyed COM interface pointers and RPC server unavailability errors caused by Windows Explorer restarts or system sleep cycles.</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="pyvda-pr-screenshot.png" alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers." width="800">
+                        <a class="screenshot-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank" aria-label="View Pull Request #57 on GitHub (opens in a new tab)">
+                            <img class="screenshot" src="pyvda-pr-screenshot.png" alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers." width="800">
+                        </a>
                         <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank"><span aria-hidden="true">→ </span>View Pull Request #57 on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
                     </div>
                     <div class="item-nav-bar">
@@ -816,12 +868,14 @@
             <ul class="project-list">
                 <li id="item-winstasis" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">WinStasis (Window Position Restorer CLI)</h3>
+                        <h3 class="project-title"><a href="https://github.com/Amirf147/WinStasis" target="_blank">WinStasis (Window Position Restorer CLI)<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Tiny Tool Town</span>
                     </div>
                     <p class="description">Lightweight CLI utility to instantly snapshot and restore window positions and virtual desktop assignments on Windows, permanently resolving application drift. Publicly featured on Tiny Tool Town.</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="winstasis-screenshot.png" alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary." width="600">
+                        <a class="screenshot-link" href="https://github.com/Amirf147/WinStasis" target="_blank" aria-label="View WinStasis GitHub Repository (opens in a new tab)">
+                            <img class="screenshot" src="winstasis-screenshot.png" alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary." width="600">
+                        </a>
                         <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> for WinStasis (opens in a new tab)</span></a>
                         <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/" target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span class="sr-only"> for WinStasis (opens in a new tab)</span></a>
                     </div>
@@ -833,12 +887,14 @@
                 </li>
                 <li id="item-vdtree" class="project-item" tabindex="-1">
                     <div class="project-title-row">
-                        <h3 class="project-title">vdtree (Windows Virtual Desktop Tree CLI)</h3>
+                        <h3 class="project-title"><a href="https://github.com/Amirf147/vdtree" target="_blank">vdtree (Windows Virtual Desktop Tree CLI)<span class="sr-only"> (opens in a new tab)</span></a></h3>
                         <span class="status-tag status-live">Tiny Tool Town</span>
                     </div>
                     <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops. Maps out all active virtual desktops and open application windows in a clean CLI table, displaying window titles, desktop assignments, coordinates (X, Y), and dimensions (W x H).</p>
                     <div class="evidence-box">
-                        <img class="screenshot" src="vdtree-screenshot.png" alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions." width="600">
+                        <a class="screenshot-link" href="https://github.com/Amirf147/vdtree" target="_blank" aria-label="View vdtree GitHub Repository (opens in a new tab)">
+                            <img class="screenshot" src="vdtree-screenshot.png" alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions." width="600">
+                        </a>
                         <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> for vdtree (opens in a new tab)</span></a>
                         <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/" target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span class="sr-only"> for vdtree (opens in a new tab)</span></a>
                     </div>
