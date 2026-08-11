@@ -922,7 +922,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: max-content;
-            max-width: 220px;
+            max-width: 260px;
             padding: 8px 12px;
             border-radius: 6px;
             background-color: var(--menu-bg);
@@ -954,14 +954,27 @@
             pointer-events: none;
         }
 
-        [data-tooltip]:hover::before,
-        [data-tooltip]:hover::after {
-            opacity: 1;
-            visibility: visible;
+        /* Top-positioned tooltip variant for bottom elements */
+        [data-tooltip-pos="top"]::before {
+            top: auto;
+            bottom: 135%;
         }
 
+        [data-tooltip-pos="top"]::after {
+            top: auto;
+            bottom: 115%;
+            border-bottom-color: transparent;
+            border-top-color: var(--menu-border);
+        }
+
+        [data-tooltip]:hover::before,
+        [data-tooltip]:hover::after,
+        [data-tooltip]:focus-visible::before,
+        [data-tooltip]:focus-visible::after,
         [data-tooltip][disabled]:hover::before,
-        [data-tooltip][disabled]:hover::after {
+        [data-tooltip][disabled]:hover::after,
+        [data-tooltip][disabled]:focus-visible::before,
+        [data-tooltip][disabled]:focus-visible::after {
             opacity: 1;
             visibility: visible;
         }
@@ -1633,7 +1646,7 @@
             if (limit > 5) {
                 html += `
                     <div class="commits-expand-row">
-                        <button id="toggle-commits-expand-btn" class="nav-btn btn-sm" aria-expanded="false" aria-controls="commits-wrapper" aria-label="Show more recent commits" data-tooltip="Expand to view all ${limit} recent commits">
+                        <button id="toggle-commits-expand-btn" class="nav-btn btn-sm" aria-expanded="false" aria-controls="commits-wrapper" aria-label="Show more recent commits" data-tooltip="Expand to view all ${limit} recent commits" data-tooltip-pos="top">
                             Show More Commits
                         </button>
                     </div>
