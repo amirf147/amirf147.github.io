@@ -3,16 +3,20 @@
  * Voice Navigation & HUD Overlay Module
  * Cross-Browser Voice Engine with Dual Mode:
  *   Mode 1: Native Web Speech Recognition (Chrome, Edge, Safari, Brave, Opera)
- *   Mode 2: Lightweight In-Browser Neural Engine (Firefox & Unsupported Browsers)
+ *   Mode 2: Lightweight In-Browser Neural Engine (Firefox, Waterfox & Unsupported Browsers)
  * Senior Voice UX (VUI) feedback with real-time waveform equalizer,
  * tactile chimes, ARIA live announcements, and hands-free command execution.
- * Compatible with local file:// protocol and https:// GitHub Pages.
+ * Compatible with local development and https:// GitHub Pages.
  * ============================================================================
  */
 
 class VoiceNav {
     constructor() {
-        this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const ua = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase() : '';
+        this.isGecko = ua.includes('firefox') || ua.includes('waterfox') || ua.includes('librewolf') || ua.includes('floorp') || ua.includes('zen') || ua.includes('gecko/');
+
+        // Chromium/Safari use native cloud STT; Gecko (Firefox/Waterfox) uses in-browser neural engine
+        this.SpeechRecognition = !this.isGecko ? (window.SpeechRecognition || window.webkitSpeechRecognition) : null;
         this.hasNativeSpeech = !!this.SpeechRecognition;
         this.hasMediaDevices = typeof navigator !== 'undefined' && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
         this.isSupported = this.hasNativeSpeech || this.hasMediaDevices;
@@ -29,9 +33,9 @@ class VoiceNav {
         this.analyser = null;
         this.animFrameId = null;
 
-        // Global states
+        // Global states (Always start off until user initiates gesture)
         this.isListening = false;
-        this.shouldBeListening = localStorage.getItem('voice_nav_active') === 'true';
+        this.shouldBeListening = false;
         this.toastTimeout = null;
 
         this.init();
@@ -49,17 +53,12 @@ class VoiceNav {
         if (this.engineMode === 'native') {
             this.setupNativeSpeechRecognition();
         }
-
-        // Restore active state if user previously had it enabled
-        if (this.shouldBeListening) {
-            this.startListening();
-        }
     }
 
     mountHUD() {
         if (document.getElementById('vui-root')) return;
 
-        const engineBadge = this.engineMode === 'in-browser' ? ' (Firefox)' : '';
+        const engineBadge = this.isGecko ? ' (Firefox)' : '';
 
         const hudHtml = `
             <div id="vui-root" class="vui-container" aria-label="Voice Navigation Assistant">
@@ -250,11 +249,14 @@ class VoiceNav {
             this.recognition.onerror = (event) => {
                 if (event.error === 'no-speech') return;
                 console.warn('Speech recognition error:', event.error);
+                this.shouldBeListening = false;
+                this.isListening = false;
+                this.updateUIState(false);
+
                 if (event.error === 'not-allowed') {
-                    this.shouldBeListening = false;
-                    localStorage.setItem('voice_nav_active', 'false');
-                    this.updateUIState(false);
-                    this.showToast('Microphone access blocked. Click mic to retry.');
+                    this.showToast('Microphone access blocked. Grant mic permissions to use voice.');
+                } else if (event.error === 'network') {
+                    this.showToast('Network error. Speech recognition requires an active connection.');
                 }
             };
 
@@ -277,7 +279,7 @@ class VoiceNav {
     }
 
     /* ========================================================================
-     * Mode 2: In-Browser Neural Speech Commands Engine (Firefox & Fallback)
+     * Mode 2: In-Browser Neural Speech Commands Engine (Firefox, Waterfox & Fallback)
      * ======================================================================== */
     loadScript(src) {
         if (document.querySelector(`script[src="${src}"]`)) {
@@ -297,9 +299,15 @@ class VoiceNav {
         if (this.tfRecognizer) return this.tfRecognizer;
         if (this.isLoadingModel) return null;
 
+        // Check for file:// protocol limitation in Firefox
+        if (window.location.protocol === 'file:') {
+            this.showToast('Microphone requires HTTP/HTTPS. Please serve via localhost or GitHub Pages.');
+            throw new Error('getUserMedia not permitted on file:/// protocol');
+        }
+
         this.isLoadingModel = true;
-        this.showToast('Loading lightweight in-browser speech engine...');
-        this.showInterimTranscript('Loading neural model (~1.5 MB)...');
+        this.showToast('Loading lightweight speech model (~1.5 MB)...');
+        this.showInterimTranscript('Loading neural model...');
 
         try {
             // Lazy load TensorFlow.js and the pre-trained Speech Commands model
@@ -330,7 +338,6 @@ class VoiceNav {
 
             this.isListening = true;
             this.shouldBeListening = true;
-            localStorage.setItem('voice_nav_active', 'true');
             this.updateUIState(true);
             this.playChime(true);
             this.showToast('Voice active! Say "one", "two", "up", "down", "stop"');
@@ -356,9 +363,13 @@ class VoiceNav {
         } catch (err) {
             console.warn('In-browser speech recognition error:', err);
             this.shouldBeListening = false;
-            localStorage.setItem('voice_nav_active', 'false');
+            this.isListening = false;
             this.updateUIState(false);
-            this.showToast('Microphone access blocked or failed. Click mic to retry.');
+            if (window.location.protocol === 'file:') {
+                this.showToast('Microphone blocked on local file://. Run with local server or GitHub Pages.');
+            } else {
+                this.showToast('Microphone access blocked. Click mic and allow permissions in browser.');
+            }
         }
     }
 
@@ -388,7 +399,6 @@ class VoiceNav {
 
     startListening() {
         this.shouldBeListening = true;
-        localStorage.setItem('voice_nav_active', 'true');
 
         if (this.engineMode === 'native' && this.recognition) {
             try {
@@ -403,7 +413,6 @@ class VoiceNav {
 
     stopListening() {
         this.shouldBeListening = false;
-        localStorage.setItem('voice_nav_active', 'false');
 
         if (this.engineMode === 'native' && this.recognition) {
             try {
@@ -422,7 +431,7 @@ class VoiceNav {
     updateUIState(listening) {
         if (!this.dom) return;
 
-        const engineBadge = this.engineMode === 'in-browser' ? ' (Firefox)' : '';
+        const engineBadge = this.isGecko ? ' (Firefox)' : '';
 
         if (listening) {
             this.dom.hud.classList.add('is-listening');
