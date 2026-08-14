@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Accessibility & Keyboard Shortcuts Modal Dialog
+   Portfolio Workspace (amirf147.github.io)
+   ========================================================================== */
+
+dialog {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid var(--focus-ring);
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 540px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+}
+
+dialog h2 {
+    margin-top: 0;
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--divider-color);
+    padding-bottom: 12px;
+}
+
+.kbd {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.85em;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-weight: bold;
+    background-color: var(--btn-bg);
+    border: 2px solid var(--btn-border);
+    border-radius: 4px;
+    color: var(--heading-color);
+    margin: 0 4px;
+}
+
+.dialog-close {
+    margin-top: 24px;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Theme Previews in Dialog */
+.theme-previews {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0 20px 0;
+    flex-wrap: wrap;
+}
+
+.theme-preview-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+.theme-preview-card svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.preview-dark {
+    background-color: #121212;
+    color: #ffffff;
+    border: 2px solid #333333;
+}
+
+.preview-dark svg {
+    stroke: #ffffff;
+}
+
+.preview-light {
+    background-color: #ffffff;
+    color: #171717;
+    border: 2px solid #d4d4d4;
+}
+
+.preview-light svg {
+    stroke: #171717;
+}
+
+.preview-contrast {
+    background-color: #000000;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+}
+
+.preview-contrast svg {
+    fill: #ffff00;
+    stroke: none;
+}

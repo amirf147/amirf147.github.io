@@ -1,0 +1,290 @@
+/* ==========================================================================
+   Recent GitHub Activity / Commits Feed
+   Portfolio Workspace (amirf147.github.io)
+   ========================================================================== */
+
+#recent-commits-section {
+    scroll-margin-top: 50px;
+}
+
+.commits-container {
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--btn-bg);
+    transition: border-color 0.2s ease;
+}
+
+.commits-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--divider-color);
+    padding-bottom: 12px;
+}
+
+.commits-live-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.commits-live-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--live-dot-color);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--live-dot-color);
+    animation: pulse-dot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+}
+
+.commits-live-text {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--heading-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.commits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.commit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--divider-color);
+    gap: 20px;
+}
+
+.commit-item:last-child {
+    border-bottom: none;
+}
+
+.commit-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.commit-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.commit-repo {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.78rem;
+    color: var(--syntax-repo);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.commit-repo:hover {
+    text-decoration: underline;
+}
+
+.commit-message-link {
+    color: var(--heading-color);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s ease;
+}
+
+.commit-message-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.commit-message-link:focus-visible,
+.commit-repo:focus-visible,
+.commit-sha-badge:focus-visible {
+    outline: 2px dashed var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.commit-right-side {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.commit-sha-badge {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--syntax-sha-text);
+    background-color: var(--syntax-sha-bg);
+    border: 1px solid var(--syntax-sha-border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.commit-sha-badge:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+}
+
+.commit-time-elapsed {
+    font-size: 0.78rem;
+    color: var(--subtitle-color);
+    white-space: nowrap;
+}
+
+.commits-feed-wrapper {
+    max-height: 295px; /* Fits ~5 commits by default */
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.commits-feed-wrapper.is-expanded {
+    max-height: 1200px; /* Expands to show all recent commits */
+}
+
+/* Gradient fade overlay at bottom of 5 commits */
+.commits-feed-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(transparent, var(--bg-color));
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.commits-feed-wrapper.is-expanded::after {
+    opacity: 0;
+}
+
+.commits-expand-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+/* Skeleton Loading State */
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.skeleton-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.skeleton-row:last-child {
+    border-bottom: none;
+}
+
+.skeleton-bar {
+    height: 14px;
+    background: linear-gradient(90deg, var(--divider-color) 25%, var(--border-color) 50%, var(--divider-color) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Error state styling */
+.commits-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    gap: 12px;
+}
+
+.commits-error-text {
+    color: var(--subtitle-color);
+    font-size: 0.95rem;
+}
+
+.commits-error-link {
+    color: var(--heading-color);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Custom smaller button */
+.nav-btn.btn-sm {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+}
+
+.refresh-icon.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@media (max-width: 600px) {
+    .commit-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px 0;
+    }
+
+    .commit-right-side {
+        align-self: flex-end;
+    }
+
+    .commit-message-link {
+        white-space: normal;
+        word-break: break-word;
+    }
+}

@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/voice-nav.css">
   <style>
     :root {
       --bg-base: #070a13;
@@ -1184,6 +1186,11 @@
 </div>
 
 <div class="app-container">
+  <noscript>
+    <div style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; font-size: 0.88rem; color: #fecaca;" role="alert">
+      <strong style="color: #f87171;">Notice:</strong> JavaScript is currently disabled or blocked by a browser extension (such as uBlock Origin). The interactive timeline filtering, search, subsystem modals, and voice HUD require JavaScript. To enable them, please allow JavaScript for this page.
+    </div>
+  </noscript>
   <!-- Top Hero Header -->
   <header class="hero-header">
     <div class="hero-pill">
@@ -2507,6 +2514,13 @@ function showToast(message) {
     }, 300);
   }, 2600);
 }
+</script>
+
+<script src="./js/voice-nav.js"></script>
+<script>
+  if (window.VoiceNav) {
+    window.timelineVoice = new window.VoiceNav();
+  }
 </script>
 
 </body>
