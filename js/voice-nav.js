@@ -1,8 +1,11 @@
 /**
  * ============================================================================
  * Voice Navigation & HUD Overlay Module
- * Native Web Speech Recognition Engine with Senior Voice UX (VUI) feedback.
- * Demonstrates Caster Voice OS hands-free navigation directly in the browser.
+ * Cross-Browser Voice Engine with Dual Mode:
+ *   Mode 1: Native Web Speech Recognition (Chrome, Edge, Safari, Brave, Opera)
+ *   Mode 2: Lightweight In-Browser Neural Engine (Firefox & Unsupported Browsers)
+ * Senior Voice UX (VUI) feedback with real-time waveform equalizer,
+ * tactile chimes, ARIA live announcements, and hands-free command execution.
  * Compatible with local file:// protocol and https:// GitHub Pages.
  * ============================================================================
  */
@@ -10,12 +13,25 @@
 class VoiceNav {
     constructor() {
         this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        this.isSupported = !window.location.protocol.startsWith('http') && !this.SpeechRecognition ? false : !!this.SpeechRecognition;
+        this.hasNativeSpeech = !!this.SpeechRecognition;
+        this.hasMediaDevices = typeof navigator !== 'undefined' && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+        this.isSupported = this.hasNativeSpeech || this.hasMediaDevices;
+        this.engineMode = this.hasNativeSpeech ? 'native' : (this.hasMediaDevices ? 'in-browser' : 'none');
 
+        // Native recognition state
         this.recognition = null;
+
+        // In-Browser Neural Engine state
+        this.tfRecognizer = null;
+        this.isLoadingModel = false;
+        this.mediaStream = null;
+        this.audioCtx = null;
+        this.analyser = null;
+        this.animFrameId = null;
+
+        // Global states
         this.isListening = false;
         this.shouldBeListening = localStorage.getItem('voice_nav_active') === 'true';
-        this.audioCtx = null;
         this.toastTimeout = null;
 
         this.init();
@@ -30,7 +46,9 @@ class VoiceNav {
             return;
         }
 
-        this.setupSpeechRecognition();
+        if (this.engineMode === 'native') {
+            this.setupNativeSpeechRecognition();
+        }
 
         // Restore active state if user previously had it enabled
         if (this.shouldBeListening) {
@@ -40,6 +58,8 @@ class VoiceNav {
 
     mountHUD() {
         if (document.getElementById('vui-root')) return;
+
+        const engineBadge = this.engineMode === 'in-browser' ? ' (Firefox)' : '';
 
         const hudHtml = `
             <div id="vui-root" class="vui-container" aria-label="Voice Navigation Assistant">
@@ -68,13 +88,13 @@ class VoiceNav {
                     </div>
 
                     <div class="vui-category">
-                        <div class="vui-category-label">// Navigation</div>
+                        <div class="vui-category-label">// Navigation (Natural or Digits "0"-"4")</div>
                         <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="go to caster"><span class="chip-quote">"</span>Go to Caster<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Commits<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to caster"><span class="chip-quote">"</span>Go to Caster / One<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems / Two<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source / Three<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools / Four<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Commits / Zero<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="open timeline"><span class="chip-quote">"</span>Open Timeline<span class="chip-quote">"</span></button>
                         </div>
                     </div>
@@ -84,9 +104,9 @@ class VoiceNav {
                         <div class="vui-chip-group">
                             <button class="vui-chip" data-cmd="next project"><span class="chip-quote">"</span>Next Project<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="previous project"><span class="chip-quote">"</span>Previous Project<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="scroll down"><span class="chip-quote">"</span>Scroll Down<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="scroll up"><span class="chip-quote">"</span>Scroll Up<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="back to top"><span class="chip-quote">"</span>Back to Top<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="scroll down"><span class="chip-quote">"</span>Scroll Down / Down<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="scroll up"><span class="chip-quote">"</span>Scroll Up / Up<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="back to top"><span class="chip-quote">"</span>Back to Top / Go<span class="chip-quote">"</span></button>
                         </div>
                     </div>
 
@@ -103,7 +123,7 @@ class VoiceNav {
                     <div class="vui-category">
                         <div class="vui-category-label">// Voice & Mic Controls</div>
                         <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="stop listening"><span class="chip-quote">"</span>Stop Listening<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="stop listening"><span class="chip-quote">"</span>Stop Listening / Stop<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="turn off mic"><span class="chip-quote">"</span>Turn Off Mic<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="close guide"><span class="chip-quote">"</span>Close Guide<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="help"><span class="chip-quote">"</span>Help / Commands<span class="chip-quote">"</span></button>
@@ -128,7 +148,7 @@ class VoiceNav {
                     </div>
 
                     <div class="vui-label-group">
-                        <span id="vui-status-title" class="vui-hud-title">Voice Nav <span class="kbd">v</span></span>
+                        <span id="vui-status-title" class="vui-hud-title">Voice Nav${engineBadge} <span class="kbd">v</span></span>
                         <span id="vui-status-sub" class="vui-hud-subtitle">Click or press V</span>
                     </div>
 
@@ -152,7 +172,8 @@ class VoiceNav {
             interimText: document.getElementById('vui-interim-text'),
             toast: document.getElementById('vui-toast'),
             toastMsg: document.getElementById('vui-toast-msg'),
-            ariaLive: document.getElementById('vui-aria-live')
+            ariaLive: document.getElementById('vui-aria-live'),
+            waveBars: document.querySelectorAll('#vui-hud .vui-bar')
         };
     }
 
@@ -186,7 +207,10 @@ class VoiceNav {
         });
     }
 
-    setupSpeechRecognition() {
+    /* ========================================================================
+     * Mode 1: Native Web Speech Recognition Pipeline (Chromium, Safari, Edge)
+     * ======================================================================== */
+    setupNativeSpeechRecognition() {
         try {
             this.recognition = new this.SpeechRecognition();
             this.recognition.continuous = true;
@@ -247,14 +271,111 @@ class VoiceNav {
                 }
             };
         } catch (err) {
-            console.error('Failed to initialize speech recognition:', err);
-            this.setUnsupportedState();
+            console.warn('Failed to initialize native speech recognition, switching to in-browser engine:', err);
+            this.engineMode = this.hasMediaDevices ? 'in-browser' : 'none';
         }
     }
 
+    /* ========================================================================
+     * Mode 2: In-Browser Neural Speech Commands Engine (Firefox & Fallback)
+     * ======================================================================== */
+    loadScript(src) {
+        if (document.querySelector(`script[src="${src}"]`)) {
+            return Promise.resolve();
+        }
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.async = true;
+            s.onload = () => resolve();
+            s.onerror = (err) => reject(err);
+            document.head.appendChild(s);
+        });
+    }
+
+    async initTfjsSpeechEngine() {
+        if (this.tfRecognizer) return this.tfRecognizer;
+        if (this.isLoadingModel) return null;
+
+        this.isLoadingModel = true;
+        this.showToast('Loading lightweight in-browser speech engine...');
+        this.showInterimTranscript('Loading neural model (~1.5 MB)...');
+
+        try {
+            // Lazy load TensorFlow.js and the pre-trained Speech Commands model
+            await this.loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+            await this.loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.4/dist/speech-commands.min.js');
+
+            if (!window.speechCommands) {
+                throw new Error('speechCommands library not available');
+            }
+
+            const recognizer = window.speechCommands.create('BROWSER_FFT');
+            await recognizer.ensureModelLoaded();
+
+            this.tfRecognizer = recognizer;
+            this.isLoadingModel = false;
+            return recognizer;
+        } catch (err) {
+            this.isLoadingModel = false;
+            console.warn('Failed to load TFJS speech commands engine:', err);
+            throw err;
+        }
+    }
+
+    async startInBrowserEngine() {
+        try {
+            const recognizer = await this.initTfjsSpeechEngine();
+            if (!recognizer) return;
+
+            this.isListening = true;
+            this.shouldBeListening = true;
+            localStorage.setItem('voice_nav_active', 'true');
+            this.updateUIState(true);
+            this.playChime(true);
+            this.showToast('Voice active! Say "one", "two", "up", "down", "stop"');
+            this.announceSR('Voice navigation active. Listening for commands.');
+            this.showInterimTranscript('Listening (Firefox)...');
+
+            recognizer.listen(result => {
+                const labels = recognizer.wordLabels();
+                const maxScore = Math.max(...result.scores);
+                const index = result.scores.indexOf(maxScore);
+                const word = labels[index];
+
+                // Confidence threshold to eliminate false positives and background noise
+                if (maxScore >= 0.70 && word && word !== '_background_noise_' && word !== '_unknown_') {
+                    this.showInterimTranscript(`Heard: "${word}"`);
+                    this.executeCommand(word);
+                }
+            }, {
+                includeSpectrogram: false,
+                probabilityThreshold: 0.70,
+                invokeCallbackOnNoiseAndUnknown: false
+            });
+        } catch (err) {
+            console.warn('In-browser speech recognition error:', err);
+            this.shouldBeListening = false;
+            localStorage.setItem('voice_nav_active', 'false');
+            this.updateUIState(false);
+            this.showToast('Microphone access blocked or failed. Click mic to retry.');
+        }
+    }
+
+    stopInBrowserEngine() {
+        if (this.tfRecognizer && this.tfRecognizer.isListening()) {
+            try {
+                this.tfRecognizer.stopListening();
+            } catch (e) {}
+        }
+    }
+
+    /* ========================================================================
+     * Unified Lifecycle & State Control
+     * ======================================================================== */
     toggleListening() {
         if (!this.isSupported) {
-            this.showToast('Voice recognition active on Chrome, Edge, and Safari.');
+            this.showToast('Microphone access is not supported in this browser.');
             return;
         }
 
@@ -266,24 +387,33 @@ class VoiceNav {
     }
 
     startListening() {
-        if (!this.recognition) return;
         this.shouldBeListening = true;
         localStorage.setItem('voice_nav_active', 'true');
-        try {
-            this.recognition.start();
-        } catch (e) {
-            // Already started or restarting
+
+        if (this.engineMode === 'native' && this.recognition) {
+            try {
+                this.recognition.start();
+            } catch (e) {
+                // Already running
+            }
+        } else if (this.engineMode === 'in-browser') {
+            this.startInBrowserEngine();
         }
     }
 
     stopListening() {
         this.shouldBeListening = false;
         localStorage.setItem('voice_nav_active', 'false');
-        if (this.recognition) {
+
+        if (this.engineMode === 'native' && this.recognition) {
             try {
                 this.recognition.stop();
             } catch (e) {}
+        } else if (this.engineMode === 'in-browser') {
+            this.stopInBrowserEngine();
         }
+
+        this.isListening = false;
         this.updateUIState(false);
         this.playChime(false);
         this.announceSR('Voice navigation paused.');
@@ -292,14 +422,16 @@ class VoiceNav {
     updateUIState(listening) {
         if (!this.dom) return;
 
+        const engineBadge = this.engineMode === 'in-browser' ? ' (Firefox)' : '';
+
         if (listening) {
             this.dom.hud.classList.add('is-listening');
             this.dom.statusTitle.innerHTML = `Listening... <span class="kbd">v</span>`;
-            this.dom.statusSub.textContent = `Say "Help" or "Go to..."`;
+            this.dom.statusSub.textContent = `Say "one", "two", "up", "down"...`;
             this.dom.micBtn.setAttribute('aria-label', 'Stop Voice Navigation (Press V)');
         } else {
             this.dom.hud.classList.remove('is-listening');
-            this.dom.statusTitle.innerHTML = `Voice Nav <span class="kbd">v</span>`;
+            this.dom.statusTitle.innerHTML = `Voice Nav${engineBadge} <span class="kbd">v</span>`;
             this.dom.statusSub.textContent = `Click or press V`;
             this.dom.micBtn.setAttribute('aria-label', 'Start Voice Navigation (Press V)');
             this.hideTranscript();
@@ -308,9 +440,9 @@ class VoiceNav {
 
     setUnsupportedState() {
         if (!this.dom) return;
-        this.dom.statusTitle.textContent = 'Voice (Chrome/Edge)';
-        this.dom.statusSub.textContent = 'Speech API ready';
-        this.dom.micBtn.style.opacity = '0.7';
+        this.dom.statusTitle.textContent = 'Voice Unavailable';
+        this.dom.statusSub.textContent = 'Microphone required';
+        this.dom.micBtn.style.opacity = '0.5';
     }
 
     showInterimTranscript(text) {
@@ -388,36 +520,39 @@ class VoiceNav {
                 osc.stop(now + 0.15);
             }
         } catch (e) {
-            // AudioContext not permitted before user interaction
+            // AudioContext suspended before user gesture
         }
     }
 
+    /* ========================================================================
+     * Natural Voice & Spoken Keyword Command Processing Matrix
+     * ======================================================================== */
     executeCommand(rawText) {
         const text = rawText.toLowerCase().trim();
 
-        // 1. Navigation Commands
-        if (/(go to|jump to|open|show)?.*(caster|passion project|voice os|flagship)/i.test(text)) {
-            this.jumpTo('caster-voice-os', 'Jumped to Caster Voice OS');
+        // 1. Navigation Commands (Mapped by natural phrase and single spoken word "zero"-"four")
+        if (/^(1|one|first)$/i.test(text) || /(go to|jump to|open|show)?.*(caster|passion project|voice os|flagship)/i.test(text)) {
+            this.jumpTo('caster-voice-os', 'Jumped to Caster Voice OS (Section 1)');
             return;
         }
 
-        if (/(go to|jump to|open|show)?.*(solved problems|problem|tracker|app switcher)/i.test(text)) {
-            this.jumpTo('solved-problems', 'Jumped to Solved Problems');
+        if (/^(2|two|second)$/i.test(text) || /(go to|jump to|open|show)?.*(solved problems|problem|tracker|app switcher)/i.test(text)) {
+            this.jumpTo('solved-problems', 'Jumped to Solved Problems (Section 2)');
             return;
         }
 
-        if (/(go to|jump to|open|show)?.*(open source|contributions|merged prs|pull requests|dragonfly|pyvda)/i.test(text)) {
-            this.jumpTo('open-source', 'Jumped to Open Source Contributions');
+        if (/^(3|three|third)$/i.test(text) || /(go to|jump to|open|show)?.*(open source|contributions|merged prs|pull requests|dragonfly|pyvda)/i.test(text)) {
+            this.jumpTo('open-source', 'Jumped to Open Source Contributions (Section 3)');
             return;
         }
 
-        if (/(go to|jump to|open|show)?.*(tools|public tools|winstasis|vdtree|virtual desktop)/i.test(text)) {
-            this.jumpTo('tools', 'Jumped to Public Tools');
+        if (/^(4|four|fourth)$/i.test(text) || /(go to|jump to|open|show)?.*(tools|public tools|winstasis|vdtree|virtual desktop)/i.test(text)) {
+            this.jumpTo('tools', 'Jumped to Public Tools (Section 4)');
             return;
         }
 
-        if (/(go to|jump to|open|show)?.*(commits|recent activity|activity feed|github feed)/i.test(text)) {
-            this.jumpTo('recent-commits-section', 'Jumped to Recent Activity');
+        if (/^(0|zero)$/i.test(text) || /(go to|jump to|open|show)?.*(commits|recent activity|activity feed|github feed)/i.test(text)) {
+            this.jumpTo('recent-commits-section', 'Jumped to Recent Activity (Section 0)');
             return;
         }
 
@@ -454,21 +589,21 @@ class VoiceNav {
             return;
         }
 
-        if (/(scroll down|page down|down)/i.test(text)) {
+        if (/^(down|scroll down|page down)$/i.test(text)) {
             window.scrollBy({ top: window.innerHeight * 0.75, behavior: 'smooth' });
             this.showToast('Scrolled down');
             this.playChime(true);
             return;
         }
 
-        if (/(scroll up|page up|up)/i.test(text)) {
+        if (/^(up|scroll up|page up)$/i.test(text)) {
             window.scrollBy({ top: -window.innerHeight * 0.75, behavior: 'smooth' });
             this.showToast('Scrolled up');
             this.playChime(true);
             return;
         }
 
-        if (/(back to top|go to top|top)/i.test(text)) {
+        if (/^(go|top|back to top|go to top)$/i.test(text)) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const topNav = document.getElementById('top');
             if (topNav) topNav.focus();
@@ -524,7 +659,7 @@ class VoiceNav {
         }
 
         // 5. Voice & Mic Controls
-        if (/^(stop listening|stop voice|stop mic|stop|turn off voice|turn off listening|turn off mic|turn off microphone|turn off|turn voice off|turn mic off|shut off|shut down|disable voice|disable mic|mute mic|mute voice|mute|sleep|pause voice|pause listening|pause mic|pause|quit voice|exit voice|deactivate)$/i.test(text) || /(stop listening|turn off (the )?(mic|microphone|voice)|turn (the )?(mic|microphone|voice) off|disable (the )?(mic|voice)|stop recognition)/i.test(text)) {
+        if (/^(stop|stop listening|stop voice|stop mic|turn off voice|turn off listening|turn off mic|turn off microphone|turn off|turn voice off|turn mic off|shut off|shut down|disable voice|disable mic|mute mic|mute voice|mute|sleep|pause voice|pause listening|pause mic|pause|quit voice|exit voice|deactivate)$/i.test(text) || /(stop listening|turn off (the )?(mic|microphone|voice)|turn (the )?(mic|microphone|voice) off|disable (the )?(mic|voice)|stop recognition)/i.test(text)) {
             this.stopListening();
             this.closeDrawer();
             this.showToast('Voice navigation turned off. Click mic or press V to restart.');
