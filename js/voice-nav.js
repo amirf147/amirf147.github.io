@@ -28,10 +28,8 @@ class VoiceNav {
         // In-Browser Neural Engine state
         this.tfRecognizer = null;
         this.isLoadingModel = false;
-        this.mediaStream = null;
+        this.micPermissionGranted = false;
         this.audioCtx = null;
-        this.analyser = null;
-        this.animFrameId = null;
 
         // Global states (Always start off until user initiates gesture)
         this.isListening = false;
@@ -52,6 +50,13 @@ class VoiceNav {
 
         if (this.engineMode === 'native') {
             this.setupNativeSpeechRecognition();
+        } else if (this.engineMode === 'in-browser' && window.location.protocol !== 'file:') {
+            // Pre-warm the neural model in idle time so clicking the mic button is instantaneous
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(() => this.initTfjsSpeechEngine(true), { timeout: 3000 });
+            } else {
+                setTimeout(() => this.initTfjsSpeechEngine(true), 2000);
+            }
         }
     }
 
@@ -254,7 +259,7 @@ class VoiceNav {
                 this.updateUIState(false);
 
                 if (event.error === 'not-allowed') {
-                    this.showToast('Microphone access blocked. Grant mic permissions to use voice.');
+                    this.showToast('Microphone access blocked. Grant mic permissions in browser.');
                 } else if (event.error === 'network') {
                     this.showToast('Network error. Speech recognition requires an active connection.');
                 }
@@ -295,19 +300,22 @@ class VoiceNav {
         });
     }
 
-    async initTfjsSpeechEngine() {
+    async initTfjsSpeechEngine(silent = false) {
         if (this.tfRecognizer) return this.tfRecognizer;
         if (this.isLoadingModel) return null;
 
-        // Check for file:// protocol limitation in Firefox
         if (window.location.protocol === 'file:') {
-            this.showToast('Microphone requires HTTP/HTTPS. Please serve via localhost or GitHub Pages.');
-            throw new Error('getUserMedia not permitted on file:/// protocol');
+            if (!silent) {
+                this.showToast('Microphone requires HTTP/HTTPS. Please serve via localhost or GitHub Pages.');
+            }
+            throw new Error('getUserMedia not permitted on file:/// protocol in Firefox/Waterfox');
         }
 
         this.isLoadingModel = true;
-        this.showToast('Loading lightweight speech model (~1.5 MB)...');
-        this.showInterimTranscript('Loading neural model...');
+        if (!silent) {
+            this.showToast('Preparing speech engine (~1.5 MB)...');
+            this.showInterimTranscript('Loading neural model...');
+        }
 
         try {
             // Lazy load TensorFlow.js and the pre-trained Speech Commands model
@@ -326,15 +334,48 @@ class VoiceNav {
             return recognizer;
         } catch (err) {
             this.isLoadingModel = false;
-            console.warn('Failed to load TFJS speech commands engine:', err);
+            if (!silent) {
+                console.warn('Failed to load TFJS speech commands engine:', err);
+            }
             throw err;
         }
     }
 
     async startInBrowserEngine() {
+        let tempStream = null;
         try {
+            // 1. Immediately request microphone access while the user gesture is active!
+            // In Gecko (Firefox/Waterfox), getUserMedia must be invoked synchronously on click.
+            if (!this.micPermissionGranted) {
+                try {
+                    tempStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    this.micPermissionGranted = true;
+                } catch (permErr) {
+                    console.warn('Microphone permission error:', permErr);
+                    if (window.location.protocol === 'file:') {
+                        this.showToast('Microphone blocked on local file://. Run on GitHub Pages or local server.');
+                    } else {
+                        this.showToast('Microphone access blocked. Click mic and allow permissions in browser.');
+                    }
+                    this.updateUIState(false);
+                    return;
+                }
+            }
+
             const recognizer = await this.initTfjsSpeechEngine();
-            if (!recognizer) return;
+            if (!recognizer) {
+                if (tempStream) tempStream.getTracks().forEach(t => t.stop());
+                return;
+            }
+
+            // Stop temporary stream before recognizer attaches its own Web Audio graph
+            if (tempStream) {
+                tempStream.getTracks().forEach(t => t.stop());
+            }
+
+            if (recognizer.isListening()) {
+                await recognizer.stopListening();
+            }
 
             this.isListening = true;
             this.shouldBeListening = true;
@@ -344,7 +385,7 @@ class VoiceNav {
             this.announceSR('Voice navigation active. Listening for commands.');
             this.showInterimTranscript('Listening (Firefox)...');
 
-            recognizer.listen(result => {
+            await recognizer.listen(result => {
                 const labels = recognizer.wordLabels();
                 const maxScore = Math.max(...result.scores);
                 const index = result.scores.indexOf(maxScore);
@@ -362,21 +403,27 @@ class VoiceNav {
             });
         } catch (err) {
             console.warn('In-browser speech recognition error:', err);
+            if (tempStream) {
+                tempStream.getTracks().forEach(t => t.stop());
+            }
             this.shouldBeListening = false;
             this.isListening = false;
             this.updateUIState(false);
+
             if (window.location.protocol === 'file:') {
                 this.showToast('Microphone blocked on local file://. Run with local server or GitHub Pages.');
-            } else {
+            } else if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
                 this.showToast('Microphone access blocked. Click mic and allow permissions in browser.');
+            } else {
+                this.showToast(`Voice error: ${err.message || 'Microphone unavailable'}`);
             }
         }
     }
 
-    stopInBrowserEngine() {
+    async stopInBrowserEngine() {
         if (this.tfRecognizer && this.tfRecognizer.isListening()) {
             try {
-                this.tfRecognizer.stopListening();
+                await this.tfRecognizer.stopListening();
             } catch (e) {}
         }
     }
@@ -397,7 +444,7 @@ class VoiceNav {
         }
     }
 
-    startListening() {
+    async startListening() {
         this.shouldBeListening = true;
 
         if (this.engineMode === 'native' && this.recognition) {
@@ -407,11 +454,11 @@ class VoiceNav {
                 // Already running
             }
         } else if (this.engineMode === 'in-browser') {
-            this.startInBrowserEngine();
+            await this.startInBrowserEngine();
         }
     }
 
-    stopListening() {
+    async stopListening() {
         this.shouldBeListening = false;
 
         if (this.engineMode === 'native' && this.recognition) {
@@ -419,7 +466,7 @@ class VoiceNav {
                 this.recognition.stop();
             } catch (e) {}
         } else if (this.engineMode === 'in-browser') {
-            this.stopInBrowserEngine();
+            await this.stopInBrowserEngine();
         }
 
         this.isListening = false;
