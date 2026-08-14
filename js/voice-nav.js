@@ -36,7 +36,39 @@ class VoiceNav {
         this.shouldBeListening = false;
         this.toastTimeout = null;
 
+        this.applyAudioContextSampleRateFix();
         this.init();
+    }
+
+    applyAudioContextSampleRateFix() {
+        if (typeof window === 'undefined') return;
+        if (window.__voiceNavAudioContextPatched) return;
+
+        const NativeAudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!NativeAudioContext) return;
+
+        const isGecko = /firefox|waterfox|librewolf|floorp|zen/i.test(navigator.userAgent);
+        if (isGecko) {
+            window.__voiceNavAudioContextPatched = true;
+            // In Gecko (Firefox/Waterfox), creating AudioContext with a hardcoded sampleRate (e.g. 44100)
+            // causes createMediaStreamSource(stream) to fail with NotSupportedError if the hardware mic
+            // is running at 48000 Hz. Instantiating with the system default rate resolves this seamlessly.
+            class GeckoSafeAudioContext extends NativeAudioContext {
+                constructor(options) {
+                    if (options && options.sampleRate) {
+                        try {
+                            super();
+                            return;
+                        } catch (e) {}
+                    }
+                    super(options);
+                }
+            }
+            window.AudioContext = GeckoSafeAudioContext;
+            if (window.webkitAudioContext) {
+                window.webkitAudioContext = GeckoSafeAudioContext;
+            }
+        }
     }
 
     init() {
