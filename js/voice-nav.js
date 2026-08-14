@@ -319,14 +319,15 @@ class VoiceNav {
 
         try {
             // Lazy load TensorFlow.js and the pre-trained Speech Commands model
-            await this.loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-            await this.loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.4/dist/speech-commands.min.js');
+            await this.loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs');
+            await this.loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands');
 
-            if (!window.speechCommands) {
+            const sc = window.speechCommands || (window.tf && window.tf.speechCommands);
+            if (!sc) {
                 throw new Error('speechCommands library not available');
             }
 
-            const recognizer = window.speechCommands.create('BROWSER_FFT');
+            const recognizer = sc.create('BROWSER_FFT');
             await recognizer.ensureModelLoaded();
 
             this.tfRecognizer = recognizer;
