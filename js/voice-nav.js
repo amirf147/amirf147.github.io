@@ -95,7 +95,98 @@ class VoiceNav {
     mountHUD() {
         if (document.getElementById('vui-root')) return;
 
+        const isFirefoxEngine = this.engineMode === 'in-browser';
         const engineBadge = this.isGecko ? ' (Firefox)' : '';
+
+        const drawerContent = isFirefoxEngine ? `
+                    <div class="vui-drawer-header">
+                        <h3 class="vui-drawer-title">
+                            <span aria-hidden="true">🎙️</span> Voice Commands Guide <span class="vui-badge">Firefox</span>
+                        </h3>
+                        <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice commands guide">✕</button>
+                    </div>
+
+                    <div class="vui-engine-note">
+                        <strong>In-Browser Neural Engine:</strong> Running locally via isolated keyword spotting. Speak single keyword commands clearly into your microphone:
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Section Jump Keywords</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="zero"><span class="chip-quote">"</span>zero<span class="chip-quote">"</span> ➔ Recent Activity</button>
+                            <button class="vui-chip" data-cmd="one"><span class="chip-quote">"</span>one<span class="chip-quote">"</span> ➔ Passion Project</button>
+                            <button class="vui-chip" data-cmd="two"><span class="chip-quote">"</span>two<span class="chip-quote">"</span> ➔ Solved Problems</button>
+                            <button class="vui-chip" data-cmd="three"><span class="chip-quote">"</span>three<span class="chip-quote">"</span> ➔ Open Source</button>
+                            <button class="vui-chip" data-cmd="four"><span class="chip-quote">"</span>four<span class="chip-quote">"</span> ➔ Public Tools</button>
+                        </div>
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Scrolling & Navigation</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="down"><span class="chip-quote">"</span>down<span class="chip-quote">"</span> ➔ Scroll Down</button>
+                            <button class="vui-chip" data-cmd="up"><span class="chip-quote">"</span>up<span class="chip-quote">"</span> ➔ Scroll Up</button>
+                            <button class="vui-chip" data-cmd="go"><span class="chip-quote">"</span>go<span class="chip-quote">"</span> ➔ Jump to Top</button>
+                        </div>
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Controls</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="stop"><span class="chip-quote">"</span>stop<span class="chip-quote">"</span> ➔ Stop Listening</button>
+                        </div>
+                    </div>
+        ` : `
+                    <div class="vui-drawer-header">
+                        <h3 class="vui-drawer-title">
+                            <span aria-hidden="true">🎙️</span> Voice Commands Guide
+                        </h3>
+                        <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice commands guide">✕</button>
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Section Navigation</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="go to passion project"><span class="chip-quote">"</span>Go to Passion Project<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Activity<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="open timeline"><span class="chip-quote">"</span>Open Timeline<span class="chip-quote">"</span></button>
+                        </div>
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Stepping & Scrolling</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="next project"><span class="chip-quote">"</span>Next Project<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="previous project"><span class="chip-quote">"</span>Previous Project<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="scroll down"><span class="chip-quote">"</span>Scroll Down<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="scroll up"><span class="chip-quote">"</span>Scroll Up<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="back to top"><span class="chip-quote">"</span>Back to Top<span class="chip-quote">"</span></button>
+                        </div>
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Theme & Accessibility</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="dark mode"><span class="chip-quote">"</span>Dark Mode<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="light mode"><span class="chip-quote">"</span>Light Mode<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="high contrast"><span class="chip-quote">"</span>High Contrast<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="toggle theme"><span class="chip-quote">"</span>Toggle Theme<span class="chip-quote">"</span></button>
+                        </div>
+                    </div>
+
+                    <div class="vui-category">
+                        <div class="vui-category-label">// Voice & Mic Controls</div>
+                        <div class="vui-chip-group">
+                            <button class="vui-chip" data-cmd="stop listening"><span class="chip-quote">"</span>Stop Listening<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="turn off mic"><span class="chip-quote">"</span>Turn Off Mic<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="close guide"><span class="chip-quote">"</span>Close Guide<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="help"><span class="chip-quote">"</span>Help / Commands<span class="chip-quote">"</span></button>
+                        </div>
+                    </div>
+        `;
 
         const hudHtml = `
             <div id="vui-root" class="vui-container" aria-label="Voice Navigation Assistant">
@@ -116,55 +207,7 @@ class VoiceNav {
 
                 <!-- Interactive Cheatsheet Drawer -->
                 <div id="vui-drawer" class="vui-drawer" role="dialog" aria-modal="false" aria-label="Voice Commands Cheatsheet">
-                    <div class="vui-drawer-header">
-                        <h3 class="vui-drawer-title">
-                            <span aria-hidden="true">🎙️</span> Voice Commands Guide
-                        </h3>
-                        <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice commands guide">✕</button>
-                    </div>
-
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Navigation (Natural or Digits "0"-"4")</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="go to caster"><span class="chip-quote">"</span>Go to Caster / One<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems / Two<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source / Three<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools / Four<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Commits / Zero<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="open timeline"><span class="chip-quote">"</span>Open Timeline<span class="chip-quote">"</span></button>
-                        </div>
-                    </div>
-
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Stepping & Scrolling</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="next project"><span class="chip-quote">"</span>Next Project<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="previous project"><span class="chip-quote">"</span>Previous Project<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="scroll down"><span class="chip-quote">"</span>Scroll Down / Down<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="scroll up"><span class="chip-quote">"</span>Scroll Up / Up<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="back to top"><span class="chip-quote">"</span>Back to Top / Go<span class="chip-quote">"</span></button>
-                        </div>
-                    </div>
-
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Theme & Accessibility</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="dark mode"><span class="chip-quote">"</span>Dark Mode<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="light mode"><span class="chip-quote">"</span>Light Mode<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="high contrast"><span class="chip-quote">"</span>High Contrast<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="toggle theme"><span class="chip-quote">"</span>Toggle Theme<span class="chip-quote">"</span></button>
-                        </div>
-                    </div>
-
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Voice & Mic Controls</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="stop listening"><span class="chip-quote">"</span>Stop Listening / Stop<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="turn off mic"><span class="chip-quote">"</span>Turn Off Mic<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="close guide"><span class="chip-quote">"</span>Close Guide<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="help"><span class="chip-quote">"</span>Help / Commands<span class="chip-quote">"</span></button>
-                        </div>
-                    </div>
+                    ${drawerContent}
                 </div>
 
                 <!-- Floating HUD Pill -->
@@ -257,6 +300,7 @@ class VoiceNav {
                 this.isListening = true;
                 this.updateUIState(true);
                 this.playChime(true);
+                this.showToast('Voice active! Say "Next Project", "Solved Problems", or "Help"');
                 this.announceSR('Voice navigation active. Listening for commands.');
             };
 
@@ -516,7 +560,11 @@ class VoiceNav {
         if (listening) {
             this.dom.hud.classList.add('is-listening');
             this.dom.statusTitle.innerHTML = `Listening... <span class="kbd">v</span>`;
-            this.dom.statusSub.textContent = `Say "one", "two", "up", "down"...`;
+            if (this.engineMode === 'in-browser') {
+                this.dom.statusSub.textContent = `Say "one", "two", "up", "down"...`;
+            } else {
+                this.dom.statusSub.textContent = `Say "Next Project", "Light Mode"...`;
+            }
             this.dom.micBtn.setAttribute('aria-label', 'Stop Voice Navigation (Press V)');
         } else {
             this.dom.hud.classList.remove('is-listening');

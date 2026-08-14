@@ -319,6 +319,30 @@
     outline: 2px dashed var(--focus-ring);
 }
 
+.vui-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-num);
+    border: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.vui-engine-note {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--subtitle-color);
+    background: var(--btn-bg);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-color);
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+}
+
 .vui-category {
     margin-bottom: 12px;
 }
