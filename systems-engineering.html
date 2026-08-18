@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Farhadi | Systems Administration, Infrastructure & Automation Portfolio</title>
+    <meta name="description" content="Systems administration and infrastructure engineering portfolio of Amir Farhadi (B.Eng. in ICT — Embedded Electronics & IoT). Featuring Linux server administration, Docker container orchestration, PowerShell/Python automation, InfluxDB/Grafana telemetry, and secure networking.">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="./css/test-engineering.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="container">
+        <!-- Top Utility Navigation -->
+        <nav class="eng-top-nav" aria-label="Utility Navigation">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <a href="./index.html" class="back-link" aria-label="Return to Main Software Portfolio">
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                        <path fill-rule="evenodd" d="M15 8a.75.75 0 0 1-.75.75H4.06l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 1.06L4.06 7.25h10.19A.75.75 0 0 1 15 8z"></path>
+                    </svg>
+                    Main Portfolio
+                </a>
+                <a href="./test-engineering.html" class="back-link" aria-label="View Test Engineering Portfolio">
+                    🔬 Test Engineering Portfolio
+                </a>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="mailto:amirf147@gmail.com" class="back-link" aria-label="Send Email">
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 .327.618l7.25 4.834a.75.75 0 0 0 .846 0l7.25-4.834A.75.75 0 0 0 16 4.486v-.736A1.75 1.75 0 0 0 14.25 2H1.75zM0 6.079v6.171C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25V6.079l-6.573 4.382a2.25 2.25 0 0 1-2.497 0L0 6.079z"></path>
+                    </svg>
+                    amirf147@gmail.com
+                </a>
+                <button id="theme-toggle" class="back-link" aria-label="Toggle theme" style="cursor: pointer;">
+                    <span id="theme-icon" style="display: flex; align-items: center;"></span>
+                    <span id="theme-label">Theme</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Header Section -->
+        <header class="eng-hero" id="main-content">
+            <h1 class="eng-title">Amir Farhadi</h1>
+            <div class="eng-role">B.Eng. in ICT — Systems Administration, Infrastructure &amp; Automation</div>
+            <p class="eng-bio">
+                Systems administration, IT infrastructure, and systems automation engineering background with hands-on experience in Linux/Windows OS administration, Docker container orchestration, automated system telemetry (InfluxDB &amp; Grafana), PowerShell/Bash/Python scripting, secure networking (SSH, firewalls, reverse proxies), and AI-augmented operational troubleshooting.
+            </p>
+
+            <div class="eng-meta-strip">
+                <span class="meta-item">
+                    <span class="meta-dot"></span>
+                    <strong>Location:</strong> Tulsa, OK Metro Area (Immediate Availability)
+                </span>
+                <span class="meta-item">
+                    <strong>Citizenship:</strong> Dual US &amp; Finnish Citizen (No Sponsorship Needed)
+                </span>
+                <span class="meta-item">
+                    <strong>Education:</strong> B.Eng. in ICT (Embedded Electronics &amp; IoT), Turku UAS
+                </span>
+            </div>
+
+            <!-- Jump Bar -->
+            <div class="quick-jump-bar" aria-label="Project Navigation">
+                <a href="#edge-server-project" class="jump-pill">🐧 Linux &amp; Docker Telemetry Node</a>
+                <a href="#automation-tools-project" class="jump-pill">⚡ PowerShell &amp; Python Automation</a>
+                <a href="#iot-server-project" class="jump-pill">📡 Multi-Threaded Monitoring Server</a>
+                <a href="#rf-field-project" class="jump-pill">📶 Field Infrastructure &amp; RF Testing</a>
+                <a href="#sysadmin-skills-matrix" class="jump-pill">📋 SysAdmin &amp; Infrastructure Matrix</a>
+            </div>
+        </header>
+
+        <!-- Core Systems Competencies -->
+        <section aria-labelledby="core-competencies-heading">
+            <h2 id="core-competencies-heading" class="sr-only">Core Systems Competencies</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h3>🐧 Linux &amp; Windows Administration</h3>
+                    <p>Configuring and administering Debian, Ubuntu, Raspbian, and Windows 10/11/Server environments. Managing systemd services, user/group permissions, Win32 APIs, registry, and event logging.</p>
+                </div>
+                <div class="competency-card">
+                    <h3>🌐 Networking &amp; Security Hardening</h3>
+                    <p>Managing TCP/IP, DNS, DHCP, SSH/SFTP authentication, UFW/Windows firewall rules, SMB/NFS shares, reverse proxies (Nginx/Apache), and STUN/ICE NAT traversal.</p>
+                </div>
+                <div class="competency-card">
+                    <h3>🐳 Container Orchestration &amp; Telemetry</h3>
+                    <p>Deploying microservice stacks via Docker &amp; Docker Compose with ordered boot sequencing, persistent volume permissions, and real-time health telemetry via InfluxDB &amp; Grafana.</p>
+                </div>
+                <div class="competency-card">
+                    <h3>⚡ Systems Automation &amp; AI Scripting</h3>
+                    <p>Writing robust PowerShell, Bash, Python, and C# (.NET) automation scripts for scheduled health checks, log rotation, automated backups, and leveraging modern AI for rapid root-cause diagnosis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Project 1: Linux Edge Server -->
+        <section id="edge-server-project" class="project-card" aria-labelledby="edge-server-title">
+            <div class="project-header-row">
+                <h2 id="edge-server-title" class="project-title">1. Edge Linux Server &amp; IoT Container Infrastructure</h2>
+                <span class="project-org-badge">EU Horizon 2020 RESPONSE / City of Turku / FMI</span>
+            </div>
+            <p class="project-summary">
+                Deployed, configured, and administered modular Linux-based edge compute gateways (Raspberry Pi 4 &amp; ESP32) collecting environmental telemetry for the Finnish Meteorological Institute (FMI). Engineered an isolated Docker microservice architecture with automated system health monitoring and time-series telemetry pipelines.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Server Architecture &amp; Containerization
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Host Operating System:</strong> Debian-based Linux (Raspberry Pi OS) with systemd process management.</li>
+                        <li><strong>Container Orchestration:</strong> Docker &amp; Docker Compose managing isolated microservices (Broker, DB, Ingestion, Gateway).</li>
+                        <li><strong>Security &amp; Remote Access:</strong> Hardened SSH/SFTP access, key-based authentication, and UFW firewall rules.</li>
+                        <li><strong>Boot Sequencing:</strong> Custom Bash startup scripts managing ordered container initialization and shared volume namespace permissions.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Infrastructure Health &amp; Reliability
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Uptime &amp; Telemetry:</strong> InfluxDB time-series metrics streaming to Grafana to monitor CPU load, memory utilization, and network link stability.</li>
+                        <li><strong>Automated Recovery:</strong> Configured Docker container restart policies and watchdog services to eliminate system lockups.</li>
+                        <li><strong>Fail-Safe Telemetry:</strong> Implemented local SQLite/InfluxDB caching buffers to prevent data loss during cellular network dropouts.</li>
+                        <li><strong>Standard Operating Procedures:</strong> Authored comprehensive SOP documentation and deployment runbooks for repeatable server provisioning.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Linux (Debian)</span>
+                <span class="hw-tag">Docker &amp; Compose</span>
+                <span class="hw-tag">InfluxDB</span>
+                <span class="hw-tag">Grafana Dashboards</span>
+                <span class="hw-tag">Bash Scripting</span>
+                <span class="hw-tag">SSH / SFTP Hardening</span>
+                <span class="hw-tag">SOP Runbooks</span>
+            </div>
+
+            <div class="media-gallery">
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('aq-sensor-bench.jpg', 'Edge Linux compute station and sensor interface test bench showing Raspberry Pi gateway and serial telemetry connections.')">
+                        <img src="aq-sensor-bench.jpg" alt="Edge Linux Server Test Bench" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 1.1:</strong> Edge Linux gateway test bench showing Raspberry Pi compute module, Dockerized services, and serial telemetry bus.
+                    </figcaption>
+                </figure>
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('aq-sensor-enclosure.jpg', 'Weatherproof field IoT enclosure housing Linux gateway, power regulation, and cellular antenna.')">
+                        <img src="aq-sensor-enclosure.jpg" alt="Field Infrastructure Enclosure" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 1.2:</strong> Weatherproof field enclosure deployment housing Linux compute node and 24V/5V DC power management.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Featured Project 2: Systems Automation -->
+        <section id="automation-tools-project" class="project-card" aria-labelledby="automation-title">
+            <div class="project-header-row">
+                <h2 id="automation-title" class="project-title">2. Windows &amp; Linux Systems Automation &amp; Diagnostics</h2>
+                <span class="project-org-badge">Systems Engineering &amp; Open Source</span>
+            </div>
+            <p class="project-summary">
+                Engineered system-level utilities, automation scripts, and diagnostic tools in C# (.NET), Python, PowerShell, and Bash. Leveraged Win32 API interop and Inter-Process Communication (IPC) to automate multi-application workflows, monitor process health, and maintain 99.9% uptime for hands-free workstation infrastructure.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Automation &amp; Inter-Process Architecture
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Windows API Interop:</strong> C# (.NET) and Python utilities interfacing directly with User32/Kernel32 for window state inspection and process management.</li>
+                        <li><strong>IPC Bridge:</strong> Thread-safe XML-RPC and socket-based hardware IPC bridges enabling external hardware controllers to trigger system actions.</li>
+                        <li><strong>PowerShell Tooling:</strong> 40+ modular administrative scripts automating repetitive system configuration, diagnostic logging, and batch execution.</li>
+                        <li><strong>AI-Augmented Workflows:</strong> Integrated LLM-driven diagnostic routines to parse application log dumps and automate root-cause triage.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Operational Reliability &amp; Open Source
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Crash Elimination:</strong> Diagnosed and resolved memory leaks, thread race conditions, and COM object lifecycle crashes across upstream repositories.</li>
+                        <li><strong>Hardware Debouncing:</strong> Implemented software-level debounce filtering and state chording for external USB button peripherals.</li>
+                        <li><strong>Open-Source Contributions:</strong> 3 merged upstream pull requests in production automation frameworks (Caster, Dragonfly, PyVDA) across 400+ commits.</li>
+                        <li><strong>High-Reliability Uptime:</strong> Engineered fail-safe exception handling ensuring uninterrupted hands-free workstation operation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">PowerShell</span>
+                <span class="hw-tag">Python</span>
+                <span class="hw-tag">C# (.NET)</span>
+                <span class="hw-tag">Win32 API</span>
+                <span class="hw-tag">Inter-Process Communication (IPC)</span>
+                <span class="hw-tag">Task Scheduler</span>
+                <span class="hw-tag">Git / GitHub</span>
+            </div>
+
+            <div class="media-gallery">
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('caster-pr-screenshot.png', 'Merged upstream pull request solving thread bottlenecks and process lifecycle stability in open-source automation framework.')">
+                        <img src="caster-pr-screenshot.png" alt="Open-Source Pull Request and Systems Stability Patch" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 2.1:</strong> Upstream system stability patch resolving process execution bottlenecks and threading stability.
+                    </figcaption>
+                </figure>
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('winstasis-screenshot.png', 'C# Win32 desktop diagnostic utility for window state management and process inspection.')">
+                        <img src="winstasis-screenshot.png" alt="C# Diagnostic Utility" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 2.2:</strong> Lightweight C# (.NET) Win32 diagnostic utility inspecting process handles and window state hierarchies.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Featured Project 3: IoT Monitoring Server -->
+        <section id="iot-server-project" class="project-card" aria-labelledby="iot-server-title">
+            <div class="project-header-row">
+                <h2 id="iot-server-title" class="project-title">3. Multi-Threaded Linux Home &amp; Security Server</h2>
+                <span class="project-org-badge">Embedded Systems Lab</span>
+            </div>
+            <p class="project-summary">
+                Architected a centralized Raspberry Pi Linux server managing multi-threaded sensor polling (GPIO, I2C), TCP/IP socket network alerts, and persistent metric logging. Configured systemd background services and automated network reconnect routines to maintain continuous telemetry flow across intermittent local network conditions.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Server &amp; Network Protocol Stack
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Platform:</strong> Raspberry Pi 4 running headless Debian Linux with systemd service isolation.</li>
+                        <li><strong>Network Alerts:</strong> Custom TCP/IP socket client-server daemon with automated email/SMS dispatch.</li>
+                        <li><strong>Sensor Bus:</strong> Multi-threaded polling of reed switch door contacts and BME280 environmental sensors.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Reliability &amp; Failover Protection
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Service Daemon:</strong> Registered as a systemd service with automatic exponential-backoff restart.</li>
+                        <li><strong>Network Recovery:</strong> Built-in socket reconnection loop handling DHCP lease renewals and Wi-Fi drops.</li>
+                        <li><strong>Event Logging:</strong> Structured log outputs with timestamped event auditing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Raspberry Pi</span>
+                <span class="hw-tag">Headless Linux</span>
+                <span class="hw-tag">TCP/IP Sockets</span>
+                <span class="hw-tag">Systemd Services</span>
+                <span class="hw-tag">Python Multithreading</span>
+                <span class="hw-tag">Network Automation</span>
+            </div>
+        </section>
+
+        <!-- Featured Project 4: RF Field Infrastructure -->
+        <section id="rf-field-project" class="project-card" aria-labelledby="rf-field-title">
+            <div class="project-header-row">
+                <h2 id="rf-field-title" class="project-title">4. Field Infrastructure &amp; Cellular Network Verification</h2>
+                <span class="project-org-badge">TEKsystems / SmartSky Networks</span>
+            </div>
+            <p class="project-summary">
+                Supported lead field engineers in executing pre-deployment cellular and air-to-ground network verification tests across distributed cell tower sites. Operated Rohde &amp; Schwarz spectrum analyzers, aligned directional antenna arrays, and verified telemetry data integrity.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Field Equipment &amp; Operations
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Instrumentation:</strong> Rohde &amp; Schwarz FSH4 Handheld Spectrum Analyzer for interference mapping.</li>
+                        <li><strong>Antenna Systems:</strong> Rigged and aligned high-gain omni and directional antenna masts.</li>
+                        <li><strong>Site Safety:</strong> Strict compliance with OSHA, mobile lift, and job-site safety standards.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Data Integrity &amp; Reporting
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Telemetry Export:</strong> Captured real-time RF trace dumps and exported CSV logs for HQ analysis.</li>
+                        <li><strong>Site Verification:</strong> Conducted noise floor benchmarks before and after antenna positioning.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Rohde &amp; Schwarz FSH4</span>
+                <span class="hw-tag">RF Spectrum Analysis</span>
+                <span class="hw-tag">Antenna Alignment</span>
+                <span class="hw-tag">Field Operations</span>
+                <span class="hw-tag">Data Logging</span>
+            </div>
+        </section>
+
+        <!-- Technical Skills Matrix -->
+        <section id="sysadmin-skills-matrix" class="project-card" aria-labelledby="matrix-title">
+            <div class="project-header-row">
+                <h2 id="matrix-title" class="project-title">5. Systems Administration &amp; IT Infrastructure Skills Matrix</h2>
+                <span class="project-org-badge">Core Toolkit</span>
+            </div>
+
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <h4>🖥️ Operating Systems</h4>
+                    <ul>
+                        <li><strong>Linux:</strong> Debian, Ubuntu, Raspbian, CentOS fundamentals</li>
+                        <li><strong>Windows:</strong> Windows 10/11, Windows Server basics, Active Directory</li>
+                        <li><strong>Services:</strong> Systemd, Cron jobs, Windows Task Scheduler</li>
+                        <li><strong>APIs:</strong> Win32 API (User32, Kernel32), Registry, Event Viewer</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h4>🌐 Networking &amp; Protocols</h4>
+                    <ul>
+                        <li><strong>Protocols:</strong> TCP/IP, UDP, DNS, DHCP, HTTP/HTTPS, SSH, SFTP</li>
+                        <li><strong>Security:</strong> UFW, iptables, Windows Firewall, Key-based SSH</li>
+                        <li><strong>File Sharing:</strong> SMB/CIFS, NFS network shares</li>
+                        <li><strong>Web Servers:</strong> Nginx, Apache reverse proxies &amp; virtual hosts</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h4>⚡ Scripting &amp; Automation</h4>
+                    <ul>
+                        <li><strong>PowerShell:</strong> Administrative automation, log parsing, AD queries</li>
+                        <li><strong>Bash:</strong> System maintenance scripts, boot config, log rotation</li>
+                        <li><strong>Python:</strong> Automation daemons, socket servers, API integration</li>
+                        <li><strong>C# (.NET):</strong> Desktop diagnostic tools, Win32 system hooks</li>
+                    </ul>
+                </div>
+
+                <div class="matrix-card">
+                    <h4>📊 Telemetry, Containers &amp; Tools</h4>
+                    <ul>
+                        <li><strong>Containers:</strong> Docker, Docker Compose, container networking</li>
+                        <li><strong>Monitoring:</strong> InfluxDB (time-series), Grafana dashboards</li>
+                        <li><strong>Databases:</strong> SQL (MySQL, SQLite), InfluxDB, MongoDB</li>
+                        <li><strong>Methodologies:</strong> SOP authoring, Root Cause Analysis, Git</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="eng-footer">
+            <p>© 2026 Amir Farhadi • B.Eng. in ICT (Embedded Electronics &amp; IoT) • <a href="mailto:amirf147@gmail.com">amirf147@gmail.com</a> • <a href="https://linkedin.com/in/amir-farhadi" target="_blank" rel="noopener noreferrer">LinkedIn</a> • <a href="https://github.com/amirf147" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        </footer>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)" role="dialog" aria-modal="true" aria-label="Enlarged Image View">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightboxDirect()" aria-label="Close Lightbox">×</button>
+            <img id="lightbox-img" src="" alt="Enlarged Preview">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Theme & Lightbox Interactive Scripts -->
+    <script>
+        function openLightbox(imgSrc, captionText) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            if (!modal || !img) return;
+
+            img.src = imgSrc;
+            img.alt = captionText || 'Enlarged Preview';
+            if (caption) caption.textContent = captionText || '';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightboxDirect() {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal) modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox-modal' || event.target.classList.contains('lightbox-content')) {
+                closeLightboxDirect();
+            }
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightboxDirect();
+        });
+
+        const sunSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        const contrastSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></svg>`;
+
+        function updateToggleUI(theme) {
+            const icon = document.getElementById('theme-icon');
+            const label = document.getElementById('theme-label');
+            if (!icon || !label) return;
+
+            if (theme === 'light') {
+                icon.innerHTML = sunSvg;
+                label.textContent = 'Light';
+            } else if (theme === 'high-contrast') {
+                icon.innerHTML = contrastSvg;
+                label.textContent = 'Contrast';
+            } else {
+                icon.innerHTML = moonSvg;
+                label.textContent = 'Dark';
+            }
+        }
+
+        function cycleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            let next = 'dark';
+            if (current === 'dark') next = 'light';
+            else if (current === 'light') next = 'high-contrast';
+            else next = 'dark';
+
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggleUI(next);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            updateToggleUI(currentTheme);
+            const btn = document.getElementById('theme-toggle');
+            if (btn) btn.addEventListener('click', cycleTheme);
+        });
+    </script>
+</body>
+</html>
