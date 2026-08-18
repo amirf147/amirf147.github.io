@@ -1,654 +1,682 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amir Farhadi - Portfolio Evidence</title>
-    <script>
-        (function () {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-                document.documentElement.setAttribute('data-theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-
-<body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <div class="container">
-        <noscript>
-            <aside class="noscript-banner" role="alert">
-                <strong>Notice:</strong> JavaScript is currently disabled or blocked by a browser extension (such as uBlock Origin). Interactive features (Accessibility Dialog, Theme Switcher, Voice Navigation, Keyboard Shortcuts, and Live Commits) require JavaScript. To enable them, please allow JavaScript for this page in your extension settings.
-            </aside>
-        </noscript>
-
-        <nav id="top" class="top-bar" aria-label="Main Navigation" tabindex="-1">
-            <!-- Row 1: Top Utility Bar (Accessibility top-left, Theme top-right) -->
-            <div class="top-utility-bar">
-                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide">
-                        <span class="tag-prefix" aria-hidden="true">//</span> Accessibility Help <span
-                            class="kbd">?</span>
-                    </button>
-                    <a href="https://github.com/Amirf147" target="_blank" class="nav-btn"
-                        aria-label="Amir Farhadi's GitHub Profile">
-                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"
-                            style="display: inline-block; vertical-align: text-bottom;">
-                            <path
-                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
-                            </path>
-                        </svg>
-                        GitHub Profile<span class="sr-only"> (opens in a new tab)</span>
-                    </a>
-                </div>
-                <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme"
-                    data-tooltip="Cycle Themes (Dark, Light, High Contrast)">
-                    <span id="theme-icon" style="display: flex; align-items: center;"></span>
-                    <span id="theme-label">Theme</span>
-                </button>
-            </div>
-
-            <!-- Row 2: Page Sections Row (Centered with Section Label) -->
-            <div class="section-nav-wrapper">
-                <span class="section-nav-label">PAGE SECTIONS</span>
-                <div class="section-nav-cluster">
-                    <a href="#recent-commits-section" class="nav-btn">
-                        <span class="tag-prefix" aria-hidden="true">// 00</span> Recent Activity
-                    </a>
-
-                    <div class="nav-dropdown">
-                        <a href="#caster-voice-os" class="nav-btn" aria-haspopup="true">
-                            <span class="tag-prefix" aria-hidden="true">// 01</span> Passion Project <span class="arrow"
-                                aria-hidden="true">▾</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#item-caster-os">Caster Voice OS (Overview)</a>
-                            <a href="./timeline.html">Interactive Evolution Timeline ↗</a>
-                            <a href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank">GitHub Repository ↗</a>
-                        </div>
-                    </div>
-
-                    <div class="nav-dropdown">
-                        <a href="#solved-problems" class="nav-btn" aria-haspopup="true">
-                            <span class="tag-prefix" aria-hidden="true">// 02</span> Solved Problems <span class="arrow"
-                                aria-hidden="true">▾</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#item-tracker">1. Tactical Agentic Activity Tracker</a>
-                            <a href="#item-caster-switcher">2. Caster Voice App Switcher</a>
-                        </div>
-                    </div>
-
-                    <div class="nav-dropdown">
-                        <a href="#open-source" class="nav-btn" aria-haspopup="true">
-                            <span class="tag-prefix" aria-hidden="true">// 03</span> Open Source <span class="arrow"
-                                aria-hidden="true">▾</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#item-caster-merged">Caster Merged Pull Requests</a>
-                            <a href="#item-caster-975">Caster PR #975 (4-Digit Fix)</a>
-                            <a href="#item-dragonfly-409">Dragonfly PR #409 (Number Series)</a>
-                            <a href="#item-dragonfly-408">Dragonfly PR #408 (Kaldi Unload Fix)</a>
-                            <a href="#item-pyvda-57">pyvda PR #57 (COM Object Fix)</a>
-                        </div>
-                    </div>
-
-                    <div class="nav-dropdown">
-                        <a href="#tools" class="nav-btn" aria-haspopup="true">
-                            <span class="tag-prefix" aria-hidden="true">// 04</span> Public Tools <span class="arrow"
-                                aria-hidden="true">▾</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#item-winstasis">WinStasis (Window Restorer)</a>
-                            <a href="#item-vdtree">vdtree (Virtual Desktop Tree)</a>
-                        </div>
-                    </div>
-
-                    <div class="nav-dropdown">
-                        <a href="#academic-projects" class="nav-btn" aria-haspopup="true">
-                            <span class="tag-prefix" aria-hidden="true">// 05</span> School Projects <span class="arrow"
-                                aria-hidden="true">▾</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#item-iot-bms">IoT Battery Management System (BMS)</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <header class="hero">
-            <div class="sr-only">
-                Amir Farhadi's Portfolio. This page contains 5 main sections: Passion Project (Caster Voice OS), Solved Problems, Open Source, Public
-                Tools, and Previous School Projects. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
-            </div>
-            <h1 class="main-title">Amir Farhadi</h1>
-            <p class="subtitle">Software Engineer | Automation & Agentic Architect Proof of Work</p>
-        </header>
-
-        <main id="main-content" tabindex="-1">
-
-            <section id="recent-commits-section" aria-labelledby="recent-commits-title" class="navigable-item"
-                tabindex="-1">
-                <h2 id="recent-commits-title" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 00</span> Recent Activity
-                </h2>
-                <div class="commits-container">
-                    <div class="commits-header-row">
-                        <div class="commits-live-status">
-                            <span class="commits-live-dot" aria-hidden="true"></span>
-                            <span class="commits-live-text">Live Commits Feed</span>
-                        </div>
-                        <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list"
-                            data-tooltip="Fetch latest live commits">
-                            <svg class="refresh-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
-                                style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;">
-                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l.73-.73" />
-                            </svg>
-                            <span class="refresh-text">Refresh</span>
-                        </button>
-                    </div>
-                    <div id="commits-feed-container" aria-live="polite">
-                        <!-- Commits skeleton/list will render here dynamically -->
-                    </div>
-                    <div class="commits-footer-row">
-                        <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc"
-                            target="_blank" class="nav-btn" style="width: 100%; justify-content: center;"
-                            aria-label="View search query on GitHub (opens in a new tab)">
-                            View Commits Search Query on GitHub<span class="sr-only"> (opens in a new tab)</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-nav-bar" style="margin-top: 24px;">
-                    <span></span>
-                    <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                    <a href="#item-caster-os" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-                            class="kbd">n</span></a>
-                </div>
-            </section>
-
-            <!-- Section 01: Core Passion Project (Caster Voice OS) -->
-            <section id="caster-voice-os" aria-labelledby="caster-voice-os-title">
-                <h2 id="caster-voice-os-title" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 01</span> Primary Passion Project
-                </h2>
-                <ul class="project-list">
-                    <li id="item-caster-os" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="./timeline.html">Caster Voice OS — Personal Hands-Free Platform (2-Year Git Evolution)<span class="sr-only"> (opens timeline page)</span></a></h3>
-                            <span class="status-tag status-live">Active / Production</span>
-                        </div>
-                        <p class="description">A 27-month, 969-commit personal voice computing operating system powering 100% hands-free engineering. Features 3-tier failsafe OS focus management, Kaldi ASR compiler race condition fixes, and multimodal foot-pedal IPC bridges.</p>
-                        <div class="evidence-box">
-                            <div class="timeline-summary-strip">
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 1 (May–Aug 2024)</span>
-                                    <span class="era-strip-desc">Kaldi ASR migration, Talon phonetic alphabet, modular rule hierarchy</span>
-                                </div>
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 2 (Sep–Dec 2024)</span>
-                                    <span class="era-strip-desc">Desktop automation (Office/VSCodium), privacy boundaries, language CCR</span>
-                                </div>
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 3 (Jan–Nov 2025)</span>
-                                    <span class="era-strip-desc">Grammar maturation, AI IDE workflows (Cursor/Windsurf), RS31H foot pedal AHK v2</span>
-                                </div>
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 4 (May–Aug 2026)</span>
-                                    <span class="era-strip-desc">3-tier failsafe window switcher, empirical COM telemetry, Kaldi race fix, Brain docs</span>
-                                </div>
-                            </div>
-                            <a class="evidence-link" href="./timeline.html" style="margin-right: 15px;"><span aria-hidden="true">→ </span>Explore Interactive 2-Year Timeline Web App<span class="sr-only"> (opens timeline page)</span></a>
-                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/context/repository-brain.md" target="_blank"><span aria-hidden="true">→ </span>View Canonical Repository Brain Docs<span class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span>Prev
-                                Entry <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-tracker" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <section aria-labelledby="solved-problems">
-                <h2 id="solved-problems" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 02</span> Real-World Solved Problems
-                </h2>
-                <ul class="project-list">
-                    <li id="item-tracker" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=ufrwROqSNLs"
-                                    target="_blank">1. Tactical Agentic Activity Tracker<span class="sr-only"> (opens in
-                                         a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Live Demo</span>
-                        </div>
-                        <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure
-                            cloud infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
-                        <div class="evidence-box">
-                            <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/ufrwROqSNLs?si=Si-a7m6eVQ9GWaFR"
-                                    title="Demonstration video: Tactical Agentic Activity Tracker multi-agent orchestration"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs"
-                                target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span>Watch "3 Agent Demo" on YouTube<span
-                                    class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/amirf147/karki" target="_blank"><span aria-hidden="true">→ </span>View Tactical Agentic Activity Tracker docs and code on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-caster-os" class="nav-btn"><span aria-hidden="true">← </span>Prev
-                                Entry <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-caster-switcher" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
-                        </div>
-                    </li>
-                    <li id="item-caster-switcher" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=zeyoatLmYgQ"
-                                    target="_blank">2. Caster Voice App Switcher (Replacing Alt+Tab)<span
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Live Demo</span>
-                        </div>
-                        <p class="description">Low-level Windows desktop focus management and voice window switching
-                            engine for the Caster/Dragonfly speech recognition framework. Implements a 3-tier failsafe
-                            focus architecture (Win32 API + Thread Attach OS bypass, Taskbar UIA automation, synthetic
-                            keyboard macros), virtual desktop filtering, and tab cycling.</p>
-                        <div class="evidence-box">
-                            <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/zeyoatLmYgQ?si=x_mrpffWQZEdt9ky"
-                                    title="Demonstration video: Caster Voice App Switcher replacing ALT+TAB with voice commands"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <a class="evidence-link" href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank"
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>Watch "Replacing ALT + TAB
-                                with Voice commands" on YouTube<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link"
-                                href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/features/app_switcher.md"
-                                target="_blank"><span aria-hidden="true">→ </span>View App Switcher Documentation and
-                                Code on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-tracker" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-                                    class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-caster-merged" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <section aria-labelledby="open-source">
-                <h2 id="open-source" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 03</span> Open Source Contributions
-                </h2>
-                <ul class="project-list">
-                    <li id="item-caster-merged" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a
-                                    href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-                                    target="_blank">Caster Framework (Merged Pull Requests)<span class="sr-only"> (opens
-                                        in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Merged</span>
-                        </div>
-                        <p class="description">Merged pull requests into Caster—a widely used open-source voice
-                            dictation and accessibility framework. Contributions include HUD startup race condition
-                            retry logic (#965), title-case contraction and possessive parser fixes (#962), and Windows
-                            11 virtual desktop integration via updated pyvda API (#960).</p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link"
-                                href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-                                target="_blank"
-                                aria-label="View Merged Commits on GitHub by Amir Farhadi (opens in a new tab)">
-                                <img class="screenshot" src="prs-screenshot.png"
-                                    alt="Screenshot of Caster repository on GitHub showing 3 merged pull requests by Amir Farhadi: PR #965, PR #962, and PR #960."
-                                    width="800">
-                            </a>
-                            <a class="evidence-link"
-                                href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-                                target="_blank"><span aria-hidden="true">→ </span>View Merged Commits on GitHub<span
-                                    class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-caster-switcher" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-                                <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-caster-975" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
-                        </div>
-                    </li>
-                    <li id="item-caster-975" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/Caster/pull/975"
-                                    target="_blank">Caster Framework — Fix 4-Digit Length Restriction Bug<span
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Open PR #975</span>
-                        </div>
-                        <p class="description">Fixes digit sequence length limitations in Caster by migrating the
-                            numeric rule extra from legacy ShortIntegerRef to NumberRef with zero-preservation,
-                            eliminating the 4-digit cap for seamless long numeric dictation.</p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/Caster/pull/975"
-                                target="_blank" aria-label="View Pull Request #975 on GitHub (opens in a new tab)">
-                                <img class="screenshot" src="caster-pr-screenshot.png"
-                                    alt="Screenshot of Caster Pull Request #975 on GitHub showing code changes replacing ShortIntegerRef with NumberRef."
-                                    width="800">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/dictation-toolbox/Caster/pull/975"
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #975 on GitHub<span
-                                    class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-caster-merged" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-                                <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-dragonfly-409" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
-                        </div>
-                    </li>
-                    <li id="item-dragonfly-409" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-                                    target="_blank">Dragonfly Framework — Fix Number Series Sequence Matching &
-                                    Limits<span class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Open PR #409</span>
-                        </div>
-                        <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence
-                            matching conflicts, digit length constraints, and zero formatting loss across speech
-                            recognition backends.</p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-                                target="_blank" aria-label="View Pull Request #409 on GitHub (opens in a new tab)">
-                                <img class="screenshot" src="dragonfly-pr-screenshot.png"
-                                    alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching."
-                                    width="800">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #409 on GitHub<span
-                                    class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-caster-975" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-                                <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-dragonfly-408" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
-                        </div>
-                    </li>
-                    <li id="item-dragonfly-408" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/408"
-                                    target="_blank">Dragonfly Framework — Fix Kaldi Deferred Mid-Phrase Reload Bug<span
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Open PR #408</span>
-                        </div>
-                        <p class="description">Fixes KaldiError engine crashes during deferred mid-phrase reloads by
-                            capturing rules to destroy at deferral time rather than retrieving newly compiled rules from
-                            the global dictionary post-phrase.</p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408"
-                                target="_blank" aria-label="View Pull Request #408 on GitHub (opens in a new tab)">
-                                <img class="screenshot" src="dragonfly-pr408-screenshot.png"
-                                    alt="Screenshot of Dragonfly Pull Request #408 on GitHub detailing fix for Kaldi deferred unload mid-phrase reload race condition."
-                                    width="800">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408"
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #408 on GitHub<span
-                                    class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-dragonfly-409" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-                                <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-pyvda-57" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-                                    class="kbd">n</span></a>
-                        </div>
-                    </li>
-                    <li id="item-pyvda-57" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/mirober/pyvda/pull/57"
-                                    target="_blank">pyvda — Handle Stale COM Objects & RPC Server Unavailability<span
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Open PR #57</span>
-                        </div>
-                        <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle
-                            destroyed COM interface pointers and RPC server unavailability errors caused by Windows
-                            Explorer restarts or system sleep cycles.</p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank"
-                                aria-label="View Pull Request #57 on GitHub (opens in a new tab)">
-                                <img class="screenshot" src="pyvda-pr-screenshot.png"
-                                    alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers."
-                                    width="800">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57"
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #57 on GitHub<span
-                                    class="sr-only"> (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-dragonfly-408" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-                                <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-winstasis" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-                                    class="kbd">n</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <section aria-labelledby="tools">
-                <h2 id="tools" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 04</span> Publicly Released Tools
-                </h2>
-                <ul class="project-list">
-                    <li id="item-winstasis" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/WinStasis"
-                                    target="_blank">WinStasis (Window Position Restorer CLI)<span class="sr-only">
-                                        (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Tiny Tool Town</span>
-                        </div>
-                        <p class="description">Lightweight CLI utility to instantly snapshot and restore window
-                            positions and virtual desktop assignments on Windows, permanently resolving application
-                            drift. Publicly featured on Tiny Tool Town.</p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
-                                aria-label="View WinStasis GitHub Repository (opens in a new tab)">
-                                <img class="screenshot" src="winstasis-screenshot.png"
-                                    alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary."
-                                    width="600">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-                                Repository<span class="sr-only"> for WinStasis (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/"
-                                target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span
-                                    class="sr-only"> for WinStasis (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-pyvda-57" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-                                    class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-vdtree" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-                                    class="kbd">n</span></a>
-                        </div>
-                    </li>
-                    <li id="item-vdtree" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/vdtree"
-                                    target="_blank">vdtree (Windows Virtual Desktop Tree CLI)<span class="sr-only">
-                                        (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Tiny Tool Town</span>
-                        </div>
-                        <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops.
-                            Maps out all active virtual desktops and open application windows in a clean CLI table,
-                            displaying window titles, desktop assignments, coordinates (X, Y), and dimensions (W x H).
-                        </p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/Amirf147/vdtree" target="_blank"
-                                aria-label="View vdtree GitHub Repository (opens in a new tab)">
-                                <img class="screenshot" src="vdtree-screenshot.png"
-                                    alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions."
-                                    width="600">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank"
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-                                Repository<span class="sr-only"> for vdtree (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/"
-                                target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span
-                                    class="sr-only"> for vdtree (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-winstasis" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-                                    class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-iot-bms" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-                                    class="kbd">n</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- ============================================================
-                 05. ACADEMIC & CAPSTONE PROJECTS
-                 ============================================================ -->
-            <section id="academic-projects" aria-labelledby="academic-projects-title" class="project-section">
-                <h2 id="academic-projects-title" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 05</span> Previous School & Capstone Projects
-                </h2>
-                <ul class="project-list">
-                    <li id="item-iot-bms" class="project-item navigable-item" tabindex="-1">
-                        <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Battery_Management_System"
-                                    target="_blank">IoT Battery Management System (BMS)<span class="sr-only">
-                                        (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">🏆 Best Technical Presentation</span>
-                        </div>
-                        <p class="description">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack. Integrated an Analog Devices LTC6811 automotive multicell stack monitor, custom Linduino C++ SPI firmware, and SIM808 Bluetooth SPP module to stream live multi-cell voltage telemetry to a Raspberry Pi gateway running InfluxDB, Grafana dashboards, and Python data analytics.
-                        </p>
-                        <div class="evidence-box">
-                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
-                                aria-label="View IoT Battery Management System GitHub Repository (opens in a new tab)">
-                                <img class="screenshot" src="bms-hardware.jpg"
-                                    alt="Physical BMS testbench hardware setup with 4WD RC vehicle chassis, 2P4S LTO battery stack, Analog Devices LTC6811 multicell monitor, and Linduino microcontroller."
-                                    width="600">
-                            </a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-                                Repository<span class="sr-only"> for IoT Battery Management System (opens in a new tab)</span></a>
-                        </div>
-                        <div class="item-nav-bar">
-                            <a href="#item-vdtree" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-                                    class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <span></span>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <footer class="footer">
-                <span>© Amir Farhadi — Software Portfolio</span>
-                <span>Proof of Work Evidence</span>
-            </footer>
-        </main>
-    </div>
-
-    <!-- Floating Back to Top Button -->
-    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">↑ Top</button>
-
-    <!-- Accessibility Dialog -->
-    <dialog id="a11y-dialog" aria-labelledby="a11y-dialog-title">
-        <h2 id="a11y-dialog-title">Accessibility & Keyboard Shortcuts Guide</h2>
-        <p>This portfolio is optimized for screen readers, high-contrast visibility, and keyboard navigation.</p>
-
-        <div
-            style="margin: 16px 0; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--bg-color); display: flex; align-items: center; gap: 10px;">
-            <input type="checkbox" id="toggle-shortcuts-input" checked
-                style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-color);">
-            <label for="toggle-shortcuts-input"
-                style="font-weight: 600; cursor: pointer; font-size: 0.9rem; user-select: none;">
-                Enable single-key shortcuts (n, p, t, 0-5, ?)
-            </label>
-        </div>
-
-        <p><strong>Theme Toggle Button States:</strong> Click the <code>Theme</code> button in the top toolbar to cycle
-            through 3 visual modes:</p>
-        <div class="theme-previews" aria-label="Visual theme button states">
-            <div class="theme-preview-card preview-light" title="Light mode state button">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-                <span>Light</span>
-            </div>
-            <div class="theme-preview-card preview-dark" title="Dark mode state button">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                <span>Dark</span>
-            </div>
-            <div class="theme-preview-card preview-contrast" title="High Contrast mode state button">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path
-                        d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z" />
-                </svg>
-                <span>Contrast</span>
-            </div>
-        </div>
-
-        <p><strong>Keyboard Shortcuts:</strong></p>
-        <ul>
-            <li><span class="kbd">?</span> Toggle this Accessibility Guide</li>
-            <li><span class="kbd">0</span> Jump to Recent Activity</li>
-            <li><span class="kbd">1</span> Jump to Primary Passion Project</li>
-            <li><span class="kbd">2</span> Jump to Solved Problems</li>
-            <li><span class="kbd">3</span> Jump to Open Source Contributions</li>
-            <li><span class="kbd">4</span> Jump to Public Tools</li>
-            <li><span class="kbd">5</span> Jump to Previous School & Capstone Projects</li>
-            <li><span class="kbd">t</span> Back to Top</li>
-            <li><span class="kbd">n</span> Jump to Next Project Entry</li>
-            <li><span class="kbd">p</span> Jump to Previous Project Entry</li>
-            <li><span class="kbd">v</span> Toggle Hands-Free Voice Navigation</li>
-        </ul>
-
-        <p><strong>Hands-Free Voice Navigation:</strong></p>
-        <p style="font-size: 0.88rem; color: var(--subtitle-color);">Click the floating mic HUD icon or press <span class="kbd">v</span> to activate browser voice navigation. Commands adapt dynamically to your browser engine (continuous natural language speech for Chromium/Safari or acoustic keyword spotting for Firefox).</p>
-
-        <div class="dialog-close">
-            <button id="close-a11y-btn" class="nav-btn">Close Guide</button>
-        </div>
-    </dialog>
-
-    <script src="./js/theme.js"></script>
-    <script src="./js/keyboard-nav.js"></script>
-    <script src="./js/commits.js"></script>
-    <script src="./js/voice-nav.js"></script>
-    <script src="./js/main.js"></script>
-</body>
-
-</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Farhadi - Portfolio Evidence</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="container">
+        <noscript>
+            <aside class="noscript-banner" role="alert">
+                <strong>Notice:</strong> JavaScript is currently disabled or blocked by a browser extension (such as uBlock Origin). Interactive features (Accessibility Dialog, Theme Switcher, Voice Navigation, Keyboard Shortcuts, and Live Commits) require JavaScript. To enable them, please allow JavaScript for this page in your extension settings.
+            </aside>
+        </noscript>
+
+        <nav id="top" class="top-bar" aria-label="Main Navigation" tabindex="-1">
+            <!-- Row 1: Top Utility Bar (Accessibility top-left, Theme top-right) -->
+            <div class="top-utility-bar">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide">
+                        <span class="tag-prefix" aria-hidden="true">//</span> Accessibility Help <span
+                            class="kbd">?</span>
+                    </button>
+                    <a href="https://github.com/Amirf147" target="_blank" class="nav-btn"
+                        aria-label="Amir Farhadi's GitHub Profile">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"
+                            style="display: inline-block; vertical-align: text-bottom;">
+                            <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
+                            </path>
+                        </svg>
+                        GitHub Profile<span class="sr-only"> (opens in a new tab)</span>
+                    </a>
+                </div>
+                <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme"
+                    data-tooltip="Cycle Themes (Dark, Light, High Contrast)">
+                    <span id="theme-icon" style="display: flex; align-items: center;"></span>
+                    <span id="theme-label">Theme</span>
+                </button>
+            </div>
+
+            <!-- Row 2: Page Sections Row (Centered with Section Label) -->
+            <div class="section-nav-wrapper">
+                <span class="section-nav-label">PAGE SECTIONS</span>
+                <div class="section-nav-cluster">
+                    <a href="#recent-commits-section" class="nav-btn">
+                        <span class="tag-prefix" aria-hidden="true">// 00</span> Recent Activity
+                    </a>
+
+                    <div class="nav-dropdown">
+                        <a href="#caster-voice-os" class="nav-btn" aria-haspopup="true">
+                            <span class="tag-prefix" aria-hidden="true">// 01</span> Passion Project <span class="arrow"
+                                aria-hidden="true">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-caster-os">Caster Voice OS (Overview)</a>
+                            <a href="./timeline.html">Interactive Evolution Timeline ↗</a>
+                            <a href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank">GitHub Repository ↗</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#solved-problems" class="nav-btn" aria-haspopup="true">
+                            <span class="tag-prefix" aria-hidden="true">// 02</span> Solved Problems <span class="arrow"
+                                aria-hidden="true">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-tracker">1. Tactical Agentic Activity Tracker</a>
+                            <a href="#item-caster-switcher">2. Caster Voice App Switcher</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#open-source" class="nav-btn" aria-haspopup="true">
+                            <span class="tag-prefix" aria-hidden="true">// 03</span> Open Source <span class="arrow"
+                                aria-hidden="true">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-caster-merged">Caster Merged Pull Requests</a>
+                            <a href="#item-caster-975">Caster PR #975 (4-Digit Fix)</a>
+                            <a href="#item-dragonfly-409">Dragonfly PR #409 (Number Series)</a>
+                            <a href="#item-dragonfly-408">Dragonfly PR #408 (Kaldi Unload Fix)</a>
+                            <a href="#item-pyvda-57">pyvda PR #57 (COM Object Fix)</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#tools" class="nav-btn" aria-haspopup="true">
+                            <span class="tag-prefix" aria-hidden="true">// 04</span> Public Tools <span class="arrow"
+                                aria-hidden="true">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-winstasis">WinStasis (Window Restorer)</a>
+                            <a href="#item-vdtree">vdtree (Virtual Desktop Tree)</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#academic-projects" class="nav-btn" aria-haspopup="true">
+                            <span class="tag-prefix" aria-hidden="true">// 05</span> School Projects <span class="arrow"
+                                aria-hidden="true">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-iot-mail">IoT Physical Mail Detector & Home Monitor</a>
+                            <a href="#item-iot-bms">IoT Battery Management System (BMS)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="sr-only">
+                Amir Farhadi's Portfolio. This page contains 5 main sections: Passion Project (Caster Voice OS), Solved Problems, Open Source, Public
+                Tools, and Previous School Projects. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
+            </div>
+            <h1 class="main-title">Amir Farhadi</h1>
+            <p class="subtitle">Software Engineer | Automation & Agentic Architect Proof of Work</p>
+        </header>
+
+        <main id="main-content" tabindex="-1">
+
+            <section id="recent-commits-section" aria-labelledby="recent-commits-title" class="navigable-item"
+                tabindex="-1">
+                <h2 id="recent-commits-title" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 00</span> Recent Activity
+                </h2>
+                <div class="commits-container">
+                    <div class="commits-header-row">
+                        <div class="commits-live-status">
+                            <span class="commits-live-dot" aria-hidden="true"></span>
+                            <span class="commits-live-text">Live Commits Feed</span>
+                        </div>
+                        <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list"
+                            data-tooltip="Fetch latest live commits">
+                            <svg class="refresh-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                                style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l.73-.73" />
+                            </svg>
+                            <span class="refresh-text">Refresh</span>
+                        </button>
+                    </div>
+                    <div id="commits-feed-container" aria-live="polite">
+                        <!-- Commits skeleton/list will render here dynamically -->
+                    </div>
+                    <div class="commits-footer-row">
+                        <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc"
+                            target="_blank" class="nav-btn" style="width: 100%; justify-content: center;"
+                            aria-label="View search query on GitHub (opens in a new tab)">
+                            View Commits Search Query on GitHub<span class="sr-only"> (opens in a new tab)</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="item-nav-bar" style="margin-top: 24px;">
+                    <span></span>
+                    <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                    <a href="#item-caster-os" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                            class="kbd">n</span></a>
+                </div>
+            </section>
+
+            <!-- Section 01: Core Passion Project (Caster Voice OS) -->
+            <section id="caster-voice-os" aria-labelledby="caster-voice-os-title">
+                <h2 id="caster-voice-os-title" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 01</span> Primary Passion Project
+                </h2>
+                <ul class="project-list">
+                    <li id="item-caster-os" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="./timeline.html">Caster Voice OS — Personal Hands-Free Platform (2-Year Git Evolution)<span class="sr-only"> (opens timeline page)</span></a></h3>
+                            <span class="status-tag status-live">Active / Production</span>
+                        </div>
+                        <p class="description">A 27-month, 969-commit personal voice computing operating system powering 100% hands-free engineering. Features 3-tier failsafe OS focus management, Kaldi ASR compiler race condition fixes, and multimodal foot-pedal IPC bridges.</p>
+                        <div class="evidence-box">
+                            <div class="timeline-summary-strip">
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Era 1 (May–Aug 2024)</span>
+                                    <span class="era-strip-desc">Kaldi ASR migration, Talon phonetic alphabet, modular rule hierarchy</span>
+                                </div>
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Era 2 (Sep–Dec 2024)</span>
+                                    <span class="era-strip-desc">Desktop automation (Office/VSCodium), privacy boundaries, language CCR</span>
+                                </div>
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Era 3 (Jan–Nov 2025)</span>
+                                    <span class="era-strip-desc">Grammar maturation, AI IDE workflows (Cursor/Windsurf), RS31H foot pedal AHK v2</span>
+                                </div>
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Era 4 (May–Aug 2026)</span>
+                                    <span class="era-strip-desc">3-tier failsafe window switcher, empirical COM telemetry, Kaldi race fix, Brain docs</span>
+                                </div>
+                            </div>
+                            <a class="evidence-link" href="./timeline.html" style="margin-right: 15px;"><span aria-hidden="true">→ </span>Explore Interactive 2-Year Timeline Web App<span class="sr-only"> (opens timeline page)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/context/repository-brain.md" target="_blank"><span aria-hidden="true">→ </span>View Canonical Repository Brain Docs<span class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span>Prev
+                                Entry <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-tracker" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
+                                <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section aria-labelledby="solved-problems">
+                <h2 id="solved-problems" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 02</span> Real-World Solved Problems
+                </h2>
+                <ul class="project-list">
+                    <li id="item-tracker" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=ufrwROqSNLs"
+                                    target="_blank">1. Tactical Agentic Activity Tracker<span class="sr-only"> (opens in
+                                         a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Live Demo</span>
+                        </div>
+                        <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure
+                            cloud infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
+                        <div class="evidence-box">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/ufrwROqSNLs?si=Si-a7m6eVQ9GWaFR"
+                                    title="Demonstration video: Tactical Agentic Activity Tracker multi-agent orchestration"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs"
+                                target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span>Watch "3 Agent Demo" on YouTube<span
+                                    class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/karki" target="_blank"><span aria-hidden="true">→ </span>View Tactical Agentic Activity Tracker docs and code on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-caster-os" class="nav-btn"><span aria-hidden="true">← </span>Prev
+                                Entry <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-caster-switcher" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
+                                <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-caster-switcher" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=zeyoatLmYgQ"
+                                    target="_blank">2. Caster Voice App Switcher (Replacing Alt+Tab)<span
+                                        class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Live Demo</span>
+                        </div>
+                        <p class="description">Low-level Windows desktop focus management and voice window switching
+                            engine for the Caster/Dragonfly speech recognition framework. Implements a 3-tier failsafe
+                            focus architecture (Win32 API + Thread Attach OS bypass, Taskbar UIA automation, synthetic
+                            keyboard macros), virtual desktop filtering, and tab cycling.</p>
+                        <div class="evidence-box">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/zeyoatLmYgQ?si=x_mrpffWQZEdt9ky"
+                                    title="Demonstration video: Caster Voice App Switcher replacing ALT+TAB with voice commands"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <a class="evidence-link" href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank"
+                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>Watch "Replacing ALT + TAB
+                                with Voice commands" on YouTube<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link"
+                                href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/features/app_switcher.md"
+                                target="_blank"><span aria-hidden="true">→ </span>View App Switcher Documentation and
+                                Code on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-tracker" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
+                                    class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-caster-merged" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
+                                <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section aria-labelledby="open-source">
+                <h2 id="open-source" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 03</span> Open Source Contributions
+                </h2>
+                <ul class="project-list">
+                    <li id="item-caster-merged" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a
+                                    href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
+                                    target="_blank">Caster Framework (Merged Pull Requests)<span class="sr-only"> (opens
+                                        in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Merged</span>
+                        </div>
+                        <p class="description">Merged pull requests into Caster—a widely used open-source voice
+                            dictation and accessibility framework. Contributions include HUD startup race condition
+                            retry logic (#965), title-case contraction and possessive parser fixes (#962), and Windows
+                            11 virtual desktop integration via updated pyvda API (#960).</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link"
+                                href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
+                                target="_blank"
+                                aria-label="View Merged Commits on GitHub by Amir Farhadi (opens in a new tab)">
+                                <img class="screenshot" src="prs-screenshot.png"
+                                    alt="Screenshot of Caster repository on GitHub showing 3 merged pull requests by Amir Farhadi: PR #965, PR #962, and PR #960."
+                                    width="800">
+                            </a>
+                            <a class="evidence-link"
+                                href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
+                                target="_blank"><span aria-hidden="true">→ </span>View Merged Commits on GitHub<span
+                                    class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-caster-switcher" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
+                                <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-caster-975" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
+                                <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-caster-975" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/Caster/pull/975"
+                                    target="_blank">Caster Framework — Fix 4-Digit Length Restriction Bug<span
+                                        class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Open PR #975</span>
+                        </div>
+                        <p class="description">Fixes digit sequence length limitations in Caster by migrating the
+                            numeric rule extra from legacy ShortIntegerRef to NumberRef with zero-preservation,
+                            eliminating the 4-digit cap for seamless long numeric dictation.</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/Caster/pull/975"
+                                target="_blank" aria-label="View Pull Request #975 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="caster-pr-screenshot.png"
+                                    alt="Screenshot of Caster Pull Request #975 on GitHub showing code changes replacing ShortIntegerRef with NumberRef."
+                                    width="800">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/dictation-toolbox/Caster/pull/975"
+                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #975 on GitHub<span
+                                    class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-caster-merged" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
+                                <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-dragonfly-409" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
+                                <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-dragonfly-409" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/409"
+                                    target="_blank">Dragonfly Framework — Fix Number Series Sequence Matching &
+                                    Limits<span class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Open PR #409</span>
+                        </div>
+                        <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence
+                            matching conflicts, digit length constraints, and zero formatting loss across speech
+                            recognition backends.</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
+                                target="_blank" aria-label="View Pull Request #409 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="dragonfly-pr-screenshot.png"
+                                    alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching."
+                                    width="800">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
+                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #409 on GitHub<span
+                                    class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-caster-975" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
+                                <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-dragonfly-408" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
+                                <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-dragonfly-408" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/408"
+                                    target="_blank">Dragonfly Framework — Fix Kaldi Deferred Mid-Phrase Reload Bug<span
+                                        class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Open PR #408</span>
+                        </div>
+                        <p class="description">Fixes KaldiError engine crashes during deferred mid-phrase reloads by
+                            capturing rules to destroy at deferral time rather than retrieving newly compiled rules from
+                            the global dictionary post-phrase.</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408"
+                                target="_blank" aria-label="View Pull Request #408 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="dragonfly-pr408-screenshot.png"
+                                    alt="Screenshot of Dragonfly Pull Request #408 on GitHub detailing fix for Kaldi deferred unload mid-phrase reload race condition."
+                                    width="800">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408"
+                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #408 on GitHub<span
+                                    class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-dragonfly-409" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
+                                <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-pyvda-57" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                                    class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-pyvda-57" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/mirober/pyvda/pull/57"
+                                    target="_blank">pyvda — Handle Stale COM Objects & RPC Server Unavailability<span
+                                        class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Open PR #57</span>
+                        </div>
+                        <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle
+                            destroyed COM interface pointers and RPC server unavailability errors caused by Windows
+                            Explorer restarts or system sleep cycles.</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank"
+                                aria-label="View Pull Request #57 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="pyvda-pr-screenshot.png"
+                                    alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers."
+                                    width="800">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57"
+                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #57 on GitHub<span
+                                    class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-dragonfly-408" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
+                                <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-winstasis" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                                    class="kbd">n</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section aria-labelledby="tools">
+                <h2 id="tools" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 04</span> Publicly Released Tools
+                </h2>
+                <ul class="project-list">
+                    <li id="item-winstasis" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/WinStasis"
+                                    target="_blank">WinStasis (Window Position Restorer CLI)<span class="sr-only">
+                                        (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Tiny Tool Town</span>
+                        </div>
+                        <p class="description">Lightweight CLI utility to instantly snapshot and restore window
+                            positions and virtual desktop assignments on Windows, permanently resolving application
+                            drift. Publicly featured on Tiny Tool Town.</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
+                                aria-label="View WinStasis GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="winstasis-screenshot.png"
+                                    alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary."
+                                    width="600">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
+                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
+                                Repository<span class="sr-only"> for WinStasis (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/"
+                                target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span
+                                    class="sr-only"> for WinStasis (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-pyvda-57" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
+                                    class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-vdtree" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                                    class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-vdtree" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/vdtree"
+                                    target="_blank">vdtree (Windows Virtual Desktop Tree CLI)<span class="sr-only">
+                                        (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Tiny Tool Town</span>
+                        </div>
+                        <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops.
+                            Maps out all active virtual desktops and open application windows in a clean CLI table,
+                            displaying window titles, desktop assignments, coordinates (X, Y), and dimensions (W x H).
+                        </p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/Amirf147/vdtree" target="_blank"
+                                aria-label="View vdtree GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="vdtree-screenshot.png"
+                                    alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions."
+                                    width="600">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank"
+                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
+                                Repository<span class="sr-only"> for vdtree (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/"
+                                target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span
+                                    class="sr-only"> for vdtree (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-winstasis" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
+                                    class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-iot-mail" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                                    class="kbd">n</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- ============================================================
+                 05. ACADEMIC & CAPSTONE PROJECTS
+                 ============================================================ -->
+            <section id="academic-projects" aria-labelledby="academic-projects-title" class="project-section">
+                <h2 id="academic-projects-title" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 05</span> Previous School & Capstone Projects
+                </h2>
+                <ul class="project-list">
+                    <li id="item-iot-mail" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Mail_Detector"
+                                    target="_blank">IoT Physical Mail Detector & Smart Home Notifier<span class="sr-only">
+                                        (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Grade: 5/5</span>
+                        </div>
+                        <p class="description">Intelligent IoT physical mail detection and environmental monitoring system built with Raspberry Pi and Arduino communicating over a custom 500,000-baud UART serial protocol. Mounts a 3-axis Sense HAT accelerometer to the mail slot flap for instant physical delivery detection, triggers automated 12V LED illumination via Arduino serial command, captures 720p snapshots via Pi Camera, and sends real-time photo alerts to Telegram. Features ambient hallway door-open sensing, two-way Telegram bot commands, and continuous time-series telemetry logging to InfluxDB and Grafana.</p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank"
+                                aria-label="View IoT Mail Detector GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="mail-detector-demo.gif"
+                                    alt="Live demonstration preview of IoT Mail Detector detecting incoming mail, activating internal LED flash, and dispatching instant photo alert to Telegram."
+                                    width="600">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank"
+                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
+                                Repository<span class="sr-only"> for IoT Mail Detector (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-vdtree" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
+                                    class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-iot-bms" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                                    class="kbd">n</span></a>
+                        </div>
+                    </li>
+                    <li id="item-iot-bms" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Battery_Management_System"
+                                    target="_blank">IoT Battery Management System (BMS)<span class="sr-only">
+                                        (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">🏆 Best Technical Presentation</span>
+                        </div>
+                        <p class="description">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack. Integrated an Analog Devices LTC6811 automotive multicell stack monitor, custom Linduino C++ SPI firmware, and SIM808 Bluetooth SPP module to stream live multi-cell voltage telemetry to a Raspberry Pi gateway running InfluxDB, Grafana dashboards, and Python data analytics.
+                        </p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
+                                aria-label="View IoT Battery Management System GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="bms-hardware.jpg"
+                                    alt="Physical BMS testbench hardware setup with 4WD RC vehicle chassis, 2P4S LTO battery stack, Analog Devices LTC6811 multicell monitor, and Linduino microcontroller."
+                                    width="600">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
+                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
+                                Repository<span class="sr-only"> for IoT Battery Management System (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-iot-mail" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
+                                    class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <span></span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <footer class="footer">
+                <span>© Amir Farhadi — Software Portfolio</span>
+                <span>Proof of Work Evidence</span>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">↑ Top</button>
+
+    <!-- Accessibility Dialog -->
+    <dialog id="a11y-dialog" aria-labelledby="a11y-dialog-title">
+        <h2 id="a11y-dialog-title">Accessibility & Keyboard Shortcuts Guide</h2>
+        <p>This portfolio is optimized for screen readers, high-contrast visibility, and keyboard navigation.</p>
+
+        <div
+            style="margin: 16px 0; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--bg-color); display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="toggle-shortcuts-input" checked
+                style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-color);">
+            <label for="toggle-shortcuts-input"
+                style="font-weight: 600; cursor: pointer; font-size: 0.9rem; user-select: none;">
+                Enable single-key shortcuts (n, p, t, 0-5, ?)
+            </label>
+        </div>
+
+        <p><strong>Theme Toggle Button States:</strong> Click the <code>Theme</code> button in the top toolbar to cycle
+            through 3 visual modes:</p>
+        <div class="theme-previews" aria-label="Visual theme button states">
+            <div class="theme-preview-card preview-light" title="Light mode state button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <span>Light</span>
+            </div>
+            <div class="theme-preview-card preview-dark" title="Dark mode state button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <span>Dark</span>
+            </div>
+            <div class="theme-preview-card preview-contrast" title="High Contrast mode state button">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path
+                        d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z" />
+                </svg>
+                <span>Contrast</span>
+            </div>
+        </div>
+
+        <p><strong>Keyboard Shortcuts:</strong></p>
+        <ul>
+            <li><span class="kbd">?</span> Toggle this Accessibility Guide</li>
+            <li><span class="kbd">0</span> Jump to Recent Activity</li>
+            <li><span class="kbd">1</span> Jump to Primary Passion Project</li>
+            <li><span class="kbd">2</span> Jump to Solved Problems</li>
+            <li><span class="kbd">3</span> Jump to Open Source Contributions</li>
+            <li><span class="kbd">4</span> Jump to Public Tools</li>
+            <li><span class="kbd">5</span> Jump to Previous School & Capstone Projects</li>
+            <li><span class="kbd">t</span> Back to Top</li>
+            <li><span class="kbd">n</span> Jump to Next Project Entry</li>
+            <li><span class="kbd">p</span> Jump to Previous Project Entry</li>
+            <li><span class="kbd">v</span> Toggle Hands-Free Voice Navigation</li>
+        </ul>
+
+        <p><strong>Hands-Free Voice Navigation:</strong></p>
+        <p style="font-size: 0.88rem; color: var(--subtitle-color);">Click the floating mic HUD icon or press <span class="kbd">v</span> to activate browser voice navigation. Commands adapt dynamically to your browser engine (continuous natural language speech for Chromium/Safari or acoustic keyword spotting for Firefox).</p>
+
+        <div class="dialog-close">
+            <button id="close-a11y-btn" class="nav-btn">Close Guide</button>
+        </div>
+    </dialog>
+
+    <script src="./js/theme.js"></script>
+    <script src="./js/keyboard-nav.js"></script>
+    <script src="./js/commits.js"></script>
+    <script src="./js/voice-nav.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

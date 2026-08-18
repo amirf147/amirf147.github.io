@@ -690,7 +690,7 @@ class VoiceNav {
             return;
         }
 
-        if (/^(5|five|fifth)$/i.test(text) || /(go to|jump to|open|show)?.*(school projects|academic|capstone|bms|battery)/i.test(text)) {
+        if (/^(5|five|fifth)$/i.test(text) || /(go to|jump to|open|show)?.*(school projects|academic|capstone|bms|battery|mail|mail detector)/i.test(text)) {
             this.jumpTo('academic-projects', 'Jumped to School & Capstone Projects (Section 5)');
             return;
         }
