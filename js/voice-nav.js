@@ -118,6 +118,7 @@ class VoiceNav {
                             <button class="vui-chip" data-cmd="two"><span class="chip-quote">"</span>two<span class="chip-quote">"</span> ➔ Solved Problems</button>
                             <button class="vui-chip" data-cmd="three"><span class="chip-quote">"</span>three<span class="chip-quote">"</span> ➔ Open Source</button>
                             <button class="vui-chip" data-cmd="four"><span class="chip-quote">"</span>four<span class="chip-quote">"</span> ➔ Public Tools</button>
+                            <button class="vui-chip" data-cmd="five"><span class="chip-quote">"</span>five<span class="chip-quote">"</span> ➔ School Projects</button>
                         </div>
                     </div>
 
@@ -151,6 +152,7 @@ class VoiceNav {
                             <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
+                            <button class="vui-chip" data-cmd="go to school projects"><span class="chip-quote">"</span>School Projects<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Activity<span class="chip-quote">"</span></button>
                             <button class="vui-chip" data-cmd="open timeline"><span class="chip-quote">"</span>Open Timeline<span class="chip-quote">"</span></button>
                         </div>
@@ -685,6 +687,11 @@ class VoiceNav {
 
         if (/^(4|four|fourth)$/i.test(text) || /(go to|jump to|open|show)?.*(tools|public tools|winstasis|vdtree|virtual desktop)/i.test(text)) {
             this.jumpTo('tools', 'Jumped to Public Tools (Section 4)');
+            return;
+        }
+
+        if (/^(5|five|fifth)$/i.test(text) || /(go to|jump to|open|show)?.*(school projects|academic|capstone|bms|battery)/i.test(text)) {
+            this.jumpTo('academic-projects', 'Jumped to School & Capstone Projects (Section 5)');
             return;
         }
 

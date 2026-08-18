@@ -111,14 +111,24 @@
                             <a href="#item-vdtree">vdtree (Virtual Desktop Tree)</a>
                         </div>
                     </div>
+
+                    <div class="nav-dropdown">
+                        <a href="#academic-projects" class="nav-btn" aria-haspopup="true">
+                            <span class="tag-prefix" aria-hidden="true">// 05</span> School Projects <span class="arrow"
+                                aria-hidden="true">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#item-iot-bms">IoT Battery Management System (BMS)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
 
         <header class="hero">
             <div class="sr-only">
-                Amir Farhadi's Portfolio. This page contains 4 main sections: Passion Project (Caster Voice OS), Solved Problems, Open Source, and Public
-                Tools. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
+                Amir Farhadi's Portfolio. This page contains 5 main sections: Passion Project (Caster Voice OS), Solved Problems, Open Source, Public
+                Tools, and Previous School Projects. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
             </div>
             <h1 class="main-title">Amir Farhadi</h1>
             <p class="subtitle">Software Engineer | Automation & Agentic Architect Proof of Work</p>
@@ -509,6 +519,45 @@
                             <a href="#item-winstasis" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
                                     class="kbd">p</span></a>
                             <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-iot-bms" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
+                                    class="kbd">n</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- ============================================================
+                 05. ACADEMIC & CAPSTONE PROJECTS
+                 ============================================================ -->
+            <section id="academic-projects" aria-labelledby="academic-projects-title" class="project-section">
+                <h2 id="academic-projects-title" class="section-header" tabindex="-1">
+                    <span class="section-num" aria-hidden="true">// 05</span> Previous School & Capstone Projects
+                </h2>
+                <ul class="project-list">
+                    <li id="item-iot-bms" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Battery_Management_System"
+                                    target="_blank">IoT Battery Management System (BMS)<span class="sr-only">
+                                        (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">🏆 Best Technical Presentation</span>
+                        </div>
+                        <p class="description">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack. Integrated an Analog Devices LTC6811 automotive multicell stack monitor, custom Linduino C++ SPI firmware, and SIM808 Bluetooth SPP module to stream live multi-cell voltage telemetry to a Raspberry Pi gateway running InfluxDB, Grafana dashboards, and Python data analytics.
+                        </p>
+                        <div class="evidence-box">
+                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
+                                aria-label="View IoT Battery Management System GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="bms-hardware.jpg"
+                                    alt="Physical BMS testbench hardware setup with 4WD RC vehicle chassis, 2P4S LTO battery stack, Analog Devices LTC6811 multicell monitor, and Linduino microcontroller."
+                                    width="600">
+                            </a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
+                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
+                                Repository<span class="sr-only"> for IoT Battery Management System (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-vdtree" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
+                                    class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
                             <span></span>
                         </div>
                     </li>
@@ -536,7 +585,7 @@
                 style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-color);">
             <label for="toggle-shortcuts-input"
                 style="font-weight: 600; cursor: pointer; font-size: 0.9rem; user-select: none;">
-                Enable single-key shortcuts (n, p, t, 0-4, ?)
+                Enable single-key shortcuts (n, p, t, 0-5, ?)
             </label>
         </div>
 
@@ -580,6 +629,7 @@
             <li><span class="kbd">2</span> Jump to Solved Problems</li>
             <li><span class="kbd">3</span> Jump to Open Source Contributions</li>
             <li><span class="kbd">4</span> Jump to Public Tools</li>
+            <li><span class="kbd">5</span> Jump to Previous School & Capstone Projects</li>
             <li><span class="kbd">t</span> Back to Top</li>
             <li><span class="kbd">n</span> Jump to Next Project Entry</li>
             <li><span class="kbd">p</span> Jump to Previous Project Entry</li>

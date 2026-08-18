@@ -162,6 +162,8 @@ class KeyboardNav {
                 this.jumpToSection('open-source');
             } else if (e.key === '4') {
                 this.jumpToSection('tools');
+            } else if (e.key === '5') {
+                this.jumpToSection('academic-projects');
             } else if (e.key === 't' || e.key === 'T') {
                 this.scrollToTop();
             } else if (e.key === 'n' || e.key === 'N') {
