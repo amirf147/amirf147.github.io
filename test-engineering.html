@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Farhadi | Test, Hardware & Systems Engineering Portfolio</title>
+    <meta name="description" content="Engineering portfolio of Amir Farhadi (B.Eng. in Embedded Electronics). Featuring benchtop verification, multi-cell BMS testing, 5G IoT environmental telemetry, and marine LiDAR sensor fusion.">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="./css/test-engineering.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="container">
+        <!-- Top Utility Navigation -->
+        <nav class="eng-top-nav" aria-label="Utility Navigation">
+            <a href="./index.html" class="back-link" aria-label="Return to Main Software Portfolio">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M15 8a.75.75 0 0 1-.75.75H4.06l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 1.06L4.06 7.25h10.19A.75.75 0 0 1 15 8z"></path>
+                </svg>
+                Main Portfolio
+            </a>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="mailto:amirf147@gmail.com" class="back-link" aria-label="Send Email">
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 .327.618l7.25 4.834a.75.75 0 0 0 .846 0l7.25-4.834A.75.75 0 0 0 16 4.486v-.736A1.75 1.75 0 0 0 14.25 2H1.75zM0 6.079v6.171C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25V6.079l-6.573 4.382a2.25 2.25 0 0 1-2.497 0L0 6.079z"></path>
+                    </svg>
+                    amirf147@gmail.com
+                </a>
+                <button id="theme-toggle" class="back-link" aria-label="Toggle theme" style="cursor: pointer;">
+                    <span id="theme-icon" style="display: flex; align-items: center;"></span>
+                    <span id="theme-label">Theme</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Header Section -->
+        <header class="eng-hero" id="main-content">
+            <h1 class="eng-title">Amir Farhadi</h1>
+            <div class="eng-role">B.Eng. in Embedded Electronics &amp; Test Automation</div>
+            <p class="eng-bio">
+                Hardware test, field instrumentation, and embedded systems engineering background with extensive experience in benchtop verification (DMMs, oscilloscopes, DC power supplies), serial communications (UART, I2C, SPI, RS-232/485), cellular IoT telemetry (LTE-M/NB-IoT), and automated test harness scripting.
+            </p>
+
+            <div class="eng-meta-strip">
+                <span class="meta-item">
+                    <span class="meta-dot"></span>
+                    <strong>Location:</strong> Tulsa, OK Metro Area (Immediate Availability)
+                </span>
+                <span class="meta-item">
+                    <strong>Citizenship:</strong> Dual US &amp; Finnish Citizen (No Sponsorship Needed)
+                </span>
+                <span class="meta-item">
+                    <strong>Education:</strong> B.Eng. in ICT (Embedded Systems &amp; Electronics), Turku UAS
+                </span>
+            </div>
+
+            <!-- Jump Bar -->
+            <div class="quick-jump-bar" aria-label="Project Navigation">
+                <a href="#bms-project" class="jump-pill">🔋 Multi-Cell BMS Test Bench</a>
+                <a href="#aq-5g-project" class="jump-pill">📡 5G IoT Urban AQ Station</a>
+                <a href="#lidar-project" class="jump-pill">🛰️ Marine LiDAR &amp; Sensor Array</a>
+                <a href="#hil-project" class="jump-pill">⚙️ Low-Latency Test Harness</a>
+                <a href="#skills-matrix" class="jump-pill">📋 Lab Skills &amp; Equipment Matrix</a>
+            </div>
+        </header>
+
+        <!-- Core Engineering Competencies -->
+        <section aria-labelledby="core-competencies-heading">
+            <h2 id="core-competencies-heading" class="sr-only">Core Competencies</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h3>🔬 Benchtop Test &amp; Instrumentation</h3>
+                    <p>Hands-on validation using multi-channel digital multimeters, oscilloscopes, benchtop DC power supplies, and signal analyzers for hardware characterization and fault isolation.</p>
+                </div>
+                <div class="competency-card">
+                    <h3>⚡ Sensor &amp; Industrial Protocols</h3>
+                    <p>Low-level driver implementation and protocol debugging across UART, I2C, SPI, RS-232, RS-485, and Modbus for precision environmental and power monitoring.</p>
+                </div>
+                <div class="competency-card">
+                    <h3>📶 Cellular IoT &amp; Telemetry Gateways</h3>
+                    <p>End-to-end cellular telemetry architectures using Pycom GPy (ESP32 + LTE-M/NB-IoT), Raspberry Pi 4 gateways, MQTT, InfluxDB, and STUN/ICE NAT traversal.</p>
+                </div>
+                <div class="competency-card">
+                    <h3>🐍 Automated Test Scripting &amp; SOPs</h3>
+                    <p>Developing programmatic test suites in Python (pytest, pySerial), C/C++, and Win32 APIs with rigorous Standard Operating Procedures (SOPs) and pass/fail logging.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Project 1: BMS -->
+        <section id="bms-project" class="project-card" aria-labelledby="bms-title">
+            <div class="project-header-row">
+                <h2 id="bms-title" class="project-title">1. Multi-Cell Battery Management System (BMS) Test Bench &amp; Validation</h2>
+                <span class="project-org-badge">TUAS Capstone Engineering</span>
+            </div>
+            <p class="project-summary">
+                Designed, assembled, and validated a multi-cell Lithium-ion Battery Management System (BMS) test bench. Implemented precision cell monitoring, active/passive cell balancing validation, and safety cutoff trips under simulated charge/discharge fault conditions.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Hardware &amp; Circuit Architecture
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Monitoring IC:</strong> Linear Technology LTC6811 multi-cell high-voltage battery stack monitor.</li>
+                        <li><strong>Cell Balancing:</strong> Dedicated resistive bleed-off networks with thermal dissipation profiling.</li>
+                        <li><strong>Isolation &amp; Bus:</strong> SPI isolated communication interface to host microcontroller.</li>
+                        <li><strong>Power Stages:</strong> High-current MOSFET protection switches and precision current shunts.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Test Procedures &amp; Verification Results
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Voltage Accuracy:</strong> Calibrated cell voltage measurement down to ±1.2mV accuracy across 12 channels.</li>
+                        <li><strong>Safety Cutoff Verification:</strong> Verified instant trip triggers for Over-Voltage (&gt;4.20V) and Under-Voltage (&lt;2.80V).</li>
+                        <li><strong>Thermal Protection:</strong> NTC thermistor array testing to trigger shutdown at &gt;60°C pack temperature.</li>
+                        <li><strong>Benchtop Simulation:</strong> Multi-output programmable DC power supply swept across cell state curves.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Linear Tech LTC6811</span>
+                <span class="hw-tag">Benchtop DC Power Supply</span>
+                <span class="hw-tag">Digital Multimeter</span>
+                <span class="hw-tag">SPI Bus</span>
+                <span class="hw-tag">Cell Balancing</span>
+                <span class="hw-tag">Over/Under-Voltage Protection</span>
+                <span class="hw-tag">Hardware Verification Plan</span>
+            </div>
+
+            <div class="media-gallery">
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('bms-hardware.jpg', 'Multi-cell BMS hardware test bench and LTC6811 evaluation board setup with multi-channel wiring and monitoring test points.')">
+                        <img src="bms-hardware.jpg" alt="BMS Hardware Test Bench and Circuit Board" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 1.1:</strong> Multi-cell BMS hardware test bench showing cell balance circuitry, LTC6811 monitoring IC, and benchtop test interface.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Featured Project 2: 5G AQ Sensor -->
+        <section id="aq-5g-project" class="project-card" aria-labelledby="aq-title">
+            <div class="project-header-row">
+                <h2 id="aq-title" class="project-title">2. 5G &amp; Cellular IoT Urban Environmental Station</h2>
+                <span class="project-org-badge">EU Horizon 2020 RESPONSE / City of Turku / MegaSense</span>
+            </div>
+            <p class="project-summary">
+                Engineered, bench-tested, and deployed outdoor cellular IoT particulate matter monitoring stations. Integrated optical laser sensors with dual-core ESP32 microcontrollers and Raspberry Pi 4 edge nodes transmitting telemetry via LTE-M / NB-IoT cellular modems.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Sensor &amp; Modem Architecture
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Aerosol Sensor:</strong> Sensirion SPS30 optical particulate matter sensor (PM1.0, PM2.5, PM4, PM10 mass concentration &amp; particle counts).</li>
+                        <li><strong>Cellular Microcontroller:</strong> Pycom GPy (ESP32 SoC + Sequans Monarch LTE-M / NB-IoT modem).</li>
+                        <li><strong>Edge Gateway:</strong> Raspberry Pi 4 Model B (4GB) running Docker microservices.</li>
+                        <li><strong>Enclosure &amp; Power:</strong> Custom IP65 weatherproof enclosure with regulated 5V/3.3V power distribution.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Telemetry &amp; Field Diagnostics
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>UART / I2C Characterization:</strong> Validated sensor polling rates and frame checksum verification under MicroPython.</li>
+                        <li><strong>Cellular Failover &amp; Buffer:</strong> Programmed local flash ring buffer to prevent data loss during cellular network dropouts.</li>
+                        <li><strong>NAT Traversal Diagnostics:</strong> Engineered STUN/ICE diagnostic logging for remote connectivity across carrier-grade NAT.</li>
+                        <li><strong>Time-Series Ingestion:</strong> InfluxDB + RabbitMQ + Grafana telemetry pipeline for live environmental monitoring.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Sensirion SPS30</span>
+                <span class="hw-tag">Pycom GPy (ESP32)</span>
+                <span class="hw-tag">Sequans LTE-M / NB-IoT</span>
+                <span class="hw-tag">Raspberry Pi 4</span>
+                <span class="hw-tag">UART / I2C</span>
+                <span class="hw-tag">MicroPython</span>
+                <span class="hw-tag">MQTT</span>
+                <span class="hw-tag">InfluxDB</span>
+                <span class="hw-tag">Docker Compose</span>
+            </div>
+
+            <div class="media-gallery">
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('aq-sensor-bench.jpg', 'Sensirion SPS30 particulate matter sensor with optical laser chamber and interface cabling on test bench.')">
+                        <img src="aq-sensor-bench.jpg" alt="Sensirion SPS30 Particulate Sensor on Test Bench" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 2.1:</strong> Sensirion SPS30 optical particulate matter sensor undergoing benchtop serial communication &amp; calibration testing.
+                    </figcaption>
+                </figure>
+
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('uart-pycom-pi.png', 'UART serial interface bridge between Pycom GPy LTE-M module and Raspberry Pi 4 edge gateway.')">
+                        <img src="uart-pycom-pi.png" alt="UART Hardware Bridge Diagram" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 2.2:</strong> UART hardware telemetry interface bridging the Pycom GPy cellular modem with the Raspberry Pi gateway.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Featured Project 3: Marine LiDAR & Multi-Sensor Suite -->
+        <section id="lidar-project" class="project-card" aria-labelledby="lidar-title">
+            <div class="project-header-row">
+                <h2 id="lidar-title" class="project-title">3. Autonomous Marine LiDAR &amp; Environmental Sensor Array Evaluation</h2>
+                <span class="project-org-badge">TUAS Maritime / Froude Project / Awake.io</span>
+            </div>
+            <p class="project-summary">
+                Evaluated, integrated, and bench-tested multi-spectral LiDAR and meteorological sensor arrays for autonomous maritime vessel collision avoidance. Developed real-time data ingestion pipelines connecting solid-state LiDAR, optical cameras, and industrial weather transmitters.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Instrumentation &amp; Sensor Payloads
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>LiDAR Systems:</strong> Intel RealSense L515 solid-state LiDAR (2M-pixel depth + RGB + IMU) and Livox MID-14 / TELE-15 long-range units.</li>
+                        <li><strong>Atmospheric Sensors:</strong> Vaisala PTU-307 pressure/temperature/humidity transmitter and Vaisala PWD-20 visibility / present weather sensor.</li>
+                        <li><strong>Compute Nodes:</strong> Raspberry Pi 4 edge nodes and Neousys Nuvo-6108GC rugged industrial GPU PC.</li>
+                        <li><strong>Physical Interfaces:</strong> RS-232 / RS-485 serial communication lines (9600 8N1) and Gigabit Ethernet (GigE Vision).</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Data Pipelines &amp; Sensor Fusion
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Point Cloud Processing:</strong> Extracted and filtered 3D point cloud geometries in Polygon File Format (<code style="color:var(--accent-color);">.ply</code>) using <code style="color:var(--accent-color);">pyrealsense2</code>.</li>
+                        <li><strong>ROS Integration:</strong> Configured ROS (Robot Operating System) nodes on Raspberry Pi for depth stream publishing and coordinate transformation.</li>
+                        <li><strong>Environmental Validation:</strong> Analyzed laser attenuation, false returns, and point density under simulated maritime weather conditions (fog, rain, ambient glare).</li>
+                        <li><strong>Serial Parsing:</strong> Built automated serial stream parsers converting NMEA and Vaisala ASCII output into structured diagnostic packets.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Intel RealSense L515 LiDAR</span>
+                <span class="hw-tag">Livox MID-14</span>
+                <span class="hw-tag">Vaisala PTU-307</span>
+                <span class="hw-tag">Vaisala PWD-20</span>
+                <span class="hw-tag">RS-232 / RS-485</span>
+                <span class="hw-tag">ROS (Robot Operating System)</span>
+                <span class="hw-tag">Python (pyrealsense2)</span>
+                <span class="hw-tag">3D Point Cloud (.ply)</span>
+                <span class="hw-tag">Nuvo-6108GC IPC</span>
+            </div>
+
+            <div class="media-gallery">
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('lidar-sensors-overview.png', 'Autonomous vessel sensor suite layout featuring LiDAR, thermal cameras, radar, and Vaisala meteorological sensors.')">
+                        <img src="lidar-sensors-overview.png" alt="Marine LiDAR and Sensor Array Architecture" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 3.1:</strong> Autonomous marine sensor payload configuration diagram showing LiDAR, thermal imaging, and Vaisala weather sensor placement.
+                    </figcaption>
+                </figure>
+
+                <figure class="media-figure">
+                    <div class="media-img-wrapper" onclick="openLightbox('vaisala-weather-sensors.jpg', 'Vaisala industrial meteorological sensors for environmental testing and atmospheric correction.')">
+                        <img src="vaisala-weather-sensors.jpg" alt="Vaisala Meteorological and Visibility Sensors" loading="lazy">
+                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                    </div>
+                    <figcaption class="media-caption">
+                        <strong>Figure 3.2:</strong> Vaisala industrial meteorological and visibility sensor suite integrated for atmospheric attenuation testing.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Featured Project 4: HIL Test Harness -->
+        <section id="hil-project" class="project-card" aria-labelledby="hil-title">
+            <div class="project-header-row">
+                <h2 id="hil-title" class="project-title">4. Hardware-in-the-Loop (HIL) &amp; Low-Latency IPC Test Automation Harness</h2>
+                <span class="project-org-badge">Test Automation &amp; IPC Architecture</span>
+            </div>
+            <p class="project-summary">
+                Engineered high-speed test harnesses and hardware interfacing bridges for automated device validation. Designed low-latency polling loops, inter-process communication (IPC) channels, and programmatic test suites to replace manual testing with high-throughput automated verification.
+            </p>
+
+            <div class="spec-verif-grid">
+                <div class="spec-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
+                        Test Architecture &amp; Interfaces
+                    </div>
+                    <ul class="spec-list">
+                        <li><strong>Low-Latency Polling:</strong> Sub-10ms event loop polling designed with Win32 APIs, COM interfaces, and Windows UIAutomation.</li>
+                        <li><strong>Hardware Bridges:</strong> Custom USB HID multi-channel test fixtures for physical state verification and loopback tests.</li>
+                        <li><strong>Inter-Process Messaging:</strong> High-speed IPC channels linking low-level drivers with Python verification test runners.</li>
+                    </ul>
+                </div>
+
+                <div class="verif-box">
+                    <div class="box-title">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
+                        Verification &amp; Test Metrics
+                    </div>
+                    <ul class="verif-list">
+                        <li><strong>Automated Regression:</strong> Automated 100+ manual validation steps into repeatable continuous test suites with pass/fail telemetry.</li>
+                        <li><strong>Fault Injection Testing:</strong> Simulated packet dropouts, interface disconnects, and buffer overflows to verify failsafe recovery.</li>
+                        <li><strong>Execution Speed:</strong> Reduced end-to-end hardware verification cycle time by over 80% with automated pass/fail reporting.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hw-tag-cluster">
+                <span class="hw-tag">Python (pytest)</span>
+                <span class="hw-tag">Win32 APIs / COM</span>
+                <span class="hw-tag">USB HID Loopback</span>
+                <span class="hw-tag">Sub-10ms Polling</span>
+                <span class="hw-tag">Fault Injection</span>
+                <span class="hw-tag">Automated Test Harness</span>
+            </div>
+        </section>
+
+        <!-- Technical Skills & Equipment Matrix -->
+        <section id="skills-matrix" class="project-card" aria-labelledby="skills-heading">
+            <div class="project-header-row">
+                <h2 id="skills-heading" class="project-title">Technical Equipment, Protocols &amp; Tooling Matrix</h2>
+                <span class="project-org-badge">Laboratory &amp; Field Capabilities</span>
+            </div>
+
+            <div class="equipment-table-wrap">
+                <table class="equipment-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 25%;">Domain</th>
+                            <th scope="col" style="width: 40%;">Tools &amp; Hardware Platforms</th>
+                            <th scope="col" style="width: 35%;">Practical Applications</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Benchtop Test &amp; Measurement</strong></td>
+                            <td>Digital Multimeters (Fluke, Keysight), Digital Storage Oscilloscopes, Programmable DC Power Supplies, Signal Generators, Logic Analyzers.</td>
+                            <td>Circuit debugging, waveform capture, power rail ripple analysis, voltage/current threshold verification.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Communication Protocols</strong></td>
+                            <td>UART, I2C, SPI, RS-232, RS-485, Modbus RTU, USB HID, GPIO, CAN / ARINC concepts.</td>
+                            <td>Sensor interfacing, edge telemetry, industrial bus communication, loopback hardware testing.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Embedded &amp; Edge Hardware</strong></td>
+                            <td>Pycom GPy (ESP32 SoC + LTE-M/NB-IoT), Raspberry Pi 4 (Linux/ROS), STM32, Arduino, Nuvo Industrial GPU IPCs.</td>
+                            <td>Cellular telemetry nodes, ROS sensor fusion, embedded control systems, remote monitoring stations.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Software, Scripting &amp; Data</strong></td>
+                            <td>Python (pytest, pySerial, pyrealsense2), MicroPython, C/C++, InfluxDB, RabbitMQ, Grafana, Docker, PowerShell.</td>
+                            <td>Automated test harnesses, telemetry pipelines, real-time dashboarding, containerized services.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quality, Safety &amp; Process</strong></td>
+                            <td>Standard Operating Procedures (SOPs), Hardware Verification Plans, Root Cause Analysis (RCA), ESD Safe Handling.</td>
+                            <td>Executing repeatable test procedures, documentation of pass/fail criteria, lab safety compliance.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--divider-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+                <strong>Amir Farhadi</strong> &bull; B.Eng. in Embedded Electronics &bull; Tulsa, OK
+            </div>
+            <div>
+                <a href="./index.html" class="back-link" style="font-size: 0.82rem;">← Return to Main Software Portfolio</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)" role="dialog" aria-modal="true" aria-label="Image Zoom Preview">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightboxDirect()" aria-label="Close image preview">&times;</button>
+            <img id="lightbox-img" src="" alt="Enlarged Hardware Preview">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Theme & Lightbox Interactive Scripts -->
+    <script>
+        // Lightbox Functions
+        function openLightbox(imgSrc, captionText) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            if (!modal || !img) return;
+
+            img.src = imgSrc;
+            img.alt = captionText || 'Enlarged Preview';
+            if (caption) caption.textContent = captionText || '';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightboxDirect() {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal) modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox-modal' || event.target.classList.contains('lightbox-content')) {
+                closeLightboxDirect();
+            }
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightboxDirect();
+        });
+
+        // Theme Switcher Logic
+        const sunSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        const contrastSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></svg>`;
+
+        function updateToggleUI(theme) {
+            const icon = document.getElementById('theme-icon');
+            const label = document.getElementById('theme-label');
+            if (!icon || !label) return;
+
+            if (theme === 'light') {
+                icon.innerHTML = sunSvg;
+                label.textContent = 'Light';
+            } else if (theme === 'high-contrast') {
+                icon.innerHTML = contrastSvg;
+                label.textContent = 'Contrast';
+            } else {
+                icon.innerHTML = moonSvg;
+                label.textContent = 'Dark';
+            }
+        }
+
+        function cycleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            let next = 'dark';
+            if (current === 'dark') next = 'light';
+            else if (current === 'light') next = 'high-contrast';
+            else next = 'dark';
+
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggleUI(next);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            updateToggleUI(currentTheme);
+            const btn = document.getElementById('theme-toggle');
+            if (btn) btn.addEventListener('click', cycleTheme);
+        });
+    </script>
+</body>
+</html>
