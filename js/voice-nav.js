@@ -35,6 +35,8 @@ class VoiceNav {
         this.isListening = false;
         this.shouldBeListening = false;
         this.toastTimeout = null;
+        this.currentActiveSection = '';
+        this.lastTargetElement = null;
 
         this.applyAudioContextSampleRateFix();
         this.init();
@@ -74,6 +76,7 @@ class VoiceNav {
     init() {
         this.mountHUD();
         this.setupEventListeners();
+        this.setupScrollSpy();
 
         if (!this.isSupported) {
             this.setUnsupportedState();
@@ -98,96 +101,132 @@ class VoiceNav {
         const isFirefoxEngine = this.engineMode === 'in-browser';
         const engineBadge = this.isGecko ? ' (Firefox)' : '';
 
-        const drawerContent = isFirefoxEngine ? `
-                    <div class="vui-drawer-header">
-                        <h3 class="vui-drawer-title">
-                            <span aria-hidden="true">🎙️</span> Voice Commands Guide <span class="vui-badge">Firefox</span>
-                        </h3>
-                        <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice commands guide">✕</button>
-                    </div>
+        const destinationsHtml = `
+            <div class="vui-category">
+                <div class="vui-category-label">// Quick Destinations</div>
+                <div class="vui-destinations-menu" id="vui-destinations-list">
+                    <button class="vui-dest-item" data-cmd="zero" data-target="recent-commits-section">
+                        <span><span class="vui-dest-num">// 00</span>Recent Activity</span>
+                        <span class="vui-dest-voice-tag">"zero" / "commits"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="one" data-target="caster-voice-os">
+                        <span><span class="vui-dest-num">// 01</span>Passion Project</span>
+                        <span class="vui-dest-voice-tag">"personal project" / "one"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="two" data-target="solved-problems">
+                        <span><span class="vui-dest-num">// 02</span>Solved Problems</span>
+                        <span class="vui-dest-voice-tag">"two" / "problems"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="three" data-target="open-source">
+                        <span><span class="vui-dest-num">// 03</span>Open Source</span>
+                        <span class="vui-dest-voice-tag">"three" / "open source"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="four" data-target="tools">
+                        <span><span class="vui-dest-num">// 04</span>Public Tools</span>
+                        <span class="vui-dest-voice-tag">"four" / "tools"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="five" data-target="academic-projects">
+                        <span><span class="vui-dest-num">// 05</span>School &amp; Engineering</span>
+                        <span class="vui-dest-voice-tag">"five" / "school"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="back to top" data-target="top">
+                        <span><span class="vui-dest-num">↑</span>Back to Top</span>
+                        <span class="vui-dest-voice-tag">"back to top" / "go to top"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="timeline" data-target="timeline">
+                        <span><span class="vui-dest-num">⏱</span>Evolution Timeline ↗</span>
+                        <span class="vui-dest-voice-tag">"timeline"</span>
+                    </button>
+                </div>
+            </div>
+        `;
 
-                    <div class="vui-engine-note">
-                        <strong>In-Browser Neural Engine:</strong> Running locally via isolated keyword spotting. Speak single keyword commands clearly into your microphone:
-                    </div>
+        const exhaustiveCheatsheetHtml = isFirefoxEngine ? `
+            <div id="vui-exhaustive-commands" class="vui-exhaustive-view">
+                <div class="vui-engine-note">
+                    <strong>Firefox Neural Engine:</strong> Speak single keywords clearly into your microphone:
+                </div>
 
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Section Jump Keywords</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="zero"><span class="chip-quote">"</span>zero<span class="chip-quote">"</span> ➔ Recent Activity</button>
-                            <button class="vui-chip" data-cmd="one"><span class="chip-quote">"</span>one<span class="chip-quote">"</span> ➔ Passion Project</button>
-                            <button class="vui-chip" data-cmd="two"><span class="chip-quote">"</span>two<span class="chip-quote">"</span> ➔ Solved Problems</button>
-                            <button class="vui-chip" data-cmd="three"><span class="chip-quote">"</span>three<span class="chip-quote">"</span> ➔ Open Source</button>
-                            <button class="vui-chip" data-cmd="four"><span class="chip-quote">"</span>four<span class="chip-quote">"</span> ➔ Public Tools</button>
-                            <button class="vui-chip" data-cmd="five"><span class="chip-quote">"</span>five<span class="chip-quote">"</span> ➔ School Projects</button>
-                        </div>
+                <div class="vui-category">
+                    <div class="vui-category-label">// Keyword Commands</div>
+                    <div class="vui-chip-group">
+                        <button class="vui-chip" data-cmd="down"><span class="chip-quote">"</span>down<span class="chip-quote">"</span> ➔ Scroll Down</button>
+                        <button class="vui-chip" data-cmd="up"><span class="chip-quote">"</span>up<span class="chip-quote">"</span> ➔ Scroll Up</button>
+                        <button class="vui-chip" data-cmd="go"><span class="chip-quote">"</span>go<span class="chip-quote">"</span> ➔ Top</button>
+                        <button class="vui-chip" data-cmd="stop"><span class="chip-quote">"</span>stop<span class="chip-quote">"</span> ➔ Stop</button>
                     </div>
-
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Scrolling & Navigation</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="down"><span class="chip-quote">"</span>down<span class="chip-quote">"</span> ➔ Scroll Down</button>
-                            <button class="vui-chip" data-cmd="up"><span class="chip-quote">"</span>up<span class="chip-quote">"</span> ➔ Scroll Up</button>
-                            <button class="vui-chip" data-cmd="go"><span class="chip-quote">"</span>go<span class="chip-quote">"</span> ➔ Jump to Top</button>
-                        </div>
-                    </div>
-
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Controls</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="stop"><span class="chip-quote">"</span>stop<span class="chip-quote">"</span> ➔ Stop Listening</button>
-                        </div>
-                    </div>
+                </div>
+            </div>
         ` : `
-                    <div class="vui-drawer-header">
-                        <h3 class="vui-drawer-title">
-                            <span aria-hidden="true">🎙️</span> Voice Commands Guide
-                        </h3>
-                        <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice commands guide">✕</button>
+            <div id="vui-exhaustive-commands" class="vui-exhaustive-view">
+                <div class="vui-category">
+                    <div class="vui-category-label">// Page Navigation &amp; Jumps</div>
+                    <div class="vui-chip-group">
+                        <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Activity<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to passion project"><span class="chip-quote">"</span>Personal Project<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to school projects"><span class="chip-quote">"</span>School Projects<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="open timeline"><span class="chip-quote">"</span>Timeline<span class="chip-quote">"</span></button>
                     </div>
+                </div>
 
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Section Navigation</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="go to passion project"><span class="chip-quote">"</span>Go to Passion Project<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to school projects"><span class="chip-quote">"</span>School Projects<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Activity<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="open timeline"><span class="chip-quote">"</span>Open Timeline<span class="chip-quote">"</span></button>
-                        </div>
+                <div class="vui-category">
+                    <div class="vui-category-label">// Scrolling &amp; Page Movement</div>
+                    <div class="vui-chip-group">
+                        <button class="vui-chip" data-cmd="scroll down"><span class="chip-quote">"</span>Scroll Down<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="scroll up"><span class="chip-quote">"</span>Scroll Up<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="next project"><span class="chip-quote">"</span>Next Project<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="previous project"><span class="chip-quote">"</span>Previous Project<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="back to top"><span class="chip-quote">"</span>Back to Top<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="bottom"><span class="chip-quote">"</span>Bottom<span class="chip-quote">"</span></button>
                     </div>
+                </div>
 
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Stepping & Scrolling</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="next project"><span class="chip-quote">"</span>Next Project<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="previous project"><span class="chip-quote">"</span>Previous Project<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="scroll down"><span class="chip-quote">"</span>Scroll Down<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="scroll up"><span class="chip-quote">"</span>Scroll Up<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="back to top"><span class="chip-quote">"</span>Back to Top<span class="chip-quote">"</span></button>
-                        </div>
+                <div class="vui-category">
+                    <div class="vui-category-label">// Keyboard Tab Navigation</div>
+                    <div class="vui-chip-group">
+                        <button class="vui-chip" data-cmd="tab"><span class="chip-quote">"</span>Tab<span class="chip-quote">"</span> / <span class="chip-quote">"</span>Tap<span class="chip-quote">"</span> ➔ Next Focus</button>
+                        <button class="vui-chip" data-cmd="shift tab"><span class="chip-quote">"</span>Shift Tab<span class="chip-quote">"</span> / <span class="chip-quote">"</span>Shift Tap<span class="chip-quote">"</span> ➔ Prev Focus</button>
                     </div>
+                </div>
 
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Theme & Accessibility</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="dark mode"><span class="chip-quote">"</span>Dark Mode<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="light mode"><span class="chip-quote">"</span>Light Mode<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="high contrast"><span class="chip-quote">"</span>High Contrast<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="toggle theme"><span class="chip-quote">"</span>Toggle Theme<span class="chip-quote">"</span></button>
-                        </div>
+                <div class="vui-category">
+                    <div class="vui-category-label">// Visual Themes</div>
+                    <div class="vui-chip-group">
+                        <button class="vui-chip" data-cmd="dark mode"><span class="chip-quote">"</span>Dark Mode<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="light mode"><span class="chip-quote">"</span>Light Mode<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="high contrast"><span class="chip-quote">"</span>High Contrast<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="toggle theme"><span class="chip-quote">"</span>Toggle Theme<span class="chip-quote">"</span></button>
                     </div>
+                </div>
 
-                    <div class="vui-category">
-                        <div class="vui-category-label">// Voice & Mic Controls</div>
-                        <div class="vui-chip-group">
-                            <button class="vui-chip" data-cmd="stop listening"><span class="chip-quote">"</span>Stop Listening<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="turn off mic"><span class="chip-quote">"</span>Turn Off Mic<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="close guide"><span class="chip-quote">"</span>Close Guide<span class="chip-quote">"</span></button>
-                            <button class="vui-chip" data-cmd="help"><span class="chip-quote">"</span>Help / Commands<span class="chip-quote">"</span></button>
-                        </div>
+                <div class="vui-category">
+                    <div class="vui-category-label">// Voice &amp; Assistant Controls</div>
+                    <div class="vui-chip-group">
+                        <button class="vui-chip" data-cmd="stop listening"><span class="chip-quote">"</span>Stop Listening<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="close guide"><span class="chip-quote">"</span>Close Guide<span class="chip-quote">"</span></button>
                     </div>
+                </div>
+            </div>
+        `;
+
+        const drawerContent = `
+            <div class="vui-drawer-header">
+                <h3 class="vui-drawer-title">
+                    <span aria-hidden="true">🎙️</span> Voice Navigator &amp; Guide ${engineBadge ? `<span class="vui-badge">${engineBadge.trim()}</span>` : ''}
+                </h3>
+                <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice guide">✕</button>
+            </div>
+
+            ${destinationsHtml}
+
+            <button id="vui-toggle-all-cmds-btn" class="vui-toggle-all-btn" aria-expanded="false">
+                📋 Show All Voice Commands
+            </button>
+
+            ${exhaustiveCheatsheetHtml}
         `;
 
         const hudHtml = `
@@ -207,8 +246,8 @@ class VoiceNav {
                     <span id="vui-interim-text" class="vui-interim-text">Listening...</span>
                 </div>
 
-                <!-- Interactive Cheatsheet Drawer -->
-                <div id="vui-drawer" class="vui-drawer" role="dialog" aria-modal="false" aria-label="Voice Commands Cheatsheet">
+                <!-- Interactive Guided Navigator Drawer -->
+                <div id="vui-drawer" class="vui-drawer" role="dialog" aria-modal="false" aria-label="Voice Navigation Assistant">
                     ${drawerContent}
                 </div>
 
@@ -249,6 +288,9 @@ class VoiceNav {
             helpBtn: document.getElementById('vui-help-btn'),
             drawer: document.getElementById('vui-drawer'),
             drawerCloseBtn: document.getElementById('vui-drawer-close-btn'),
+            toggleAllCmdsBtn: document.getElementById('vui-toggle-all-cmds-btn'),
+            exhaustiveCommands: document.getElementById('vui-exhaustive-commands'),
+            destItems: document.querySelectorAll('.vui-dest-item'),
             transcript: document.getElementById('vui-transcript'),
             interimText: document.getElementById('vui-interim-text'),
             toast: document.getElementById('vui-toast'),
@@ -265,6 +307,10 @@ class VoiceNav {
         this.dom.helpBtn.addEventListener('click', () => this.toggleDrawer());
         this.dom.drawerCloseBtn.addEventListener('click', () => this.closeDrawer());
 
+        if (this.dom.toggleAllCmdsBtn) {
+            this.dom.toggleAllCmdsBtn.addEventListener('click', () => this.toggleAllCommands());
+        }
+
         // Keyboard navigation custom event sync ('v' key)
         window.addEventListener('togglevoicenav', () => this.toggleListening());
 
@@ -275,17 +321,163 @@ class VoiceNav {
             }
         });
 
-        // Clickable command chips
-        const chips = this.dom.drawer.querySelectorAll('.vui-chip');
-        chips.forEach(chip => {
-            chip.addEventListener('click', () => {
+        // Clickable command chips and destination buttons
+        this.dom.drawer.addEventListener('click', (e) => {
+            const chip = e.target.closest('.vui-chip');
+            if (chip) {
                 const cmd = chip.getAttribute('data-cmd');
                 if (cmd) {
                     this.executeCommand(cmd);
-                    this.closeDrawer();
                 }
-            });
+                return;
+            }
+
+            const destBtn = e.target.closest('.vui-dest-item');
+            if (destBtn) {
+                const cmd = destBtn.getAttribute('data-cmd');
+                if (cmd) {
+                    this.executeCommand(cmd);
+                }
+            }
         });
+    }
+
+    setupScrollSpy() {
+        const sections = [
+            { id: 'recent-commits-section', el: document.getElementById('recent-commits-section') },
+            { id: 'caster-voice-os', el: document.getElementById('caster-voice-os') },
+            { id: 'solved-problems', el: document.getElementById('solved-problems') },
+            { id: 'open-source', el: document.getElementById('open-source') },
+            { id: 'tools', el: document.getElementById('tools') },
+            { id: 'academic-projects', el: document.getElementById('academic-projects') }
+        ];
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            for (const sec of sections) {
+                if (sec.el) {
+                    const rect = sec.el.getBoundingClientRect();
+                    if (rect.top <= 200 && rect.bottom >= 100) {
+                        current = sec.id;
+                        break;
+                    }
+                }
+            }
+            if (current && current !== this.currentActiveSection) {
+                this.currentActiveSection = current;
+                this.highlightActiveDestination(current);
+            }
+        }, { passive: true });
+    }
+
+    highlightActiveDestination(sectionId) {
+        if (!this.dom || !this.dom.destItems) return;
+        this.dom.destItems.forEach(item => {
+            if (item.getAttribute('data-target') === sectionId) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    dismissTour() {
+        if (!this.dom || !this.dom.tourCard) return;
+        this.tourDismissed = true;
+        this.dom.tourCard.style.display = 'none';
+        this.showToast('Tutorial closed. Click "Show All Voice Commands" for full cheatsheet.');
+        this.playChime(false);
+    }
+
+    openTour() {
+        if (!this.dom || !this.dom.tourCard) return;
+        this.tourDismissed = false;
+        this.dom.tourCard.style.display = 'block';
+        this.tourStep = 1;
+        this.advanceTour(1);
+        this.showToast('Interactive tutorial started.');
+        this.playChime(true);
+    }
+
+    toggleAllCommands(forceState = null) {
+        if (!this.dom || !this.dom.exhaustiveCommands || !this.dom.toggleAllCmdsBtn) return;
+        const isOpen = this.dom.exhaustiveCommands.classList.contains('open');
+        const shouldOpen = forceState !== null ? forceState : !isOpen;
+
+        if (shouldOpen) {
+            this.dom.exhaustiveCommands.classList.add('open');
+            this.dom.toggleAllCmdsBtn.innerHTML = '🔼 Simplified View';
+            this.dom.toggleAllCmdsBtn.setAttribute('aria-expanded', 'true');
+            this.showToast('Showing all voice commands');
+        } else {
+            this.dom.exhaustiveCommands.classList.remove('open');
+            this.dom.toggleAllCmdsBtn.innerHTML = '📋 Show All Voice Commands';
+            this.dom.toggleAllCmdsBtn.setAttribute('aria-expanded', 'false');
+            this.showToast('Showing simplified view');
+        }
+        this.playChime(true);
+    }
+
+    handleTabNavigation(reverse = false) {
+        const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        const allElements = Array.from(document.querySelectorAll(selector));
+        const focusable = allElements.filter(el => {
+            const isVisible = el.offsetParent !== null || el.getClientRects().length > 0;
+            return isVisible && !el.closest('#vui-root');
+        });
+
+        if (!focusable.length) return;
+
+        let currentIndex = focusable.indexOf(document.activeElement);
+
+        // If activeElement is not in focusable (e.g. user jumped to a section or clicked non-interactive area):
+        if (currentIndex === -1) {
+            // 1. If we have a tracked last target section/element, find the first focusable inside or following it
+            if (this.lastTargetElement && document.contains(this.lastTargetElement)) {
+                const inner = focusable.filter(el => this.lastTargetElement.contains(el));
+                if (inner.length > 0) {
+                    currentIndex = reverse ? focusable.indexOf(inner[inner.length - 1]) + 1 : focusable.indexOf(inner[0]) - 1;
+                } else {
+                    const afterIdx = focusable.findIndex(el => (this.lastTargetElement.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING));
+                    if (afterIdx !== -1) {
+                        currentIndex = reverse ? afterIdx : afterIdx - 1;
+                    }
+                }
+            }
+
+            // 2. If still not resolved, check viewport position
+            if (currentIndex === -1) {
+                const inViewIdx = focusable.findIndex(el => {
+                    const rect = el.getBoundingClientRect();
+                    return rect.top >= 40 && rect.bottom <= window.innerHeight + 100;
+                });
+                if (inViewIdx !== -1) {
+                    currentIndex = reverse ? inViewIdx : inViewIdx - 1;
+                } else {
+                    currentIndex = reverse ? 0 : focusable.length - 1;
+                }
+            }
+        }
+
+        let nextIndex;
+        if (reverse) {
+            nextIndex = (currentIndex - 1 + focusable.length) % focusable.length;
+        } else {
+            nextIndex = (currentIndex + 1) % focusable.length;
+        }
+
+        const targetEl = focusable[nextIndex];
+        if (targetEl) {
+            targetEl.focus();
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.lastTargetElement = targetEl.closest('.navigable-item, section, header, nav') || targetEl;
+
+            const rawLabel = (targetEl.innerText || targetEl.getAttribute('aria-label') || targetEl.title || 'Element').trim().replace(/\s+/g, ' ');
+            const label = rawLabel.length > 25 ? rawLabel.slice(0, 25) + '...' : rawLabel;
+            const actionName = reverse ? 'Shift-Tab' : 'Tab';
+            this.showToast(`${actionName} ➔ ${label}`);
+            this.playChime(true);
+        }
     }
 
     /* ========================================================================
@@ -302,7 +494,10 @@ class VoiceNav {
                 this.isListening = true;
                 this.updateUIState(true);
                 this.playChime(true);
-                this.showToast('Voice active! Say "Next Project", "Solved Problems", or "Help"');
+                if (this.dom && this.dom.drawer && !this.dom.drawer.classList.contains('open')) {
+                    this.dom.drawer.classList.add('open');
+                }
+                this.showToast('Voice active! Say "Personal Project", "Solved Problems", or "Help"');
                 this.announceSR('Voice navigation active. Listening for commands.');
             };
 
@@ -424,7 +619,6 @@ class VoiceNav {
         let tempStream = null;
         try {
             // 1. Immediately request microphone access while the user gesture is active!
-            // In Gecko (Firefox/Waterfox), getUserMedia must be invoked synchronously on click.
             if (!this.micPermissionGranted) {
                 try {
                     tempStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -460,6 +654,9 @@ class VoiceNav {
             this.shouldBeListening = true;
             this.updateUIState(true);
             this.playChime(true);
+            if (this.dom && this.dom.drawer && !this.dom.drawer.classList.contains('open')) {
+                this.dom.drawer.classList.add('open');
+            }
             this.showToast('Voice active! Say "one", "two", "up", "down", "stop"');
             this.announceSR('Voice navigation active. Listening for commands.');
             this.showInterimTranscript('Listening (Firefox)...');
@@ -565,7 +762,7 @@ class VoiceNav {
             if (this.engineMode === 'in-browser') {
                 this.dom.statusSub.textContent = `Say "one", "two", "up", "down"...`;
             } else {
-                this.dom.statusSub.textContent = `Say "Next Project", "Light Mode"...`;
+                this.dom.statusSub.textContent = `Say "Personal Project", "Light Mode"...`;
             }
             this.dom.micBtn.setAttribute('aria-label', 'Stop Voice Navigation (Press V)');
         } else {
@@ -667,40 +864,47 @@ class VoiceNav {
      * Natural Voice & Spoken Keyword Command Processing Matrix
      * ======================================================================== */
     executeCommand(rawText) {
-        const text = rawText.toLowerCase().trim();
+        const text = rawText.toLowerCase().replace(/[.,!?;:]/g, '').trim();
 
-        // 1. Navigation Commands (Mapped by natural phrase and single spoken word "zero"-"four")
-        if (/^(1|one|first)$/i.test(text) || /(go to|jump to|open|show)?.*(caster|passion project|voice os|flagship)/i.test(text)) {
+        // 1. Navigation Commands (Forgiving matchers supporting synonyms, singular/plural, few syllables, numbers)
+        // Section 1: Passion Project
+        if (/^(1|one|first)$/i.test(text) || /(personal\s*projects?|passion\s*projects?|passion|caster(\s*os|\s*voice)?|voice\s*os|flagship|section\s*(1|one))/i.test(text)) {
             this.jumpTo('caster-voice-os', 'Jumped to Caster Voice OS (Section 1)');
             return;
         }
 
-        if (/^(2|two|second)$/i.test(text) || /(go to|jump to|open|show)?.*(solved problems|problem|tracker|app switcher)/i.test(text)) {
+        // Section 2: Solved Problems
+        if (/^(2|two|second)$/i.test(text) || /(solved\s*problems?|problems?|tactical\s*tracker|activity\s*tracker|tracker|app\s*switcher|switcher|section\s*(2|two))/i.test(text)) {
             this.jumpTo('solved-problems', 'Jumped to Solved Problems (Section 2)');
             return;
         }
 
-        if (/^(3|three|third)$/i.test(text) || /(go to|jump to|open|show)?.*(open source|contributions|merged prs|pull requests|dragonfly|pyvda)/i.test(text)) {
+        // Section 3: Open Source
+        if (/^(3|three|third)$/i.test(text) || /(open\s*source|contributions?|pull\s*requests?|merged\s*prs?|prs?|pr\s*#?\d+|dragonfly|pyvda|section\s*(3|three))/i.test(text)) {
             this.jumpTo('open-source', 'Jumped to Open Source Contributions (Section 3)');
             return;
         }
 
-        if (/^(4|four|fourth)$/i.test(text) || /(go to|jump to|open|show)?.*(tools|public tools|winstasis|vdtree|virtual desktop)/i.test(text)) {
+        // Section 4: Public Tools
+        if (/^(4|four|fourth)$/i.test(text) || /(public\s*tools?|tools?|tool|winstasis|vdtree|virtual\s*desktop|section\s*(4|four))/i.test(text)) {
             this.jumpTo('tools', 'Jumped to Public Tools (Section 4)');
             return;
         }
 
-        if (/^(5|five|fifth)$/i.test(text) || /(go to|jump to|open|show)?.*(school projects|academic|capstone|bms|battery|mail|mail detector)/i.test(text)) {
-            this.jumpTo('academic-projects', 'Jumped to School & Capstone Projects (Section 5)');
+        // Section 5: School & Applied Engineering
+        if (/^(5|five|fifth)$/i.test(text) || /(school\s*projects?|school|applied\s*engineering|engineering|academic|capstone|bms|battery|mail|mail\s*detector|lidar|5g|sensor|section\s*(5|five))/i.test(text)) {
+            this.jumpTo('academic-projects', 'Jumped to School & Applied Engineering (Section 5)');
             return;
         }
 
-        if (/^(0|zero)$/i.test(text) || /(go to|jump to|open|show)?.*(commits|recent activity|activity feed|github feed)/i.test(text)) {
+        // Section 0: Recent Activity
+        if (/^(0|zero)$/i.test(text) || /(recent\s*activity|activity|live\s*commits|commits?|github\s*feed|recent|section\s*(0|zero))/i.test(text)) {
             this.jumpTo('recent-commits-section', 'Jumped to Recent Activity (Section 0)');
             return;
         }
 
-        if (/(open|show|go to)?.*(timeline|evolution timeline|git history)/i.test(text)) {
+        // Timeline
+        if (/(open|show|go to)?.*(timeline|evolution\s*timeline|git\s*history|git\s*timeline)/i.test(text)) {
             this.showToast('Opening Evolution Timeline...');
             this.playChime(true);
             setTimeout(() => {
@@ -709,7 +913,7 @@ class VoiceNav {
             return;
         }
 
-        if (/(back to portfolio|home|main page)/i.test(text)) {
+        if (/(back to portfolio|home|main page|portfolio home)/i.test(text)) {
             this.showToast('Returning to Portfolio Home...');
             this.playChime(true);
             setTimeout(() => {
@@ -718,68 +922,84 @@ class VoiceNav {
             return;
         }
 
-        // 2. Stepping & Scrolling Commands
-        if (/next (project|item|entry)?/i.test(text)) {
+        // 2. Tab Keyboard Emulation Commands (Forward & Backward)
+        // Robust against phonetic collisions with 'tap', 'tabbing', etc.
+        if (/(^(tab|tap|tabbing|tapping)$|(tab|tap)\s*forward|next\s*focus|(tab|tap)\s*next)/i.test(text)) {
+            this.handleTabNavigation(false);
+            return;
+        }
+
+        if (/(shift\s*(tab|tap)|(tab|tap)\s*back|(tab|tap)\s*backward|prev\s*focus|previous\s*focus)/i.test(text)) {
+            this.handleTabNavigation(true);
+            return;
+        }
+
+        // 3. Stepping & Scrolling Commands
+        if (/^(next|next\s*project|next\s*item|next\s*entry)$/i.test(text) || /next (project|item|entry)?/i.test(text)) {
             this.stepProject('next');
             this.showToast('Navigated to next project');
             this.playChime(true);
             return;
         }
 
-        if (/(previous|prev) (project|item|entry)?/i.test(text)) {
+        if (/^(prev|previous|prev\s*project|previous\s*project)$/i.test(text) || /(previous|prev) (project|item|entry)?/i.test(text)) {
             this.stepProject('prev');
             this.showToast('Navigated to previous project');
             this.playChime(true);
             return;
         }
 
-        if (/^(down|scroll down|page down)$/i.test(text)) {
-            window.scrollBy({ top: window.innerHeight * 0.75, behavior: 'smooth' });
+        if (/(scroll\s*down|page\s*down|^down$|go\s*down|move\s*down)/i.test(text)) {
+            const scrollAmount = Math.max(window.innerHeight * 0.7, 350);
+            window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
             this.showToast('Scrolled down');
             this.playChime(true);
             return;
         }
 
-        if (/^(up|scroll up|page up)$/i.test(text)) {
-            window.scrollBy({ top: -window.innerHeight * 0.75, behavior: 'smooth' });
+        if (/(scroll\s*up|page\s*up|^up$|go\s*up|move\s*up)/i.test(text)) {
+            const scrollAmount = Math.max(window.innerHeight * 0.7, 350);
+            window.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
             this.showToast('Scrolled up');
             this.playChime(true);
             return;
         }
 
-        if (/^(go|top|back to top|go to top)$/i.test(text)) {
+        // Top of Page (requires explicit phrase so 'tab' / 'tap' never collides with 'top')
+        if (/(back\s*to\s*top|go\s*to\s*(the\s*)?top|scroll\s*to\s*(the\s*)?top|top\s*of\s*(the\s*)?page|^home$)/i.test(text)) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const topNav = document.getElementById('top');
             if (topNav) topNav.focus();
-            this.showToast('Jumped to top');
+            this.showToast('Jumped to top of page');
             this.playChime(true);
             return;
         }
 
-        if (/(go to bottom|scroll to bottom|bottom)/i.test(text)) {
+        // Bottom of Page (requires explicit phrase)
+        if (/(scroll\s*to\s*(the\s*)?bottom|go\s*to\s*(the\s*)?bottom|bottom\s*of\s*(the\s*)?page)/i.test(text)) {
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            this.showToast('Jumped to bottom');
+            this.showToast('Jumped to bottom of page');
             this.playChime(true);
             return;
         }
 
-        // 3. Theme Controls
-        if (/(dark mode|dark theme|switch to dark)/i.test(text)) {
+        // 4. Visual Themes
+        if (/(dark\s*mode|dark\s*theme|^dark$)/i.test(text)) {
             this.setThemeDirect('dark', 'Switched to Dark Theme');
             return;
         }
 
-        if (/(light mode|light theme|switch to light)/i.test(text)) {
+        if (/(light\s*mode|light\s*theme|^light$)/i.test(text)) {
             this.setThemeDirect('light', 'Switched to Light Theme');
             return;
         }
 
-        if (/(high contrast|contrast mode|switch to contrast)/i.test(text)) {
+        if (/(high\s*contrast|contrast\s*mode|^contrast$)/i.test(text)) {
             this.setThemeDirect('high-contrast', 'Switched to High Contrast Mode');
             return;
         }
 
-        if (/(toggle theme|switch theme|cycle theme)/i.test(text)) {
+        if (/(toggle\s*theme|switch\s*theme|cycle\s*theme|^theme$)/i.test(text)) {
             const toggleBtn = document.getElementById('theme-toggle');
             if (toggleBtn) toggleBtn.click();
             this.showToast('Toggled visual theme');
@@ -787,23 +1007,35 @@ class VoiceNav {
             return;
         }
 
-        // 4. Help & Cheatsheet
-        if (/(help|what can i say|commands|show commands|show help|guide|cheatsheet)/i.test(text)) {
-            this.toggleDrawer();
-            this.showToast('Opened Voice Commands Guide');
+        // 5. Cheatsheet & View Controls
+        if (/(show\s*all\s*commands|all\s*commands|full\s*commands|show\s*cheatsheet|^cheatsheet$|exhaustive)/i.test(text)) {
+            this.toggleAllCommands(true);
+            return;
+        }
+
+        if (/(simplified\s*view|simple\s*view|hide\s*all\s*commands)/i.test(text)) {
+            this.toggleAllCommands(false);
+            return;
+        }
+
+        if (/(help|commands|what\s*can\s*i\s*say|show\s*help|show\s*guide|^guide$)/i.test(text)) {
+            if (this.dom && this.dom.drawer && !this.dom.drawer.classList.contains('open')) {
+                this.toggleDrawer();
+            }
+            this.showToast('Opened Voice Navigation Guide');
             this.playChime(true);
             return;
         }
 
-        if (/(close help|close guide|close commands|close drawer|close cheatsheet|hide guide|hide help|hide commands|dismiss)/i.test(text)) {
+        if (/(close\s*help|close\s*guide|close\s*commands|close\s*drawer|dismiss|minimize)/i.test(text)) {
             this.closeDrawer();
             this.showToast('Closed Voice Commands Guide');
             this.playChime(true);
             return;
         }
 
-        // 5. Voice & Mic Controls
-        if (/^(stop|stop listening|stop voice|stop mic|turn off voice|turn off listening|turn off mic|turn off microphone|turn off|turn voice off|turn mic off|shut off|shut down|disable voice|disable mic|mute mic|mute voice|mute|sleep|pause voice|pause listening|pause mic|pause|quit voice|exit voice|deactivate)$/i.test(text) || /(stop listening|turn off (the )?(mic|microphone|voice)|turn (the )?(mic|microphone|voice) off|disable (the )?(mic|voice)|stop recognition)/i.test(text)) {
+        // 6. Voice & Mic Controls
+        if (/^(stop|stop\s*listening|stop\s*voice|stop\s*mic|turn\s*off\s*voice|turn\s*off\s*listening|turn\s*off\s*mic|turn\s*off\s*microphone|turn\s*off|turn\s*voice\s*off|turn\s*mic\s*off|shut\s*off|shut\s*down|disable\s*voice|disable\s*mic|mute\s*mic|mute\s*voice|mute|sleep|pause\s*voice|pause\s*listening|pause\s*mic|pause|quit\s*voice|exit\s*voice|deactivate)$/i.test(text) || /(stop listening|turn off (the )?(mic|microphone|voice)|turn (the )?(mic|microphone|voice) off|disable (the )?(mic|voice)|stop recognition)/i.test(text)) {
             this.stopListening();
             this.closeDrawer();
             this.showToast('Voice navigation turned off. Click mic or press V to restart.');
@@ -812,13 +1044,14 @@ class VoiceNav {
     }
 
     jumpTo(elementId, toastMessage) {
-        this.closeDrawer();
         const target = document.getElementById(elementId);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
-            target.focus();
+            target.focus({ preventScroll: true });
+            this.lastTargetElement = target;
             this.showToast(toastMessage);
             this.playChime(true);
+            this.highlightActiveDestination(elementId);
         }
     }
 
@@ -858,6 +1091,8 @@ class VoiceNav {
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
             target.focus({ preventScroll: true });
+            this.lastTargetElement = target;
+            this.highlightActiveDestination(target.id);
         }
     }
 
