@@ -93,6 +93,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .commit-repo {
@@ -105,6 +106,162 @@
 
 .commit-repo:hover {
     text-decoration: underline;
+}
+
+/* CI/CD Status Badges */
+.commit-ci-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.commit-ci-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 4px;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.commit-ci-icon {
+    font-size: 0.72rem;
+    line-height: 1;
+    display: inline-block;
+}
+
+/* Success (Green) */
+.commit-ci-success {
+    background-color: var(--status-live-bg, rgba(46, 160, 67, 0.18));
+    color: var(--status-live-text, #56d364);
+    border: 1px solid rgba(63, 185, 80, 0.35);
+}
+
+.commit-ci-success:hover {
+    border-color: var(--status-live-text, #56d364);
+    box-shadow: 0 0 8px rgba(63, 185, 80, 0.25);
+    color: var(--status-live-text, #56d364);
+}
+
+/* Failure / WIP (Muted Gray - Non-negative, professional) */
+.commit-ci-review {
+    background-color: rgba(110, 118, 129, 0.15);
+    color: #8b949e;
+    border: 1px solid rgba(139, 148, 158, 0.25);
+}
+
+.commit-ci-review:hover {
+    color: #c9d1d9;
+    border-color: #8b949e;
+    box-shadow: 0 0 8px rgba(139, 148, 158, 0.2);
+}
+
+/* Running (Subtle Blue/Gray) */
+.commit-ci-running {
+    background-color: rgba(88, 166, 255, 0.15);
+    color: #58a6ff;
+    border: 1px solid rgba(88, 166, 255, 0.35);
+}
+
+.commit-ci-running:hover {
+    border-color: #58a6ff;
+    box-shadow: 0 0 8px rgba(88, 166, 255, 0.25);
+    color: #58a6ff;
+}
+
+.commit-ci-running .commit-ci-icon {
+    animation: ci-spin 2s linear infinite;
+}
+
+@keyframes ci-spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] .commit-ci-success {
+    background-color: rgba(26, 127, 55, 0.1);
+    color: #1a7f37;
+    border: 1px solid rgba(26, 127, 55, 0.28);
+}
+
+[data-theme="light"] .commit-ci-success:hover {
+    border-color: #1a7f37;
+    box-shadow: 0 0 8px rgba(26, 127, 55, 0.2);
+    color: #1a7f37;
+}
+
+[data-theme="light"] .commit-ci-review {
+    background-color: rgba(87, 96, 106, 0.08);
+    color: #57606a;
+    border: 1px solid rgba(87, 96, 106, 0.24);
+}
+
+[data-theme="light"] .commit-ci-review:hover {
+    color: #24292f;
+    border-color: #57606a;
+    box-shadow: 0 0 8px rgba(87, 96, 106, 0.15);
+}
+
+[data-theme="light"] .commit-ci-running {
+    background-color: rgba(9, 105, 218, 0.1);
+    color: #0969da;
+    border: 1px solid rgba(9, 105, 218, 0.28);
+}
+
+[data-theme="light"] .commit-ci-running:hover {
+    border-color: #0969da;
+    box-shadow: 0 0 8px rgba(9, 105, 218, 0.2);
+    color: #0969da;
+}
+
+/* High-Contrast Theme Overrides (WCAG AAA) */
+[data-theme="high-contrast"] .commit-ci-success {
+    background-color: #000000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+}
+
+[data-theme="high-contrast"] .commit-ci-success:hover {
+    background-color: #1a1a00;
+    box-shadow: 0 0 8px #00ff00;
+    color: #00ff00;
+}
+
+[data-theme="high-contrast"] .commit-ci-review {
+    background-color: #000000;
+    color: #d4d4d4;
+    border: 1px solid #d4d4d4;
+}
+
+[data-theme="high-contrast"] .commit-ci-review:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 0 8px #d4d4d4;
+}
+
+[data-theme="high-contrast"] .commit-ci-running {
+    background-color: #000000;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+}
+
+[data-theme="high-contrast"] .commit-ci-running:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 8px #00ffff;
+    color: #00ffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .commit-ci-running .commit-ci-icon {
+        animation: none;
+    }
 }
 
 .commit-message-link {
@@ -125,6 +282,7 @@
 
 .commit-message-link:focus-visible,
 .commit-repo:focus-visible,
+.commit-ci-badge:focus-visible,
 .commit-sha-badge:focus-visible {
     outline: 2px dashed var(--focus-ring);
     outline-offset: 2px;

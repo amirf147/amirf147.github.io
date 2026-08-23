@@ -1,7 +1,8 @@
 /**
  * ============================================================================
  * GitHub Commits Module
- * Fetches recent public commits with caching, skeleton states, and rate limiting.
+ * Fetches recent public commits with caching, CI/CD status resolution,
+ * skeleton states, and rate limiting.
  * Compatible with local file:// protocol and https:// GitHub Pages.
  * ============================================================================
  */
@@ -14,6 +15,7 @@ class CommitsFeed {
 
         this.CACHE_KEY = 'amir_recent_commits_feed';
         this.CACHE_TIME_KEY = 'amir_recent_commits_feed_time';
+        this.CI_CACHE_KEY = 'amir_commits_ci_cache_v1';
         this.CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
         this.isCooldown = false;
@@ -33,6 +35,92 @@ class CommitsFeed {
                 this.startRefreshCooldown();
             });
         }
+    }
+
+    getCiCache() {
+        try {
+            const raw = localStorage.getItem(this.CI_CACHE_KEY);
+            return raw ? JSON.parse(raw) : {};
+        } catch {
+            return {};
+        }
+    }
+
+    setCiCache(cache) {
+        try {
+            const keys = Object.keys(cache);
+            if (keys.length > 100) {
+                const trimmed = {};
+                keys.slice(keys.length - 100).forEach(k => {
+                    trimmed[k] = cache[k];
+                });
+                localStorage.setItem(this.CI_CACHE_KEY, JSON.stringify(trimmed));
+            } else {
+                localStorage.setItem(this.CI_CACHE_KEY, JSON.stringify(cache));
+            }
+        } catch (e) {
+            console.warn('Failed to save CI cache:', e);
+        }
+    }
+
+    parseCiStatus(checkRunsData, repoFullName, sha) {
+        if (!checkRunsData || typeof checkRunsData.total_count !== 'number') {
+            return null;
+        }
+
+        if (checkRunsData.total_count === 0) {
+            return { hasCi: false };
+        }
+
+        const runs = checkRunsData.check_runs || [];
+        const hasRunning = runs.some(r => r.status === 'in_progress' || r.status === 'queued' || r.status === 'waiting');
+        const hasFailure = runs.some(r => r.conclusion === 'failure' || r.conclusion === 'timed_out' || r.conclusion === 'action_required' || r.conclusion === 'cancelled');
+
+        let state = 'success';
+        let label = 'CI/CD: all checks passed';
+        let icon = '✔';
+        let ariaLabel = 'CI/CD Status: All checks passed';
+
+        if (hasRunning) {
+            state = 'running';
+            label = 'CI/CD: running checks';
+            icon = '↻';
+            ariaLabel = 'CI/CD Status: Running checks';
+        } else if (hasFailure) {
+            state = 'review';
+            label = 'CI/CD: pipeline review';
+            icon = '●';
+            ariaLabel = 'CI/CD Status: Pipeline review';
+        } else {
+            state = 'success';
+            label = 'CI/CD: all checks passed';
+            icon = '✔';
+            ariaLabel = 'CI/CD Status: All checks passed';
+        }
+
+        const url = runs[0]?.html_url || `https://github.com/${repoFullName}/commit/${sha}/checks`;
+
+        return {
+            hasCi: true,
+            state,
+            label,
+            icon,
+            ariaLabel,
+            url,
+            isImmutable: !hasRunning
+        };
+    }
+
+    generateCiBadgeHtml(ciInfo) {
+        if (!ciInfo || !ciInfo.hasCi) return '';
+        const { state, label, icon, ariaLabel, url } = ciInfo;
+        return `
+            <a href="${url}" target="_blank" class="commit-ci-badge commit-ci-${state}" aria-label="${ariaLabel} (opens in a new tab)">
+                <span class="commit-ci-icon" aria-hidden="true">${icon}</span>
+                <span class="commit-ci-text">${label}</span>
+                <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+        `;
     }
 
     getRelativeTimeString(dateString) {
@@ -65,7 +153,10 @@ class CommitsFeed {
             skeletonHtml += `
                 <div class="skeleton-row">
                     <div style="display: flex; flex-direction: column; gap: 8px; width: 60%;">
-                        <div class="skeleton-bar" style="width: 40%; height: 10px;"></div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <div class="skeleton-bar" style="width: 130px; height: 12px;"></div>
+                            <div class="skeleton-bar" style="width: 80px; height: 14px; border-radius: 4px;"></div>
+                        </div>
                         <div class="skeleton-bar" style="width: 90%; height: 14px;"></div>
                     </div>
                     <div style="display: flex; gap: 12px; align-items: center;">
@@ -90,17 +181,23 @@ class CommitsFeed {
             return;
         }
 
+        const ciCache = this.getCiCache();
         let html = '<div id="commits-wrapper" class="commits-feed-wrapper"><ul class="commits-list">';
         const limit = Math.min(items.length, 15);
         for (let i = 0; i < limit; i++) {
             const item = items[i];
             const sha = item.sha ? item.sha.substring(0, 7) : '';
+            const fullSha = item.sha || '';
             const commitUrl = item.html_url || '';
             const repoFullName = item.repository ? item.repository.full_name : '';
             const repoUrl = item.repository ? item.repository.html_url : '';
             const commitMsg = item.commit && item.commit.message ? item.commit.message.split('\n')[0] : 'No commit message';
             const commitDate = item.commit && item.commit.committer ? item.commit.committer.date : '';
             const relativeTime = this.getRelativeTimeString(commitDate);
+
+            const cacheKey = `${repoFullName}@${fullSha}`;
+            const cachedCi = ciCache[cacheKey];
+            const ciBadgeHtml = cachedCi ? this.generateCiBadgeHtml(cachedCi) : '';
 
             html += `
                 <li class="commit-item">
@@ -109,6 +206,7 @@ class CommitsFeed {
                             <a href="${repoUrl}" target="_blank" class="commit-repo" aria-label="Repository ${repoFullName} (opens in a new tab)">
                                 ${repoFullName}
                             </a>
+                            <span class="commit-ci-container" data-ci-key="${cacheKey}">${ciBadgeHtml}</span>
                         </div>
                         <a href="${commitUrl}" target="_blank" class="commit-message-link" title="${commitMsg.replace(/"/g, '&quot;')}" aria-label="Commit: ${commitMsg.replace(/"/g, '&quot;')} (opens in a new tab)">
                             ${commitMsg}
@@ -148,6 +246,75 @@ class CommitsFeed {
                     toggleBtn.setAttribute('aria-label', isExpanded ? 'Show fewer recent commits' : 'Show more recent commits');
                     toggleBtn.setAttribute('data-tooltip', isExpanded ? 'Collapse commit feed view' : `Expand to view all ${limit} recent commits`);
                 });
+            }
+        }
+
+        // Asynchronously resolve any missing or in-progress CI statuses
+        this.resolveMissingCiStatuses(items);
+    }
+
+    async resolveMissingCiStatuses(items) {
+        const ciCache = this.getCiCache();
+        const uncachedItems = [];
+        const limit = Math.min(items.length, 15);
+
+        for (let i = 0; i < limit; i++) {
+            const item = items[i];
+            if (!item.repository || !item.sha) continue;
+            const repoFullName = item.repository.full_name;
+            const sha = item.sha;
+            const cacheKey = `${repoFullName}@${sha}`;
+
+            if (!ciCache[cacheKey] || ciCache[cacheKey].state === 'running') {
+                uncachedItems.push({ repoFullName, sha, cacheKey });
+            }
+        }
+
+        if (uncachedItems.length === 0) return;
+
+        // Process in small parallel batches to avoid throttling
+        const batchSize = 3;
+        for (let i = 0; i < uncachedItems.length; i += batchSize) {
+            const batch = uncachedItems.slice(i, i + batchSize);
+            let hitRateLimit = false;
+
+            await Promise.allSettled(batch.map(async ({ repoFullName, sha, cacheKey }) => {
+                try {
+                    const response = await fetch(`https://api.github.com/repos/${repoFullName}/commits/${sha}/check-runs`, {
+                        headers: {
+                            'Accept': 'application/vnd.github+json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 404 || response.status === 422) {
+                            ciCache[cacheKey] = { hasCi: false };
+                            this.setCiCache(ciCache);
+                        } else if (response.status === 403 || response.status === 429) {
+                            hitRateLimit = true;
+                        }
+                        return;
+                    }
+
+                    const data = await response.json();
+                    const ciInfo = this.parseCiStatus(data, repoFullName, sha);
+                    if (ciInfo) {
+                        ciCache[cacheKey] = ciInfo;
+                        this.setCiCache(ciCache);
+
+                        const container = document.querySelector(`[data-ci-key="${cacheKey}"]`);
+                        if (container) {
+                            container.innerHTML = this.generateCiBadgeHtml(ciInfo);
+                        }
+                    }
+                } catch (err) {
+                    console.warn(`Failed to resolve CI for ${cacheKey}:`, err);
+                }
+            }));
+
+            if (hitRateLimit) {
+                console.warn('GitHub check-runs rate limit reached; pausing further CI status lookups.');
+                break;
             }
         }
     }
