@@ -56,7 +56,7 @@ The command processor uses forgiving regular expressions that accommodate variat
 | Destination | Primary Spoken Phrases | Numeric / Short Keywords |
 | :--- | :--- | :--- |
 | **// 00 Recent Activity** | `"recent activity"`, `"commits"`, `"live commits"`, `"github feed"` | `"zero"`, `"0"` |
-| **// 01 Passion Project** | `"personal project"`, `"personal projects"`, `"passion project"`, `"caster"`, `"voice os"` | `"one"`, `"1"`, `"first"` |
+| **// 01 Passion Projects** | `"personal project"`, `"personal projects"`, `"passion project"`, `"passion projects"`, `"adce"`, `"context engine"`, `"caster"`, `"voice os"` | `"one"`, `"1"`, `"first"` |
 | **// 02 Solved Problems** | `"solved problems"`, `"problems"`, `"problem"`, `"tracker"`, `"switcher"`, `"app switcher"` | `"two"`, `"2"`, `"second"` |
 | **// 03 Open Source** | `"open source"`, `"contributions"`, `"pull requests"`, `"merged prs"`, `"dragonfly"`, `"pyvda"` | `"three"`, `"3"`, `"third"` |
 | **// 04 Public Tools** | `"public tools"`, `"tools"`, `"tool"`, `"winstasis"`, `"vdtree"`, `"virtual desktop"` | `"four"`, `"4"`, `"fourth"` |

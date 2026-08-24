@@ -110,8 +110,8 @@ class VoiceNav {
                         <span class="vui-dest-voice-tag">"zero" / "commits"</span>
                     </button>
                     <button class="vui-dest-item" data-cmd="one" data-target="caster-voice-os">
-                        <span><span class="vui-dest-num">// 01</span>Passion Project</span>
-                        <span class="vui-dest-voice-tag">"personal project" / "one"</span>
+                        <span><span class="vui-dest-num">// 01</span>Passion Projects</span>
+                        <span class="vui-dest-voice-tag">"personal project" / "adce" / "one"</span>
                     </button>
                     <button class="vui-dest-item" data-cmd="two" data-target="solved-problems">
                         <span><span class="vui-dest-num">// 02</span>Solved Problems</span>
@@ -163,7 +163,7 @@ class VoiceNav {
                     <div class="vui-category-label">// Page Navigation &amp; Jumps</div>
                     <div class="vui-chip-group">
                         <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Activity<span class="chip-quote">"</span></button>
-                        <button class="vui-chip" data-cmd="go to passion project"><span class="chip-quote">"</span>Personal Project<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to passion projects"><span class="chip-quote">"</span>Passion Projects<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
@@ -867,9 +867,9 @@ class VoiceNav {
         const text = rawText.toLowerCase().replace(/[.,!?;:]/g, '').trim();
 
         // 1. Navigation Commands (Forgiving matchers supporting synonyms, singular/plural, few syllables, numbers)
-        // Section 1: Passion Project
-        if (/^(1|one|first)$/i.test(text) || /(personal\s*projects?|passion\s*projects?|passion|caster(\s*os|\s*voice)?|voice\s*os|flagship|section\s*(1|one))/i.test(text)) {
-            this.jumpTo('caster-voice-os', 'Jumped to Caster Voice OS (Section 1)');
+        // Section 1: Passion Projects
+        if (/^(1|one|first)$/i.test(text) || /(personal\s*projects?|passion\s*projects?|passion|adce|context\s*engine|active\s*desktop|caster(\s*os|\s*voice)?|voice\s*os|flagship|section\s*(1|one))/i.test(text)) {
+            this.jumpTo('caster-voice-os', 'Jumped to Passion Projects (Section 1)');
             return;
         }
 

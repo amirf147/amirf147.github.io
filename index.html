@@ -131,25 +131,17 @@
 
 
                     <div class="nav-dropdown">
-
                         <a href="#caster-voice-os" class="nav-btn" aria-haspopup="true">
-
-                            <span class="tag-prefix" aria-hidden="true">// 01</span> Passion Project <span class="arrow"
-
+                            <span class="tag-prefix" aria-hidden="true">// 01</span> Passion Projects <span class="arrow"
                                 aria-hidden="true">▾</span>
-
                         </a>
-
                         <div class="dropdown-menu">
-
+                            <a href="#item-adce">Active Desktop Context Engine (ADCE)</a>
                             <a href="#item-caster-os">Caster Voice OS (Overview)</a>
-
                             <a href="./timeline.html">Interactive Evolution Timeline ↗</a>
-
-                            <a href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank">GitHub Repository ↗</a>
-
+                            <a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">ADCE GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank">Caster Voice OS GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a>
                         </div>
-
                     </div>
 
 
@@ -261,11 +253,8 @@
         <header class="hero">
 
             <div class="sr-only">
-
-                Amir Farhadi's Portfolio. This page contains 5 main sections: Passion Project (Caster Voice OS), Solved Problems, Open Source, Public
-
+                Amir Farhadi's Portfolio. This page contains 5 main sections: Passion Projects (ADCE &amp; Caster Voice OS), Solved Problems, Open Source, Public
                 Tools, and Previous School &amp; Applied Engineering Projects. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
-
             </div>
 
             <h1 class="main-title">Amir Farhadi</h1>
@@ -345,105 +334,93 @@
                 </div>
 
                 <div class="item-nav-bar" style="margin-top: 24px;">
-
                     <span></span>
-
                     <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                    <a href="#item-caster-os" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
+                    <a href="#item-adce" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
                             class="kbd">n</span></a>
-
                 </div>
 
             </section>
 
 
 
-            <!-- Section 01: Core Passion Project (Caster Voice OS) -->
-
+            <!-- Section 01: Passion Projects (ADCE & Caster Voice OS) -->
             <section id="caster-voice-os" aria-labelledby="caster-voice-os-title">
-
                 <h2 id="caster-voice-os-title" class="section-header" tabindex="-1">
-
-                    <span class="section-num" aria-hidden="true">// 01</span> Primary Passion Project
-
+                    <span class="section-num" aria-hidden="true">// 01</span> Passion Projects
                 </h2>
-
                 <ul class="project-list">
+                    <li id="item-adce" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">Active Desktop Context Engine (ADCE) — Local Context Graph &amp; MCP Provider for AI &amp; Voice<span class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Active / .NET 10 &amp; UIA3</span>
+                        </div>
+                        <p class="description">A high-performance, privacy-first Windows background daemon and Model Context Protocol (MCP) server delivering structured desktop topology, active application envelopes, Virtual Desktop metadata, and container-aware tab extraction in &lt; 15 ms with 0% idle CPU. Replaces heavy screenshot OCR polling with native Win32 WinEvent hooks and cached UI Automation (FlaUI.UIA3), streaming token-dense context to local LLMs and hands-free voice frameworks.</p>
+                        <div class="evidence-box">
+                            <div class="timeline-summary-strip">
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Dual-Engine Core</span>
+                                    <span class="era-strip-desc">Win32 shallow gating (&lt; 0.5 ms) combined with FlaUI.UIA3 batch CacheRequest container discovery</span>
+                                </div>
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Zero DOM Crawling</span>
+                                    <span class="era-strip-desc">Strict container-level pruning eliminating deep DOM stalls (~10.17 ms extraction across 30 active browser/IDE tabs)</span>
+                                </div>
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">MCP JSON-RPC Server</span>
+                                    <span class="era-strip-desc">Stdio / SSE endpoints (<code>get_desktop_context</code>, <code>desktop://current</code>) streaming token-dense JSON context to AI agents</span>
+                                </div>
+                                <div class="era-strip-item">
+                                    <span class="era-strip-badge">Time-Series Persistence</span>
+                                    <span class="era-strip-desc">Embedded SQLite WAL store tracking temporal window focus transitions and tab timelines for agent reasoning</span>
+                                </div>
+                            </div>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/ARCHITECTURE_AND_MODULAR_IMPLEMENTATION_PLAN.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View 5-Project Architecture Spec<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span>View Empirical FlaUI Telemetry Benchmarks<span class="sr-only"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
+                            <a href="#item-caster-os" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
+                        </div>
+                    </li>
 
                     <li id="item-caster-os" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
                             <h3 class="project-title"><a href="./timeline.html">Caster Voice OS — Personal Hands-Free Platform (2-Year Git Evolution)<span class="sr-only"> (opens timeline page)</span></a></h3>
-
                             <span class="status-tag status-live">Active / Production</span>
-
                         </div>
-
                         <p class="description">A 27-month, 969-commit personal voice computing operating system powering 100% hands-free engineering. Features 3-tier failsafe OS focus management, Kaldi ASR compiler race condition fixes, and multimodal foot-pedal IPC bridges.</p>
-
                         <div class="evidence-box">
-
                             <div class="timeline-summary-strip">
-
                                 <div class="era-strip-item">
-
                                     <span class="era-strip-badge">Era 1 (May–Aug 2024)</span>
-
                                     <span class="era-strip-desc">Kaldi ASR migration, Talon phonetic alphabet, modular rule hierarchy</span>
-
                                 </div>
-
                                 <div class="era-strip-item">
-
                                     <span class="era-strip-badge">Era 2 (Sep–Dec 2024)</span>
-
                                     <span class="era-strip-desc">Desktop automation (Office/VSCodium), privacy boundaries, language CCR</span>
-
                                 </div>
-
                                 <div class="era-strip-item">
-
                                     <span class="era-strip-badge">Era 3 (Jan–Nov 2025)</span>
-
                                     <span class="era-strip-desc">Grammar maturation, AI IDE workflows (Cursor/Windsurf), RS31H foot pedal AHK v2</span>
-
                                 </div>
-
                                 <div class="era-strip-item">
-
                                     <span class="era-strip-badge">Era 4 (May–Aug 2026)</span>
-
                                     <span class="era-strip-desc">3-tier failsafe window switcher, empirical COM telemetry, Kaldi race fix, Brain docs</span>
-
                                 </div>
-
                             </div>
-
                             <a class="evidence-link" href="./timeline.html" style="margin-right: 15px;"><span aria-hidden="true">→ </span>Explore Interactive 2-Year Timeline Web App<span class="sr-only"> (opens timeline page)</span></a>
-
                             <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
-
                             <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/context/repository-brain.md" target="_blank"><span aria-hidden="true">→ </span>View Canonical Repository Brain Docs<span class="sr-only"> (opens in a new tab)</span></a>
-
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span>Prev
-
-                                Entry <span class="kbd">p</span></a>
-
+                            <a href="#item-adce" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span class="kbd">p</span></a>
                             <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
                             <a href="#item-tracker" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-
                                 <span class="kbd">n</span></a>
-
                         </div>
-
                     </li>
 
                 </ul>
@@ -1424,7 +1401,7 @@
 
             <li><span class="kbd">0</span> Jump to Recent Activity</li>
 
-            <li><span class="kbd">1</span> Jump to Primary Passion Project</li>
+            <li><span class="kbd">1</span> Jump to Passion Projects</li>
 
             <li><span class="kbd">2</span> Jump to Solved Problems</li>
 
