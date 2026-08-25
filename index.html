@@ -353,31 +353,37 @@
                     <li id="item-adce" class="project-item navigable-item" tabindex="-1">
                         <div class="project-title-row">
                             <h3 class="project-title"><a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">Active Desktop Context Engine (ADCE) — Local Context Graph &amp; MCP Provider for AI &amp; Voice<span class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Active / .NET 10 &amp; UIA3</span>
+                            <span class="status-tag status-live">Active / .NET 10 (LTS) &amp; UIA3</span>
                         </div>
-                        <p class="description">A high-performance, privacy-first Windows background daemon and Model Context Protocol (MCP) server delivering structured desktop topology, active application envelopes, Virtual Desktop metadata, and container-aware tab extraction in &lt; 15 ms with 0% idle CPU. Replaces heavy screenshot OCR polling with native Win32 WinEvent hooks and cached UI Automation (FlaUI.UIA3), streaming token-dense context to local LLMs and hands-free voice frameworks.</p>
+                        <p class="description">High-performance, privacy-first Windows background daemon and Model Context Protocol (MCP) server delivering structured desktop topology, active window envelopes, Virtual Desktop GUIDs, and container-aware tab extraction in &lt; 15 ms with 0.0% idle CPU. Replaces resource-heavy screenshot OCR polling with a dual-engine architecture: sub-millisecond Win32 shallow gating (&lt; 0.5 ms) paired with targeted UI Automation (FlaUI.UIA3) batch caching. Features an embedded SQLite WAL time-series store for temporal agent reasoning, strict browser DOM tree pruning (10.17 ms for 30 tabs), a dedicated STA event pipeline, and a Per-Monitor V2 DPI-aware system tray host with a non-activating live DevTools HUD overlay (<code>WS_EX_NOACTIVATE | WS_EX_TOPMOST</code>).</p>
                         <div class="evidence-box">
-                            <div class="timeline-summary-strip">
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Dual-Engine Core</span>
-                                    <span class="era-strip-desc">Win32 shallow gating (&lt; 0.5 ms) combined with FlaUI.UIA3 batch CacheRequest container discovery</span>
+                            <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
+                                <div style="flex: 1 1 360px; max-width: 100%;">
+                                    <a class="screenshot-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank"
+                                        aria-label="View ADCE System Tray Daemon and Live DevTools HUD preview (opens in a new tab)">
+                                        <img class="screenshot" src="adce-tray-and-hud-demo.gif"
+                                            alt="Active Desktop Context Engine (ADCE) running as a Windows system tray daemon with a non-activating live DevTools HUD overlay streaming desktop context."
+                                            width="600">
+                                    </a>
+                                    <div style="font-size: 0.82rem; color: var(--subtitle-color); margin-top: 4px; font-weight: 600;">
+                                        <span aria-hidden="true">▸ </span>System Tray Host &amp; Non-Activating Live DevTools HUD
+                                    </div>
                                 </div>
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Zero DOM Crawling</span>
-                                    <span class="era-strip-desc">Strict container-level pruning eliminating deep DOM stalls (~10.17 ms extraction across 30 active browser/IDE tabs)</span>
-                                </div>
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">MCP JSON-RPC Server</span>
-                                    <span class="era-strip-desc">Stdio / SSE endpoints (<code>get_desktop_context</code>, <code>desktop://current</code>) streaming token-dense JSON context to AI agents</span>
-                                </div>
-                                <div class="era-strip-item">
-                                    <span class="era-strip-badge">Time-Series Persistence</span>
-                                    <span class="era-strip-desc">Embedded SQLite WAL store tracking temporal window focus transitions and tab timelines for agent reasoning</span>
+                                <div style="flex: 1 1 360px; max-width: 100%;">
+                                    <a class="screenshot-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank"
+                                        aria-label="View ADCE Waterfox browser tab extraction telemetry (opens in a new tab)">
+                                        <img class="screenshot" src="adce-waterfox-browser-telemetry.gif"
+                                            alt="ADCE extracting Waterfox browser tabs, URLs, and document context in under 15ms without browser DOM crawling."
+                                            width="600">
+                                    </a>
+                                    <div style="font-size: 0.82rem; color: var(--subtitle-color); margin-top: 4px; font-weight: 600;">
+                                        <span aria-hidden="true">▸ </span>Zero DOM Crawling: Sub-15ms Browser Tab &amp; URL Extraction
+                                    </div>
                                 </div>
                             </div>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/ARCHITECTURE_AND_MODULAR_IMPLEMENTATION_PLAN.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View 5-Project Architecture Spec<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span>View Empirical FlaUI Telemetry Benchmarks<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span>View Empirical Telemetry Benchmarks<span class="sr-only"> (opens in a new tab)</span></a>
                         </div>
                         <div class="item-nav-bar">
                             <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span class="kbd">p</span></a>
