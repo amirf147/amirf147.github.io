@@ -17,12 +17,18 @@ The voice navigation system provides an intuitive, accessible, and tactile hands
 
 ---
 
-## 2. Dual-Engine Architecture
+## 2. Dual-Engine Architecture & Adaptive UX
 
-| Engine Mode | Target Browsers | Engine / Pipeline | Network / Privacy |
-| :--- | :--- | :--- | :--- |
-| **Mode 1: Native Cloud STT** | Chromium, Chrome, Edge, Safari, Brave, Opera | Web Speech Recognition API (`window.SpeechRecognition` / `webkitSpeechRecognition`) | Streams audio to native OS/browser speech recognizer |
-| **Mode 2: Local Neural Engine** | Firefox, Waterfox, LibreWolf, Zen, Gecko engines | TensorFlow.js + Speech Commands (`BROWSER_FFT`) | 100% on-device FFT classification (~1.5 MB cached) |
+| Engine Mode | Target Browsers | Engine / Pipeline | Supported Vocabulary | Network / Privacy |
+| :--- | :--- | :--- | :--- | :--- |
+| **Mode 1: Native Cloud STT** | Chromium, Chrome, Edge, Safari, Brave, Opera | Web Speech Recognition API (`window.SpeechRecognition` / `webkitSpeechRecognition`) | Full conversational English, synonyms, tab cycling, themes | Streams audio to native OS/browser speech recognizer |
+| **Mode 2: Local Neural Engine** | Firefox, Waterfox, LibreWolf, Zen, Gecko engines | TensorFlow.js + Speech Commands (`BROWSER_FFT`) | Restricted keyword classifier (`0`–`5`, `up`, `down`, `go`, `stop`) | 100% on-device FFT classification (~1.5 MB cached) |
+
+### Firefox Limitation Notice & Tailored UX:
+Gecko-based browsers (Firefox/Waterfox) do not implement the native Web Speech Recognition API. When visited in Firefox:
+- A prominent **yellow warning notice** is displayed at the top of the Voice Guide explaining engine constraints and recommending a Chromium-based browser or Safari for full conversational control.
+- The Quick Destinations menu is automatically simplified to show only the supported numeric keywords (`"zero"` / `"0"` through `"five"` / `"5"`) and direct motion keywords (`"up"`, `"down"`, `"go"`, `"stop"`).
+- Non-functional spoken commands (natural names, tab cycling, theme toggles) are omitted from the Firefox guide to prevent user confusion.
 
 ### Automatic Gecko AudioContext Sample-Rate Adapter:
 In Gecko-based browsers (Firefox/Waterfox), creating an `AudioContext` with a hardcoded sample rate (e.g. 44.1 kHz) when the physical hardware microphone operates at 48.0 kHz causes `createMediaStreamSource(stream)` to fail with a `NotSupportedError`. The engine dynamically intercepts and neutralizes hardcoded sample rate constraints to match hardware defaults.

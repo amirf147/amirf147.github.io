@@ -98,10 +98,74 @@ class VoiceNav {
     mountHUD() {
         if (document.getElementById('vui-root')) return;
 
-        const isFirefoxEngine = this.engineMode === 'in-browser';
+        const isFirefoxEngine = this.engineMode === 'in-browser' || this.isGecko;
         const engineBadge = this.isGecko ? ' (Firefox)' : '';
 
-        const destinationsHtml = `
+        let drawerContent = '';
+
+        if (isFirefoxEngine) {
+            drawerContent = `
+            <div class="vui-drawer-header">
+                <h3 class="vui-drawer-title">
+                    <span aria-hidden="true">🎙️</span> Voice Navigator &amp; Guide <span class="vui-badge">Firefox</span>
+                </h3>
+                <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice guide">✕</button>
+            </div>
+
+            <div class="vui-warning-card" role="note" aria-label="Firefox Voice Navigation Notice">
+                <div class="vui-warning-header">
+                    <span aria-hidden="true">⚠️</span> Firefox Voice Engine (Limited)
+                </div>
+                <p class="vui-warning-desc">
+                    Firefox does not support the native Web Speech Recognition API (<code>webkitSpeechRecognition</code>). An on-device keyword classifier (~1.5 MB) is active with a restricted vocabulary: single digits (<strong>0–5</strong>) and action keywords (<strong>up</strong>, <strong>down</strong>, <strong>go</strong>, <strong>stop</strong>).
+                </p>
+                <p class="vui-warning-tip">
+                    💡 <strong>Recommendation:</strong> For full conversational voice control, natural phrasing, tab focus cycling, and theme switching, switch to a <strong>Chromium-based browser</strong> (Chrome, Edge, Brave, Opera, Arc) or Safari.
+                </p>
+            </div>
+
+            <div class="vui-category">
+                <div class="vui-category-label">// Numbered Destinations</div>
+                <div class="vui-destinations-menu" id="vui-destinations-list">
+                    <button class="vui-dest-item" data-cmd="zero" data-target="recent-commits-section">
+                        <span><span class="vui-dest-num">// 00</span>Recent Activity</span>
+                        <span class="vui-dest-voice-tag">"zero" / "0"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="one" data-target="caster-voice-os">
+                        <span><span class="vui-dest-num">// 01</span>Passion Projects</span>
+                        <span class="vui-dest-voice-tag">"one" / "1"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="two" data-target="solved-problems">
+                        <span><span class="vui-dest-num">// 02</span>Solved Problems</span>
+                        <span class="vui-dest-voice-tag">"two" / "2"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="three" data-target="open-source">
+                        <span><span class="vui-dest-num">// 03</span>Open Source</span>
+                        <span class="vui-dest-voice-tag">"three" / "3"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="four" data-target="tools">
+                        <span><span class="vui-dest-num">// 04</span>Public Tools</span>
+                        <span class="vui-dest-voice-tag">"four" / "4"</span>
+                    </button>
+                    <button class="vui-dest-item" data-cmd="five" data-target="academic-projects">
+                        <span><span class="vui-dest-num">// 05</span>School &amp; Engineering</span>
+                        <span class="vui-dest-voice-tag">"five" / "5"</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="vui-category">
+                <div class="vui-category-label">// Movement &amp; Controls</div>
+                <div class="vui-chip-group">
+                    <button class="vui-chip" data-cmd="down"><span class="chip-quote">"</span>down<span class="chip-quote">"</span> ➔ Scroll Down</button>
+                    <button class="vui-chip" data-cmd="up"><span class="chip-quote">"</span>up<span class="chip-quote">"</span> ➔ Scroll Up</button>
+                    <button class="vui-chip" data-cmd="go"><span class="chip-quote">"</span>go<span class="chip-quote">"</span> ➔ Jump to Top</button>
+                    <button class="vui-chip" data-cmd="stop"><span class="chip-quote">"</span>stop<span class="chip-quote">"</span> ➔ Stop Voice</button>
+                </div>
+            </div>
+            `;
+        } else {
+            const destinationsHtml = `
             <div class="vui-category">
                 <div class="vui-category-label">// Quick Destinations</div>
                 <div class="vui-destinations-menu" id="vui-destinations-list">
@@ -139,25 +203,9 @@ class VoiceNav {
                     </button>
                 </div>
             </div>
-        `;
+            `;
 
-        const exhaustiveCheatsheetHtml = isFirefoxEngine ? `
-            <div id="vui-exhaustive-commands" class="vui-exhaustive-view">
-                <div class="vui-engine-note">
-                    <strong>Firefox Neural Engine:</strong> Speak single keywords clearly into your microphone:
-                </div>
-
-                <div class="vui-category">
-                    <div class="vui-category-label">// Keyword Commands</div>
-                    <div class="vui-chip-group">
-                        <button class="vui-chip" data-cmd="down"><span class="chip-quote">"</span>down<span class="chip-quote">"</span> ➔ Scroll Down</button>
-                        <button class="vui-chip" data-cmd="up"><span class="chip-quote">"</span>up<span class="chip-quote">"</span> ➔ Scroll Up</button>
-                        <button class="vui-chip" data-cmd="go"><span class="chip-quote">"</span>go<span class="chip-quote">"</span> ➔ Top</button>
-                        <button class="vui-chip" data-cmd="stop"><span class="chip-quote">"</span>stop<span class="chip-quote">"</span> ➔ Stop</button>
-                    </div>
-                </div>
-            </div>
-        ` : `
+            const exhaustiveCheatsheetHtml = `
             <div id="vui-exhaustive-commands" class="vui-exhaustive-view">
                 <div class="vui-category">
                     <div class="vui-category-label">// Page Navigation &amp; Jumps</div>
@@ -210,12 +258,12 @@ class VoiceNav {
                     </div>
                 </div>
             </div>
-        `;
+            `;
 
-        const drawerContent = `
+            drawerContent = `
             <div class="vui-drawer-header">
                 <h3 class="vui-drawer-title">
-                    <span aria-hidden="true">🎙️</span> Voice Navigator &amp; Guide ${engineBadge ? `<span class="vui-badge">${engineBadge.trim()}</span>` : ''}
+                    <span aria-hidden="true">🎙️</span> Voice Navigator &amp; Guide
                 </h3>
                 <button id="vui-drawer-close-btn" class="vui-drawer-close" aria-label="Close voice guide">✕</button>
             </div>
@@ -227,7 +275,8 @@ class VoiceNav {
             </button>
 
             ${exhaustiveCheatsheetHtml}
-        `;
+            `;
+        }
 
         const hudHtml = `
             <div id="vui-root" class="vui-container" aria-label="Voice Navigation Assistant">
@@ -965,8 +1014,8 @@ class VoiceNav {
             return;
         }
 
-        // Top of Page (requires explicit phrase so 'tab' / 'tap' never collides with 'top')
-        if (/(back\s*to\s*top|go\s*to\s*(the\s*)?top|scroll\s*to\s*(the\s*)?top|top\s*of\s*(the\s*)?page|^home$)/i.test(text)) {
+        // Top of Page (supports "go" in Firefox/keyword model, plus full natural phrases)
+        if (/(^go$|^top$|^home$|back\s*to\s*top|go\s*to\s*(the\s*)?top|scroll\s*to\s*(the\s*)?top|top\s*of\s*(the\s*)?page)/i.test(text)) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const topNav = document.getElementById('top');
             if (topNav) topNav.focus();

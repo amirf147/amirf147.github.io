@@ -331,16 +331,87 @@
     vertical-align: middle;
 }
 
-.vui-engine-note {
+.vui-warning-card {
+    background: rgba(210, 153, 34, 0.12);
+    border: 1.5px solid #d29922;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     font-size: 0.78rem;
     line-height: 1.45;
+}
+
+.vui-warning-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    color: #e3b341;
+    font-size: 0.82rem;
+}
+
+.vui-warning-desc {
+    color: var(--text-color);
+    margin: 0;
+}
+
+.vui-warning-tip {
     color: var(--subtitle-color);
-    background: var(--btn-bg);
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--accent-color);
-    padding: 8px 10px;
-    border-radius: 6px;
-    margin-bottom: 14px;
+    margin: 0;
+    font-size: 0.75rem;
+    border-top: 1px dashed rgba(210, 153, 34, 0.35);
+    padding-top: 5px;
+}
+
+.vui-warning-tip strong {
+    color: #e3b341;
+}
+
+[data-theme="light"] .vui-warning-card {
+    background: #fffbeb;
+    border-color: #d97706;
+}
+
+[data-theme="light"] .vui-warning-header {
+    color: #92400e;
+}
+
+[data-theme="light"] .vui-warning-desc {
+    color: #451a03;
+}
+
+[data-theme="light"] .vui-warning-tip {
+    color: #78350f;
+    border-top-color: rgba(217, 119, 6, 0.25);
+}
+
+[data-theme="light"] .vui-warning-tip strong {
+    color: #92400e;
+}
+
+[data-theme="high-contrast"] .vui-warning-card {
+    background: #000000;
+    border: 2px solid #ffff00;
+}
+
+[data-theme="high-contrast"] .vui-warning-header {
+    color: #ffff00;
+}
+
+[data-theme="high-contrast"] .vui-warning-desc {
+    color: #ffffff;
+}
+
+[data-theme="high-contrast"] .vui-warning-tip {
+    color: #ffff00;
+    border-top-color: #ffff00;
+}
+
+[data-theme="high-contrast"] .vui-warning-tip strong {
+    color: #ffffff;
 }
 
 .vui-category {
