@@ -37,13 +37,13 @@ In Gecko-based browsers (Firefox/Waterfox), creating an `AudioContext` with a ha
 
 ## 3. Explored Concepts & Future Interactive Onboarding Architecture
 
-During VUI design exploration, a step-by-step interactive onboarding tutorial card was developed to guide first-time visitors through progressive vocal commands (`"Personal Project"` ➔ `"Solved Problems"` ➔ `"Back to Top"` ➔ Full Hands-Free Mode). 
+During VUI design exploration, a step-by-step interactive onboarding tutorial card was developed to guide first-time visitors through progressive vocal commands (`"Personal Project"` ➔ `"Engineering Solutions"` ➔ `"Back to Top"` ➔ Full Hands-Free Mode). 
 
 ```mermaid
 stateDiagram-v2
     [*] --> Step1: Voice Nav Activated (Press V or Click Mic)
     Step1 --> Step2: Spoken "Personal Project" / "One" (Jumps to Section 01)
-    Step2 --> Step3: Spoken "Solved Problems" / "Scroll Down" (Jumps to Section 02)
+    Step2 --> Step3: Spoken "Engineering Solutions" / "Scroll Down" (Jumps to Section 02)
     Step3 --> Step4: Spoken "Back to Top" / "Dark Mode" (Scrolls to Top / Theme)
     Step4 --> FreeRoaming: Free-Roaming Mode Active (All commands enabled)
 ```
@@ -63,7 +63,7 @@ The command processor uses forgiving regular expressions that accommodate variat
 | :--- | :--- | :--- |
 | **// 00 Recent Activity** | `"recent activity"`, `"commits"`, `"live commits"`, `"github feed"` | `"zero"`, `"0"` |
 | **// 01 Passion Projects** | `"personal project"`, `"personal projects"`, `"passion project"`, `"passion projects"`, `"adce"`, `"context engine"`, `"caster"`, `"voice os"` | `"one"`, `"1"`, `"first"` |
-| **// 02 Solved Problems** | `"solved problems"`, `"problems"`, `"problem"`, `"tracker"`, `"switcher"`, `"app switcher"` | `"two"`, `"2"`, `"second"` |
+| **// 02 Engineering Solutions** | `"engineering solutions"`, `"solutions"`, `"applied solutions"`, `"tracker"`, `"switcher"`, `"app switcher"` | `"two"`, `"2"`, `"second"` |
 | **// 03 Open Source** | `"open source"`, `"contributions"`, `"pull requests"`, `"merged prs"`, `"dragonfly"`, `"pyvda"` | `"three"`, `"3"`, `"third"` |
 | **// 04 Public Tools** | `"public tools"`, `"tools"`, `"tool"`, `"winstasis"`, `"vdtree"`, `"virtual desktop"` | `"four"`, `"4"`, `"fourth"` |
 | **// 05 School & Engineering** | `"school projects"`, `"school"`, `"applied engineering"`, `"bms"`, `"mail"`, `"lidar"`, `"5g"` | `"five"`, `"5"`, `"fifth"` |

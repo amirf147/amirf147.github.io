@@ -136,7 +136,7 @@ class VoiceNav {
                         <span class="vui-dest-voice-tag">"one" / "1"</span>
                     </button>
                     <button class="vui-dest-item" data-cmd="two" data-target="solved-problems">
-                        <span><span class="vui-dest-num">// 02</span>Solved Problems</span>
+                        <span><span class="vui-dest-num">// 02</span>Engineering Solutions</span>
                         <span class="vui-dest-voice-tag">"two" / "2"</span>
                     </button>
                     <button class="vui-dest-item" data-cmd="three" data-target="open-source">
@@ -178,8 +178,8 @@ class VoiceNav {
                         <span class="vui-dest-voice-tag">"personal project" / "adce" / "one"</span>
                     </button>
                     <button class="vui-dest-item" data-cmd="two" data-target="solved-problems">
-                        <span><span class="vui-dest-num">// 02</span>Solved Problems</span>
-                        <span class="vui-dest-voice-tag">"two" / "problems"</span>
+                        <span><span class="vui-dest-num">// 02</span>Engineering Solutions</span>
+                        <span class="vui-dest-voice-tag">"two" / "solutions"</span>
                     </button>
                     <button class="vui-dest-item" data-cmd="three" data-target="open-source">
                         <span><span class="vui-dest-num">// 03</span>Open Source</span>
@@ -212,7 +212,7 @@ class VoiceNav {
                     <div class="vui-chip-group">
                         <button class="vui-chip" data-cmd="go to commits"><span class="chip-quote">"</span>Recent Activity<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to passion projects"><span class="chip-quote">"</span>Passion Projects<span class="chip-quote">"</span></button>
-                        <button class="vui-chip" data-cmd="go to solved problems"><span class="chip-quote">"</span>Solved Problems<span class="chip-quote">"</span></button>
+                        <button class="vui-chip" data-cmd="go to engineering solutions"><span class="chip-quote">"</span>Engineering Solutions<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to open source"><span class="chip-quote">"</span>Open Source<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to tools"><span class="chip-quote">"</span>Public Tools<span class="chip-quote">"</span></button>
                         <button class="vui-chip" data-cmd="go to school projects"><span class="chip-quote">"</span>School Projects<span class="chip-quote">"</span></button>
@@ -546,7 +546,7 @@ class VoiceNav {
                 if (this.dom && this.dom.drawer && !this.dom.drawer.classList.contains('open')) {
                     this.dom.drawer.classList.add('open');
                 }
-                this.showToast('Voice active! Say "Personal Project", "Solved Problems", or "Help"');
+                this.showToast('Voice active! Say "Personal Project", "Engineering Solutions", or "Help"');
                 this.announceSR('Voice navigation active. Listening for commands.');
             };
 
@@ -922,9 +922,9 @@ class VoiceNav {
             return;
         }
 
-        // Section 2: Solved Problems
-        if (/^(2|two|second)$/i.test(text) || /(solved\s*problems?|problems?|tactical\s*tracker|activity\s*tracker|tracker|app\s*switcher|switcher|section\s*(2|two))/i.test(text)) {
-            this.jumpTo('solved-problems', 'Jumped to Solved Problems (Section 2)');
+        // Section 2: Engineering Solutions
+        if (/^(2|two|second)$/i.test(text) || /(engineering\s*solutions?|applied\s*solutions?|solutions?|solved\s*problems?|problems?|tactical\s*tracker|activity\s*tracker|tracker|app\s*switcher|switcher|section\s*(2|two))/i.test(text)) {
+            this.jumpTo('solved-problems', 'Jumped to Engineering Solutions (Section 2)');
             return;
         }
 
