@@ -45,44 +45,44 @@
 }
 
 [data-theme="light"] {
-    /* VS Code Light+ / GitHub Light Syntax Theme */
-    --bg-color: #ffffff;
-    --text-color: #24292f;
-    --heading-color: #0f1419;
-    --subtitle-color: #57606a;
-    --accent-color: #0969da;
-    --border-color: #d0d7de;
-    --divider-color: #eaeef2;
-    --status-bg: #f6f8fa;
-    --status-text: #57606a;
-    --status-live-bg: rgba(26, 127, 55, 0.12);
-    --status-live-text: #1a7f37;
-    --btn-bg: #ffffff;
-    --btn-border: #d0d7de;
-    --btn-text: #24292f;
-    --btn-hover-bg: #f3f4f6;
-    --btn-hover-border: #0969da;
-    --tag-num: #0550ae;
-    --menu-bg: #ffffff;
-    --menu-border: #d0d7de;
-    --focus-ring: #0969da;
+    /* Warm Paper / Parchment Theme (Editorial & Soothing) */
+    --bg-color: #f7f4ed;
+    --text-color: #292524;
+    --heading-color: #1c1917;
+    --subtitle-color: #57534e;
+    --accent-color: #0954b5;
+    --border-color: #ded7c9;
+    --divider-color: #ebe4d7;
+    --status-bg: #ede7db;
+    --status-text: #57534e;
+    --status-live-bg: rgba(22, 101, 52, 0.12);
+    --status-live-text: #15803d;
+    --btn-bg: #fffdfa;
+    --btn-border: #ded7c9;
+    --btn-text: #292524;
+    --btn-hover-bg: #eee8dc;
+    --btn-hover-border: #0954b5;
+    --tag-num: #064893;
+    --menu-bg: #fffdfa;
+    --menu-border: #ded7c9;
+    --focus-ring: #1d4ed8;
 
     /* Syntax Tokens */
-    --syntax-repo: #8250df;
-    --syntax-sha-bg: #f3f4f6;
-    --syntax-sha-border: #d0d7de;
-    --syntax-sha-text: #1a7f37;
-    --live-dot-color: #1a7f37;
+    --syntax-repo: #6b21a8;
+    --syntax-sha-bg: #ede7db;
+    --syntax-sha-border: #ded7c9;
+    --syntax-sha-text: #15803d;
+    --live-dot-color: #16a34a;
 
-    /* Voice UI Tokens (Light) */
-    --vui-hud-bg: rgba(255, 255, 255, 0.92);
-    --vui-hud-border: #d0d7de;
-    --vui-hud-glow: rgba(9, 105, 218, 0.25);
-    --vui-active-mic: #cf222e;
-    --vui-wave-color: #0969da;
-    --vui-chip-bg: #f3f4f6;
-    --vui-chip-border: #d0d7de;
-    --vui-chip-hover: #0969da;
+    /* Voice UI Tokens (Warm Paper Light) */
+    --vui-hud-bg: rgba(247, 244, 237, 0.94);
+    --vui-hud-border: #ded7c9;
+    --vui-hud-glow: rgba(9, 84, 181, 0.2);
+    --vui-active-mic: #c22929;
+    --vui-wave-color: #0954b5;
+    --vui-chip-bg: #ede7db;
+    --vui-chip-border: #ded7c9;
+    --vui-chip-hover: #0954b5;
 }
 
 [data-theme="high-contrast"] {

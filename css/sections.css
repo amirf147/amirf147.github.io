@@ -111,9 +111,193 @@ li.project-item {
 
 .description {
     color: var(--subtitle-color);
-    margin: 10px 0 16px 0;
+    margin: 10px 0 10px 0;
     font-size: 0.95rem;
     line-height: 1.6;
+}
+
+/* Project Feature & Architecture Bullet Lists */
+.project-features {
+    margin: 8px 0 14px 0;
+    padding-left: 20px;
+    font-size: 0.9rem;
+    color: var(--subtitle-color);
+    line-height: 1.55;
+}
+
+.project-features li {
+    margin-bottom: 6px;
+}
+
+.project-features li strong {
+    color: var(--heading-color);
+}
+
+.project-features code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.82rem;
+    color: var(--accent-color);
+    background-color: var(--status-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+}
+
+/* Technology & Category Tag Pill Clusters */
+.tech-pill-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 8px 0 12px 0;
+}
+
+/* Technology & Category Tag Pill Clusters */
+.tech-pill-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 8px 0 12px 0;
+}
+
+.tech-pill {
+    display: inline-flex;
+    align-items: center;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: rgba(9, 84, 181, 0.05);
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    line-height: 1.45;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.tech-pill:hover {
+    border-color: var(--accent-color);
+    color: var(--heading-color);
+}
+
+/* 1. Category & Languages (Blue / Indigo) */
+.tech-pill.tech-pill-category,
+.tech-pill.tech-pill-blue,
+.tech-pill.tech-pill-lang {
+    color: #0954b5;
+    background-color: rgba(9, 84, 181, 0.08);
+    border-color: #b6d4fe;
+    font-weight: 700;
+}
+
+/* 2. Systems, OS & Win32 APIs (Teal / Cyan) */
+.tech-pill.tech-pill-teal,
+.tech-pill.tech-pill-sys {
+    color: #0f766e;
+    background-color: rgba(15, 118, 110, 0.08);
+    border-color: #99f6e4;
+    font-weight: 600;
+}
+
+/* 3. AI, Protocols & Storage (Purple / Violet) */
+.tech-pill.tech-pill-purple,
+.tech-pill.tech-pill-ai {
+    color: #6b21a8;
+    background-color: rgba(107, 33, 168, 0.08);
+    border-color: #e9d5ff;
+    font-weight: 600;
+}
+
+/* 4. Hardware, Embedded & IoT (Amber / Orange) */
+.tech-pill.tech-pill-amber,
+.tech-pill.tech-pill-hw {
+    color: #9a3412;
+    background-color: rgba(154, 52, 18, 0.08);
+    border-color: #fed7aa;
+    font-weight: 600;
+}
+
+/* 5. Production & Testing (Emerald / Green) */
+.tech-pill.tech-pill-emerald,
+.tech-pill.tech-pill-test {
+    color: #15803d;
+    background-color: rgba(22, 101, 52, 0.08);
+    border-color: #bbf7d0;
+    font-weight: 600;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .tech-pill {
+    background-color: rgba(56, 139, 253, 0.06);
+    color: #c9d1d9;
+    border-color: #30363d;
+}
+
+[data-theme="dark"] .tech-pill.tech-pill-category,
+[data-theme="dark"] .tech-pill.tech-pill-blue,
+[data-theme="dark"] .tech-pill.tech-pill-lang {
+    color: #79c0ff;
+    background-color: rgba(56, 139, 253, 0.14);
+    border-color: rgba(56, 139, 253, 0.35);
+}
+
+[data-theme="dark"] .tech-pill.tech-pill-teal,
+[data-theme="dark"] .tech-pill.tech-pill-sys {
+    color: #39c5cf;
+    background-color: rgba(57, 197, 207, 0.12);
+    border-color: rgba(57, 197, 207, 0.32);
+}
+
+[data-theme="dark"] .tech-pill.tech-pill-purple,
+[data-theme="dark"] .tech-pill.tech-pill-ai {
+    color: #d2a8ff;
+    background-color: rgba(163, 113, 247, 0.14);
+    border-color: rgba(163, 113, 247, 0.32);
+}
+
+[data-theme="dark"] .tech-pill.tech-pill-amber,
+[data-theme="dark"] .tech-pill.tech-pill-hw {
+    color: #ffab70;
+    background-color: rgba(255, 123, 114, 0.12);
+    border-color: rgba(255, 123, 114, 0.32);
+}
+
+[data-theme="dark"] .tech-pill.tech-pill-emerald,
+[data-theme="dark"] .tech-pill.tech-pill-test {
+    color: #56d364;
+    background-color: rgba(46, 160, 67, 0.14);
+    border-color: rgba(46, 160, 67, 0.32);
+}
+
+/* High Contrast Theme Overrides */
+[data-theme="high-contrast"] .tech-pill {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+[data-theme="high-contrast"] .tech-pill.tech-pill-category,
+[data-theme="high-contrast"] .tech-pill.tech-pill-blue,
+[data-theme="high-contrast"] .tech-pill.tech-pill-lang,
+[data-theme="high-contrast"] .tech-pill.tech-pill-teal,
+[data-theme="high-contrast"] .tech-pill.tech-pill-sys {
+    color: #00ffff;
+    border-color: #00ffff;
+}
+
+[data-theme="high-contrast"] .tech-pill.tech-pill-purple,
+[data-theme="high-contrast"] .tech-pill.tech-pill-ai,
+[data-theme="high-contrast"] .tech-pill.tech-pill-amber,
+[data-theme="high-contrast"] .tech-pill.tech-pill-hw {
+    color: #ffff00;
+    border-color: #ffff00;
+}
+
+[data-theme="high-contrast"] .tech-pill.tech-pill-emerald,
+[data-theme="high-contrast"] .tech-pill.tech-pill-test {
+    color: #00ff00;
+    border-color: #00ff00;
 }
 
 /* Evidence & Media */

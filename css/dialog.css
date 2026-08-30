@@ -84,13 +84,13 @@ dialog h2 {
 }
 
 .preview-light {
-    background-color: #ffffff;
-    color: #171717;
-    border: 2px solid #d4d4d4;
+    background-color: #f7f4ed;
+    color: #1c1917;
+    border: 2px solid #ded7c9;
 }
 
 .preview-light svg {
-    stroke: #171717;
+    stroke: #1c1917;
 }
 
 .preview-contrast {

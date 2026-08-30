@@ -26,25 +26,40 @@ class KeyboardNav {
     }
 
     setupBackToTop() {
-        if (!this.backToTopBtn) return;
+        if (this.backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 150) {
+                    this.backToTopBtn.classList.add('visible');
+                } else {
+                    this.backToTopBtn.classList.remove('visible');
+                }
+            });
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 150) {
-                this.backToTopBtn.classList.add('visible');
-            } else {
-                this.backToTopBtn.classList.remove('visible');
+            this.backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.scrollToTop();
+            });
+        }
+
+        // Intercept any <a href="#top"> clicks to ensure clean (0, 0) scroll without clipping the top utility bar
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href="#top"]');
+            if (link) {
+                e.preventDefault();
+                this.scrollToTop();
+                if (window.history && window.history.pushState) {
+                    window.history.pushState(null, null, '#top');
+                }
             }
-        });
-
-        this.backToTopBtn.addEventListener('click', () => {
-            this.scrollToTop();
         });
     }
 
     scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         const topNav = document.getElementById('top');
-        if (topNav) topNav.focus();
+        if (topNav) {
+            topNav.focus({ preventScroll: true });
+        }
     }
 
     setupA11yDialog() {
@@ -83,37 +98,66 @@ class KeyboardNav {
         const projects = Array.from(document.querySelectorAll('.navigable-item'));
         if (!projects.length) return;
 
-        const activeProject = document.activeElement ? document.activeElement.closest('.navigable-item') : null;
+        // Check if currently focused element belongs to a project currently visible in the viewport
+        const activeElement = document.activeElement;
+        const activeProject = activeElement ? activeElement.closest('.navigable-item') : null;
+        let isFocusVisible = false;
+
+        if (activeProject) {
+            const activeRect = activeProject.getBoundingClientRect();
+            // Consider visible if within the active viewport reading zone
+            isFocusVisible = (activeRect.top >= -80 && activeRect.top < window.innerHeight * 0.75);
+        }
+
         let target = null;
-        const activeIdx = projects.indexOf(activeProject);
 
         if (direction === 'next') {
-            if (activeIdx !== -1 && activeIdx < projects.length - 1) {
-                target = projects[activeIdx + 1];
-            } else {
+            if (isFocusVisible && activeProject) {
+                const activeIdx = projects.indexOf(activeProject);
+                if (activeIdx !== -1 && activeIdx < projects.length - 1) {
+                    target = projects[activeIdx + 1];
+                }
+            }
+            // If focus is off-screen or not set, find based on current viewport scroll position
+            if (!target) {
                 for (const project of projects) {
-                    if (project.getBoundingClientRect().top > 60) {
+                    const rect = project.getBoundingClientRect();
+                    if (rect.top > 80) {
                         target = project;
                         break;
                     }
                 }
+                // Fallback to last item if past all items
+                if (!target && projects.length > 0) {
+                    target = projects[projects.length - 1];
+                }
             }
         } else {
-            if (activeIdx !== -1 && activeIdx > 0) {
-                target = projects[activeIdx - 1];
-            } else {
+            // Previous
+            if (isFocusVisible && activeProject) {
+                const activeIdx = projects.indexOf(activeProject);
+                if (activeIdx > 0) {
+                    target = projects[activeIdx - 1];
+                }
+            }
+            if (!target) {
                 for (let i = projects.length - 1; i >= 0; i--) {
                     const project = projects[i];
-                    if (project.getBoundingClientRect().top < -60) {
+                    const rect = project.getBoundingClientRect();
+                    if (rect.top < -40) {
                         target = project;
                         break;
                     }
+                }
+                // Fallback to first item if near top
+                if (!target && projects.length > 0) {
+                    target = projects[0];
                 }
             }
         }
 
         if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             target.focus({ preventScroll: true });
         }
     }

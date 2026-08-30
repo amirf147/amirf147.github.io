@@ -184,41 +184,41 @@
     }
 }
 
-/* Light Theme Overrides */
+/* Light Theme Overrides (Warm Paper) */
 [data-theme="light"] .commit-ci-success {
-    background-color: rgba(26, 127, 55, 0.1);
-    color: #1a7f37;
-    border: 1px solid rgba(26, 127, 55, 0.28);
+    background-color: rgba(22, 101, 52, 0.12);
+    color: #15803d;
+    border: 1px solid rgba(22, 101, 52, 0.3);
 }
 
 [data-theme="light"] .commit-ci-success:hover {
-    border-color: #1a7f37;
-    box-shadow: 0 0 8px rgba(26, 127, 55, 0.2);
-    color: #1a7f37;
+    border-color: #15803d;
+    box-shadow: 0 0 8px rgba(22, 101, 52, 0.22);
+    color: #15803d;
 }
 
 [data-theme="light"] .commit-ci-review {
-    background-color: rgba(87, 96, 106, 0.08);
-    color: #57606a;
-    border: 1px solid rgba(87, 96, 106, 0.24);
+    background-color: rgba(87, 83, 78, 0.1);
+    color: #57534e;
+    border: 1px solid rgba(87, 83, 78, 0.28);
 }
 
 [data-theme="light"] .commit-ci-review:hover {
-    color: #24292f;
-    border-color: #57606a;
-    box-shadow: 0 0 8px rgba(87, 96, 106, 0.15);
+    color: #1c1917;
+    border-color: #57534e;
+    box-shadow: 0 0 8px rgba(87, 83, 78, 0.18);
 }
 
 [data-theme="light"] .commit-ci-running {
-    background-color: rgba(9, 105, 218, 0.1);
-    color: #0969da;
-    border: 1px solid rgba(9, 105, 218, 0.28);
+    background-color: rgba(9, 84, 181, 0.1);
+    color: #0954b5;
+    border: 1px solid rgba(9, 84, 181, 0.3);
 }
 
 [data-theme="light"] .commit-ci-running:hover {
-    border-color: #0969da;
-    box-shadow: 0 0 8px rgba(9, 105, 218, 0.2);
-    color: #0969da;
+    border-color: #0954b5;
+    box-shadow: 0 0 8px rgba(9, 84, 181, 0.22);
+    color: #0954b5;
 }
 
 /* High-Contrast Theme Overrides (WCAG AAA) */

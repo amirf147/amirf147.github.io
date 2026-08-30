@@ -350,10 +350,26 @@
                 <ul class="project-list">
                     <li id="item-adce" class="project-item navigable-item" tabindex="-1">
                         <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">Active Desktop Context Engine (ADCE) — Local Context Graph &amp; MCP Provider for AI &amp; Voice<span class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Active / .NET 10 (LTS) &amp; UIA3</span>
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">Active Desktop Context Engine (ADCE) - Local Context Graph &amp; MCP Provider for AI &amp; Voice<span class="sr-only"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live">Active (with Real-World Use Case; see links below)</span>
                         </div>
-                        <p class="description">High-performance, privacy-first Windows background daemon and Model Context Protocol (MCP) server delivering structured desktop topology, active window envelopes, Virtual Desktop GUIDs, and container-aware tab extraction in &lt; 15 ms with 0.0% idle CPU. Replaces resource-heavy screenshot OCR polling with a dual-engine architecture: sub-millisecond Win32 shallow gating (&lt; 0.5 ms) paired with targeted UI Automation (FlaUI.UIA3) batch caching. Features an embedded SQLite WAL time-series store for temporal agent reasoning, strict browser DOM tree pruning (10.17 ms for 30 tabs), a dedicated STA event pipeline, and a Per-Monitor V2 DPI-aware system tray host with a non-activating live DevTools HUD overlay (<code>WS_EX_NOACTIVATE | WS_EX_TOPMOST</code>).</p>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">.NET 10 (C#)</span>
+                            <span class="tech-pill tech-pill-sys">Win32 API / PInvoke</span>
+                            <span class="tech-pill tech-pill-sys">FlaUI.UIA3</span>
+                            <span class="tech-pill tech-pill-ai">SQLite WAL</span>
+                            <span class="tech-pill tech-pill-ai">Model Context Protocol (MCP)</span>
+                            <span class="tech-pill tech-pill-sys">Single-Threaded Apartment (STA)</span>
+                            <span class="tech-pill tech-pill-sys">Per-Monitor V2 DPI</span>
+                        </div>
+                        <p class="description">Windows background daemon and Model Context Protocol (MCP) server providing real-time desktop topology, active window envelopes, Virtual Desktop GUIDs, and container-aware tab extraction in under 15 ms with 0.0% idle CPU.</p>
+                        <ul class="project-features">
+                            <li><strong>Dual-Engine Topology:</strong> Sub-millisecond Win32 shallow gating (&lt; 0.5 ms) paired with FlaUI.UIA3 batch caching to replace CPU-heavy OCR screenshot polling.</li>
+                            <li><strong>Real-World Downstream Integration:</strong> Streams live UI focus zones to Caster Voice OS to enable dynamic IDE terminal voice grammars with zero speech engine audio latency.</li>
+                            <li><strong>Browser Extraction:</strong> Container-aware tab and URL extraction with strict DOM tree pruning (10.17 ms for 30 tabs) without browser extensions.</li>
+                            <li><strong>Time-Series Store:</strong> Embedded SQLite WAL database recording window state transitions for temporal agent reasoning.</li>
+                            <li><strong>System Tray Host:</strong> Per-Monitor V2 DPI-aware host with non-activating live DevTools HUD overlay (<code>WS_EX_NOACTIVATE | WS_EX_TOPMOST</code>).</li>
+                        </ul>
                         <div class="evidence-box">
                             <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
                                 <div style="flex: 1 1 360px; max-width: 100%;">
@@ -380,6 +396,7 @@
                                 </div>
                             </div>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/guides/FIRST_REAL_WORLD_USE_CASE_CASTER_DYNAMIC_TERMINAL_GRAMMARS.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View Real-World Use Case: Caster Dynamic IDE Grammars<span class="sr-only"> (opens in a new tab)</span></a>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/ARCHITECTURE_AND_MODULAR_IMPLEMENTATION_PLAN.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View 5-Project Architecture Spec<span class="sr-only"> (opens in a new tab)</span></a>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span>View Empirical Telemetry Benchmarks<span class="sr-only"> (opens in a new tab)</span></a>
                         </div>
@@ -392,10 +409,25 @@
 
                     <li id="item-caster-os" class="project-item navigable-item" tabindex="-1">
                         <div class="project-title-row">
-                            <h3 class="project-title"><a href="./timeline.html">Caster Voice OS — Personal Hands-Free Platform (2-Year Git Evolution)<span class="sr-only"> (opens timeline page)</span></a></h3>
+                            <h3 class="project-title"><a href="./timeline.html">Caster Voice OS - Personal Hands-Free Platform (2-Year Git Evolution)<span class="sr-only"> (opens timeline page)</span></a></h3>
                             <span class="status-tag status-live">Active / Production</span>
                         </div>
-                        <p class="description">A 27-month, 969-commit personal voice computing operating system powering 100% hands-free engineering. Features 3-tier failsafe OS focus management, Kaldi ASR compiler race condition fixes, and multimodal foot-pedal IPC bridges.</p>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Python 3</span>
+                            <span class="tech-pill tech-pill-sys">Caster / Dragonfly</span>
+                            <span class="tech-pill tech-pill-ai">Kaldi ASR</span>
+                            <span class="tech-pill tech-pill-sys">Win32 API</span>
+                            <span class="tech-pill tech-pill-sys">AutoHotkey v2</span>
+                            <span class="tech-pill tech-pill-ai">XML-RPC / Sockets</span>
+                            <span class="tech-pill tech-pill-test">Git (960+ Commits)</span>
+                        </div>
+                        <p class="description">A 27-month, 969-commit personal voice computing operating system enabling hands-free programming, terminal navigation, and desktop orchestration.</p>
+                        <ul class="project-features">
+                            <li><strong>3-Tier Window Switcher:</strong> Deterministic OS focus engine with Win32 thread attach, Taskbar UIA fallback, and synthetic keystroke routing.</li>
+                            <li><strong>Kaldi ASR Engine Patches:</strong> Resolved compiler race conditions and memory leaks during deferred grammar reloads.</li>
+                            <li><strong>Multimodal IPC:</strong> Integrated Olympus RS31H foot pedal controls via AutoHotkey v2 and thread-safe XML-RPC bridges.</li>
+                            <li><strong>CCR Language Grammars:</strong> Modular command suites for Python, C#, PowerShell, Git, and AI IDE workflows (Windsurf, Cursor).</li>
+                        </ul>
                         <div class="evidence-box">
                             <div class="timeline-summary-strip">
                                 <div class="era-strip-item">
@@ -457,9 +489,24 @@
 
                         </div>
 
-                        <p class="description">End-to-end multi-agent orchestration solution bridging proprietary Azure
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Python</span>
+                            <span class="tech-pill tech-pill-ai">Microsoft AI Foundry</span>
+                            <span class="tech-pill tech-pill-ai">Azure Speech Services</span>
+                            <span class="tech-pill tech-pill-ai">Google Gemini SDK</span>
+                            <span class="tech-pill tech-pill-ai">Agentic Orchestration</span>
+                            <span class="tech-pill tech-pill-sys">AsyncIO</span>
+                            <span class="tech-pill tech-pill-sys">REST API</span>
+                        </div>
 
-                            cloud infrastructure with the Gemini SDK ecosystem using custom cross-vendor middleware.</p>
+                        <p class="description">Multi-agent orchestration middleware connecting private Azure cloud infrastructure, Microsoft AI Foundry, and Azure Speech Services with the Google Gemini SDK ecosystem.</p>
+
+                        <ul class="project-features">
+                            <li><strong>Cross-Vendor Orchestration:</strong> Custom Python middleware managing concurrent execution across independent LLM agent processes.</li>
+                            <li><strong>Speech &amp; AI Integration:</strong> Synthesized multimodal agent reasoning using Microsoft AI Foundry models and Azure Speech Services.</li>
+                            <li><strong>Context Synchronization:</strong> Shared state store coordinating multi-step planning, task delegation, and execution logging.</li>
+                            <li><strong>Live Telemetry:</strong> Real-time event streaming and execution monitoring across cloud endpoints.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -517,13 +564,22 @@
 
                         </div>
 
-                        <p class="description">Low-level Windows desktop focus management and voice window switching
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Python</span>
+                            <span class="tech-pill tech-pill-sys">Win32 API / User32</span>
+                            <span class="tech-pill tech-pill-sys">UI Automation (UIA)</span>
+                            <span class="tech-pill tech-pill-sys">Virtual Desktop API</span>
+                            <span class="tech-pill tech-pill-ai">Dragonfly</span>
+                            <span class="tech-pill tech-pill-sys">Process Handles</span>
+                        </div>
 
-                            engine for the Caster/Dragonfly speech recognition framework. Implements a 3-tier failsafe
+                        <p class="description">Low-level Windows desktop focus management and voice window switching engine for the Caster and Dragonfly speech recognition frameworks.</p>
 
-                            focus architecture (Win32 API + Thread Attach OS bypass, Taskbar UIA automation, synthetic
-
-                            keyboard macros), virtual desktop filtering, and tab cycling.</p>
+                        <ul class="project-features">
+                            <li><strong>3-Tier Failsafe Architecture:</strong> Primary <code>AttachThreadInput</code> + <code>SetForegroundWindow</code> Win32 API bypass, secondary Taskbar UIA automation, and tertiary synthetic keystroke dispatch.</li>
+                            <li><strong>Virtual Desktop Filtering:</strong> Interfaces with Windows Virtual Desktop APIs to filter application targets by active workspace.</li>
+                            <li><strong>In-App Tab Cycling:</strong> Direct voice commands to switch between open tabs across browsers and code editors.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -607,15 +663,23 @@
 
                         </div>
 
-                        <p class="description">Merged pull requests into Caster—a widely used open-source voice
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Open Source</span>
+                            <span class="tech-pill tech-pill-blue">Python</span>
+                            <span class="tech-pill tech-pill-ai">Grammar Compilers</span>
+                            <span class="tech-pill tech-pill-sys">pyvda / COM</span>
+                            <span class="tech-pill tech-pill-sys">Thread Synchronization</span>
+                            <span class="tech-pill tech-pill-test">Upstream Merged</span>
+                        </div>
 
-                            dictation and accessibility framework. Contributions include numeric rule refactoring to
+                        <p class="description">Upstream contributions merged into Caster, an open-source voice dictation and accessibility platform.</p>
 
-                            NumberRef eliminating 4-digit dictation limits (#975), HUD startup race condition retry
-
-                            logic (#965), title-case contraction and possessive parser fixes (#962), and Windows 11
-
-                            virtual desktop integration via updated pyvda API (#960).</p>
+                        <ul class="project-features">
+                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/975" target="_blank">PR #975<span class="sr-only"> (opens in a new tab)</span></a> (Numeric Engine Refactor):</strong> Rebuilt number grammar rules using <code>NumberRef</code>, resolving Caster <a href="https://github.com/dictation-toolbox/caster/issues/938" target="_blank">Issue #938<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://github.com/dictation-toolbox/caster/issues/857" target="_blank">Issue #857<span class="sr-only"> (opens in a new tab)</span></a> to remove the legacy 4-digit dictation ceiling.</li>
+                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/965" target="_blank">PR #965<span class="sr-only"> (opens in a new tab)</span></a> (HUD Startup Synchronization):</strong> Added polling retry logic to resolve thread initialization race conditions during startup.</li>
+                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/962" target="_blank">PR #962<span class="sr-only"> (opens in a new tab)</span></a> (Parser Corrections):</strong> Fixed title-case contraction and possessive casing bugs in continuous dictation output.</li>
+                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/960" target="_blank">PR #960<span class="sr-only"> (opens in a new tab)</span></a> (Windows 11 Desktops):</strong> Restored virtual desktop voice navigation by integrating updated pyvda COM interfaces.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -667,19 +731,27 @@
 
                             <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/409"
 
-                                    target="_blank">Dragonfly Framework — Fix Number Series Sequence Matching &
-
-                                    Limits<span class="sr-only"> (opens in a new tab)</span></a></h3>
+                                    target="_blank">Dragonfly Framework - Fix Number Series Sequence Matching &amp; Limits (PR #409)<span class="sr-only"> (opens in a new tab)</span></a></h3>
 
                             <span class="status-tag status-live">Open PR #409</span>
 
                         </div>
 
-                        <p class="description">Core dictation engine fix in Dragonfly's Number class resolving sequence
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Speech Recognition Engine</span>
+                            <span class="tech-pill tech-pill-blue">Python</span>
+                            <span class="tech-pill tech-pill-ai">Dragonfly Core</span>
+                            <span class="tech-pill tech-pill-ai">AST Parsing</span>
+                            <span class="tech-pill tech-pill-test">Regression Testing</span>
+                        </div>
 
-                            matching conflicts, digit length constraints, and zero formatting loss across speech
+                        <p class="description">Upstream patch resolving digit sequence matching conflicts, arbitrary length boundaries, and formatting loss in Dragonfly's core Number grammar class.</p>
 
-                            recognition backends.</p>
+                        <ul class="project-features">
+                            <li><strong>Sequence Matching:</strong> Corrected greedy matching conflicts between single digits, compound numbers, and formatted number strings.</li>
+                            <li><strong>Unbounded Digit Sequences:</strong> Removed hardcoded length restrictions to support arbitrary numeric input across speech engines.</li>
+                            <li><strong>Zero Formatting &amp; Upstream Link:</strong> Preserved leading and embedded zeros across speech backends, unblocking Caster <a href="https://github.com/dictation-toolbox/caster/issues/938" target="_blank">Issue #938<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://github.com/dictation-toolbox/caster/issues/857" target="_blank">Issue #857<span class="sr-only"> (opens in a new tab)</span></a>.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -725,7 +797,7 @@
 
                             <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/408"
 
-                                    target="_blank">Dragonfly Framework — Fix Kaldi Deferred Mid-Phrase Reload Bug<span
+                                    target="_blank">Dragonfly Framework - Fix Kaldi Deferred Mid-Phrase Reload Bug (PR #408)<span
 
                                         class="sr-only"> (opens in a new tab)</span></a></h3>
 
@@ -733,11 +805,21 @@
 
                         </div>
 
-                        <p class="description">Fixes KaldiError engine crashes during deferred mid-phrase reloads by
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Kaldi ASR</span>
+                            <span class="tech-pill tech-pill-blue">Python</span>
+                            <span class="tech-pill tech-pill-sys">Race Condition Patch</span>
+                            <span class="tech-pill tech-pill-sys">State Management</span>
+                            <span class="tech-pill tech-pill-hw">Exception Handling</span>
+                        </div>
 
-                            capturing rules to destroy at deferral time rather than retrieving newly compiled rules from
+                        <p class="description">Engine patch fixing fatal <code>KaldiError</code> crashes during deferred mid-phrase grammar reloads.</p>
 
-                            the global dictionary post-phrase.</p>
+                        <ul class="project-features">
+                            <li><strong>Root Cause Fix:</strong> Captured stale rules scheduled for destruction at deferral time rather than querying modified global dictionaries post-phrase.</li>
+                            <li><strong>State Isolation:</strong> Prevented the Kaldi grammar compiler from attempting to unload newly compiled replacement rules.</li>
+                            <li><strong>Caster Stability:</strong> Resolves Caster <a href="https://github.com/dictation-toolbox/caster/issues/943" target="_blank">Issue #943<span class="sr-only"> (opens in a new tab)</span></a>, eliminating fatal process crashes during background rule compilation while user speech is in progress.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -783,7 +865,7 @@
 
                             <h3 class="project-title"><a href="https://github.com/mirober/pyvda/pull/57"
 
-                                    target="_blank">pyvda — Handle Stale COM Objects & RPC Server Unavailability<span
+                                    target="_blank">pyvda - Handle Stale COM Objects &amp; RPC Server Unavailability (PR #57)<span
 
                                         class="sr-only"> (opens in a new tab)</span></a></h3>
 
@@ -791,11 +873,21 @@
 
                         </div>
 
-                        <p class="description">Robustness fix for pyvda (Python Windows Virtual Desktop API) to handle
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">COM Interop</span>
+                            <span class="tech-pill tech-pill-blue">Python</span>
+                            <span class="tech-pill tech-pill-sys">Windows Internal APIs</span>
+                            <span class="tech-pill tech-pill-sys">RPC Server Management</span>
+                            <span class="tech-pill tech-pill-sys">Ctypes / Comtypes</span>
+                        </div>
 
-                            destroyed COM interface pointers and RPC server unavailability errors caused by Windows
+                        <p class="description">Stability patch for pyvda (Python Windows Virtual Desktop API) to recover from destroyed COM interface pointers and RPC server unavailability.</p>
 
-                            Explorer restarts or system sleep cycles.</p>
+                        <ul class="project-features">
+                            <li><strong>Explorer Restart Resilience:</strong> Intercepts <code>RPC_S_SERVER_UNAVAILABLE</code> (0x800706BA) when Windows Explorer restarts.</li>
+                            <li><strong>Re-initialization Hook:</strong> Automatically re-binds the internal <code>IVirtualDesktopManagerInternal</code> interface on fault detection.</li>
+                            <li><strong>Sleep/Resume Protection:</strong> Prevents unhandled exceptions when systems resume from low-power sleep states.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -865,11 +957,21 @@
 
                         </div>
 
-                        <p class="description">Lightweight CLI utility to instantly snapshot and restore window
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">C# / .NET</span>
+                            <span class="tech-pill tech-pill-sys">Win32 API</span>
+                            <span class="tech-pill tech-pill-sys">Virtual Desktop API</span>
+                            <span class="tech-pill tech-pill-ai">JSON Serialization</span>
+                            <span class="tech-pill tech-pill-test">CLI Utility</span>
+                        </div>
 
-                            positions and virtual desktop assignments on Windows, permanently resolving application
+                        <p class="description">Standalone CLI utility to snapshot and restore window coordinates, dimensions, and virtual desktop assignments on Windows, permanently resolving application drift. Publicly featured on Tiny Tool Town.</p>
 
-                            drift. Publicly featured on Tiny Tool Town.</p>
+                        <ul class="project-features">
+                            <li><strong>State Persistence:</strong> Serializes window geometry (X, Y, Width, Height, Z-order) and desktop GUIDs to JSON configuration files.</li>
+                            <li><strong>Drift Correction:</strong> Restores multi-monitor window layouts following display disconnects, sleep cycles, or resolution changes.</li>
+                            <li><strong>Process Filter:</strong> Ignores transient tooltips, invisible utility frames, and background daemon windows.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -929,13 +1031,21 @@
 
                         </div>
 
-                        <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops.
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">C# / .NET</span>
+                            <span class="tech-pill tech-pill-sys">Win32 Console</span>
+                            <span class="tech-pill tech-pill-sys">Desktop Topology</span>
+                            <span class="tech-pill tech-pill-sys">Process Enumeration</span>
+                            <span class="tech-pill tech-pill-test">CLI Tool</span>
+                        </div>
 
-                            Maps out all active virtual desktops and open application windows in a clean CLI table,
+                        <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops. Maps out all active virtual desktops and open application windows in a clean terminal table.</p>
 
-                            displaying window titles, desktop assignments, coordinates (X, Y), and dimensions (W x H).
-
-                        </p>
+                        <ul class="project-features">
+                            <li><strong>Desktop Hierarchy:</strong> Traverses the active desktop array and prints a structured tree view to the terminal.</li>
+                            <li><strong>Window Attributes:</strong> Reports window handle (HWND), executable process name, window title, coordinates, and bounding dimensions.</li>
+                            <li><strong>Zero Overhead:</strong> Lightweight single-binary executable with sub-50 ms execution time.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -1017,7 +1127,24 @@
 
                         </div>
 
-                        <p class="description">Intelligent IoT physical mail detection and environmental monitoring system built with Raspberry Pi and Arduino communicating over a custom 500,000-baud UART serial protocol. Mounts a 3-axis Sense HAT accelerometer to the mail slot flap for instant physical delivery detection, triggers automated 12V LED illumination via Arduino serial command, captures 720p snapshots via Pi Camera, and sends real-time photo alerts to Telegram. Features ambient hallway door-open sensing, two-way Telegram bot commands, and continuous time-series telemetry logging to InfluxDB and Grafana.</p>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Embedded Systems / IoT</span>
+                            <span class="tech-pill tech-pill-blue">Raspberry Pi (Linux)</span>
+                            <span class="tech-pill tech-pill-sys">Arduino (C++)</span>
+                            <span class="tech-pill tech-pill-sys">UART Serial Bus</span>
+                            <span class="tech-pill tech-pill-ai">Telegram Bot API</span>
+                            <span class="tech-pill tech-pill-ai">InfluxDB &amp; Grafana</span>
+                            <span class="tech-pill tech-pill-hw">Sense HAT</span>
+                        </div>
+
+                        <p class="description">Intelligent IoT physical mail detection and environmental monitoring system built with Raspberry Pi and Arduino communicating over a custom UART serial protocol.</p>
+
+                        <ul class="project-features">
+                            <li><strong>Vibration Sensing:</strong> 3-axis Sense HAT accelerometer mounted to the mail slot flap detects physical deliveries with zero false positives.</li>
+                            <li><strong>Automated Capture:</strong> Triggers 12V LED illumination via Arduino serial command and captures 720p snapshots via Pi Camera.</li>
+                            <li><strong>Alerting &amp; Remote Control:</strong> Dispatches real-time photo alerts to Telegram and executes user commands via two-way Telegram bot.</li>
+                            <li><strong>Telemetry Logging:</strong> Continuous time-series telemetry logging for door-state and environmental sensors to InfluxDB and Grafana.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -1071,9 +1198,24 @@
 
                         </div>
 
-                        <p class="description">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack. Integrated an Analog Devices LTC6811 automotive multicell stack monitor, custom Linduino C++ SPI firmware, and SIM808 Bluetooth SPP module to stream live multi-cell voltage telemetry to a Raspberry Pi gateway running InfluxDB, Grafana dashboards, and Python data analytics.
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Power &amp; Hardware Engineering</span>
+                            <span class="tech-pill tech-pill-hw">Analog Devices LTC6811</span>
+                            <span class="tech-pill tech-pill-hw">Lithium-Titanate (LTO)</span>
+                            <span class="tech-pill tech-pill-sys">Linduino (C++)</span>
+                            <span class="tech-pill tech-pill-sys">SPI Bus</span>
+                            <span class="tech-pill tech-pill-sys">Bluetooth SPP / SIM808</span>
+                            <span class="tech-pill tech-pill-ai">InfluxDB / Python</span>
+                        </div>
 
-                        </p>
+                        <p class="description">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack.</p>
+
+                        <ul class="project-features">
+                            <li><strong>Battery Stack Monitoring:</strong> Integrated Analog Devices LTC6811 automotive multicell stack monitor to read individual cell voltages across 2P4S pack.</li>
+                            <li><strong>Microcontroller Firmware:</strong> Wrote Linduino C++ firmware communicating over an isolated SPI bus with CRC validation.</li>
+                            <li><strong>Wireless Gateway:</strong> Streamed live voltage data over Bluetooth SPP via SIM808 module to an edge Raspberry Pi.</li>
+                            <li><strong>Analytics Dashboard:</strong> Automated InfluxDB storage and Grafana visualization to track cell degradation and imbalance during discharge cycles.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -1123,7 +1265,24 @@
 
                         </div>
 
-                        <p class="description">Evaluated, integrated, and bench-tested multi-spectral LiDAR and meteorological sensor arrays for autonomous maritime vessel collision avoidance. Configured Intel RealSense L515 solid-state LiDAR (2M-pixel depth + RGB + IMU) and Livox MID-14/TELE-15 sensors, integrated Vaisala PTU-307 atmospheric transmitters and PWD-20 present weather/visibility sensors over RS-232/RS-485 serial, and built 3D point-cloud processing pipelines (.ply) with pyrealsense2 and ROS (Robot Operating System) depth streaming nodes on Raspberry Pi and rugged GPU IPCs under simulated maritime fog, rain, and ambient glare.</p>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Autonomous Robotics &amp; Sensors</span>
+                            <span class="tech-pill tech-pill-hw">Intel RealSense L515</span>
+                            <span class="tech-pill tech-pill-hw">Livox LiDAR</span>
+                            <span class="tech-pill tech-pill-hw">Vaisala Weather Sensors</span>
+                            <span class="tech-pill tech-pill-sys">ROS (Robot Operating System)</span>
+                            <span class="tech-pill tech-pill-sys">RS-232 / RS-485 Serial</span>
+                            <span class="tech-pill tech-pill-blue">Python (pyrealsense2)</span>
+                        </div>
+
+                        <p class="description">Evaluated, integrated, and bench-tested multi-spectral LiDAR and meteorological sensor arrays for autonomous maritime vessel collision avoidance.</p>
+
+                        <ul class="project-features">
+                            <li><strong>Sensor Evaluation:</strong> Bench-tested Intel RealSense L515 solid-state LiDAR and Livox MID-14/TELE-15 sensors under simulated maritime fog, rain, and ambient glare.</li>
+                            <li><strong>Meteorological Integration:</strong> Connected Vaisala PTU-307 atmospheric transmitters and PWD-20 visibility sensors over RS-232/RS-485 serial.</li>
+                            <li><strong>Point-Cloud Processing:</strong> Developed 3D point-cloud processing pipelines (.ply) using <code>pyrealsense2</code> and ROS depth-streaming nodes on Raspberry Pi and GPU IPCs.</li>
+                            <li><strong>Data Logging:</strong> Serialized multi-sensor streams into structured diagnostic packets for collision avoidance validation.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
@@ -1179,7 +1338,24 @@
 
                         </div>
 
-                        <p class="description">Engineered, bench-tested, and deployed outdoor cellular IoT particulate matter monitoring stations for the City of Turku and Finnish Meteorological Institute (FMI). Integrated Sensirion SPS30 optical laser PM sensors with Pycom GPy (ESP32 SoC + Sequans LTE-M/NB-IoT modem) and Raspberry Pi 4 edge gateways running containerized Docker Compose microservices. Implemented UART/I2C sensor drivers in MicroPython with local flash ring buffers to prevent data loss during network dropouts, engineered STUN/ICE NAT traversal diagnostic logging, and routed real-time time-series telemetry through InfluxDB and Grafana dashboards.</p>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Cellular IoT / 5G</span>
+                            <span class="tech-pill tech-pill-hw">Sensirion SPS30</span>
+                            <span class="tech-pill tech-pill-hw">Pycom GPy (ESP32)</span>
+                            <span class="tech-pill tech-pill-hw">LTE-M / NB-IoT</span>
+                            <span class="tech-pill tech-pill-blue">MicroPython</span>
+                            <span class="tech-pill tech-pill-sys">Docker Compose</span>
+                            <span class="tech-pill tech-pill-ai">InfluxDB / Grafana</span>
+                        </div>
+
+                        <p class="description">Engineered, bench-tested, and deployed outdoor cellular IoT particulate matter monitoring stations for the City of Turku and Finnish Meteorological Institute (FMI).</p>
+
+                        <ul class="project-features">
+                            <li><strong>Optical PM Sensing:</strong> Integrated Sensirion SPS30 optical laser PM sensors measuring PM1.0, PM2.5, PM4, and PM10 mass concentrations.</li>
+                            <li><strong>Cellular Microcontroller:</strong> Programmed Pycom GPy (ESP32 SoC + Sequans LTE-M/NB-IoT modem) with UART/I2C sensor drivers in MicroPython.</li>
+                            <li><strong>Network Failover:</strong> Built local flash ring buffer to prevent data loss during network dropouts and engineered STUN/ICE NAT traversal diagnostic logging.</li>
+                            <li><strong>Edge Compute &amp; Pipeline:</strong> Deployed containerized Docker Compose microservices on Raspberry Pi 4 edge gateways with InfluxDB and Grafana.</li>
+                        </ul>
 
                         <div class="evidence-box">
 
