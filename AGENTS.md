@@ -15,3 +15,10 @@
 
 ### 3. Verification & Testing Policy
 - **Manual User Verification**: Do not perform automated or subagent browser verifications unless explicitly requested by the user. The user always verifies changes manually unless stated otherwise.
+
+### 4. Bilingual Localization & Translation Sync Policy
+- **Dual-Language Symmetry**: All pages (`index.html`, `systems-engineering.html`, `test-engineering.html`, `timeline.html`) support seamless English (`en`) and Finnish (`fi`) switching.
+- **Data Attributes**: Use `data-i18n`, `data-i18n-html`, and `data-i18n-attr` on all translatable elements.
+- **Section Sync Requirement**: Anytime content, sections, badges, or labels are added or modified, update both [`js/i18n/en.js`](./js/i18n/en.js) and [`js/i18n/fi.js`](./js/i18n/fi.js) in authentic professional Finnish (*kirjakieli / asiatyyli*).
+- **Mandatory Verification**: Always run `python scripts/check_translations.py` and `python scripts/check_absolute_paths.py` to confirm 100% dictionary symmetry and zero path leaks before completing any task.
+

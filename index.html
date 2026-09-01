@@ -1,357 +1,196 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Amir Farhadi - Portfolio Evidence</title>
-
     <script>
-
         (function () {
-
             const savedTheme = localStorage.getItem('theme');
-
             if (savedTheme) {
-
                 document.documentElement.setAttribute('data-theme', savedTheme);
-
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-
                 document.documentElement.setAttribute('data-theme', 'light');
-
             } else {
-
                 document.documentElement.setAttribute('data-theme', 'dark');
-
             }
 
+            const savedLang = localStorage.getItem('portfolio_lang');
+            if (savedLang) {
+                document.documentElement.setAttribute('lang', savedLang);
+            } else if (navigator && navigator.language && navigator.language.toLowerCase().startsWith('fi')) {
+                document.documentElement.setAttribute('lang', 'fi');
+            } else {
+                document.documentElement.setAttribute('lang', 'en');
+            }
         })();
-
     </script>
-
     <link rel="stylesheet" href="./css/main.css">
-
 </head>
 
-
-
 <body>
-
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-
+    <a href="#main-content" class="skip-link" data-i18n="global.skip_to_content">Skip to main content</a>
 
     <div class="container">
-
         <noscript>
-
             <aside class="noscript-banner" role="alert">
-
                 <strong>Notice:</strong> JavaScript is currently disabled or blocked by a browser extension (such as uBlock Origin). Interactive features (Accessibility Dialog, Theme Switcher, Voice Navigation, Keyboard Shortcuts, and Live Commits) require JavaScript. To enable them, please allow JavaScript for this page in your extension settings.
-
             </aside>
-
         </noscript>
 
-
-
         <nav id="top" class="top-bar" aria-label="Main Navigation" tabindex="-1">
-
-            <!-- Row 1: Top Utility Bar (Accessibility top-left, Theme top-right) -->
-
+            <!-- Row 1: Top Utility Bar (Accessibility top-left, Lang & Theme top-right) -->
             <div class="top-utility-bar">
-
                 <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-
-                    <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide">
-
-                        <span class="tag-prefix" aria-hidden="true">//</span> Accessibility Help <span
-
-                            class="kbd">?</span>
-
+                    <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide" data-i18n-attr="aria-label:index.a11y_btn_aria">
+                        <span class="tag-prefix" aria-hidden="true">//</span> <span data-i18n="index.a11y_btn">Accessibility Help</span> <span class="kbd">?</span>
                     </button>
-
-                    <a href="https://github.com/Amirf147" target="_blank" class="nav-btn"
-
-                        aria-label="Amir Farhadi's GitHub Profile">
-
-                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"
-
-                            style="display: inline-block; vertical-align: text-bottom;">
-
-                            <path
-
-                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
-
-                            </path>
-
+                    <a href="https://github.com/Amirf147" target="_blank" class="nav-btn" aria-label="Amir Farhadi's GitHub Profile">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: text-bottom;">
+                            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
                         </svg>
-
-                        GitHub Profile<span class="sr-only"> (opens in a new tab)</span>
-
+                        <span data-i18n="global.github_profile">GitHub Profile</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
                     </a>
-
                 </div>
 
-                <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme"
-
-                    data-tooltip="Cycle Themes (Dark, Light, High Contrast)">
-
-                    <span id="theme-icon" style="display: flex; align-items: center;"></span>
-
-                    <span id="theme-label">Theme</span>
-
-                </button>
-
+                <div class="top-utility-actions">
+                    <button id="lang-toggle" class="nav-btn lang-toggle" aria-label="Switch to Finnish / Vaihda kieleksi suomi" data-tooltip="Switch to Finnish [L]">
+                        <span id="lang-icon" style="display: flex; align-items: center;"></span>
+                        <span id="lang-label" data-i18n="global.lang_toggle_label">English (EN)</span>
+                    </button>
+                    <button id="theme-toggle" class="theme-toggle nav-btn" aria-label="Toggle theme" data-tooltip="Cycle Themes (Dark, Light, High Contrast)">
+                        <span id="theme-icon" style="display: flex; align-items: center;"></span>
+                        <span id="theme-label" data-i18n="global.theme_toggle_label">Theme</span>
+                    </button>
+                </div>
             </div>
 
-
-
             <!-- Row 2: Page Sections Row (Centered with Section Label) -->
-
             <div class="section-nav-wrapper">
-
-                <span class="section-nav-label">PAGE SECTIONS</span>
-
+                <span class="section-nav-label" data-i18n="index.page_sections_label">PAGE SECTIONS</span>
                 <div class="section-nav-cluster">
-
                     <a href="#recent-commits-section" class="nav-btn">
-
-                        <span class="tag-prefix" aria-hidden="true">// 00</span> Recent Activity
-
+                        <span class="tag-prefix" aria-hidden="true">// 00</span> <span data-i18n="index.nav_section00">Recent Activity</span>
                     </a>
-
-
 
                     <div class="nav-dropdown">
                         <a href="#caster-voice-os" class="nav-btn" aria-haspopup="true">
-                            <span class="tag-prefix" aria-hidden="true">// 01</span> Passion Projects <span class="arrow"
-                                aria-hidden="true">▾</span>
+                            <span class="tag-prefix" aria-hidden="true">// 01</span> <span data-i18n="index.nav_section01">Passion Projects</span> <span class="arrow" aria-hidden="true">▾</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="#item-adce">Active Desktop Context Engine (ADCE)</a>
-                            <a href="#item-caster-os">Caster Voice OS (Overview)</a>
-                            <a href="./timeline.html">Interactive Evolution Timeline ↗</a>
-                            <a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">ADCE GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank">Caster Voice OS GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a href="#item-adce" data-i18n="index.nav_item_adce">Active Desktop Context Engine (ADCE)</a>
+                            <a href="#item-caster-os" data-i18n="index.nav_item_caster_os">Caster Voice OS (Overview)</a>
+                            <a href="./timeline.html" data-i18n="index.nav_item_timeline">Interactive Evolution Timeline ↗</a>
+                            <a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank"><span data-i18n="index.nav_item_adce_github">ADCE GitHub ↗</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank"><span data-i18n="index.nav_item_caster_github">Caster Voice OS GitHub ↗</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
                     </div>
 
-
-
                     <div class="nav-dropdown">
-
                         <a href="#solved-problems" class="nav-btn" aria-haspopup="true">
-
-                            <span class="tag-prefix" aria-hidden="true">// 02</span> Engineering Solutions <span class="arrow"
-
-                                aria-hidden="true">▾</span>
-
+                            <span class="tag-prefix" aria-hidden="true">// 02</span> <span data-i18n="index.nav_section02">Engineering Solutions</span> <span class="arrow" aria-hidden="true">▾</span>
                         </a>
-
                         <div class="dropdown-menu">
-
-                            <a href="#item-tracker">1. Tactical Agentic Activity Tracker</a>
-
-                            <a href="#item-caster-switcher">2. Caster Voice App Switcher</a>
-
+                            <a href="#item-tracker" data-i18n="index.nav_item_tracker">1. Tactical Agentic Activity Tracker</a>
+                            <a href="#item-caster-switcher" data-i18n="index.nav_item_switcher">2. Caster Voice App Switcher</a>
                         </div>
-
                     </div>
 
-
-
                     <div class="nav-dropdown">
-
                         <a href="#open-source" class="nav-btn" aria-haspopup="true">
-
-                            <span class="tag-prefix" aria-hidden="true">// 03</span> Open Source <span class="arrow"
-
-                                aria-hidden="true">▾</span>
-
+                            <span class="tag-prefix" aria-hidden="true">// 03</span> <span data-i18n="index.nav_section03">Open Source</span> <span class="arrow" aria-hidden="true">▾</span>
                         </a>
-
                         <div class="dropdown-menu">
-
-                            <a href="#item-caster-merged">Caster Merged Pull Requests</a>
-
-                            <a href="#item-dragonfly-409">Dragonfly PR #409 (Number Series)</a>
-
-                            <a href="#item-dragonfly-408">Dragonfly PR #408 (Kaldi Unload Fix)</a>
-
-                            <a href="#item-pyvda-57">pyvda PR #57 (COM Object Fix)</a>
-
+                            <a href="#item-caster-merged" data-i18n="index.nav_item_caster_merged">Caster Merged Pull Requests</a>
+                            <a href="#item-dragonfly-409" data-i18n="index.nav_item_dragonfly_409">Dragonfly PR #409 (Number Series)</a>
+                            <a href="#item-dragonfly-408" data-i18n="index.nav_item_dragonfly_408">Dragonfly PR #408 (Kaldi Unload Fix)</a>
+                            <a href="#item-pyvda-57" data-i18n="index.nav_item_pyvda_57">pyvda PR #57 (COM Object Fix)</a>
                         </div>
-
                     </div>
 
-
-
                     <div class="nav-dropdown">
-
                         <a href="#tools" class="nav-btn" aria-haspopup="true">
-
-                            <span class="tag-prefix" aria-hidden="true">// 04</span> Public Tools <span class="arrow"
-
-                                aria-hidden="true">▾</span>
-
+                            <span class="tag-prefix" aria-hidden="true">// 04</span> <span data-i18n="index.nav_section04">Public Tools</span> <span class="arrow" aria-hidden="true">▾</span>
                         </a>
-
                         <div class="dropdown-menu">
-
-                            <a href="#item-winstasis">WinStasis (Window Restorer)</a>
-
-                            <a href="#item-vdtree">vdtree (Virtual Desktop Tree)</a>
-
+                            <a href="#item-winstasis" data-i18n="index.nav_item_winstasis">WinStasis (Window Restorer)</a>
+                            <a href="#item-vdtree" data-i18n="index.nav_item_vdtree">vdtree (Virtual Desktop Tree)</a>
                         </div>
-
                     </div>
-
-
 
                     <div class="nav-dropdown">
-
                         <a href="#academic-projects" class="nav-btn" aria-haspopup="true">
-
-                            <span class="tag-prefix" aria-hidden="true">// 05</span> School &amp; Engineering <span class="arrow"
-
-                                aria-hidden="true">▾</span>
-
+                            <span class="tag-prefix" aria-hidden="true">// 05</span> <span data-i18n="index.nav_section05">School &amp; Engineering</span> <span class="arrow" aria-hidden="true">▾</span>
                         </a>
-
                         <div class="dropdown-menu">
-
-                            <a href="#item-iot-mail">IoT Physical Mail Detector &amp; Home Monitor</a>
-
-                            <a href="#item-iot-bms">IoT Battery Management System (BMS)</a>
-
-                            <a href="#item-marine-lidar">Autonomous Marine LiDAR &amp; Sensor Array</a>
-
-                            <a href="#item-5g-aq-station">5G &amp; Cellular IoT Urban AQ Station</a>
-
+                            <a href="#item-iot-mail" data-i18n="index.nav_item_iot_mail">IoT Physical Mail Detector &amp; Home Monitor</a>
+                            <a href="#item-iot-bms" data-i18n="index.nav_item_iot_bms">IoT Battery Management System (BMS)</a>
+                            <a href="#item-marine-lidar" data-i18n="index.nav_item_marine_lidar">Autonomous Marine LiDAR &amp; Sensor Array</a>
+                            <a href="#item-5g-aq-station" data-i18n="index.nav_item_5g_aq_station">5G &amp; Cellular IoT Urban AQ Station</a>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </nav>
 
-
-
         <header class="hero">
-
-            <div class="sr-only">
+            <div class="sr-only" data-i18n="index.hero_sr_only">
                 Amir Farhadi's Portfolio. This page contains 5 main sections: Passion Projects (ADCE &amp; Caster Voice OS), Engineering Solutions, Open Source, Public
                 Tools, and Previous School &amp; Applied Engineering Projects. Press the question mark key to open the Accessibility and Keyboard Shortcuts guide.
             </div>
-
-            <h1 class="main-title">Amir Farhadi</h1>
-
-            <p class="subtitle">Software Engineer | Automation &amp; Agentic Systems Architect</p>
-
+            <h1 class="main-title" data-i18n="index.hero_title">Amir Farhadi</h1>
+            <p class="subtitle" data-i18n="index.hero_subtitle">Software Engineer | Automation &amp; Agentic Systems Architect</p>
         </header>
+
 
 
 
         <main id="main-content" tabindex="-1">
 
-
-
-            <section id="recent-commits-section" aria-labelledby="recent-commits-title" class="navigable-item"
-
-                tabindex="-1">
-
+            <section id="recent-commits-section" aria-labelledby="recent-commits-title" class="navigable-item" tabindex="-1">
                 <h2 id="recent-commits-title" class="section-header" tabindex="-1">
-
-                    <span class="section-num" aria-hidden="true">// 00</span> Recent Activity
-
+                    <span class="section-num" aria-hidden="true">// 00</span> <span data-i18n="index.section00_title">Recent Activity</span>
                 </h2>
-
                 <div class="commits-container">
-
                     <div class="commits-header-row">
-
                         <div class="commits-live-status">
-
                             <span class="commits-live-dot" aria-hidden="true"></span>
-
-                            <span class="commits-live-text">Live Commits Feed</span>
-
+                            <span class="commits-live-text" data-i18n="index.commits_live_status">Live Commits Feed</span>
                         </div>
-
-                        <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list"
-
-                            data-tooltip="Fetch latest live commits">
-
-                            <svg class="refresh-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
-
-                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
-
-                                style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;">
-
+                        <button id="refresh-commits-btn" class="nav-btn btn-sm" aria-label="Refresh commits list" data-tooltip="Fetch latest live commits" data-i18n-attr="data-tooltip:index.commits_refresh_tooltip">
+                            <svg class="refresh-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;">
                                 <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l.73-.73" />
-
                             </svg>
-
-                            <span class="refresh-text">Refresh</span>
-
+                            <span class="refresh-text" data-i18n="index.commits_refresh_btn">Refresh</span>
                         </button>
-
                     </div>
-
                     <div id="commits-feed-container" aria-live="polite">
-
                         <!-- Commits skeleton/list will render here dynamically -->
-
                     </div>
-
                     <div class="commits-footer-row">
-
-                        <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc"
-
-                            target="_blank" class="nav-btn" style="width: 100%; justify-content: center;"
-
-                            aria-label="View search query on GitHub (opens in a new tab)">
-
-                            View Commits Search Query on GitHub<span class="sr-only"> (opens in a new tab)</span>
-
+                        <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc" target="_blank" class="nav-btn" style="width: 100%; justify-content: center;" aria-label="View search query on GitHub (opens in a new tab)">
+                            <span data-i18n="index.commits_search_link">View Commits Search Query on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
                         </a>
-
                     </div>
-
                 </div>
-
                 <div class="item-nav-bar" style="margin-top: 24px;">
                     <span></span>
-                    <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                    <a href="#item-adce" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-                            class="kbd">n</span></a>
+                    <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                    <a href="#item-adce" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                 </div>
-
             </section>
-
-
 
             <!-- Section 01: Passion Projects (ADCE & Caster Voice OS) -->
             <section id="caster-voice-os" aria-labelledby="caster-voice-os-title">
                 <h2 id="caster-voice-os-title" class="section-header" tabindex="-1">
-                    <span class="section-num" aria-hidden="true">// 01</span> Passion Projects
+                    <span class="section-num" aria-hidden="true">// 01</span> <span data-i18n="index.section01_title">Passion Projects</span>
                 </h2>
                 <ul class="project-list">
                     <li id="item-adce" class="project-item navigable-item" tabindex="-1">
                         <div class="project-title-row">
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank">Active Desktop Context Engine (ADCE) - Local Context Graph &amp; MCP Provider for AI &amp; Voice<span class="sr-only"> (opens in a new tab)</span></a></h3>
-                            <span class="status-tag status-live">Active (with Real-World Use Case; see links below)</span>
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank"><span data-i18n="index.adce_title">Active Desktop Context Engine (ADCE) - Local Context Graph &amp; MCP Provider for AI &amp; Voice</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.adce_status">Active (with Real-World Use Case; see links below)</span>
                         </div>
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">.NET 10 (C#)</span>
@@ -362,13 +201,13 @@
                             <span class="tech-pill tech-pill-sys">Single-Threaded Apartment (STA)</span>
                             <span class="tech-pill tech-pill-sys">Per-Monitor V2 DPI</span>
                         </div>
-                        <p class="description">Windows background daemon and Model Context Protocol (MCP) server providing real-time desktop topology, active window envelopes, Virtual Desktop GUIDs, and container-aware tab extraction in under 15 ms with 0.0% idle CPU.</p>
+                        <p class="description" data-i18n="index.adce_desc">Windows background daemon and Model Context Protocol (MCP) server providing real-time desktop topology, active window envelopes, Virtual Desktop GUIDs, and container-aware tab extraction in under 15 ms with 0.0% idle CPU.</p>
                         <ul class="project-features">
-                            <li><strong>Dual-Engine Topology:</strong> Sub-millisecond Win32 shallow gating (&lt; 0.5 ms) paired with FlaUI.UIA3 batch caching to replace CPU-heavy OCR screenshot polling.</li>
-                            <li><strong>Real-World Downstream Integration:</strong> Streams live UI focus zones to Caster Voice OS to enable dynamic IDE terminal voice grammars with zero speech engine audio latency.</li>
-                            <li><strong>Browser Extraction:</strong> Container-aware tab and URL extraction with strict DOM tree pruning (10.17 ms for 30 tabs) without browser extensions.</li>
-                            <li><strong>Time-Series Store:</strong> Embedded SQLite WAL database recording window state transitions for temporal agent reasoning.</li>
-                            <li><strong>System Tray Host:</strong> Per-Monitor V2 DPI-aware host with non-activating live DevTools HUD overlay (<code>WS_EX_NOACTIVATE | WS_EX_TOPMOST</code>).</li>
+                            <li data-i18n-html="index.adce_f1"><strong>Dual-Engine Topology:</strong> Sub-millisecond Win32 shallow gating (&lt; 0.5 ms) paired with FlaUI.UIA3 batch caching to replace CPU-heavy OCR screenshot polling.</li>
+                            <li data-i18n-html="index.adce_f2"><strong>Real-World Downstream Integration:</strong> Streams live UI focus zones to Caster Voice OS to enable dynamic IDE terminal voice grammars with zero speech engine audio latency.</li>
+                            <li data-i18n-html="index.adce_f3"><strong>Browser Extraction:</strong> Container-aware tab and URL extraction with strict DOM tree pruning (10.17 ms for 30 tabs) without browser extensions.</li>
+                            <li data-i18n-html="index.adce_f4"><strong>Time-Series Store:</strong> Embedded SQLite WAL database recording window state transitions for temporal agent reasoning.</li>
+                            <li data-i18n-html="index.adce_f5"><strong>System Tray Host:</strong> Per-Monitor V2 DPI-aware host with non-activating live DevTools HUD overlay (<code>WS_EX_NOACTIVATE | WS_EX_TOPMOST</code>).</li>
                         </ul>
                         <div class="evidence-box">
                             <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
@@ -380,7 +219,7 @@
                                             width="600">
                                     </a>
                                     <div style="font-size: 0.82rem; color: var(--subtitle-color); margin-top: 4px; font-weight: 600;">
-                                        <span aria-hidden="true">▸ </span>System Tray Host &amp; Non-Activating Live DevTools HUD
+                                        <span aria-hidden="true">▸ </span><span data-i18n="index.adce_img1_caption">System Tray Host &amp; Non-Activating Live DevTools HUD</span>
                                     </div>
                                 </div>
                                 <div style="flex: 1 1 360px; max-width: 100%;">
@@ -391,26 +230,26 @@
                                             width="600">
                                     </a>
                                     <div style="font-size: 0.82rem; color: var(--subtitle-color); margin-top: 4px; font-weight: 600;">
-                                        <span aria-hidden="true">▸ </span>Zero DOM Crawling: Sub-15ms Browser Tab &amp; URL Extraction
+                                        <span aria-hidden="true">▸ </span><span data-i18n="index.adce_img2_caption">Zero DOM Crawling: Sub-15ms Browser Tab &amp; URL Extraction</span>
                                     </div>
                                 </div>
                             </div>
-                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/guides/FIRST_REAL_WORLD_USE_CASE_CASTER_DYNAMIC_TERMINAL_GRAMMARS.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View Real-World Use Case: Caster Dynamic IDE Grammars<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/ARCHITECTURE_AND_MODULAR_IMPLEMENTATION_PLAN.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View 5-Project Architecture Spec<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span>View Empirical Telemetry Benchmarks<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/guides/FIRST_REAL_WORLD_USE_CASE_CASTER_DYNAMIC_TERMINAL_GRAMMARS.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_usecase">View Real-World Use Case: Caster Dynamic IDE Grammars</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/ARCHITECTURE_AND_MODULAR_IMPLEMENTATION_PLAN.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_arch">View 5-Project Architecture Spec</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_benchmarks">View Empirical Telemetry Benchmarks</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
                         <div class="item-nav-bar">
-                            <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-caster-os" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
+                            <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-caster-os" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
                     </li>
 
                     <li id="item-caster-os" class="project-item navigable-item" tabindex="-1">
                         <div class="project-title-row">
-                            <h3 class="project-title"><a href="./timeline.html">Caster Voice OS - Personal Hands-Free Platform (2-Year Git Evolution)<span class="sr-only"> (opens timeline page)</span></a></h3>
-                            <span class="status-tag status-live">Active / Production</span>
+                            <h3 class="project-title"><a href="./timeline.html"><span data-i18n="index.caster_os_title">Caster Voice OS - Personal Hands-Free Platform (2-Year Git Evolution)</span><span class="sr-only" data-i18n="global.opens_timeline"> (opens timeline page)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.caster_os_status">Active / Production</span>
                         </div>
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Python 3</span>
@@ -421,74 +260,55 @@
                             <span class="tech-pill tech-pill-ai">XML-RPC / Sockets</span>
                             <span class="tech-pill tech-pill-test">Git (960+ Commits)</span>
                         </div>
-                        <p class="description">A 27-month, 969-commit personal voice computing operating system enabling hands-free programming, terminal navigation, and desktop orchestration.</p>
+                        <p class="description" data-i18n="index.caster_os_desc">A 27-month, 969-commit personal voice computing operating system enabling hands-free programming, terminal navigation, and desktop orchestration.</p>
                         <ul class="project-features">
-                            <li><strong>3-Tier Window Switcher:</strong> Deterministic OS focus engine with Win32 thread attach, Taskbar UIA fallback, and synthetic keystroke routing.</li>
-                            <li><strong>Kaldi ASR Engine Patches:</strong> Resolved compiler race conditions and memory leaks during deferred grammar reloads.</li>
-                            <li><strong>Multimodal IPC:</strong> Integrated Olympus RS31H foot pedal controls via AutoHotkey v2 and thread-safe XML-RPC bridges.</li>
-                            <li><strong>CCR Language Grammars:</strong> Modular command suites for Python, C#, PowerShell, Git, and AI IDE workflows (Windsurf, Cursor).</li>
+                            <li data-i18n-html="index.caster_os_f1"><strong>3-Tier Window Switcher:</strong> Deterministic OS focus engine with Win32 thread attach, Taskbar UIA fallback, and synthetic keystroke routing.</li>
+                            <li data-i18n-html="index.caster_os_f2"><strong>Kaldi ASR Engine Patches:</strong> Resolved compiler race conditions and memory leaks during deferred grammar reloads.</li>
+                            <li data-i18n-html="index.caster_os_f3"><strong>Multimodal IPC:</strong> Integrated Olympus RS31H foot pedal controls via AutoHotkey v2 and thread-safe XML-RPC bridges.</li>
+                            <li data-i18n-html="index.caster_os_f4"><strong>CCR Language Grammars:</strong> Modular command suites for Python, C#, PowerShell, Git, and AI IDE workflows (Windsurf, Cursor).</li>
                         </ul>
                         <div class="evidence-box">
                             <div class="timeline-summary-strip">
                                 <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 1 (May–Aug 2024)</span>
-                                    <span class="era-strip-desc">Kaldi ASR migration, Talon phonetic alphabet, modular rule hierarchy</span>
+                                    <span class="era-strip-badge" data-i18n="index.caster_era1_badge">Era 1 (May–Aug 2024)</span>
+                                    <span class="era-strip-desc" data-i18n="index.caster_era1_desc">Kaldi ASR migration, Talon phonetic alphabet, modular rule hierarchy</span>
                                 </div>
                                 <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 2 (Sep–Dec 2024)</span>
-                                    <span class="era-strip-desc">Desktop automation (Office/VSCodium), privacy boundaries, language CCR</span>
+                                    <span class="era-strip-badge" data-i18n="index.caster_era2_badge">Era 2 (Sep–Dec 2024)</span>
+                                    <span class="era-strip-desc" data-i18n="index.caster_era2_desc">Desktop automation (Office/VSCodium), privacy boundaries, language CCR</span>
                                 </div>
                                 <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 3 (Jan–Nov 2025)</span>
-                                    <span class="era-strip-desc">Grammar maturation, AI IDE workflows (Cursor/Windsurf), RS31H foot pedal AHK v2</span>
+                                    <span class="era-strip-badge" data-i18n="index.caster_era3_badge">Era 3 (Jan–Nov 2025)</span>
+                                    <span class="era-strip-desc" data-i18n="index.caster_era3_desc">Grammar maturation, AI IDE workflows (Cursor/Windsurf), RS31H foot pedal AHK v2</span>
                                 </div>
                                 <div class="era-strip-item">
-                                    <span class="era-strip-badge">Era 4 (May–Aug 2026)</span>
-                                    <span class="era-strip-desc">3-tier failsafe window switcher, empirical COM telemetry, Kaldi race fix, Brain docs</span>
+                                    <span class="era-strip-badge" data-i18n="index.caster_era4_badge">Era 4 (May–Aug 2026)</span>
+                                    <span class="era-strip-desc" data-i18n="index.caster_era4_desc">3-tier failsafe window switcher, empirical COM telemetry, Kaldi race fix, Brain docs</span>
                                 </div>
                             </div>
-                            <a class="evidence-link" href="./timeline.html" style="margin-right: 15px;"><span aria-hidden="true">→ </span>Explore Interactive 2-Year Timeline Web App<span class="sr-only"> (opens timeline page)</span></a>
-                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span>View GitHub Repository<span class="sr-only"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/context/repository-brain.md" target="_blank"><span aria-hidden="true">→ </span>View Canonical Repository Brain Docs<span class="sr-only"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="./timeline.html" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.caster_link_timeline">Explore Interactive 2-Year Timeline Web App</span><span class="sr-only" data-i18n="global.opens_timeline"> (opens timeline page)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.caster_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/context/repository-brain.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.caster_link_brain">View Canonical Repository Brain Docs</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
                         <div class="item-nav-bar">
-                            <a href="#item-adce" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span class="kbd">p</span></a>
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-                            <a href="#item-tracker" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-                                <span class="kbd">n</span></a>
+                            <a href="#item-adce" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-tracker" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
                     </li>
-
                 </ul>
-
             </section>
 
-
-
             <section aria-labelledby="solved-problems">
-
                 <h2 id="solved-problems" class="section-header" tabindex="-1">
-
-                    <span class="section-num" aria-hidden="true">// 02</span> Engineering Solutions
-
+                    <span class="section-num" aria-hidden="true">// 02</span> <span data-i18n="index.section02_title">Engineering Solutions</span>
                 </h2>
-
                 <ul class="project-list">
-
                     <li id="item-tracker" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=ufrwROqSNLs"
-
-                                    target="_blank">1. Tactical Agentic Activity Tracker<span class="sr-only"> (opens in
-
-                                         a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Live Demo</span>
-
+                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=ufrwROqSNLs" target="_blank"><span data-i18n="index.tracker_title">1. Tactical Agentic Activity Tracker</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.tracker_status">Live Demo</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Python</span>
                             <span class="tech-pill tech-pill-ai">Microsoft AI Foundry</span>
@@ -498,72 +318,36 @@
                             <span class="tech-pill tech-pill-sys">AsyncIO</span>
                             <span class="tech-pill tech-pill-sys">REST API</span>
                         </div>
-
-                        <p class="description">Multi-agent orchestration middleware connecting private Azure cloud infrastructure, Microsoft AI Foundry, and Azure Speech Services with the Google Gemini SDK ecosystem.</p>
-
+                        <p class="description" data-i18n="index.tracker_desc">Multi-agent orchestration middleware connecting private Azure cloud infrastructure, Microsoft AI Foundry, and Azure Speech Services with the Google Gemini SDK ecosystem.</p>
                         <ul class="project-features">
-                            <li><strong>Cross-Vendor Orchestration:</strong> Custom Python middleware managing concurrent execution across independent LLM agent processes.</li>
-                            <li><strong>Speech &amp; AI Integration:</strong> Synthesized multimodal agent reasoning using Microsoft AI Foundry models and Azure Speech Services.</li>
-                            <li><strong>Context Synchronization:</strong> Shared state store coordinating multi-step planning, task delegation, and execution logging.</li>
-                            <li><strong>Live Telemetry:</strong> Real-time event streaming and execution monitoring across cloud endpoints.</li>
+                            <li data-i18n-html="index.tracker_f1"><strong>Cross-Vendor Orchestration:</strong> Custom Python middleware managing concurrent execution across independent LLM agent processes.</li>
+                            <li data-i18n-html="index.tracker_f2"><strong>Speech &amp; AI Integration:</strong> Synthesized multimodal agent reasoning using Microsoft AI Foundry models and Azure Speech Services.</li>
+                            <li data-i18n-html="index.tracker_f3"><strong>Context Synchronization:</strong> Shared state store coordinating multi-step planning, task delegation, and execution logging.</li>
+                            <li data-i18n-html="index.tracker_f4"><strong>Live Telemetry:</strong> Real-time event streaming and execution monitoring across cloud endpoints.</li>
                         </ul>
-
                         <div class="evidence-box">
-
                             <div class="video-container">
-
                                 <iframe src="https://www.youtube.com/embed/ufrwROqSNLs?si=Si-a7m6eVQ9GWaFR"
-
                                     title="Demonstration video: Tactical Agentic Activity Tracker multi-agent orchestration"
-
                                     frameborder="0"
-
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
                             </div>
-
-                            <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs"
-
-                                target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span>Watch "3 Agent Demo" on YouTube<span
-
-                                    class="sr-only"> (opens in a new tab)</span></a>
-
-                            <a class="evidence-link" href="https://github.com/amirf147/karki" target="_blank"><span aria-hidden="true">→ </span>View Tactical Agentic Activity Tracker docs and code on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://www.youtube.com/watch?v=ufrwROqSNLs" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span><span data-i18n="index.tracker_link_video">Watch "3 Agent Demo" on YouTube</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/karki" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.tracker_link_github">View Tactical Agentic Activity Tracker docs and code on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-caster-os" class="nav-btn"><span aria-hidden="true">← </span>Prev
-
-                                Entry <span class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-caster-switcher" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-
-                                <span class="kbd">n</span></a>
-
+                            <a href="#item-caster-os" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-caster-switcher" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-caster-switcher" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=zeyoatLmYgQ"
-
-                                    target="_blank">2. Caster Voice App Switcher (Replacing Alt+Tab)<span
-
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Live Demo</span>
-
+                            <h3 class="project-title"><a href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank"><span data-i18n="index.switcher_title">2. Caster Voice App Switcher (Replacing Alt+Tab)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.switcher_status">Live Demo</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Python</span>
                             <span class="tech-pill tech-pill-sys">Win32 API / User32</span>
@@ -572,61 +356,31 @@
                             <span class="tech-pill tech-pill-ai">Dragonfly</span>
                             <span class="tech-pill tech-pill-sys">Process Handles</span>
                         </div>
-
-                        <p class="description">Low-level Windows desktop focus management and voice window switching engine for the Caster and Dragonfly speech recognition frameworks.</p>
-
+                        <p class="description" data-i18n="index.switcher_desc">Low-level Windows desktop focus management and voice window switching engine for the Caster and Dragonfly speech recognition frameworks.</p>
                         <ul class="project-features">
-                            <li><strong>3-Tier Failsafe Architecture:</strong> Primary <code>AttachThreadInput</code> + <code>SetForegroundWindow</code> Win32 API bypass, secondary Taskbar UIA automation, and tertiary synthetic keystroke dispatch.</li>
-                            <li><strong>Virtual Desktop Filtering:</strong> Interfaces with Windows Virtual Desktop APIs to filter application targets by active workspace.</li>
-                            <li><strong>In-App Tab Cycling:</strong> Direct voice commands to switch between open tabs across browsers and code editors.</li>
+                            <li data-i18n-html="index.switcher_f1"><strong>3-Tier Failsafe Architecture:</strong> Primary <code>AttachThreadInput</code> + <code>SetForegroundWindow</code> Win32 API bypass, secondary Taskbar UIA automation, and tertiary synthetic keystroke dispatch.</li>
+                            <li data-i18n-html="index.switcher_f2"><strong>Virtual Desktop Filtering:</strong> Interfaces with Windows Virtual Desktop APIs to filter application targets by active workspace.</li>
+                            <li data-i18n-html="index.switcher_f3"><strong>In-App Tab Cycling:</strong> Direct voice commands to switch between open tabs across browsers and code editors.</li>
                         </ul>
-
                         <div class="evidence-box">
-
                             <div class="video-container">
-
                                 <iframe src="https://www.youtube.com/embed/zeyoatLmYgQ?si=x_mrpffWQZEdt9ky"
-
                                     title="Demonstration video: Caster Voice App Switcher replacing ALT+TAB with voice commands"
-
                                     frameborder="0"
-
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
                             </div>
-
-                            <a class="evidence-link" href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank"
-
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>Watch "Replacing ALT + TAB
-
-                                with Voice commands" on YouTube<span class="sr-only"> (opens in a new tab)</span></a>
-
-                            <a class="evidence-link"
-
-                                href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/features/app_switcher.md"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View App Switcher Documentation and
-
-                                Code on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://www.youtube.com/watch?v=zeyoatLmYgQ" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span><span data-i18n="index.switcher_link_video">Watch "Replacing ALT + TAB with Voice commands" on YouTube</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/features/app_switcher.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.switcher_link_github">View App Switcher Documentation and Code on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-tracker" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-caster-merged" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-
-                                <span class="kbd">n</span></a>
-
+                            <a href="#item-tracker" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-caster-merged" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
+                    </li>
+                </ul>
+            </section>
                     </li>
 
                 </ul>
@@ -636,33 +390,16 @@
 
 
             <section aria-labelledby="open-source">
-
                 <h2 id="open-source" class="section-header" tabindex="-1">
-
-                    <span class="section-num" aria-hidden="true">// 03</span> Open Source Contributions
-
+                    <span class="section-num" aria-hidden="true">// 03</span> <span data-i18n="index.section03_title">Open Source Contributions</span>
                 </h2>
-
                 <ul class="project-list">
-
                     <li id="item-caster-merged" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a
-
-                                    href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-
-                                    target="_blank">Caster Framework (Merged Pull Requests)<span class="sr-only"> (opens
-
-                                        in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Merged</span>
-
-                            <span class="status-tag status-live">Latest merge on Aug 27, 2026</span>
-
+                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank"><span data-i18n="index.caster_merged_title">Caster Framework (Merged Pull Requests)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.merged_status">Merged</span>
+                            <span class="status-tag status-live" data-i18n="index.caster_merged_date">Latest merge on Aug 27, 2026</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Open Source</span>
                             <span class="tech-pill tech-pill-blue">Python</span>
@@ -671,72 +408,31 @@
                             <span class="tech-pill tech-pill-sys">Thread Synchronization</span>
                             <span class="tech-pill tech-pill-test">Upstream Merged</span>
                         </div>
-
-                        <p class="description">Upstream contributions merged into Caster, an open-source voice dictation and accessibility platform.</p>
-
+                        <p class="description" data-i18n="index.caster_merged_desc">Upstream contributions merged into Caster, an open-source voice dictation and accessibility platform.</p>
                         <ul class="project-features">
-                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/975" target="_blank">PR #975<span class="sr-only"> (opens in a new tab)</span></a> (Numeric Engine Refactor):</strong> Rebuilt number grammar rules using <code>NumberRef</code>, resolving Caster <a href="https://github.com/dictation-toolbox/caster/issues/938" target="_blank">Issue #938<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://github.com/dictation-toolbox/caster/issues/857" target="_blank">Issue #857<span class="sr-only"> (opens in a new tab)</span></a> to remove the legacy 4-digit dictation ceiling.</li>
-                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/965" target="_blank">PR #965<span class="sr-only"> (opens in a new tab)</span></a> (HUD Startup Synchronization):</strong> Added polling retry logic to resolve thread initialization race conditions during startup.</li>
-                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/962" target="_blank">PR #962<span class="sr-only"> (opens in a new tab)</span></a> (Parser Corrections):</strong> Fixed title-case contraction and possessive casing bugs in continuous dictation output.</li>
-                            <li><strong><a href="https://github.com/dictation-toolbox/caster/pull/960" target="_blank">PR #960<span class="sr-only"> (opens in a new tab)</span></a> (Windows 11 Desktops):</strong> Restored virtual desktop voice navigation by integrating updated pyvda COM interfaces.</li>
+                            <li data-i18n-html="index.caster_merged_f1"><strong><a href="https://github.com/dictation-toolbox/caster/pull/975" target="_blank">PR #975<span class="sr-only"> (opens in a new tab)</span></a> (Numeric Engine Refactor):</strong> Rebuilt number grammar rules using <code>NumberRef</code>, resolving Caster <a href="https://github.com/dictation-toolbox/caster/issues/938" target="_blank">Issue #938<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://github.com/dictation-toolbox/caster/issues/857" target="_blank">Issue #857<span class="sr-only"> (opens in a new tab)</span></a> to remove the legacy 4-digit dictation ceiling.</li>
+                            <li data-i18n-html="index.caster_merged_f2"><strong><a href="https://github.com/dictation-toolbox/caster/pull/965" target="_blank">PR #965<span class="sr-only"> (opens in a new tab)</span></a> (HUD Startup Synchronization):</strong> Added polling retry logic to resolve thread initialization race conditions during startup.</li>
+                            <li data-i18n-html="index.caster_merged_f3"><strong><a href="https://github.com/dictation-toolbox/caster/pull/962" target="_blank">PR #962<span class="sr-only"> (opens in a new tab)</span></a> (Parser Corrections):</strong> Fixed title-case contraction and possessive casing bugs in continuous dictation output.</li>
+                            <li data-i18n-html="index.caster_merged_f4"><strong><a href="https://github.com/dictation-toolbox/caster/pull/960" target="_blank">PR #960<span class="sr-only"> (opens in a new tab)</span></a> (Windows 11 Desktops):</strong> Restored virtual desktop voice navigation by integrating updated pyvda COM interfaces.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link"
-
-                                href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-
-                                target="_blank"
-
-                                aria-label="View Merged Commits on GitHub by Amir Farhadi (opens in a new tab)">
-
-                                <img class="screenshot" src="prs-screenshot.png"
-
-                                    alt="Screenshot of Caster repository on GitHub showing 4 merged pull requests by Amir Farhadi: PR #975, PR #965, PR #962, and PR #960."
-
-                                    width="800">
-
+                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank" aria-label="View Merged Commits on GitHub by Amir Farhadi (opens in a new tab)">
+                                <img class="screenshot" src="prs-screenshot.png" alt="Screenshot of Caster repository on GitHub showing 4 merged pull requests by Amir Farhadi: PR #975, PR #965, PR #962, and PR #960." width="800" data-i18n-attr="alt:index.caster_merged_img_alt">
                             </a>
-
-                            <a class="evidence-link"
-
-                                href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View Merged Commits on GitHub<span
-
-                                    class="sr-only"> (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/dictation-toolbox/caster/commits?author=Amirf147" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.caster_merged_link">View Merged Commits on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-caster-switcher" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-
-                                <span class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-dragonfly-409" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-
-                                <span class="kbd">n</span></a>
-
+                            <a href="#item-caster-switcher" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-dragonfly-409" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-dragonfly-409" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-
-                                    target="_blank">Dragonfly Framework - Fix Number Series Sequence Matching &amp; Limits (PR #409)<span class="sr-only"> (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Open PR #409</span>
-
+                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank"><span data-i18n="index.df409_title">Dragonfly Framework - Fix Number Series Sequence Matching &amp; Limits (PR #409)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.df409_status">Open PR #409</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Speech Recognition Engine</span>
                             <span class="tech-pill tech-pill-blue">Python</span>
@@ -744,67 +440,30 @@
                             <span class="tech-pill tech-pill-ai">AST Parsing</span>
                             <span class="tech-pill tech-pill-test">Regression Testing</span>
                         </div>
-
-                        <p class="description">Upstream patch resolving digit sequence matching conflicts, arbitrary length boundaries, and formatting loss in Dragonfly's core Number grammar class.</p>
-
+                        <p class="description" data-i18n="index.df409_desc">Upstream patch resolving digit sequence matching conflicts, arbitrary length boundaries, and formatting loss in Dragonfly's core Number grammar class.</p>
                         <ul class="project-features">
-                            <li><strong>Sequence Matching:</strong> Corrected greedy matching conflicts between single digits, compound numbers, and formatted number strings.</li>
-                            <li><strong>Unbounded Digit Sequences:</strong> Removed hardcoded length restrictions to support arbitrary numeric input across speech engines.</li>
-                            <li><strong>Zero Formatting &amp; Upstream Link:</strong> Preserved leading and embedded zeros across speech backends, unblocking Caster <a href="https://github.com/dictation-toolbox/caster/issues/938" target="_blank">Issue #938<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://github.com/dictation-toolbox/caster/issues/857" target="_blank">Issue #857<span class="sr-only"> (opens in a new tab)</span></a>.</li>
+                            <li data-i18n-html="index.df409_f1"><strong>Sequence Matching:</strong> Corrected greedy matching conflicts between single digits, compound numbers, and formatted number strings.</li>
+                            <li data-i18n-html="index.df409_f2"><strong>Unbounded Digit Sequences:</strong> Removed hardcoded length restrictions to support arbitrary numeric input across speech engines.</li>
+                            <li data-i18n-html="index.df409_f3"><strong>Zero Formatting &amp; Upstream Link:</strong> Preserved leading and embedded zeros across speech backends, unblocking Caster <a href="https://github.com/dictation-toolbox/caster/issues/938" target="_blank">Issue #938<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://github.com/dictation-toolbox/caster/issues/857" target="_blank">Issue #857<span class="sr-only"> (opens in a new tab)</span></a>.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-
-                                target="_blank" aria-label="View Pull Request #409 on GitHub (opens in a new tab)">
-
-                                <img class="screenshot" src="dragonfly-pr-screenshot.png"
-
-                                    alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching."
-
-                                    width="800">
-
+                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank" aria-label="View Pull Request #409 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="dragonfly-pr-screenshot.png" alt="Screenshot of Dragonfly Pull Request #409 on GitHub detailing fixes for speech recognition number series sequence matching." width="800" data-i18n-attr="alt:index.df409_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #409 on GitHub<span
-
-                                    class="sr-only"> (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/409" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.df409_link">View Pull Request #409 on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-caster-merged" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-
-                                <span class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-dragonfly-408" class="nav-btn">Next Entry <span aria-hidden="true">→</span>
-
-                                <span class="kbd">n</span></a>
-
+                            <a href="#item-caster-merged" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-dragonfly-408" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-dragonfly-408" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/408"
-
-                                    target="_blank">Dragonfly Framework - Fix Kaldi Deferred Mid-Phrase Reload Bug (PR #408)<span
-
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Open PR #408</span>
-
+                            <h3 class="project-title"><a href="https://github.com/dictation-toolbox/dragonfly/pull/408" target="_blank"><span data-i18n="index.df408_title">Dragonfly Framework - Fix Kaldi Deferred Mid-Phrase Reload Bug (PR #408)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.df408_status">Open PR #408</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Kaldi ASR</span>
                             <span class="tech-pill tech-pill-blue">Python</span>
@@ -812,67 +471,30 @@
                             <span class="tech-pill tech-pill-sys">State Management</span>
                             <span class="tech-pill tech-pill-hw">Exception Handling</span>
                         </div>
-
-                        <p class="description">Engine patch fixing fatal <code>KaldiError</code> crashes during deferred mid-phrase grammar reloads.</p>
-
+                        <p class="description" data-i18n="index.df408_desc">Engine patch fixing fatal <code>KaldiError</code> crashes during deferred mid-phrase grammar reloads.</p>
                         <ul class="project-features">
-                            <li><strong>Root Cause Fix:</strong> Captured stale rules scheduled for destruction at deferral time rather than querying modified global dictionaries post-phrase.</li>
-                            <li><strong>State Isolation:</strong> Prevented the Kaldi grammar compiler from attempting to unload newly compiled replacement rules.</li>
-                            <li><strong>Caster Stability:</strong> Resolves Caster <a href="https://github.com/dictation-toolbox/caster/issues/943" target="_blank">Issue #943<span class="sr-only"> (opens in a new tab)</span></a>, eliminating fatal process crashes during background rule compilation while user speech is in progress.</li>
+                            <li data-i18n-html="index.df408_f1"><strong>Root Cause Fix:</strong> Captured stale rules scheduled for destruction at deferral time rather than querying modified global dictionaries post-phrase.</li>
+                            <li data-i18n-html="index.df408_f2"><strong>State Isolation:</strong> Prevented the Kaldi grammar compiler from attempting to unload newly compiled replacement rules.</li>
+                            <li data-i18n-html="index.df408_f3"><strong>Caster Stability:</strong> Resolves Caster <a href="https://github.com/dictation-toolbox/caster/issues/943" target="_blank">Issue #943<span class="sr-only"> (opens in a new tab)</span></a>, eliminating fatal process crashes during background rule compilation while user speech is in progress.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408"
-
-                                target="_blank" aria-label="View Pull Request #408 on GitHub (opens in a new tab)">
-
-                                <img class="screenshot" src="dragonfly-pr408-screenshot.png"
-
-                                    alt="Screenshot of Dragonfly Pull Request #408 on GitHub detailing fix for Kaldi deferred unload mid-phrase reload race condition."
-
-                                    width="800">
-
+                            <a class="screenshot-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408" target="_blank" aria-label="View Pull Request #408 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="dragonfly-pr408-screenshot.png" alt="Screenshot of Dragonfly Pull Request #408 on GitHub detailing fix for Kaldi deferred unload mid-phrase reload race condition." width="800" data-i18n-attr="alt:index.df408_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #408 on GitHub<span
-
-                                    class="sr-only"> (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/dictation-toolbox/dragonfly/pull/408" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.df408_link">View Pull Request #408 on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-dragonfly-409" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-
-                                <span class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-pyvda-57" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-dragonfly-409" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-pyvda-57" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-pyvda-57" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/mirober/pyvda/pull/57"
-
-                                    target="_blank">pyvda - Handle Stale COM Objects &amp; RPC Server Unavailability (PR #57)<span
-
-                                        class="sr-only"> (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Open PR #57</span>
-
+                            <h3 class="project-title"><a href="https://github.com/mirober/pyvda/pull/57" target="_blank"><span data-i18n="index.pyvda57_title">pyvda - Handle Stale COM Objects &amp; RPC Server Unavailability (PR #57)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.pyvda57_status">Open PR #57</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">COM Interop</span>
                             <span class="tech-pill tech-pill-blue">Python</span>
@@ -880,83 +502,37 @@
                             <span class="tech-pill tech-pill-sys">RPC Server Management</span>
                             <span class="tech-pill tech-pill-sys">Ctypes / Comtypes</span>
                         </div>
-
-                        <p class="description">Stability patch for pyvda (Python Windows Virtual Desktop API) to recover from destroyed COM interface pointers and RPC server unavailability.</p>
-
+                        <p class="description" data-i18n="index.pyvda57_desc">Stability patch for pyvda (Python Windows Virtual Desktop API) to recover from destroyed COM interface pointers and RPC server unavailability.</p>
                         <ul class="project-features">
-                            <li><strong>Explorer Restart Resilience:</strong> Intercepts <code>RPC_S_SERVER_UNAVAILABLE</code> (0x800706BA) when Windows Explorer restarts.</li>
-                            <li><strong>Re-initialization Hook:</strong> Automatically re-binds the internal <code>IVirtualDesktopManagerInternal</code> interface on fault detection.</li>
-                            <li><strong>Sleep/Resume Protection:</strong> Prevents unhandled exceptions when systems resume from low-power sleep states.</li>
+                            <li data-i18n-html="index.pyvda57_f1"><strong>Explorer Restart Resilience:</strong> Intercepts <code>RPC_S_SERVER_UNAVAILABLE</code> (0x800706BA) when Windows Explorer restarts.</li>
+                            <li data-i18n-html="index.pyvda57_f2"><strong>Re-initialization Hook:</strong> Automatically re-binds the internal <code>IVirtualDesktopManagerInternal</code> interface on fault detection.</li>
+                            <li data-i18n-html="index.pyvda57_f3"><strong>Sleep/Resume Protection:</strong> Prevents unhandled exceptions when systems resume from low-power sleep states.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank"
-
-                                aria-label="View Pull Request #57 on GitHub (opens in a new tab)">
-
-                                <img class="screenshot" src="pyvda-pr-screenshot.png"
-
-                                    alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers."
-
-                                    width="800">
-
+                            <a class="screenshot-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank" aria-label="View Pull Request #57 on GitHub (opens in a new tab)">
+                                <img class="screenshot" src="pyvda-pr-screenshot.png" alt="Screenshot of pyvda Pull Request #57 on GitHub displaying exception handling for destroyed COM pointers." width="800" data-i18n-attr="alt:index.pyvda57_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View Pull Request #57 on GitHub<span
-
-                                    class="sr-only"> (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/mirober/pyvda/pull/57" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.pyvda57_link">View Pull Request #57 on GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-dragonfly-408" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry
-
-                                <span class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-winstasis" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-dragonfly-408" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-winstasis" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
-
                 </ul>
-
             </section>
 
-
-
             <section aria-labelledby="tools">
-
                 <h2 id="tools" class="section-header" tabindex="-1">
-
-                    <span class="section-num" aria-hidden="true">// 04</span> Publicly Released Tools
-
+                    <span class="section-num" aria-hidden="true">// 04</span> <span data-i18n="index.section04_title">Publicly Released Tools</span>
                 </h2>
-
                 <ul class="project-list">
-
                     <li id="item-winstasis" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/WinStasis"
-
-                                    target="_blank">WinStasis (Window Position Restorer CLI)<span class="sr-only">
-
-                                        (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Tiny Tool Town</span>
-
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/WinStasis" target="_blank"><span data-i18n="index.winstasis_title">WinStasis (Window Position Restorer CLI)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.winstasis_status">Tiny Tool Town</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">C# / .NET</span>
                             <span class="tech-pill tech-pill-sys">Win32 API</span>
@@ -964,73 +540,31 @@
                             <span class="tech-pill tech-pill-ai">JSON Serialization</span>
                             <span class="tech-pill tech-pill-test">CLI Utility</span>
                         </div>
-
-                        <p class="description">Standalone CLI utility to snapshot and restore window coordinates, dimensions, and virtual desktop assignments on Windows, permanently resolving application drift. Publicly featured on Tiny Tool Town.</p>
-
+                        <p class="description" data-i18n="index.winstasis_desc">Standalone CLI utility to snapshot and restore window coordinates, dimensions, and virtual desktop assignments on Windows, permanently resolving application drift. Publicly featured on Tiny Tool Town.</p>
                         <ul class="project-features">
-                            <li><strong>State Persistence:</strong> Serializes window geometry (X, Y, Width, Height, Z-order) and desktop GUIDs to JSON configuration files.</li>
-                            <li><strong>Drift Correction:</strong> Restores multi-monitor window layouts following display disconnects, sleep cycles, or resolution changes.</li>
-                            <li><strong>Process Filter:</strong> Ignores transient tooltips, invisible utility frames, and background daemon windows.</li>
+                            <li data-i18n-html="index.winstasis_f1"><strong>State Persistence:</strong> Serializes window geometry (X, Y, Width, Height, Z-order) and desktop GUIDs to JSON configuration files.</li>
+                            <li data-i18n-html="index.winstasis_f2"><strong>Drift Correction:</strong> Restores multi-monitor window layouts following display disconnects, sleep cycles, or resolution changes.</li>
+                            <li data-i18n-html="index.winstasis_f3"><strong>Process Filter:</strong> Ignores transient tooltips, invisible utility frames, and background daemon windows.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
-
-                                aria-label="View WinStasis GitHub Repository (opens in a new tab)">
-
-                                <img class="screenshot" src="winstasis-screenshot.png"
-
-                                    alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary."
-
-                                    width="600">
-
+                            <a class="screenshot-link" href="https://github.com/Amirf147/WinStasis" target="_blank" aria-label="View WinStasis GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="winstasis-screenshot.png" alt="WinStasis Window Position Restorer graphic showing snapshot and restore feature summary." width="600" data-i18n-attr="alt:index.winstasis_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank"
-
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-
-                                Repository<span class="sr-only"> for WinStasis (opens in a new tab)</span></a>
-
-                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span
-
-                                    class="sr-only"> for WinStasis (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/Amirf147/WinStasis" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span><span data-i18n="index.winstasis_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> for WinStasis (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/winstasis/" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.winstasis_link_ttt">View on Tiny Tool Town</span><span class="sr-only" data-i18n="global.opens_new_tab"> for WinStasis (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-pyvda-57" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-vdtree" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-pyvda-57" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-vdtree" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-vdtree" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/vdtree"
-
-                                    target="_blank">vdtree (Windows Virtual Desktop Tree CLI)<span class="sr-only">
-
-                                        (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Tiny Tool Town</span>
-
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/vdtree" target="_blank"><span data-i18n="index.vdtree_title">vdtree (Windows Virtual Desktop Tree CLI)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.vdtree_status">Tiny Tool Town</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">C# / .NET</span>
                             <span class="tech-pill tech-pill-sys">Win32 Console</span>
@@ -1038,95 +572,41 @@
                             <span class="tech-pill tech-pill-sys">Process Enumeration</span>
                             <span class="tech-pill tech-pill-test">CLI Tool</span>
                         </div>
-
-                        <p class="description">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops. Maps out all active virtual desktops and open application windows in a clean terminal table.</p>
-
+                        <p class="description" data-i18n="index.vdtree_desc">Standalone CLI utility acting like 'ls' for Windows Virtual Desktops. Maps out all active virtual desktops and open application windows in a clean terminal table.</p>
                         <ul class="project-features">
-                            <li><strong>Desktop Hierarchy:</strong> Traverses the active desktop array and prints a structured tree view to the terminal.</li>
-                            <li><strong>Window Attributes:</strong> Reports window handle (HWND), executable process name, window title, coordinates, and bounding dimensions.</li>
-                            <li><strong>Zero Overhead:</strong> Lightweight single-binary executable with sub-50 ms execution time.</li>
+                            <li data-i18n-html="index.vdtree_f1"><strong>Desktop Hierarchy:</strong> Traverses the active desktop array and prints a structured tree view to the terminal.</li>
+                            <li data-i18n-html="index.vdtree_f2"><strong>Window Attributes:</strong> Reports window handle (HWND), executable process name, window title, coordinates, and bounding dimensions.</li>
+                            <li data-i18n-html="index.vdtree_f3"><strong>Zero Overhead:</strong> Lightweight single-binary executable with sub-50 ms execution time.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/Amirf147/vdtree" target="_blank"
-
-                                aria-label="View vdtree GitHub Repository (opens in a new tab)">
-
-                                <img class="screenshot" src="vdtree-screenshot.png"
-
-                                    alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions."
-
-                                    width="600">
-
+                            <a class="screenshot-link" href="https://github.com/Amirf147/vdtree" target="_blank" aria-label="View vdtree GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="vdtree-screenshot.png" alt="Screenshot of vdtree CLI console table displaying virtual desktops, window titles, coordinates, and dimensions." width="600" data-i18n-attr="alt:index.vdtree_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank"
-
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-
-                                Repository<span class="sr-only"> for vdtree (opens in a new tab)</span></a>
-
-                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/"
-
-                                target="_blank"><span aria-hidden="true">→ </span>View on Tiny Tool Town<span
-
-                                    class="sr-only"> for vdtree (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/Amirf147/vdtree" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span><span data-i18n="index.vdtree_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> for vdtree (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://www.tinytooltown.com/tools/vdtree/" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.vdtree_link_ttt">View on Tiny Tool Town</span><span class="sr-only" data-i18n="global.opens_new_tab"> for vdtree (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-winstasis" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-iot-mail" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-winstasis" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-iot-mail" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
-
                 </ul>
-
             </section>
 
-
-
             <!-- ============================================================
-
                  05. ACADEMIC & CAPSTONE PROJECTS
-
                  ============================================================ -->
-
             <section id="academic-projects" aria-labelledby="academic-projects-title" class="project-section">
-
                 <h2 id="academic-projects-title" class="section-header" tabindex="-1">
-
-                    <span class="section-num" aria-hidden="true">// 05</span> Previous School &amp; Applied Engineering Projects
-
+                    <span class="section-num" aria-hidden="true">// 05</span> <span data-i18n="index.section05_title">Previous School &amp; Applied Engineering Projects</span>
                 </h2>
-
                 <ul class="project-list">
-
                     <li id="item-iot-mail" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Mail_Detector"
-
-                                    target="_blank">IoT Physical Mail Detector &amp; Smart Home Notifier<span class="sr-only">
-
-                                        (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">Grade: 5/5</span>
-
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank"><span data-i18n="index.iot_mail_title">IoT Physical Mail Detector &amp; Smart Home Notifier</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.iot_mail_status">Grade: 5/5</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Embedded Systems / IoT</span>
                             <span class="tech-pill tech-pill-blue">Raspberry Pi (Linux)</span>
@@ -1136,68 +616,31 @@
                             <span class="tech-pill tech-pill-ai">InfluxDB &amp; Grafana</span>
                             <span class="tech-pill tech-pill-hw">Sense HAT</span>
                         </div>
-
-                        <p class="description">Intelligent IoT physical mail detection and environmental monitoring system built with Raspberry Pi and Arduino communicating over a custom UART serial protocol.</p>
-
+                        <p class="description" data-i18n="index.iot_mail_desc">Intelligent IoT physical mail detection and environmental monitoring system built with Raspberry Pi and Arduino communicating over a custom UART serial protocol.</p>
                         <ul class="project-features">
-                            <li><strong>Vibration Sensing:</strong> 3-axis Sense HAT accelerometer mounted to the mail slot flap detects physical deliveries with zero false positives.</li>
-                            <li><strong>Automated Capture:</strong> Triggers 12V LED illumination via Arduino serial command and captures 720p snapshots via Pi Camera.</li>
-                            <li><strong>Alerting &amp; Remote Control:</strong> Dispatches real-time photo alerts to Telegram and executes user commands via two-way Telegram bot.</li>
-                            <li><strong>Telemetry Logging:</strong> Continuous time-series telemetry logging for door-state and environmental sensors to InfluxDB and Grafana.</li>
+                            <li data-i18n-html="index.iot_mail_f1"><strong>Vibration Sensing:</strong> 3-axis Sense HAT accelerometer mounted to the mail slot flap detects physical deliveries with zero false positives.</li>
+                            <li data-i18n-html="index.iot_mail_f2"><strong>Automated Capture:</strong> Triggers 12V LED illumination via Arduino serial command and captures 720p snapshots via Pi Camera.</li>
+                            <li data-i18n-html="index.iot_mail_f3"><strong>Alerting &amp; Remote Control:</strong> Dispatches real-time photo alerts to Telegram and executes user commands via two-way Telegram bot.</li>
+                            <li data-i18n-html="index.iot_mail_f4"><strong>Telemetry Logging:</strong> Continuous time-series telemetry logging for door-state and environmental sensors to InfluxDB and Grafana.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank"
-
-                                aria-label="View IoT Mail Detector GitHub Repository (opens in a new tab)">
-
-                                <img class="screenshot" src="mail-detector-demo.gif"
-
-                                    alt="Live demonstration preview of IoT Mail Detector detecting incoming mail, activating internal LED flash, and dispatching instant photo alert to Telegram."
-
-                                    width="600">
-
+                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank" aria-label="View IoT Mail Detector GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="mail-detector-demo.gif" alt="Live demonstration preview of IoT Mail Detector detecting incoming mail, activating internal LED flash, and dispatching instant photo alert to Telegram." width="600" data-i18n-attr="alt:index.iot_mail_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank"
-
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-
-                                Repository<span class="sr-only"> for IoT Mail Detector (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Mail_Detector" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span><span data-i18n="index.iot_mail_link">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> for IoT Mail Detector (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-vdtree" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-iot-bms" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-vdtree" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-iot-bms" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-iot-bms" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Battery_Management_System"
-
-                                    target="_blank">IoT Battery Management System (BMS)<span class="sr-only">
-
-                                        (opens in a new tab)</span></a></h3>
-
-                            <span class="status-tag status-live">🏆 Winner of Best Technical Outcome</span>
-
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"><span data-i18n="index.iot_bms_title">IoT Battery Management System (BMS)</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.iot_bms_status">🏆 Winner of Best Technical Outcome</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Power &amp; Hardware Engineering</span>
                             <span class="tech-pill tech-pill-hw">Analog Devices LTC6811</span>
@@ -1207,64 +650,31 @@
                             <span class="tech-pill tech-pill-sys">Bluetooth SPP / SIM808</span>
                             <span class="tech-pill tech-pill-ai">InfluxDB / Python</span>
                         </div>
-
-                        <p class="description">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack.</p>
-
+                        <p class="description" data-i18n="index.iot_bms_desc">Award-winning Capstone Engineering project developed in collaboration with the TUAS e3power Research Group. Engineered an end-to-end IoT Battery Management System (BMS) testbench using a 4WD electric vehicle chassis powered by Lithium-Titanate (LTO) cells in a 2P4S pack.</p>
                         <ul class="project-features">
-                            <li><strong>Battery Stack Monitoring:</strong> Integrated Analog Devices LTC6811 automotive multicell stack monitor to read individual cell voltages across 2P4S pack.</li>
-                            <li><strong>Microcontroller Firmware:</strong> Wrote Linduino C++ firmware communicating over an isolated SPI bus with CRC validation.</li>
-                            <li><strong>Wireless Gateway:</strong> Streamed live voltage data over Bluetooth SPP via SIM808 module to an edge Raspberry Pi.</li>
-                            <li><strong>Analytics Dashboard:</strong> Automated InfluxDB storage and Grafana visualization to track cell degradation and imbalance during discharge cycles.</li>
+                            <li data-i18n-html="index.iot_bms_f1"><strong>Battery Stack Monitoring:</strong> Integrated Analog Devices LTC6811 automotive multicell stack monitor to read individual cell voltages across 2P4S pack.</li>
+                            <li data-i18n-html="index.iot_bms_f2"><strong>Microcontroller Firmware:</strong> Wrote Linduino C++ firmware communicating over an isolated SPI bus with CRC validation.</li>
+                            <li data-i18n-html="index.iot_bms_f3"><strong>Wireless Gateway:</strong> Streamed live voltage data over Bluetooth SPP via SIM808 module to an edge Raspberry Pi.</li>
+                            <li data-i18n-html="index.iot_bms_f4"><strong>Analytics Dashboard:</strong> Automated InfluxDB storage and Grafana visualization to track cell degradation and imbalance during discharge cycles.</li>
                         </ul>
-
                         <div class="evidence-box">
-
-                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
-
-                                aria-label="View IoT Battery Management System GitHub Repository (opens in a new tab)">
-
-                                <img class="screenshot" src="bms-hardware.jpg"
-
-                                    alt="Physical BMS testbench hardware setup with 4WD RC vehicle chassis, 2P4S LTO battery stack, Analog Devices LTC6811 multicell monitor, and Linduino microcontroller."
-
-                                    width="600">
-
+                            <a class="screenshot-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank" aria-label="View IoT Battery Management System GitHub Repository (opens in a new tab)">
+                                <img class="screenshot" src="bms-hardware.jpg" alt="Physical BMS testbench hardware setup with 4WD RC vehicle chassis, 2P4S LTO battery stack, Analog Devices LTC6811 multicell monitor, and Linduino microcontroller." width="600" data-i18n-attr="alt:index.iot_bms_img_alt">
                             </a>
-
-                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank"
-
-                                style="margin-right: 20px;"><span aria-hidden="true">→ </span>View GitHub
-
-                                Repository<span class="sr-only"> for IoT Battery Management System (opens in a new tab)</span></a>
-
+                            <a class="evidence-link" href="https://github.com/Amirf147/IoT_Battery_Management_System" target="_blank" style="margin-right: 20px;"><span aria-hidden="true">→ </span><span data-i18n="index.iot_bms_link">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> for IoT Battery Management System (opens in a new tab)</span></a>
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-iot-mail" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-marine-lidar" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-iot-mail" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-marine-lidar" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-marine-lidar" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title">Autonomous Marine LiDAR &amp; Environmental Sensor Array Evaluation</h3>
-
-                            <span class="project-org-badge status-tag status-live">TUAS Maritime / Awake.io</span>
-
+                            <h3 class="project-title" data-i18n="index.marine_lidar_title">Autonomous Marine LiDAR &amp; Environmental Sensor Array Evaluation</h3>
+                            <span class="project-org-badge status-tag status-live" data-i18n="index.marine_lidar_badge">TUAS Maritime / Awake.io</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Autonomous Robotics &amp; Sensors</span>
                             <span class="tech-pill tech-pill-hw">Intel RealSense L515</span>
@@ -1274,70 +684,35 @@
                             <span class="tech-pill tech-pill-sys">RS-232 / RS-485 Serial</span>
                             <span class="tech-pill tech-pill-blue">Python (pyrealsense2)</span>
                         </div>
-
-                        <p class="description">Evaluated, integrated, and bench-tested multi-spectral LiDAR and meteorological sensor arrays for autonomous maritime vessel collision avoidance.</p>
-
+                        <p class="description" data-i18n="index.marine_lidar_desc">Evaluated, integrated, and bench-tested multi-spectral LiDAR and meteorological sensor arrays for autonomous maritime vessel collision avoidance.</p>
                         <ul class="project-features">
-                            <li><strong>Sensor Evaluation:</strong> Bench-tested Intel RealSense L515 solid-state LiDAR and Livox MID-14/TELE-15 sensors under simulated maritime fog, rain, and ambient glare.</li>
-                            <li><strong>Meteorological Integration:</strong> Connected Vaisala PTU-307 atmospheric transmitters and PWD-20 visibility sensors over RS-232/RS-485 serial.</li>
-                            <li><strong>Point-Cloud Processing:</strong> Developed 3D point-cloud processing pipelines (.ply) using <code>pyrealsense2</code> and ROS depth-streaming nodes on Raspberry Pi and GPU IPCs.</li>
-                            <li><strong>Data Logging:</strong> Serialized multi-sensor streams into structured diagnostic packets for collision avoidance validation.</li>
+                            <li data-i18n-html="index.marine_lidar_f1"><strong>Sensor Evaluation:</strong> Bench-tested Intel RealSense L515 solid-state LiDAR and Livox MID-14/TELE-15 sensors under simulated maritime fog, rain, and ambient glare.</li>
+                            <li data-i18n-html="index.marine_lidar_f2"><strong>Meteorological Integration:</strong> Connected Vaisala PTU-307 atmospheric transmitters and PWD-20 visibility sensors over RS-232/RS-485 serial.</li>
+                            <li data-i18n-html="index.marine_lidar_f3"><strong>Point-Cloud Processing:</strong> Developed 3D point-cloud processing pipelines (.ply) using <code>pyrealsense2</code> and ROS depth-streaming nodes on Raspberry Pi and GPU IPCs.</li>
+                            <li data-i18n-html="index.marine_lidar_f4"><strong>Data Logging:</strong> Serialized multi-sensor streams into structured diagnostic packets for collision avoidance validation.</li>
                         </ul>
-
                         <div class="evidence-box">
-
                             <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px;">
-
                                 <div style="flex: 1 1 360px; max-width: 100%;">
-
-                                    <img class="screenshot" src="lidar-sensors-overview.png"
-
-                                        alt="Autonomous vessel sensor suite architecture diagram showing LiDAR, thermal imaging, radar, and Vaisala meteorological sensor placement."
-
-                                        width="600">
-
+                                    <img class="screenshot" src="lidar-sensors-overview.png" alt="Autonomous vessel sensor suite architecture diagram showing LiDAR, thermal imaging, radar, and Vaisala meteorological sensor placement." width="600" data-i18n-attr="alt:index.marine_lidar_img1_alt">
                                 </div>
-
                                 <div style="flex: 1 1 360px; max-width: 100%;">
-
-                                    <img class="screenshot" src="vaisala-weather-sensors.jpg"
-
-                                        alt="Vaisala industrial meteorological and visibility sensor suite integrated for atmospheric attenuation testing."
-
-                                        width="600">
-
+                                    <img class="screenshot" src="vaisala-weather-sensors.jpg" alt="Vaisala industrial meteorological and visibility sensor suite integrated for atmospheric attenuation testing." width="600" data-i18n-attr="alt:index.marine_lidar_img2_alt">
                                 </div>
-
                             </div>
-
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-iot-bms" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
-                            <a href="#item-5g-aq-station" class="nav-btn">Next Entry <span aria-hidden="true">→</span> <span
-
-                                    class="kbd">n</span></a>
-
+                            <a href="#item-iot-bms" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-5g-aq-station" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
-
                     </li>
 
                     <li id="item-5g-aq-station" class="project-item navigable-item" tabindex="-1">
-
                         <div class="project-title-row">
-
-                            <h3 class="project-title">5G &amp; Cellular IoT Urban Environmental Telemetry Station</h3>
-
-                            <span class="project-org-badge status-tag status-live">EU Horizon 2020 RESPONSE</span>
-
+                            <h3 class="project-title" data-i18n="index.aq_title">5G &amp; Cellular IoT Urban Environmental Telemetry Station</h3>
+                            <span class="project-org-badge status-tag status-live" data-i18n="index.aq_badge">EU Horizon 2020 RESPONSE</span>
                         </div>
-
                         <div class="tech-pill-cluster">
                             <span class="tech-pill tech-pill-category">Cellular IoT / 5G</span>
                             <span class="tech-pill tech-pill-hw">Sensirion SPS30</span>
@@ -1347,234 +722,116 @@
                             <span class="tech-pill tech-pill-sys">Docker Compose</span>
                             <span class="tech-pill tech-pill-ai">InfluxDB / Grafana</span>
                         </div>
-
-                        <p class="description">Engineered, bench-tested, and deployed outdoor cellular IoT particulate matter monitoring stations for the City of Turku and Finnish Meteorological Institute (FMI).</p>
-
+                        <p class="description" data-i18n="index.aq_desc">Engineered, bench-tested, and deployed outdoor cellular IoT particulate matter monitoring stations for the City of Turku and Finnish Meteorological Institute (FMI).</p>
                         <ul class="project-features">
-                            <li><strong>Optical PM Sensing:</strong> Integrated Sensirion SPS30 optical laser PM sensors measuring PM1.0, PM2.5, PM4, and PM10 mass concentrations.</li>
-                            <li><strong>Cellular Microcontroller:</strong> Programmed Pycom GPy (ESP32 SoC + Sequans LTE-M/NB-IoT modem) with UART/I2C sensor drivers in MicroPython.</li>
-                            <li><strong>Network Failover:</strong> Built local flash ring buffer to prevent data loss during network dropouts and engineered STUN/ICE NAT traversal diagnostic logging.</li>
-                            <li><strong>Edge Compute &amp; Pipeline:</strong> Deployed containerized Docker Compose microservices on Raspberry Pi 4 edge gateways with InfluxDB and Grafana.</li>
+                            <li data-i18n-html="index.aq_f1"><strong>Optical PM Sensing:</strong> Integrated Sensirion SPS30 optical laser PM sensors measuring PM1.0, PM2.5, PM4, and PM10 mass concentrations.</li>
+                            <li data-i18n-html="index.aq_f2"><strong>Cellular Microcontroller:</strong> Programmed Pycom GPy (ESP32 SoC + Sequans LTE-M/NB-IoT modem) with UART/I2C sensor drivers in MicroPython.</li>
+                            <li data-i18n-html="index.aq_f3"><strong>Network Failover:</strong> Built local flash ring buffer to prevent data loss during network dropouts and engineered STUN/ICE NAT traversal diagnostic logging.</li>
+                            <li data-i18n-html="index.aq_f4"><strong>Edge Compute &amp; Pipeline:</strong> Deployed containerized Docker Compose microservices on Raspberry Pi 4 edge gateways with InfluxDB and Grafana.</li>
                         </ul>
-
                         <div class="evidence-box">
-
                             <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px;">
-
                                 <div style="flex: 1 1 360px; max-width: 100%;">
-
-                                    <img class="screenshot" src="aq-sensor-bench.jpg"
-
-                                        alt="Sensirion SPS30 optical particulate matter sensor undergoing benchtop serial communication and calibration testing."
-
-                                        width="600">
-
+                                    <img class="screenshot" src="aq-sensor-bench.jpg" alt="Sensirion SPS30 optical particulate matter sensor undergoing benchtop serial communication and calibration testing." width="600" data-i18n-attr="alt:index.aq_img1_alt">
                                 </div>
-
                                 <div style="flex: 1 1 360px; max-width: 100%;">
-
-                                    <img class="screenshot" src="aq-sensor-enclosure.jpg"
-
-                                        alt="Weatherproof field IoT enclosure housing Linux gateway, power regulation, and cellular antenna."
-
-                                        width="600">
-
+                                    <img class="screenshot" src="aq-sensor-enclosure.jpg" alt="Weatherproof field IoT enclosure housing Linux gateway, power regulation, and cellular antenna." width="600" data-i18n-attr="alt:index.aq_img2_alt">
                                 </div>
-
                             </div>
-
                         </div>
-
                         <div class="item-nav-bar">
-
-                            <a href="#item-marine-lidar" class="nav-btn"><span aria-hidden="true">← </span>Prev Entry <span
-
-                                    class="kbd">p</span></a>
-
-                            <a href="#top" class="nav-btn">↑ Back to Top <span class="kbd">t</span></a>
-
+                            <a href="#item-marine-lidar" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
                             <span></span>
-
                         </div>
-
                     </li>
-
                 </ul>
-
             </section>
 
-
-
             <footer class="footer">
-
-                <span>© Amir Farhadi — Software Portfolio</span>
-
-                <span>Systems &amp; Hands-Free Computing</span>
-
+                <span data-i18n="global.footer_copy">© Amir Farhadi — Software Portfolio</span>
+                <span data-i18n="global.footer_systems">Systems &amp; Hands-Free Computing</span>
             </footer>
-
         </main>
-
     </div>
 
-
-
     <!-- Floating Back to Top Button -->
-
-    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">↑ Top</button>
-
-
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top" data-i18n-attr="aria-label:global.back_to_top"><span data-i18n="global.back_to_top_floating">↑ Top</span></button>
 
     <!-- Accessibility Dialog -->
-
     <dialog id="a11y-dialog" aria-labelledby="a11y-dialog-title">
+        <h2 id="a11y-dialog-title" data-i18n="index.a11y_dialog_title">Accessibility &amp; Keyboard Shortcuts Guide</h2>
+        <p data-i18n="index.a11y_dialog_summary">This portfolio is optimized for screen readers, high-contrast visibility, and keyboard navigation.</p>
 
-        <h2 id="a11y-dialog-title">Accessibility & Keyboard Shortcuts Guide</h2>
-
-        <p>This portfolio is optimized for screen readers, high-contrast visibility, and keyboard navigation.</p>
-
-
-
-        <div
-
-            style="margin: 16px 0; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--bg-color); display: flex; align-items: center; gap: 10px;">
-
-            <input type="checkbox" id="toggle-shortcuts-input" checked
-
-                style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-color);">
-
-            <label for="toggle-shortcuts-input"
-
-                style="font-weight: 600; cursor: pointer; font-size: 0.9rem; user-select: none;">
-
-                Enable single-key shortcuts (n, p, t, 0-5, ?)
-
+        <div style="margin: 16px 0; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--bg-color); display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="toggle-shortcuts-input" checked style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-color);">
+            <label for="toggle-shortcuts-input" style="font-weight: 600; cursor: pointer; font-size: 0.9rem; user-select: none;" data-i18n="index.a11y_shortcuts_toggle_label">
+                Enable single-key shortcuts (n, p, t, l, 0-5, ?)
             </label>
-
         </div>
 
-
-
-        <p><strong>Theme Toggle Button States:</strong> Click the <code>Theme</code> button in the top toolbar to cycle
-
-            through 3 visual modes:</p>
-
+        <p data-i18n-html="index.a11y_theme_heading"><strong>Theme Toggle Button States:</strong> Click the <code>Theme</code> button in the top toolbar to cycle through 3 visual modes:</p>
         <div class="theme-previews" aria-label="Visual theme button states">
-
             <div class="theme-preview-card preview-light" title="Light mode state button">
-
                 <svg aria-hidden="true" viewBox="0 0 24 24">
-
                     <circle cx="12" cy="12" r="5"></circle>
-
                     <line x1="12" y1="1" x2="12" y2="3"></line>
-
                     <line x1="12" y1="21" x2="12" y2="23"></line>
-
                     <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-
                     <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-
                     <line x1="1" y1="12" x2="3" y2="12"></line>
-
                     <line x1="21" y1="12" x2="23" y2="12"></line>
-
                     <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-
                 </svg>
-
-                <span>Light</span>
-
+                <span data-i18n="index.a11y_theme_light">Light</span>
             </div>
-
             <div class="theme-preview-card preview-dark" title="Dark mode state button">
-
                 <svg aria-hidden="true" viewBox="0 0 24 24">
-
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-
                 </svg>
-
-                <span>Dark</span>
-
+                <span data-i18n="index.a11y_theme_dark">Dark</span>
             </div>
-
             <div class="theme-preview-card preview-contrast" title="High Contrast mode state button">
-
                 <svg aria-hidden="true" viewBox="0 0 24 24">
-
-                    <path
-
-                        d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z" />
-
+                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z" />
                 </svg>
-
-                <span>Contrast</span>
-
+                <span data-i18n="index.a11y_theme_contrast">Contrast</span>
             </div>
-
         </div>
 
-
-
-        <p><strong>Keyboard Shortcuts:</strong></p>
-
+        <p data-i18n-html="index.a11y_shortcuts_heading"><strong>Keyboard Shortcuts:</strong></p>
         <ul>
-
-            <li><span class="kbd">?</span> Toggle this Accessibility Guide</li>
-
-            <li><span class="kbd">0</span> Jump to Recent Activity</li>
-
-            <li><span class="kbd">1</span> Jump to Passion Projects</li>
-
-            <li><span class="kbd">2</span> Jump to Engineering Solutions</li>
-
-            <li><span class="kbd">3</span> Jump to Open Source Contributions</li>
-
-            <li><span class="kbd">4</span> Jump to Public Tools</li>
-
-            <li><span class="kbd">5</span> Jump to School &amp; Applied Engineering Projects</li>
-
-            <li><span class="kbd">t</span> Back to Top</li>
-
-            <li><span class="kbd">n</span> Jump to Next Project Entry</li>
-
-            <li><span class="kbd">p</span> Jump to Previous Project Entry</li>
-
-            <li><span class="kbd">v</span> Toggle Hands-Free Voice Navigation</li>
-
+            <li data-i18n-html="index.a11y_k_q"><span class="kbd">?</span> Toggle this Accessibility Guide</li>
+            <li data-i18n-html="index.a11y_k_0"><span class="kbd">0</span> Jump to Recent Activity</li>
+            <li data-i18n-html="index.a11y_k_1"><span class="kbd">1</span> Jump to Passion Projects</li>
+            <li data-i18n-html="index.a11y_k_2"><span class="kbd">2</span> Jump to Engineering Solutions</li>
+            <li data-i18n-html="index.a11y_k_3"><span class="kbd">3</span> Jump to Open Source Contributions</li>
+            <li data-i18n-html="index.a11y_k_4"><span class="kbd">4</span> Jump to Public Tools</li>
+            <li data-i18n-html="index.a11y_k_5"><span class="kbd">5</span> Jump to School &amp; Applied Engineering Projects</li>
+            <li data-i18n-html="index.a11y_k_t"><span class="kbd">t</span> Back to Top</li>
+            <li data-i18n-html="index.a11y_k_n"><span class="kbd">n</span> Jump to Next Project Entry</li>
+            <li data-i18n-html="index.a11y_k_p"><span class="kbd">p</span> Jump to Previous Project Entry</li>
+            <li data-i18n-html="index.a11y_k_l"><span class="kbd">l</span> Toggle Language (English / Finnish)</li>
+            <li data-i18n-html="index.a11y_k_v"><span class="kbd">v</span> Toggle Hands-Free Voice Navigation</li>
         </ul>
 
-
-
-        <p><strong>Hands-Free Voice Navigation:</strong></p>
-
-        <p style="font-size: 0.88rem; color: var(--subtitle-color);">Click the floating mic HUD icon or press <span class="kbd">v</span> to activate browser voice navigation. Commands adapt dynamically to your browser engine (continuous natural language speech for Chromium/Safari or acoustic keyword spotting for Firefox).</p>
-
-
+        <p data-i18n-html="index.a11y_voice_heading"><strong>Hands-Free Voice Navigation:</strong></p>
+        <p style="font-size: 0.88rem; color: var(--subtitle-color);" data-i18n-html="index.a11y_voice_text">Click the floating mic HUD icon or press <span class="kbd">v</span> to activate browser voice navigation. Commands adapt dynamically to your browser engine (continuous natural language speech for Chromium/Safari or acoustic keyword spotting for Firefox).</p>
 
         <div class="dialog-close">
-
-            <button id="close-a11y-btn" class="nav-btn">Close Guide</button>
-
+            <button id="close-a11y-btn" class="nav-btn" data-i18n="index.a11y_close_btn">Close Guide</button>
         </div>
-
     </dialog>
 
-
-
+    <script src="./js/i18n/en.js"></script>
+    <script src="./js/i18n/fi.js"></script>
+    <script src="./js/i18n.js"></script>
     <script src="./js/theme.js"></script>
-
     <script src="./js/keyboard-nav.js"></script>
-
     <script src="./js/commits.js"></script>
-
     <script src="./js/voice-nav.js"></script>
-
     <script src="./js/main.js"></script>
-
 </body>
 
 

@@ -16,74 +16,90 @@
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
+
+            const savedLang = localStorage.getItem('portfolio_lang');
+            if (savedLang) {
+                document.documentElement.setAttribute('lang', savedLang);
+            } else if (navigator && navigator.language && navigator.language.toLowerCase().startsWith('fi')) {
+                document.documentElement.setAttribute('lang', 'fi');
+            } else {
+                document.documentElement.setAttribute('lang', 'en');
+            }
         })();
     </script>
     <link rel="stylesheet" href="./css/test-engineering.css">
 </head>
 
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-i18n="global.skip_to_content">Skip to main content</a>
 
     <div class="container">
         <!-- Top Utility Navigation -->
         <nav class="eng-top-nav" aria-label="Utility Navigation">
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <a href="./index.html" class="back-link" aria-label="Back to Main Portfolio">
+                    <span aria-hidden="true">← </span><span data-i18n="global.back_to_main">Portfolio Home</span>
+                </a>
                 <a href="https://github.com/amirf147" target="_blank" rel="noopener noreferrer" class="back-link" aria-label="Amir Farhadi's GitHub Profile">
                     <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
                     </svg>
-                    GitHub<span class="sr-only"> (opens in a new tab)</span>
+                    <span data-i18n="global.github_profile">GitHub</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
                 </a>
                 <a href="https://linkedin.com/in/amir-farhadi" target="_blank" rel="noopener noreferrer" class="back-link" aria-label="Amir Farhadi's LinkedIn Profile">
                     <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"></path>
                     </svg>
-                    LinkedIn<span class="sr-only"> (opens in a new tab)</span>
+                    <span data-i18n="global.linkedin_profile">LinkedIn</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
                 </a>
             </div>
 
-            <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="top-utility-actions">
                 <a href="mailto:amirf147@gmail.com" class="back-link" aria-label="Send Email">
                     <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 .327.618l7.25 4.834a.75.75 0 0 0 .846 0l7.25-4.834A.75.75 0 0 0 16 4.486v-.736A1.75 1.75 0 0 0 14.25 2H1.75zM0 6.079v6.171C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25V6.079l-6.573 4.382a2.25 2.25 0 0 1-2.497 0L0 6.079z"></path>
                     </svg>
                     amirf147@gmail.com
                 </a>
+                <button id="lang-toggle" class="nav-btn lang-toggle" aria-label="Switch to Finnish / Vaihda kieleksi suomi" data-tooltip="Switch to Finnish [L]">
+                    <span id="lang-icon" style="display: flex; align-items: center;"></span>
+                    <span id="lang-label" data-i18n="global.lang_toggle_label">English (EN)</span>
+                </button>
                 <button id="theme-toggle" class="back-link" aria-label="Toggle theme" style="cursor: pointer;">
                     <span id="theme-icon" style="display: flex; align-items: center;"></span>
-                    <span id="theme-label">Theme</span>
+                    <span id="theme-label" data-i18n="global.theme_toggle_label">Theme</span>
                 </button>
             </div>
         </nav>
 
         <!-- Hero Header Section -->
         <header class="eng-hero" id="main-content">
-            <h1 class="eng-title">Amir Farhadi</h1>
-            <div class="eng-role">B.Eng. in ICT — Embedded Electronics &amp; IoT</div>
-            <p class="eng-bio">
+            <h1 class="eng-title" data-i18n="sys.hero_title">Amir Farhadi</h1>
+            <div class="eng-role" data-i18n="sys.hero_role">B.Eng. in ICT — Embedded Electronics &amp; IoT</div>
+            <p class="eng-bio" data-i18n="sys.hero_bio">
                 Systems administration, IT infrastructure, and systems automation engineering background with hands-on experience in Linux/Windows OS administration, Docker container orchestration, automated system telemetry (InfluxDB &amp; Grafana), PowerShell/Bash/Python scripting, secure networking (SSH, firewalls, reverse proxies), and AI-augmented operational troubleshooting.
             </p>
 
             <div class="eng-meta-strip">
-                <span class="meta-item">
+                <span class="meta-item" data-i18n-html="sys.meta_loc">
                     <span class="meta-dot"></span>
                     <strong>Location:</strong> Tulsa, OK Metro Area (Immediate Availability)
                 </span>
-                <span class="meta-item">
+                <span class="meta-item" data-i18n-html="sys.meta_citizen">
                     <strong>Citizenship:</strong> Dual US &amp; Finnish Citizen (No Sponsorship Needed)
                 </span>
-                <span class="meta-item">
+                <span class="meta-item" data-i18n-html="sys.meta_deg">
                     <strong>Education:</strong> B.Eng. in ICT (Embedded Electronics &amp; IoT), Turku UAS
                 </span>
             </div>
 
             <!-- Jump Bar -->
             <div class="quick-jump-bar" aria-label="Project Navigation">
-                <a href="#edge-server-project" class="jump-pill">🐧 Linux &amp; Docker Telemetry Node</a>
-                <a href="#automation-tools-project" class="jump-pill">⚡ PowerShell &amp; Python Automation</a>
-                <a href="#iot-server-project" class="jump-pill">📡 Multi-Threaded Monitoring Server</a>
-                <a href="#rf-field-project" class="jump-pill">📶 Field Infrastructure &amp; RF Testing</a>
-                <a href="#sysadmin-skills-matrix" class="jump-pill">📋 SysAdmin &amp; Infrastructure Matrix</a>
+                <a href="#edge-server-project" class="jump-pill" data-i18n="sys.jump_edge">🐧 Linux &amp; Docker Telemetry Node</a>
+                <a href="#automation-tools-project" class="jump-pill" data-i18n="sys.jump_auto">⚡ PowerShell &amp; Python Automation</a>
+                <a href="#iot-server-project" class="jump-pill" data-i18n="sys.jump_iot">📡 Multi-Threaded Monitoring Server</a>
+                <a href="#rf-field-project" class="jump-pill" data-i18n="sys.jump_rf">📶 Field Infrastructure &amp; RF Testing</a>
+                <a href="#sysadmin-skills-matrix" class="jump-pill" data-i18n="sys.jump_matrix">📋 SysAdmin &amp; Infrastructure Matrix</a>
             </div>
         </header>
 
@@ -92,20 +108,20 @@
             <h2 id="core-competencies-heading" class="sr-only">Core Systems Competencies</h2>
             <div class="competency-grid">
                 <div class="competency-card">
-                    <h3>🐧 Linux &amp; Windows Administration</h3>
-                    <p>Configuring and administering Debian, Ubuntu, Raspbian, and Windows 10/11/Server environments. Managing systemd services, user/group permissions, Win32 APIs, registry, and event logging.</p>
+                    <h3 data-i18n="sys.c1_title">🐧 Linux &amp; Windows Administration</h3>
+                    <p data-i18n="sys.c1_desc">Configuring and administering Debian, Ubuntu, Raspbian, and Windows 10/11/Server environments. Managing systemd services, user/group permissions, Win32 APIs, registry, and event logging.</p>
                 </div>
                 <div class="competency-card">
-                    <h3>🌐 Networking &amp; Security Hardening</h3>
-                    <p>Managing TCP/IP, DNS, DHCP, SSH/SFTP authentication, UFW/Windows firewall rules, SMB/NFS shares, reverse proxies (Nginx/Apache), and STUN/ICE NAT traversal.</p>
+                    <h3 data-i18n="sys.c2_title">🌐 Networking &amp; Security Hardening</h3>
+                    <p data-i18n="sys.c2_desc">Managing TCP/IP, DNS, DHCP, SSH/SFTP authentication, UFW/Windows firewall rules, SMB/NFS shares, reverse proxies (Nginx/Apache), and STUN/ICE NAT traversal.</p>
                 </div>
                 <div class="competency-card">
-                    <h3>🐳 Container Orchestration &amp; Telemetry</h3>
-                    <p>Deploying microservice stacks via Docker &amp; Docker Compose with ordered boot sequencing, persistent volume permissions, and real-time health telemetry via InfluxDB &amp; Grafana.</p>
+                    <h3 data-i18n="sys.c3_title">🐳 Container Orchestration &amp; Telemetry</h3>
+                    <p data-i18n="sys.c3_desc">Deploying microservice stacks via Docker &amp; Docker Compose with ordered boot sequencing, persistent volume permissions, and real-time health telemetry via InfluxDB &amp; Grafana.</p>
                 </div>
                 <div class="competency-card">
-                    <h3>⚡ Systems Automation &amp; AI Scripting</h3>
-                    <p>Writing robust PowerShell, Bash, Python, and C# (.NET) automation scripts for scheduled health checks, log rotation, automated backups, and leveraging modern AI for rapid root-cause diagnosis.</p>
+                    <h3 data-i18n="sys.c4_title">⚡ Systems Automation &amp; AI Scripting</h3>
+                    <p data-i18n="sys.c4_desc">Writing robust PowerShell, Bash, Python, and C# (.NET) automation scripts for scheduled health checks, log rotation, automated backups, and leveraging modern AI for rapid root-cause diagnosis.</p>
                 </div>
             </div>
         </section>
@@ -113,10 +129,10 @@
         <!-- Featured Project 1: Linux Edge Server -->
         <section id="edge-server-project" class="project-card" aria-labelledby="edge-server-title">
             <div class="project-header-row">
-                <h2 id="edge-server-title" class="project-title">1. Edge Linux Server &amp; IoT Container Infrastructure</h2>
-                <span class="project-org-badge">EU Horizon 2020 RESPONSE / City of Turku / FMI</span>
+                <h2 id="edge-server-title" class="project-title" data-i18n="sys.p1_title">1. Edge Linux Server &amp; IoT Container Infrastructure</h2>
+                <span class="project-org-badge" data-i18n="sys.p1_badge">EU Horizon 2020 RESPONSE / City of Turku / FMI</span>
             </div>
-            <p class="project-summary">
+            <p class="project-summary" data-i18n="sys.p1_summary">
                 Deployed, configured, and administered modular Linux-based edge compute gateways (Raspberry Pi 4 &amp; ESP32) collecting environmental telemetry for the Finnish Meteorological Institute (FMI). Engineered an isolated Docker microservice architecture with automated system health monitoring and time-series telemetry pipelines.
             </p>
 
@@ -124,26 +140,26 @@
                 <div class="spec-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
-                        Server Architecture &amp; Containerization
+                        <span data-i18n="sys.p1_spec_title">Server Architecture &amp; Containerization</span>
                     </div>
                     <ul class="spec-list">
-                        <li><strong>Host Operating System:</strong> Debian-based Linux (Raspberry Pi OS) with systemd process management.</li>
-                        <li><strong>Container Orchestration:</strong> Docker &amp; Docker Compose managing isolated microservices (Broker, DB, Ingestion, Gateway).</li>
-                        <li><strong>Security &amp; Remote Access:</strong> Hardened SSH/SFTP access, key-based authentication, and UFW firewall rules.</li>
-                        <li><strong>Boot Sequencing:</strong> Custom Bash startup scripts managing ordered container initialization and shared volume namespace permissions.</li>
+                        <li data-i18n-html="sys.p1_s1"><strong>Host Operating System:</strong> Debian-based Linux (Raspberry Pi OS) with systemd process management.</li>
+                        <li data-i18n-html="sys.p1_s2"><strong>Container Orchestration:</strong> Docker &amp; Docker Compose managing isolated microservices (Broker, DB, Ingestion, Gateway).</li>
+                        <li data-i18n-html="sys.p1_s3"><strong>Security &amp; Remote Access:</strong> Hardened SSH/SFTP access, key-based authentication, and UFW firewall rules.</li>
+                        <li data-i18n-html="sys.p1_s4"><strong>Boot Sequencing:</strong> Custom Bash startup scripts managing ordered container initialization and shared volume namespace permissions.</li>
                     </ul>
                 </div>
 
                 <div class="verif-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
-                        Infrastructure Health &amp; Reliability
+                        <span data-i18n="sys.p1_verif_title">Infrastructure Health &amp; Reliability</span>
                     </div>
                     <ul class="verif-list">
-                        <li><strong>Uptime &amp; Telemetry:</strong> InfluxDB time-series metrics streaming to Grafana to monitor CPU load, memory utilization, and network link stability.</li>
-                        <li><strong>Automated Recovery:</strong> Configured Docker container restart policies and watchdog services to eliminate system lockups.</li>
-                        <li><strong>Fail-Safe Telemetry:</strong> Implemented local SQLite/InfluxDB caching buffers to prevent data loss during cellular network dropouts.</li>
-                        <li><strong>Standard Operating Procedures:</strong> Authored comprehensive SOP documentation and deployment runbooks for repeatable server provisioning.</li>
+                        <li data-i18n-html="sys.p1_v1"><strong>Uptime &amp; Telemetry:</strong> InfluxDB time-series metrics streaming to Grafana to monitor CPU load, memory utilization, and network link stability.</li>
+                        <li data-i18n-html="sys.p1_v2"><strong>Automated Recovery:</strong> Configured Docker container restart policies and watchdog services to eliminate system lockups.</li>
+                        <li data-i18n-html="sys.p1_v3"><strong>Fail-Safe Telemetry:</strong> Implemented local SQLite/InfluxDB caching buffers to prevent data loss during cellular network dropouts.</li>
+                        <li data-i18n-html="sys.p1_v4"><strong>Standard Operating Procedures:</strong> Authored comprehensive SOP documentation and deployment runbooks for repeatable server provisioning.</li>
                     </ul>
                 </div>
             </div>
@@ -161,19 +177,19 @@
             <div class="media-gallery">
                 <figure class="media-figure">
                     <div class="media-img-wrapper" onclick="openLightbox('aq-sensor-bench.jpg', 'Edge Linux compute station and sensor interface test bench showing Raspberry Pi gateway and serial telemetry connections.')">
-                        <img src="aq-sensor-bench.jpg" alt="Edge Linux Server Test Bench" loading="lazy">
-                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                        <img src="aq-sensor-bench.jpg" alt="Edge Linux Server Test Bench" loading="lazy" data-i18n-attr="alt:sys.p1_img1_alt">
+                        <span class="zoom-overlay" data-i18n="sys.zoom_overlay">🔍 Click to Expand</span>
                     </div>
-                    <figcaption class="media-caption">
+                    <figcaption class="media-caption" data-i18n-html="sys.p1_fig1_caption">
                         <strong>Figure 1.1:</strong> Edge Linux gateway test bench showing Raspberry Pi compute module, Dockerized services, and serial telemetry bus.
                     </figcaption>
                 </figure>
                 <figure class="media-figure">
                     <div class="media-img-wrapper" onclick="openLightbox('aq-sensor-enclosure.jpg', 'Weatherproof field IoT enclosure housing Linux gateway, power regulation, and cellular antenna.')">
-                        <img src="aq-sensor-enclosure.jpg" alt="Field Infrastructure Enclosure" loading="lazy">
-                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                        <img src="aq-sensor-enclosure.jpg" alt="Field Infrastructure Enclosure" loading="lazy" data-i18n-attr="alt:sys.p1_img2_alt">
+                        <span class="zoom-overlay" data-i18n="sys.zoom_overlay">🔍 Click to Expand</span>
                     </div>
-                    <figcaption class="media-caption">
+                    <figcaption class="media-caption" data-i18n-html="sys.p1_fig2_caption">
                         <strong>Figure 1.2:</strong> Weatherproof field enclosure deployment housing Linux compute node and 24V/5V DC power management.
                     </figcaption>
                 </figure>
@@ -183,10 +199,10 @@
         <!-- Featured Project 2: Systems Automation -->
         <section id="automation-tools-project" class="project-card" aria-labelledby="automation-title">
             <div class="project-header-row">
-                <h2 id="automation-title" class="project-title">2. Windows &amp; Linux Systems Automation &amp; Diagnostics</h2>
-                <span class="project-org-badge">Systems Engineering &amp; Open Source</span>
+                <h2 id="automation-title" class="project-title" data-i18n="sys.p2_title">2. Windows &amp; Linux Systems Automation &amp; Diagnostics</h2>
+                <span class="project-org-badge" data-i18n="sys.p2_badge">Systems Engineering &amp; Open Source</span>
             </div>
-            <p class="project-summary">
+            <p class="project-summary" data-i18n="sys.p2_summary">
                 Engineered system-level utilities, automation scripts, and diagnostic tools in C# (.NET), Python, PowerShell, and Bash. Leveraged Win32 API interop and Inter-Process Communication (IPC) to automate multi-application workflows, monitor process health, and maintain 99.9% uptime for hands-free workstation infrastructure.
             </p>
 
@@ -194,26 +210,26 @@
                 <div class="spec-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
-                        Automation &amp; Inter-Process Architecture
+                        <span data-i18n="sys.p2_spec_title">Automation &amp; Inter-Process Architecture</span>
                     </div>
                     <ul class="spec-list">
-                        <li><strong>Windows API Interop:</strong> C# (.NET) and Python utilities interfacing directly with User32/Kernel32 for window state inspection and process management.</li>
-                        <li><strong>IPC Bridge:</strong> Thread-safe XML-RPC and socket-based hardware IPC bridges enabling external hardware controllers to trigger system actions.</li>
-                        <li><strong>PowerShell Tooling:</strong> 40+ modular administrative scripts automating repetitive system configuration, diagnostic logging, and batch execution.</li>
-                        <li><strong>AI-Augmented Workflows:</strong> Integrated LLM-driven diagnostic routines to parse application log dumps and automate root-cause triage.</li>
+                        <li data-i18n-html="sys.p2_s1"><strong>Windows API Interop:</strong> C# (.NET) and Python utilities interfacing directly with User32/Kernel32 for window state inspection and process management.</li>
+                        <li data-i18n-html="sys.p2_s2"><strong>IPC Bridge:</strong> Thread-safe XML-RPC and socket-based hardware IPC bridges enabling external hardware controllers to trigger system actions.</li>
+                        <li data-i18n-html="sys.p2_s3"><strong>PowerShell Tooling:</strong> 40+ modular administrative scripts automating repetitive system configuration, diagnostic logging, and batch execution.</li>
+                        <li data-i18n-html="sys.p2_s4"><strong>AI-Augmented Workflows:</strong> Integrated LLM-driven diagnostic routines to parse application log dumps and automate root-cause triage.</li>
                     </ul>
                 </div>
 
                 <div class="verif-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
-                        Operational Reliability &amp; Open Source
+                        <span data-i18n="sys.p2_verif_title">Operational Reliability &amp; Open Source</span>
                     </div>
                     <ul class="verif-list">
-                        <li><strong>Crash Elimination:</strong> Diagnosed and resolved memory leaks, thread race conditions, and COM object lifecycle crashes across upstream repositories.</li>
-                        <li><strong>Hardware Debouncing:</strong> Implemented software-level debounce filtering and state chording for external USB button peripherals.</li>
-                        <li><strong>Open-Source Contributions:</strong> 4 merged upstream pull requests in production automation frameworks (Caster, Dragonfly, PyVDA) across 400+ commits.</li>
-                        <li><strong>High-Reliability Uptime:</strong> Engineered fail-safe exception handling ensuring uninterrupted hands-free workstation operation.</li>
+                        <li data-i18n-html="sys.p2_v1"><strong>Crash Elimination:</strong> Diagnosed and resolved memory leaks, thread race conditions, and COM object lifecycle crashes across upstream repositories.</li>
+                        <li data-i18n-html="sys.p2_v2"><strong>Hardware Debouncing:</strong> Implemented software-level debounce filtering and state chording for external USB button peripherals.</li>
+                        <li data-i18n-html="sys.p2_v3"><strong>Open-Source Contributions:</strong> 4 merged upstream pull requests in production automation frameworks (Caster, Dragonfly, PyVDA) across 400+ commits.</li>
+                        <li data-i18n-html="sys.p2_v4"><strong>High-Reliability Uptime:</strong> Engineered fail-safe exception handling ensuring uninterrupted hands-free workstation operation.</li>
                     </ul>
                 </div>
             </div>
@@ -231,19 +247,19 @@
             <div class="media-gallery">
                 <figure class="media-figure">
                     <div class="media-img-wrapper" onclick="openLightbox('caster-pr-screenshot.png', 'Merged upstream pull request solving thread bottlenecks and process lifecycle stability in open-source automation framework.')">
-                        <img src="caster-pr-screenshot.png" alt="Open-Source Pull Request and Systems Stability Patch" loading="lazy">
-                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                        <img src="caster-pr-screenshot.png" alt="Open-Source Pull Request and Systems Stability Patch" loading="lazy" data-i18n-attr="alt:sys.p2_img1_alt">
+                        <span class="zoom-overlay" data-i18n="sys.zoom_overlay">🔍 Click to Expand</span>
                     </div>
-                    <figcaption class="media-caption">
+                    <figcaption class="media-caption" data-i18n-html="sys.p2_fig1_caption">
                         <strong>Figure 2.1:</strong> Upstream system stability patch resolving process execution bottlenecks and threading stability.
                     </figcaption>
                 </figure>
                 <figure class="media-figure">
                     <div class="media-img-wrapper" onclick="openLightbox('winstasis-screenshot.png', 'C# Win32 desktop diagnostic utility for window state management and process inspection.')">
-                        <img src="winstasis-screenshot.png" alt="C# Diagnostic Utility" loading="lazy">
-                        <span class="zoom-overlay">🔍 Click to Expand</span>
+                        <img src="winstasis-screenshot.png" alt="C# Diagnostic Utility" loading="lazy" data-i18n-attr="alt:sys.p2_img2_alt">
+                        <span class="zoom-overlay" data-i18n="sys.zoom_overlay">🔍 Click to Expand</span>
                     </div>
-                    <figcaption class="media-caption">
+                    <figcaption class="media-caption" data-i18n-html="sys.p2_fig2_caption">
                         <strong>Figure 2.2:</strong> Lightweight C# (.NET) Win32 diagnostic utility inspecting process handles and window state hierarchies.
                     </figcaption>
                 </figure>
@@ -253,10 +269,10 @@
         <!-- Featured Project 3: IoT Monitoring Server -->
         <section id="iot-server-project" class="project-card" aria-labelledby="iot-server-title">
             <div class="project-header-row">
-                <h2 id="iot-server-title" class="project-title">3. Multi-Threaded Linux Home &amp; Security Server</h2>
-                <span class="project-org-badge">Embedded Systems Lab</span>
+                <h2 id="iot-server-title" class="project-title" data-i18n="sys.p3_title">3. Multi-Threaded Linux Home &amp; Security Server</h2>
+                <span class="project-org-badge" data-i18n="sys.p3_badge">Embedded Systems Lab</span>
             </div>
-            <p class="project-summary">
+            <p class="project-summary" data-i18n="sys.p3_summary">
                 Architected a centralized Raspberry Pi Linux server managing multi-threaded sensor polling (GPIO, I2C), TCP/IP socket network alerts, and persistent metric logging. Configured systemd background services and automated network reconnect routines to maintain continuous telemetry flow across intermittent local network conditions.
             </p>
 
@@ -264,24 +280,24 @@
                 <div class="spec-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
-                        Server &amp; Network Protocol Stack
+                        <span data-i18n="sys.p3_spec_title">Server &amp; Network Protocol Stack</span>
                     </div>
                     <ul class="spec-list">
-                        <li><strong>Platform:</strong> Raspberry Pi 4 running headless Debian Linux with systemd service isolation.</li>
-                        <li><strong>Network Alerts:</strong> Custom TCP/IP socket client-server daemon with automated email/SMS dispatch.</li>
-                        <li><strong>Sensor Bus:</strong> Multi-threaded polling of reed switch door contacts and BME280 environmental sensors.</li>
+                        <li data-i18n-html="sys.p3_s1"><strong>Platform:</strong> Raspberry Pi 4 running headless Debian Linux with systemd service isolation.</li>
+                        <li data-i18n-html="sys.p3_s2"><strong>Network Alerts:</strong> Custom TCP/IP socket client-server daemon with automated email/SMS dispatch.</li>
+                        <li data-i18n-html="sys.p3_s3"><strong>Sensor Bus:</strong> Multi-threaded polling of reed switch door contacts and BME280 environmental sensors.</li>
                     </ul>
                 </div>
 
                 <div class="verif-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
-                        Reliability &amp; Failover Protection
+                        <span data-i18n="sys.p3_verif_title">Reliability &amp; Failover Protection</span>
                     </div>
                     <ul class="verif-list">
-                        <li><strong>Service Daemon:</strong> Registered as a systemd service with automatic exponential-backoff restart.</li>
-                        <li><strong>Network Recovery:</strong> Built-in socket reconnection loop handling DHCP lease renewals and Wi-Fi drops.</li>
-                        <li><strong>Event Logging:</strong> Structured log outputs with timestamped event auditing.</li>
+                        <li data-i18n-html="sys.p3_v1"><strong>Service Daemon:</strong> Registered as a systemd service with automatic exponential-backoff restart.</li>
+                        <li data-i18n-html="sys.p3_v2"><strong>Network Recovery:</strong> Built-in socket reconnection loop handling DHCP lease renewals and Wi-Fi drops.</li>
+                        <li data-i18n-html="sys.p3_v3"><strong>Event Logging:</strong> Structured log outputs with timestamped event auditing.</li>
                     </ul>
                 </div>
             </div>
@@ -299,10 +315,10 @@
         <!-- Featured Project 4: RF Field Infrastructure -->
         <section id="rf-field-project" class="project-card" aria-labelledby="rf-field-title">
             <div class="project-header-row">
-                <h2 id="rf-field-title" class="project-title">4. Field Infrastructure &amp; Cellular Network Verification</h2>
-                <span class="project-org-badge">TEKsystems / SmartSky Networks</span>
+                <h2 id="rf-field-title" class="project-title" data-i18n="sys.p4_title">4. Field Infrastructure &amp; Cellular Network Verification</h2>
+                <span class="project-org-badge" data-i18n="sys.p4_badge">TEKsystems / SmartSky Networks</span>
             </div>
-            <p class="project-summary">
+            <p class="project-summary" data-i18n="sys.p4_summary">
                 Supported lead field engineers in executing pre-deployment cellular and air-to-ground network verification tests across distributed cell tower sites. Operated Rohde &amp; Schwarz spectrum analyzers, aligned directional antenna arrays, and verified telemetry data integrity.
             </p>
 
@@ -310,23 +326,23 @@
                 <div class="spec-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 6 2zm4 0a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z"></path></svg>
-                        Field Equipment &amp; Operations
+                        <span data-i18n="sys.p4_spec_title">Field Equipment &amp; Operations</span>
                     </div>
                     <ul class="spec-list">
-                        <li><strong>Instrumentation:</strong> Rohde &amp; Schwarz FSH4 Handheld Spectrum Analyzer for interference mapping.</li>
-                        <li><strong>Antenna Systems:</strong> Rigged and aligned high-gain omni and directional antenna masts.</li>
-                        <li><strong>Site Safety:</strong> Strict compliance with OSHA, mobile lift, and job-site safety standards.</li>
+                        <li data-i18n-html="sys.p4_s1"><strong>Instrumentation:</strong> Rohde &amp; Schwarz FSH4 Handheld Spectrum Analyzer for interference mapping.</li>
+                        <li data-i18n-html="sys.p4_s2"><strong>Antenna Systems:</strong> Rigged and aligned high-gain omni and directional antenna masts.</li>
+                        <li data-i18n-html="sys.p4_s3"><strong>Site Safety:</strong> Strict compliance with OSHA, mobile lift, and job-site safety standards.</li>
                     </ul>
                 </div>
 
                 <div class="verif-box">
                     <div class="box-title">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"></path></svg>
-                        Data Integrity &amp; Reporting
+                        <span data-i18n="sys.p4_verif_title">Data Integrity &amp; Reporting</span>
                     </div>
                     <ul class="verif-list">
-                        <li><strong>Telemetry Export:</strong> Captured real-time RF trace dumps and exported CSV logs for HQ analysis.</li>
-                        <li><strong>Site Verification:</strong> Conducted noise floor benchmarks before and after antenna positioning.</li>
+                        <li data-i18n-html="sys.p4_v1"><strong>Telemetry Export:</strong> Captured real-time RF trace dumps and exported CSV logs for HQ analysis.</li>
+                        <li data-i18n-html="sys.p4_v2"><strong>Site Verification:</strong> Conducted noise floor benchmarks before and after antenna positioning.</li>
                     </ul>
                 </div>
             </div>
@@ -343,48 +359,48 @@
         <!-- Technical Skills Matrix -->
         <section id="sysadmin-skills-matrix" class="project-card" aria-labelledby="matrix-title">
             <div class="project-header-row">
-                <h2 id="matrix-title" class="project-title">5. Systems Administration &amp; IT Infrastructure Skills Matrix</h2>
-                <span class="project-org-badge">Core Toolkit</span>
+                <h2 id="matrix-title" class="project-title" data-i18n="sys.matrix_title">5. Systems Administration &amp; IT Infrastructure Skills Matrix</h2>
+                <span class="project-org-badge" data-i18n="sys.matrix_badge">Core Toolkit</span>
             </div>
 
             <div class="matrix-grid">
                 <div class="matrix-card">
-                    <h4>🖥️ Operating Systems</h4>
+                    <h4 data-i18n="sys.m1_title">🖥️ Operating Systems</h4>
                     <ul>
-                        <li><strong>Linux:</strong> Debian, Ubuntu, Raspbian, CentOS fundamentals</li>
-                        <li><strong>Windows:</strong> Windows 10/11, Windows Server basics, Active Directory</li>
-                        <li><strong>Services:</strong> Systemd, Cron jobs, Windows Task Scheduler</li>
-                        <li><strong>APIs:</strong> Win32 API (User32, Kernel32), Registry, Event Viewer</li>
+                        <li data-i18n-html="sys.m1_c1"><strong>Linux:</strong> Debian, Ubuntu, Raspbian, CentOS fundamentals</li>
+                        <li data-i18n-html="sys.m1_c2"><strong>Windows:</strong> Windows 10/11, Windows Server basics, Active Directory</li>
+                        <li data-i18n-html="sys.m1_c3"><strong>Services:</strong> Systemd, Cron jobs, Windows Task Scheduler</li>
+                        <li data-i18n-html="sys.m1_c4"><strong>APIs:</strong> Win32 API (User32, Kernel32), Registry, Event Viewer</li>
                     </ul>
                 </div>
 
                 <div class="matrix-card">
-                    <h4>🌐 Networking &amp; Protocols</h4>
+                    <h4 data-i18n="sys.m2_title">🌐 Networking &amp; Protocols</h4>
                     <ul>
-                        <li><strong>Protocols:</strong> TCP/IP, UDP, DNS, DHCP, HTTP/HTTPS, SSH, SFTP</li>
-                        <li><strong>Security:</strong> UFW, iptables, Windows Firewall, Key-based SSH</li>
-                        <li><strong>File Sharing:</strong> SMB/CIFS, NFS network shares</li>
-                        <li><strong>Web Servers:</strong> Nginx, Apache reverse proxies &amp; virtual hosts</li>
+                        <li data-i18n-html="sys.m2_c1"><strong>Protocols:</strong> TCP/IP, UDP, DNS, DHCP, HTTP/HTTPS, SSH, SFTP</li>
+                        <li data-i18n-html="sys.m2_c2"><strong>Security:</strong> UFW, iptables, Windows Firewall, Key-based SSH</li>
+                        <li data-i18n-html="sys.m2_c3"><strong>File Sharing:</strong> SMB/CIFS, NFS network shares</li>
+                        <li data-i18n-html="sys.m2_c4"><strong>Web Servers:</strong> Nginx, Apache reverse proxies &amp; virtual hosts</li>
                     </ul>
                 </div>
 
                 <div class="matrix-card">
-                    <h4>⚡ Scripting &amp; Automation</h4>
+                    <h4 data-i18n="sys.m3_title">⚡ Scripting &amp; Automation</h4>
                     <ul>
-                        <li><strong>PowerShell:</strong> Administrative automation, log parsing, AD queries</li>
-                        <li><strong>Bash:</strong> System maintenance scripts, boot config, log rotation</li>
-                        <li><strong>Python:</strong> Automation daemons, socket servers, API integration</li>
-                        <li><strong>C# (.NET):</strong> Desktop diagnostic tools, Win32 system hooks</li>
+                        <li data-i18n-html="sys.m3_c1"><strong>PowerShell:</strong> Administrative automation, log parsing, AD queries</li>
+                        <li data-i18n-html="sys.m3_c2"><strong>Bash:</strong> System maintenance scripts, boot config, log rotation</li>
+                        <li data-i18n-html="sys.m3_c3"><strong>Python:</strong> Automation daemons, socket servers, API integration</li>
+                        <li data-i18n-html="sys.m3_c4"><strong>C# (.NET):</strong> Desktop diagnostic tools, Win32 system hooks</li>
                     </ul>
                 </div>
 
                 <div class="matrix-card">
-                    <h4>📊 Telemetry, Containers &amp; Tools</h4>
+                    <h4 data-i18n="sys.m4_title">📊 Telemetry, Containers &amp; Tools</h4>
                     <ul>
-                        <li><strong>Containers:</strong> Docker, Docker Compose, container networking</li>
-                        <li><strong>Monitoring:</strong> InfluxDB (time-series), Grafana dashboards</li>
-                        <li><strong>Databases:</strong> SQL (MySQL, SQLite), InfluxDB, MongoDB</li>
-                        <li><strong>Methodologies:</strong> SOP authoring, Root Cause Analysis, Git</li>
+                        <li data-i18n-html="sys.m4_c1"><strong>Containers:</strong> Docker, Docker Compose, container networking</li>
+                        <li data-i18n-html="sys.m4_c2"><strong>Monitoring:</strong> InfluxDB (time-series), Grafana dashboards</li>
+                        <li data-i18n-html="sys.m4_c3"><strong>Databases:</strong> SQL (MySQL, SQLite), InfluxDB, MongoDB</li>
+                        <li data-i18n-html="sys.m4_c4"><strong>Methodologies:</strong> SOP authoring, Root Cause Analysis, Git</li>
                     </ul>
                 </div>
             </div>
@@ -392,7 +408,7 @@
 
         <!-- Footer -->
         <footer class="eng-footer">
-            <p>© 2026 Amir Farhadi • B.Eng. in ICT (Embedded Electronics &amp; IoT) • <a href="mailto:amirf147@gmail.com">amirf147@gmail.com</a> • <a href="https://linkedin.com/in/amir-farhadi" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a> • <a href="https://github.com/amirf147" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></p>
+            <p data-i18n-html="sys.footer_text">© 2026 Amir Farhadi • B.Eng. in ICT (Embedded Electronics &amp; IoT) • <a href="mailto:amirf147@gmail.com">amirf147@gmail.com</a> • <a href="https://linkedin.com/in/amir-farhadi" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a> • <a href="https://github.com/amirf147" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></p>
         </footer>
     </div>
 
@@ -405,7 +421,10 @@
         </div>
     </div>
 
-    <!-- Theme & Lightbox Interactive Scripts -->
+    <!-- Theme, i18n & Lightbox Interactive Scripts -->
+    <script src="./js/i18n/en.js"></script>
+    <script src="./js/i18n/fi.js"></script>
+    <script src="./js/i18n.js"></script>
     <script>
         function openLightbox(imgSrc, captionText) {
             const modal = document.getElementById('lightbox-modal');
@@ -434,6 +453,9 @@
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeLightboxDirect();
+            if ((e.key === 'l' || e.key === 'L') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+                if (window.i18n) window.i18n.toggleLanguage();
+            }
         });
 
         const sunSvg = `<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
@@ -470,6 +492,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            if (window.I18nManager) {
+                window.i18n = new window.I18nManager();
+                window.i18n.init();
+            }
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
             updateToggleUI(currentTheme);
             const btn = document.getElementById('theme-toggle');

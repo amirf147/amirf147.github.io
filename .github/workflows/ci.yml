@@ -1,0 +1,32 @@
+name: CI Verification & Safety Audits
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    name: Path Security & Translation Coverage Audits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pre-Flight Safety & Path Audit
+        run: python scripts/check_absolute_paths.py
+
+      - name: Translation Symmetry & Coverage Audit
+        run: python scripts/check_translations.py

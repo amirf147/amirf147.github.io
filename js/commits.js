@@ -35,6 +35,17 @@ class CommitsFeed {
                 this.startRefreshCooldown();
             });
         }
+
+        window.addEventListener('languagechange', () => {
+            const cachedData = localStorage.getItem(this.CACHE_KEY);
+            if (cachedData) {
+                try {
+                    this.renderCommits(JSON.parse(cachedData));
+                } catch (e) {
+                    console.warn('Failed to re-render commits on language change:', e);
+                }
+            }
+        });
     }
 
     getCiCache() {
@@ -123,18 +134,35 @@ class CommitsFeed {
         `;
     }
 
-    getRelativeTimeString(dateString) {
-        const date = new Date(dateString);
+    getRelativeTimeString(dateStr) {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
         const now = new Date();
-        const diffMs = now - date;
+        const diffMs = now.getTime() - date.getTime();
         const diffSec = Math.floor(diffMs / 1000);
         const diffMin = Math.floor(diffSec / 60);
         const diffHr = Math.floor(diffMin / 60);
         const diffDays = Math.floor(diffHr / 24);
 
         if (isNaN(date.getTime())) return '';
+        const isFi = document.documentElement.getAttribute('lang') === 'fi';
+
+        if (isFi) {
+            if (diffDays > 30) {
+                return date.toLocaleDateString('fi-FI', { year: 'numeric', month: 'short', day: 'numeric' });
+            } else if (diffDays > 0) {
+                return diffDays === 1 ? '1 päivä sitten' : `${diffDays} päivää sitten`;
+            } else if (diffHr > 0) {
+                return diffHr === 1 ? '1 tunti sitten' : `${diffHr} tuntia sitten`;
+            } else if (diffMin > 0) {
+                return diffMin === 1 ? '1 minuutti sitten' : `${diffMin} minuuttia sitten`;
+            } else {
+                return 'juuri nyt';
+            }
+        }
+
         if (diffDays > 30) {
-            return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         } else if (diffDays > 0) {
             return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
         } else if (diffHr > 0) {

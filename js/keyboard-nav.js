@@ -194,6 +194,12 @@ class KeyboardNav {
                 return;
             }
 
+            // 'l' key shortcut toggles language (EN / FI)
+            if (e.key === 'l' || e.key === 'L') {
+                window.dispatchEvent(new CustomEvent('togglelanguage'));
+                return;
+            }
+
             if (!this.shortcutsEnabled) return;
 
             if (e.key === '0') {

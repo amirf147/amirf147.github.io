@@ -134,6 +134,7 @@
     color: var(--heading-color);
 }
 
+.lang-toggle svg,
 .theme-toggle svg {
     width: 14px;
     height: 14px;
@@ -142,6 +143,13 @@
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.top-utility-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 600px) {
@@ -154,3 +162,4 @@
         min-width: 220px;
     }
 }
+

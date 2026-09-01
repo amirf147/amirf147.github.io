@@ -7,12 +7,17 @@
  */
 
 function bootstrapPortfolio() {
-    // 1. Initialize Theme Controller
+    // 1. Initialize Localization / i18n Controller
+    if (window.I18nManager) {
+        window.portfolioI18n = new window.I18nManager();
+    }
+
+    // 2. Initialize Theme Controller
     if (window.ThemeManager) {
         window.portfolioTheme = new window.ThemeManager();
     }
 
-    // 2. Initialize Keyboard Shortcuts & A11y Controller
+    // 3. Initialize Keyboard Shortcuts & A11y Controller
     if (window.KeyboardNav) {
         window.portfolioKeyboard = new window.KeyboardNav();
     }

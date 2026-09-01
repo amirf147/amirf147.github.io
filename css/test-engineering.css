@@ -43,6 +43,15 @@
     background-color: var(--btn-hover-bg);
 }
 
+.back-link svg,
+.lang-toggle svg {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+
 .eng-title {
     color: var(--heading-color);
     font-size: 2.2rem;
