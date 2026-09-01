@@ -1897,6 +1897,47 @@ function categorizeMilestone(title, significance) {
   return tags;
 }
 
+// Translation Helper for Dynamic Content
+function t(key, params = {}, fallback = '') {
+  const lang = (window.i18n && window.i18n.currentLang) || localStorage.getItem('portfolio_lang') || 'en';
+  const dict = window.I18N_DICTS && window.I18N_DICTS[lang] && window.I18N_DICTS[lang].timeline;
+  let text = (dict && dict[key]) || fallback || key;
+  for (const [k, v] of Object.entries(params)) {
+    text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), v);
+  }
+  return text;
+}
+
+function getEraShortName(eraIndex) {
+  const prefix = t('tab_era_prefix', {}, 'Era');
+  return `${prefix} ${eraIndex}`;
+}
+
+// Initial Hash Jump Handler
+function handleInitialHash() {
+  const rawHash = window.location.hash.replace('#', '').trim();
+  if (!rawHash) return;
+
+  const aliasMap = {
+    'era1': 'era_1_2024_foundations',
+    'era2': 'era_2_2024_expansion',
+    'era3': 'era_3_2025_maturity',
+    'era4': 'era_4_2026_modern',
+    'era-1': 'era_1_2024_foundations',
+    'era-2': 'era_2_2024_expansion',
+    'era-3': 'era_3_2025_maturity',
+    'era-4': 'era_4_2026_modern'
+  };
+
+  const targetId = aliasMap[rawHash.toLowerCase()] || rawHash;
+  const targetEl = document.getElementById(targetId);
+  if (targetEl) {
+    setTimeout(() => {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
+  }
+}
+
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
   initData();
@@ -1904,6 +1945,14 @@ document.addEventListener('DOMContentLoaded', () => {
   renderEras();
   setupEventListeners();
   setupScrollSpy();
+  handleInitialHash();
+});
+
+window.addEventListener('hashchange', handleInitialHash);
+
+window.addEventListener('languagechange', () => {
+  buildEraNavTabs();
+  renderEras();
 });
 
 // Load and prepare dataset
@@ -1944,17 +1993,19 @@ function initData() {
 // Build Navigation Tabs
 function buildEraNavTabs() {
   const container = document.getElementById('eraNavTabs');
+  const allErasLabel = t('tab_all_eras', {}, 'All Eras');
   let html = `
     <button class="era-tab-btn active" data-era-jump="all" style="--active-bg: rgba(99, 102, 241, 0.2); --active-border: rgba(99, 102, 241, 0.5);">
-      All Eras <span class="tab-badge">${state.flattenedMilestones.length}</span>
+      ${allErasLabel} <span class="tab-badge">${state.flattenedMilestones.length}</span>
     </button>
   `;
 
   state.dataset.forEach((era) => {
-    const meta = eraMeta[era.era_key] || { shortName: 'Era', color: '#6366f1' };
+    const meta = eraMeta[era.era_key] || { shortName: 'Era', index: 1, color: '#6366f1' };
+    const shortName = getEraShortName(meta.index);
     html += `
       <button class="era-tab-btn" data-era-jump="${era.era_key}" style="--active-bg: ${meta.badgeBg}; --active-border: ${meta.color}; --active-glow: ${meta.glow};">
-        ${meta.shortName} <span class="tab-badge">${era.milestones.length}</span>
+        ${shortName} <span class="tab-badge">${era.milestones.length}</span>
       </button>
     `;
   });
@@ -1987,6 +2038,7 @@ function renderEras() {
     }
 
     const meta = eraMeta[era.era_key];
+    const shortName = getEraShortName(meta.index);
     const subtabActive = state.activeSubtabs[era.era_key] || 'timeline';
 
     // Filter milestones for this era
@@ -2019,6 +2071,12 @@ function renderEras() {
       return; // Skip empty matching era
     }
 
+    const countText = t('era_milestones_count', { count: matchingMilestones.length, total: era.milestones.length }, `${matchingMilestones.length} of ${era.milestones.length} Milestones`);
+    const subtabMilestones = t('subtab_milestones', {}, 'Milestones');
+    const subtabSubsystems = t('subtab_subsystems', {}, 'Subsystem Breakdown');
+    const subtabLessons = t('subtab_lessons', {}, 'Technical Lessons');
+    const subtabQuotes = t('subtab_quotes', {}, 'Voice Reflections');
+
     html += `
       <section class="era-section" id="${era.era_key}" style="
         --era-color: ${meta.color};
@@ -2031,11 +2089,11 @@ function renderEras() {
         <div class="era-header-card">
           <div class="era-header-top">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="era-tag-badge">${meta.shortName}</span>
+              <span class="era-tag-badge">${shortName}</span>
               <span class="era-date-range">${era.date_range}</span>
             </div>
             <span style="font-size: 0.8rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
-              ${matchingMilestones.length} of ${era.milestones.length} Milestones
+              ${countText}
             </span>
           </div>
 
@@ -2045,16 +2103,16 @@ function renderEras() {
           <!-- Era Section Mode Tabs -->
           <div class="era-subtabs">
             <button class="era-subtab-btn ${subtabActive === 'timeline' ? 'active' : ''}" data-era-key="${era.era_key}" data-subtab="timeline">
-              ⏱️ Milestones (${matchingMilestones.length})
+              ⏱️ ${subtabMilestones} (${matchingMilestones.length})
             </button>
             <button class="era-subtab-btn ${subtabActive === 'subsystems' ? 'active' : ''}" data-era-key="${era.era_key}" data-subtab="subsystems">
-              ⚙️ Subsystem Breakdown
+              ⚙️ ${subtabSubsystems}
             </button>
             <button class="era-subtab-btn ${subtabActive === 'lessons' ? 'active' : ''}" data-era-key="${era.era_key}" data-subtab="lessons">
-              💡 Technical Lessons (${era.technical_lessons ? era.technical_lessons.length : 0})
+              💡 ${subtabLessons} (${era.technical_lessons ? era.technical_lessons.length : 0})
             </button>
             <button class="era-subtab-btn ${subtabActive === 'quotes' ? 'active' : ''}" data-era-key="${era.era_key}" data-subtab="quotes">
-              💬 Voice Reflections (${era.journey_quotes ? era.journey_quotes.length : 0})
+              💬 ${subtabQuotes} (${era.journey_quotes ? era.journey_quotes.length : 0})
             </button>
           </div>
         </div>
@@ -2070,7 +2128,7 @@ function renderEras() {
   mainContainer.innerHTML = html;
 
   // Update Result Count Badge
-  document.getElementById('resultsCountBadge').textContent = `Showing ${totalVisibleMilestones} of ${state.flattenedMilestones.length} milestones`;
+  document.getElementById('resultsCountBadge').textContent = t('showing_milestones', { visible: totalVisibleMilestones, total: state.flattenedMilestones.length }, `Showing ${totalVisibleMilestones} of ${state.flattenedMilestones.length} milestones`);
 
   // Toggle Empty State
   if (totalVisibleMilestones === 0 && query) {
@@ -2101,9 +2159,11 @@ function renderEraContent(era, milestones, activeSubtab, query) {
 // Render Milestone Cards in Vertical Timeline View
 function renderMilestonesTimeline(milestones, query) {
   if (milestones.length === 0) {
-    return `<div style="padding: 24px; color: var(--text-dim); text-align: center;">No milestones match the current filter in this era.</div>`;
+    return `<div style="padding: 24px; color: var(--text-dim); text-align: center;">${t('no_milestones_match', {}, 'No milestones match the current filter in this era.')}</div>`;
   }
 
+  const inspectText = t('card_inspect', {}, 'Inspect milestone details');
+  const exploreText = t('card_explore', {}, 'Explore ➔');
   let html = `<div class="timeline-track-container"><div class="timeline-spine"></div>`;
 
   milestones.forEach((m) => {
@@ -2126,8 +2186,8 @@ function renderMilestonesTimeline(milestones, query) {
           <h3 class="milestone-title">${highlightText(m.title, query)}</h3>
           <p class="milestone-significance">${highlightText(m.significance, query)}</p>
           <div class="milestone-card-footer">
-            <span>Inspect milestone details</span>
-            <span class="card-inspect-hint">Explore ➔</span>
+            <span>${inspectText}</span>
+            <span class="card-inspect-hint">${exploreText}</span>
           </div>
         </div>
       </div>
@@ -2141,9 +2201,11 @@ function renderMilestonesTimeline(milestones, query) {
 // Render Milestone Cards in Grid View
 function renderMilestonesGrid(milestones, query) {
   if (milestones.length === 0) {
-    return `<div style="padding: 24px; color: var(--text-dim); text-align: center;">No milestones match the current filter.</div>`;
+    return `<div style="padding: 24px; color: var(--text-dim); text-align: center;">${t('no_milestones_match', {}, 'No milestones match the current filter.')}</div>`;
   }
 
+  const inspectText = t('card_inspect', {}, 'Inspect milestone details');
+  const exploreText = t('card_explore', {}, 'Explore ➔');
   let html = `<div class="milestone-grid-container">`;
   milestones.forEach((m) => {
     const primaryCat = m.categories[0] ? m.categories[0].label : 'Architecture';
@@ -2163,8 +2225,8 @@ function renderMilestonesGrid(milestones, query) {
           <p class="milestone-significance">${highlightText(m.significance, query)}</p>
         </div>
         <div class="milestone-card-footer">
-          <span>Inspect milestone details</span>
-          <span class="card-inspect-hint">Explore ➔</span>
+          <span>${inspectText}</span>
+          <span class="card-inspect-hint">${exploreText}</span>
         </div>
       </div>
     `;
@@ -2459,10 +2521,11 @@ function openMilestoneModal(globalIndex) {
   if (!m) return;
 
   state.selectedMilestoneIndex = globalIndex;
-  const meta = eraMeta[m.era_key] || { shortName: 'Era', color: '#6366f1' };
+  const meta = eraMeta[m.era_key] || { shortName: 'Era', index: 1, color: '#6366f1' };
+  const shortName = getEraShortName(meta.index);
 
   document.getElementById('modalCommitHash').textContent = `#${m.hash}`;
-  document.getElementById('modalEraBadge').textContent = meta.shortName;
+  document.getElementById('modalEraBadge').textContent = shortName;
   document.getElementById('modalEraBadge').style.background = meta.badgeBg;
   document.getElementById('modalEraBadge').style.boxShadow = `0 0 12px ${meta.badgeGlow}`;
   document.getElementById('modalDate').textContent = m.date;
@@ -2476,7 +2539,7 @@ function openMilestoneModal(globalIndex) {
 
   if (eraObj && eraObj.technical_lessons && eraObj.technical_lessons.length > 0) {
     techBox.style.display = 'block';
-    techContent.innerHTML = `<strong>Era Key Lesson:</strong> ${eraObj.technical_lessons[0]}`;
+    techContent.innerHTML = `<strong>${t('subtab_lessons', {}, 'Technical Lessons')}:</strong> ${eraObj.technical_lessons[0]}`;
   } else {
     techBox.style.display = 'none';
   }
@@ -2484,6 +2547,9 @@ function openMilestoneModal(globalIndex) {
   // Prev / Next button state
   document.getElementById('modalPrevBtn').disabled = globalIndex === 0;
   document.getElementById('modalNextBtn').disabled = globalIndex === state.flattenedMilestones.length - 1;
+  document.getElementById('modalPrevBtn').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg> ${t('modal_prev', {}, 'Previous')}`;
+  document.getElementById('modalNextBtn').innerHTML = `${t('modal_next', {}, 'Next')} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>`;
+  document.getElementById('modalCopyHashBtn').textContent = t('modal_copy_hash', {}, '📋 Copy Commit Hash');
 
   const modal = document.getElementById('milestoneModal');
   modal.classList.add('open');
@@ -2501,7 +2567,7 @@ function closeMilestoneModal() {
 function copyCommitHash(hash) {
   if (!hash) return;
   navigator.clipboard.writeText(hash).then(() => {
-    showToast(`✓ Copied commit hash #${hash} to clipboard!`);
+    showToast(t('toast_copied', { hash }, `✓ Copied commit hash #${hash} to clipboard!`));
   }).catch(() => {
     showToast(`Commit #${hash}`);
   });

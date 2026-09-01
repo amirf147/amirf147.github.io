@@ -501,6 +501,23 @@ window.I18N_DICTS['fi'] = {
         empty_title: "Virstanpylväitä ei löytynyt",
         empty_desc: "Yksikään commit tai arkkitehtuurillinen virstanpylväs ei vastannut hakuasi. Kokeile tyhjentää haku tai valita \"Kaikki aiheet\".",
         empty_reset: "Nollaa kaikki suodattimet",
-        footer_text: "Caster Voice OS -arkkitehtuurimatka (2024–2026) • Rakennettu modernilla Vanilla Web -teknologiapinolla"
+        footer_text: "Caster Voice OS -arkkitehtuurimatka (2024–2026) • Rakennettu modernilla Vanilla Web -teknologiapinolla",
+        tab_all_eras: "Kaikki aikakaudet",
+        tab_era_prefix: "Aikakausi",
+        subtab_milestones: "Virstanpylväät",
+        subtab_subsystems: "Alijärjestelmäjakauma",
+        subtab_lessons: "Tekniset opit",
+        subtab_quotes: "Puhepohdinnat",
+        showing_milestones: "Näytetään {visible} / {total} virstanpylvästä",
+        era_milestones_count: "{count} / {total} virstanpylvästä",
+        card_inspect: "Tarkastele tietoja",
+        card_explore: "Tutustu ➔",
+        modal_significance_title: "Arkkitehtuurillinen merkitys ja vaikutus",
+        modal_tech_context_title: "Asiaankuuluva alijärjestelmäkonteksti",
+        modal_prev: "Edellinen",
+        modal_next: "Seuraava",
+        modal_copy_hash: "📋 Kopioi commit-tunniste",
+        toast_copied: "✓ Kopioitu commit-tunniste #{hash} leikepöydälle!",
+        no_milestones_match: "Yksikään virstanpylväs ei vastaa suodatusta tällä aikakaudella."
     }
 };

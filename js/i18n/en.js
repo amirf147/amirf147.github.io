@@ -501,6 +501,23 @@ window.I18N_DICTS['en'] = {
         empty_title: "No Milestones Found",
         empty_desc: "No commits or architectural milestones matched your query. Try clearing the search query or selecting \"All Topics\".",
         empty_reset: "Reset All Filters",
-        footer_text: "Caster Voice OS Architectural Journey (2024–2026) • Built with Glassmorphic Vanilla Web Stack"
+        footer_text: "Caster Voice OS Architectural Journey (2024–2026) • Built with Glassmorphic Vanilla Web Stack",
+        tab_all_eras: "All Eras",
+        tab_era_prefix: "Era",
+        subtab_milestones: "Milestones",
+        subtab_subsystems: "Subsystem Breakdown",
+        subtab_lessons: "Technical Lessons",
+        subtab_quotes: "Voice Reflections",
+        showing_milestones: "Showing {visible} of {total} milestones",
+        era_milestones_count: "{count} of {total} Milestones",
+        card_inspect: "Inspect milestone details",
+        card_explore: "Explore ➔",
+        modal_significance_title: "Architectural Significance & Impact",
+        modal_tech_context_title: "Relevant Subsystem Context",
+        modal_prev: "Previous",
+        modal_next: "Next",
+        modal_copy_hash: "📋 Copy Commit Hash",
+        toast_copied: "✓ Copied commit hash #{hash} to clipboard!",
+        no_milestones_match: "No milestones match the current filter in this era."
     }
 };
