@@ -31,6 +31,9 @@ class I18nManager {
     }
 
     init() {
+        if (this.initialized) return;
+        this.initialized = true;
+
         this.applyLanguage(this.currentLang, false);
 
         if (this.langToggleBtn) {
