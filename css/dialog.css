@@ -103,3 +103,201 @@ dialog h2 {
     fill: #ffff00;
     stroke: none;
 }
+
+/* ==========================================================================
+   CV & Resume Download Modal Dialog
+   ========================================================================== */
+
+.cv-dialog {
+    max-width: 680px;
+    width: 92%;
+    padding: 28px 32px;
+}
+
+.cv-dialog h2 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+}
+
+.cv-dialog-desc {
+    font-size: 0.88rem;
+    color: var(--subtitle-color);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.cv-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.cv-option-card {
+    background: var(--card-bg, rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--card-border, var(--btn-border));
+    border-radius: 8px;
+    padding: 18px 20px;
+    transition: all 0.2s ease;
+}
+
+.cv-option-card:hover {
+    border-color: var(--focus-ring);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.cv-option-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    margin-bottom: 8px;
+}
+
+[data-theme="light"] .cv-option-badge {
+    background: #e0e7ff;
+    color: #3730a3;
+    border-color: #c7d2fe;
+}
+
+[data-theme="high-contrast"] .cv-option-badge {
+    background: #000000;
+    color: #ffff00;
+    border-color: #ffff00;
+}
+
+.cv-option-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--heading-color);
+    margin: 0 0 6px 0;
+}
+
+.cv-option-desc {
+    font-size: 0.84rem;
+    color: var(--text-color);
+    margin: 0 0 14px 0;
+    line-height: 1.45;
+}
+
+.cv-download-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background: var(--btn-bg);
+    color: var(--heading-color);
+    border: 1px solid var(--btn-border);
+}
+
+.cv-download-btn.en-btn {
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.1);
+    color: #a5b4fc;
+}
+
+.cv-download-btn.en-btn:hover {
+    background: rgba(99, 102, 241, 0.25);
+    border-color: #818cf8;
+    color: #ffffff;
+}
+
+.cv-download-btn.fi-btn {
+    border-color: rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.1);
+    color: #6ee7b7;
+}
+
+.cv-download-btn.fi-btn:hover {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: #34d399;
+    color: #ffffff;
+}
+
+[data-theme="light"] .cv-download-btn.en-btn {
+    background: #eef2ff;
+    color: #4338ca;
+    border-color: #c7d2fe;
+}
+
+[data-theme="light"] .cv-download-btn.en-btn:hover {
+    background: #e0e7ff;
+    color: #312e81;
+}
+
+[data-theme="light"] .cv-download-btn.fi-btn {
+    background: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
+
+[data-theme="light"] .cv-download-btn.fi-btn:hover {
+    background: #d1fae5;
+    color: #044e39;
+}
+
+[data-theme="high-contrast"] .cv-download-btn {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+}
+
+[data-theme="high-contrast"] .cv-download-btn:hover {
+    background: #ffff00;
+    color: #000000;
+}
+
+.cv-preview-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--divider-color, rgba(255, 255, 255, 0.1));
+}
+
+.cv-preview-link {
+    font-size: 0.78rem;
+    color: var(--subtitle-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+.cv-preview-link:hover {
+    color: var(--link-color, #38bdf8);
+    text-decoration: underline;
+}
+
+.cv-dialog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--divider-color);
+    padding-top: 16px;
+}
+
+.cv-format-note {
+    font-size: 0.78rem;
+    color: var(--subtitle-color);
+    font-family: monospace;
+}
+

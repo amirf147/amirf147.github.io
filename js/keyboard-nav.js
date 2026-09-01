@@ -12,6 +12,9 @@ class KeyboardNav {
         this.a11yBtn = document.getElementById('a11y-btn');
         this.a11yDialog = document.getElementById('a11y-dialog');
         this.closeA11yBtn = document.getElementById('close-a11y-btn');
+        this.cvBtn = document.getElementById('cv-btn');
+        this.cvDialog = document.getElementById('cv-dialog');
+        this.closeCvBtn = document.getElementById('close-cv-btn');
         this.toggleShortcutsInput = document.getElementById('toggle-shortcuts-input');
 
         this.shortcutsEnabled = localStorage.getItem('enable_shortcuts') !== 'false';
@@ -22,6 +25,7 @@ class KeyboardNav {
     init() {
         this.setupBackToTop();
         this.setupA11yDialog();
+        this.setupCvDialog();
         this.setupKeydownListener();
     }
 
@@ -92,6 +96,30 @@ class KeyboardNav {
                 localStorage.setItem('enable_shortcuts', this.shortcutsEnabled.toString());
             });
         }
+    }
+
+    setupCvDialog() {
+        if (!this.cvDialog) return;
+
+        if (this.cvBtn) {
+            this.cvBtn.addEventListener('click', () => {
+                this.cvDialog.showModal();
+            });
+        }
+
+        if (this.closeCvBtn) {
+            this.closeCvBtn.addEventListener('click', () => {
+                this.cvDialog.close();
+                if (this.cvBtn) this.cvBtn.focus();
+            });
+        }
+
+        this.cvDialog.addEventListener('click', (e) => {
+            if (e.target === this.cvDialog) {
+                this.cvDialog.close();
+                if (this.cvBtn) this.cvBtn.focus();
+            }
+        });
     }
 
     stepProject(direction = 'next') {
@@ -183,6 +211,19 @@ class KeyboardNav {
                         if (this.a11yBtn) this.a11yBtn.focus();
                     } else {
                         this.a11yDialog.showModal();
+                    }
+                }
+                return;
+            }
+
+            // 'c' or 'C' shortcut toggles CV download dialog
+            if (e.key === 'c' || e.key === 'C') {
+                if (this.cvDialog) {
+                    if (this.cvDialog.open) {
+                        this.cvDialog.close();
+                        if (this.cvBtn) this.cvBtn.focus();
+                    } else {
+                        this.cvDialog.showModal();
                     }
                 }
                 return;

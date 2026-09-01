@@ -46,6 +46,16 @@
                     <button id="a11y-btn" class="nav-btn" aria-label="Accessibility Guide" data-i18n-attr="aria-label:index.a11y_btn_aria">
                         <span class="tag-prefix" aria-hidden="true">//</span> <span data-i18n="index.a11y_btn">Accessibility Help</span> <span class="kbd">?</span>
                     </button>
+                    <button id="cv-btn" class="nav-btn" aria-label="Download CV and Resumes" data-i18n-attr="aria-label:global.cv_btn_aria" data-tooltip="Download CV / Ansioluettelo [C]">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span data-i18n="global.cv_btn_label">Download CV</span> <span class="kbd">c</span>
+                    </button>
                     <a href="https://github.com/Amirf147" target="_blank" class="nav-btn" aria-label="Amir Farhadi's GitHub Profile">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: text-bottom;">
                             <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
@@ -814,6 +824,7 @@
             <li data-i18n-html="index.a11y_k_p"><span class="kbd">p</span> Jump to Previous Project Entry</li>
             <li data-i18n-html="index.a11y_k_l"><span class="kbd">l</span> Toggle Language (English / Finnish)</li>
             <li data-i18n-html="index.a11y_k_v"><span class="kbd">v</span> Toggle Hands-Free Voice Navigation</li>
+            <li data-i18n-html="index.a11y_k_c"><span class="kbd">c</span> Open CV and Resume Downloads</li>
         </ul>
 
         <p data-i18n-html="index.a11y_voice_heading"><strong>Hands-Free Voice Navigation:</strong></p>
@@ -821,6 +832,79 @@
 
         <div class="dialog-close">
             <button id="close-a11y-btn" class="nav-btn" data-i18n="index.a11y_close_btn">Close Guide</button>
+        </div>
+    </dialog>
+
+    <!-- CV & Resume Downloads Modal Dialog -->
+    <dialog id="cv-dialog" class="a11y-dialog cv-dialog" aria-labelledby="cv-dialog-title">
+        <h2 id="cv-dialog-title" data-i18n="global.cv_dialog_title">Curriculum Vitae / Resume Downloads</h2>
+        <p class="cv-dialog-desc" data-i18n="global.cv_dialog_desc">
+            Official PDF versions of Amir Farhadi's CV formatted for Finnish and international engineering roles. Choose between the Unified Single Narrative (Option 1) or the Role-Separated Breakdown (Option 2).
+        </p>
+
+        <div class="cv-cards-container">
+            <!-- Option 1 Card -->
+            <div class="cv-option-card">
+                <div class="cv-option-header">
+                    <span class="cv-option-badge" data-i18n="global.cv_opt1_badge">OPTION 1 • INTEGRATED</span>
+                    <h3 class="cv-option-title" data-i18n="global.cv_opt1_title">Option 1: Integrated Profile (Single Narrative CV)</h3>
+                    <p class="cv-option-desc" data-i18n="global.cv_opt1_desc">
+                        Unified technical leadership and full career synthesis across systems engineering, automation, and full-stack software development.
+                    </p>
+                </div>
+                <div class="cv-download-actions">
+                    <a href="./resumes/Finland_CV_Option1_Integrated_EN.pdf" download="Amir_Farhadi_CV_Option1_EN.pdf" class="cv-download-btn en-btn" aria-label="Download Option 1 English CV PDF">
+                        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-i18n="global.cv_download_en">Download English PDF</span>
+                    </a>
+                    <a href="./resumes/Finland_CV_Option1_Integrated_FI.pdf" download="Amir_Farhadi_CV_Option1_FI.pdf" class="cv-download-btn fi-btn" aria-label="Lataa Vaihtoehto 1 suomenkielinen CV PDF">
+                        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-i18n="global.cv_download_fi">Download Finnish PDF</span>
+                    </a>
+                </div>
+                <div class="cv-preview-row">
+                    <a href="./resumes/Finland_CV_Option1_Integrated_EN.pdf" target="_blank" rel="noopener noreferrer" class="cv-preview-link">
+                        <span data-i18n="global.cv_preview_en">EN Preview ↗</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
+                    </a>
+                    <a href="./resumes/Finland_CV_Option1_Integrated_FI.pdf" target="_blank" rel="noopener noreferrer" class="cv-preview-link">
+                        <span data-i18n="global.cv_preview_fi">FI Preview ↗</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Option 2 Card -->
+            <div class="cv-option-card">
+                <div class="cv-option-header">
+                    <span class="cv-option-badge" data-i18n="global.cv_opt2_badge">OPTION 2 • SEPARATED</span>
+                    <h3 class="cv-option-title" data-i18n="global.cv_opt2_title">Option 2: Separated Breakdown (Specialized Roles CV)</h3>
+                    <p class="cv-option-desc" data-i18n="global.cv_opt2_desc">
+                        Granular structural separation distinguishing Test Engineering, Systems Architecture, and Software Engineering specializations.
+                    </p>
+                </div>
+                <div class="cv-download-actions">
+                    <a href="./resumes/Finland_CV_Option2_Separated_EN.pdf" download="Amir_Farhadi_CV_Option2_EN.pdf" class="cv-download-btn en-btn" aria-label="Download Option 2 English CV PDF">
+                        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-i18n="global.cv_download_en">Download English PDF</span>
+                    </a>
+                    <a href="./resumes/Finland_CV_Option2_Separated_FI.pdf" download="Amir_Farhadi_CV_Option2_FI.pdf" class="cv-download-btn fi-btn" aria-label="Lataa Vaihtoehto 2 suomenkielinen CV PDF">
+                        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-i18n="global.cv_download_fi">Download Finnish PDF</span>
+                    </a>
+                </div>
+                <div class="cv-preview-row">
+                    <a href="./resumes/Finland_CV_Option2_Separated_EN.pdf" target="_blank" rel="noopener noreferrer" class="cv-preview-link">
+                        <span data-i18n="global.cv_preview_en">EN Preview ↗</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
+                    </a>
+                    <a href="./resumes/Finland_CV_Option2_Separated_FI.pdf" target="_blank" rel="noopener noreferrer" class="cv-preview-link">
+                        <span data-i18n="global.cv_preview_fi">FI Preview ↗</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-dialog-footer">
+            <span class="cv-format-note" data-i18n="global.cv_format_info">PDF format • 2 pages • A4 standard</span>
+            <button id="close-cv-btn" class="nav-btn" data-i18n="global.cv_close_btn">Close</button>
         </div>
     </dialog>
 
