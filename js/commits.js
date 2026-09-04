@@ -353,7 +353,7 @@ class CommitsFeed {
         this.commitsContainer.innerHTML = `
             <div class="commits-error-container">
                 <p class="commits-error-text">Failed to load live commits feed due to rate limiting or network issues.</p>
-                <a href="https://github.com/search?q=author%3Aamirf147&type=commits&s=committer-date&o=desc" target="_blank" class="commits-error-link" aria-label="View commits on GitHub (opens in a new tab)">
+                <a href="https://github.com/search?q=author:amirf147&type=commits&s=committer-date&o=desc" target="_blank" class="commits-error-link" aria-label="View commits on GitHub (opens in a new tab)">
                     View commits on GitHub directly →
                 </a>
             </div>
