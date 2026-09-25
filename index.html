@@ -246,11 +246,158 @@
                             </div>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/guides/FIRST_REAL_WORLD_USE_CASE_CASTER_DYNAMIC_TERMINAL_GRAMMARS.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_usecase">View Real-World Use Case: Caster Dynamic IDE Grammars</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
-                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/ARCHITECTURE_AND_MODULAR_IMPLEMENTATION_PLAN.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_arch">View 5-Project Architecture Spec</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/guides/EDUCATIONAL_GUIDE_AND_ARCHITECTURE_REFRESHER.md" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_arch">View Architecture &amp; Engineering Guide</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                             <a class="evidence-link" href="https://github.com/Amirf147/active-desktop-context-engine/blob/master/docs/benchmarks/001_micro_spike_1_flaui_telemetry.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.adce_link_benchmarks">View Empirical Telemetry Benchmarks</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
                         <div class="item-nav-bar">
                             <a href="#recent-commits-section" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-taskbar-hud" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+
+                    <li id="item-taskbar-hud" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/caster-taskbar-hud" target="_blank"><span data-i18n="index.taskbar_hud_title">Windows 11 Taskbar HUD - Native In-Process Shell Overlay &amp; IPC Bridge</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.taskbar_hud_status">Published (Windhawk Mod &amp; Standalone Repository)</span>
+                        </div>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">C++20</span>
+                            <span class="tech-pill tech-pill-sys">WinRT / XAML Islands</span>
+                            <span class="tech-pill tech-pill-sys">Windhawk</span>
+                            <span class="tech-pill tech-pill-sys">Named Pipe IPC</span>
+                            <span class="tech-pill tech-pill-sys">Windows 11 Shell</span>
+                            <span class="tech-pill tech-pill-sys">Win32 API</span>
+                        </div>
+                        <p class="description" data-i18n="index.taskbar_hud_desc">Native C++ Windhawk modification injecting real-time speech recognition hypotheses, active Dragonfly grammars, and ADCE semantic interaction zones directly into the Windows 11 taskbar (Shell_TrayWnd) adjacent to the system tray.</p>
+                        <ul class="project-features">
+                            <li data-i18n-html="index.taskbar_hud_f1"><strong>In-Process Shell XAML Injection:</strong> Hooks <code>taskbar.dll</code> symbols (<code>CTaskBand</code>, <code>TaskbarHost</code>, <code>TrayUI</code>) to mount native WinRT controls within <code>SystemTrayFrameGrid</code> across primary and secondary displays.</li>
+                            <li data-i18n-html="index.taskbar_hud_f2"><strong>Overlapped Named Pipe IPC:</strong> Integrates an asynchronous pipe server (<code>\\.\pipe\CasterTaskbarHud</code>) ingesting JSON telemetry with sub-0.5ms deserialization marshaled via <code>WH_CALLWNDPROC</code>.</li>
+                            <li data-i18n-html="index.taskbar_hud_f3"><strong>Unified Single Command Strip:</strong> Implements a compact 160px command strip to eliminate horizontal space starvation and prevent taskbar button clipping in <code>TaskListButtonPanel</code>.</li>
+                            <li data-i18n-html="index.taskbar_hud_f4"><strong>In-Situ Context Menu:</strong> Hooks XAML <code>RightTapped</code> events to present a Win32 popup menu (<code>TrackPopupMenuEx</code>) for runtime display mode toggling and HKCU registry persistence.</li>
+                        </ul>
+                        <div class="evidence-box">
+                            <div style="margin-bottom: 12px; max-width: 600px;">
+                                <a class="screenshot-link" href="https://github.com/Amirf147/caster-taskbar-hud" target="_blank"
+                                    aria-label="View Windows 11 Taskbar HUD GitHub Repository (opens in a new tab)">
+                                    <img class="screenshot" src="./taskbar_hud_adce_demo.gif"
+                                        alt="Demonstration of Caster Taskbar HUD streaming voice recognition commands and active desktop zones inside the Windows 11 taskbar."
+                                        width="600" data-i18n-attr="alt:index.taskbar_hud_img_alt">
+                                </a>
+                                <div style="font-size: 0.82rem; color: var(--subtitle-color); margin-top: 4px; font-weight: 600;">
+                                    <span aria-hidden="true">▸ </span><span data-i18n="index.taskbar_hud_img_caption">Real-Time Windows 11 Taskbar Telemetry, Voice Hypotheses, &amp; ADCE Semantic Context</span>
+                                </div>
+                            </div>
+                            <a class="evidence-link" href="https://github.com/Amirf147/caster-taskbar-hud" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.taskbar_hud_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/ramensoftware/windhawk-mods" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.taskbar_hud_link_windhawk">View Official Windhawk Mods Catalog</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-adce" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-winvda" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+
+                    <li id="item-winvda" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/winvda" target="_blank"><span data-i18n="index.winvda_title">WinVDA - Zero-Cached-State Virtual Desktop Engine &amp; Window Pinning</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.winvda_status">Active / Published (Apache-2.0)</span>
+                        </div>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Python 3.10</span>
+                            <span class="tech-pill tech-pill-sys">ctypes</span>
+                            <span class="tech-pill tech-pill-sys">Win32 COM / MTA</span>
+                            <span class="tech-pill tech-pill-sys">Windows 11 Shell</span>
+                            <span class="tech-pill tech-pill-sys">Virtual Desktops</span>
+                            <span class="tech-pill tech-pill-sys">PyPI Packaging</span>
+                        </div>
+                        <p class="description" data-i18n="index.winvda_desc">Clean-room, stateless Windows Virtual Desktop automation engine replacing legacy pyvda across Caster production. Eliminates Explorer restart crashes and resolves synthetic sub-AUMID isolation for Windows Terminal.</p>
+                        <ul class="project-features">
+                            <li data-i18n-html="index.winvda_f1"><strong>Zero-Cached-State Direct COM Dispatch:</strong> Acquires fresh interface pointers per call directly from <code>explorer.exe</code> ALPC endpoints via explicit vtable offsets, guaranteeing crash resilience.</li>
+                            <li data-i18n-html="index.winvda_f2"><strong>Transient MTA Apartments:</strong> Automatically joins MTA or preserves caller STA state upon encountering <code>RPC_E_CHANGED_MODE</code> (0x80010106).</li>
+                            <li data-i18n-html="index.winvda_f3"><strong>Sub-AUMID Normalization:</strong> Resolves modern Windows Shell XAML Island sub-AUMIDs (<code>~Wh~w&lt;HEX_HWND&gt;</code>) to canonical package IDs, achieving Task View parity for multi-window pinning.</li>
+                            <li data-i18n-html="index.winvda_f4"><strong>Active Workspace Synchronization:</strong> Executes sub-millisecond window synchronization during desktop switches to guarantee sibling windows carry across workspaces.</li>
+                        </ul>
+                        <div class="evidence-box">
+                            <div style="margin-bottom: 12px; max-width: 600px;">
+                                <a class="screenshot-link" href="https://github.com/Amirf147/winvda" target="_blank"
+                                    aria-label="View WinVDA Architecture Diagram (opens in a new tab)">
+                                    <img class="screenshot" src="./winvda-architecture.png"
+                                        alt="Architectural diagram of WinVDA transient COM vtable dispatch and Windows 11 shell integration."
+                                        width="600" data-i18n-attr="alt:index.winvda_img_alt">
+                                </a>
+                                <div style="font-size: 0.82rem; color: var(--subtitle-color); margin-top: 4px; font-weight: 600;">
+                                    <span aria-hidden="true">▸ </span><span data-i18n="index.winvda_img_caption">WinVDA Clean-Room Zero-Cached-State Transient COM Architecture</span>
+                                </div>
+                            </div>
+                            <a class="evidence-link" href="https://github.com/Amirf147/winvda" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.winvda_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/winvda/blob/master/docs/SPECIFICATION.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.winvda_link_spec">View Technical Specification &amp; Architecture</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-taskbar-hud" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-caster-plugins" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+
+                    <li id="item-caster-plugins" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/caster-plugins" target="_blank"><span data-i18n="index.caster_plugins_title">Caster Plugins - Modular HUD Ecosystem &amp; Dynamic Context Resolver</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.caster_plugins_status">Active Distribution Catalog</span>
+                        </div>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Python 3.10</span>
+                            <span class="tech-pill tech-pill-sys">PyQt5 / QSS</span>
+                            <span class="tech-pill tech-pill-sys">Plugin Architecture</span>
+                            <span class="tech-pill tech-pill-sys">AST Parsing</span>
+                            <span class="tech-pill tech-pill-test">GitHub Actions CI</span>
+                        </div>
+                        <p class="description" data-i18n="index.caster_plugins_desc">Independent distribution repository for modular Caster voice programming plugins, themed visual overlays, and decoupled context resolvers.</p>
+                        <ul class="project-features">
+                            <li data-i18n-html="index.caster_plugins_f1"><strong>Universal AST Rule Catalog:</strong> Parses <code>get_rule()</code> AST syntax trees across 160+ grammar modules at startup in under 100ms without initializing speech engines.</li>
+                            <li data-i18n-html="index.caster_plugins_f2"><strong>Dynamic Configuration Sync:</strong> Monitors <code>rules.toml</code> file timestamps to refresh enabled rule maps on the fly without process reboots.</li>
+                            <li data-i18n-html="index.caster_plugins_f3"><strong>Themed Qt HUD:</strong> Packages the advanced PyQt overlay with 10+ accessible QSS themes, opacity sliders, and frameless drag modes.</li>
+                            <li data-i18n-html="index.caster_plugins_f4"><strong>Strict Safety CI:</strong> Includes automated repository safety scanners, path hygiene checks, and GitHub Actions CI test suites.</li>
+                        </ul>
+                        <div class="evidence-box">
+                            <a class="evidence-link" href="https://github.com/Amirf147/caster-plugins" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.caster_plugins_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/caster-plugins/blob/main/plugins/taskbar_hud/README.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.caster_plugins_link_spec">View Taskbar HUD Decoupled Specification</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-winvda" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
+                            <a href="#item-caster-core-upgrades" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
+                        </div>
+                    </li>
+
+                    <li id="item-caster-core-upgrades" class="project-item navigable-item" tabindex="-1">
+                        <div class="project-title-row">
+                            <h3 class="project-title"><a href="https://github.com/Amirf147/Caster" target="_blank"><span data-i18n="index.caster_core_title">Caster Core - Process Lifecycle Strategy Pattern &amp; Engine Mic Observer</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a></h3>
+                            <span class="status-tag status-live" data-i18n="index.caster_core_status">Staged for Upstream Integration</span>
+                        </div>
+                        <div class="tech-pill-cluster">
+                            <span class="tech-pill tech-pill-category">Python 3.10</span>
+                            <span class="tech-pill tech-pill-sys">Win32 Job Objects</span>
+                            <span class="tech-pill tech-pill-sys">POSIX Process Groups</span>
+                            <span class="tech-pill tech-pill-sys">Observer Pattern</span>
+                            <span class="tech-pill tech-pill-sys">Strategy Pattern</span>
+                            <span class="tech-pill tech-pill-test">PyTest</span>
+                        </div>
+                        <p class="description" data-i18n="index.caster_core_desc">Upstream-targeted architectural enhancements to Caster core providing cross-platform process containment, synchronous microphone state observation, and extensible plugin lifecycles.</p>
+                        <ul class="project-features">
+                            <li data-i18n-html="index.caster_core_f1"><strong>Cross-Platform Process Strategy Pattern:</strong> Encapsulates child process containment via <code>WindowsProcessStrategy</code> (Win32 Job Objects with <code>JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code>), <code>LinuxProcessStrategy</code> (<code>prctl(PR_SET_PDEATHSIG)</code>), and <code>DarwinProcessStrategy</code>.</li>
+                            <li data-i18n-html="index.caster_core_f2"><strong>Self-Healing HUD Auto-Recovery:</strong> Detects communication drops in <code>show_hud()</code> and respawns the display process cleanly without restarting speech engines.</li>
+                            <li data-i18n-html="index.caster_core_f3"><strong>Speech Recognition Decoupling:</strong> Replaces synchronous XML-RPC logging with an in-memory queue (<code>queue.Queue</code>) and background daemon worker, preventing audio stutter.</li>
+                            <li data-i18n-html="index.caster_core_f4"><strong>Engine Microphone Observer Pattern:</strong> Implements <code>register_mic_mode_listener</code> on <code>EngineModesManager</code>, providing zero-overhead synchronous callbacks for mic transitions (<code>sleeping</code>, <code>listening</code>, <code>off</code>).</li>
+                        </ul>
+                        <div class="evidence-box">
+                            <a class="evidence-link" href="https://github.com/Amirf147/Caster" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.caster_core_link_repo">View GitHub Repository</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/Caster/tree/feat/hud-process-hardening" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.caster_core_link_hud_branch">Fork Branch: feat/hud-process-hardening</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/Caster/tree/feat/engine-mic-listener" target="_blank" style="margin-right: 15px;"><span aria-hidden="true">→ </span><span data-i18n="index.caster_core_link_mic_branch">Fork Branch: feat/engine-mic-listener</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                            <a class="evidence-link" href="https://github.com/Amirf147/Caster/tree/feat/core-plugin-architecture" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.caster_core_link_plugins_branch">Fork Branch: feat/core-plugin-architecture</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
+                        </div>
+                        <div class="item-nav-bar">
+                            <a href="#item-caster-plugins" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
                             <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
                             <a href="#item-caster-os" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
@@ -301,7 +448,7 @@
                             <a class="evidence-link" href="https://github.com/amirf147/caster-user-directory-and-notes/blob/master/docs/context/repository-brain.md" target="_blank"><span aria-hidden="true">→ </span><span data-i18n="index.caster_link_brain">View Canonical Repository Brain Docs</span><span class="sr-only" data-i18n="global.opens_new_tab"> (opens in a new tab)</span></a>
                         </div>
                         <div class="item-nav-bar">
-                            <a href="#item-adce" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
+                            <a href="#item-caster-core-upgrades" class="nav-btn"><span aria-hidden="true">← </span><span data-i18n="global.prev_entry">Prev Entry</span> <span class="kbd">p</span></a>
                             <a href="#top" class="nav-btn"><span data-i18n="global.back_to_top">↑ Back to Top</span> <span class="kbd">t</span></a>
                             <a href="#item-tracker" class="nav-btn"><span data-i18n="global.next_entry">Next Entry</span> <span aria-hidden="true">→</span> <span class="kbd">n</span></a>
                         </div>
